@@ -1,0 +1,169 @@
+\chapter{Introduction}
+
+\section{Purpose of the Study}
+
+The main purpose of this thesis is to incorporate the two research areas \mss{}
+and \ogs{}. Both areas have individually been the topic of intense research
+lately \todo{Citation needed} but no research exists on how to combine the two.
+
+In regard to the \mss{} domain this thesis serves as a base for discussion about
+\ms{} applications. Specifically the development and operation a set of \mss{} is
+explained in detail. Of particular interest is the topic of how to facilitate
+the composition of \mss{} and how to deploy a \ms{} application in a modern could
+environment.
+
+This thesis also provides a proof of concept that it is possible to
+develop \ogs{} using \mss{}. For this purpose a vertical slice prototype is
+developed to showcase the necessary fragments that make up a working \og{} in
+the \ms{} world. Furthermore the prototype serves as a simple development
+example of how to reproduce the development process of an \og{}. Is intended to
+live on after this thesis ends and will continuously improved in the future.
+
+As a secondary objective the usability of the recently very popular
+\todo{Citation needed} Procedural Content Generation (PCG) is also discussed in
+this thesis.
+
+\section{Theoretical framework}
+
+To curtail the infinite amount of research problems that the topics \ogs{} and
+\mss{} offer a theoretical framework can be used. Within the framework the
+abstract research problems are translated to research questions that cover the
+area of interest sufficiently. According to the research questions hypotheses
+can be formulated. The verification of these hypotheses is the final goal of
+this thesis.
+
+\subsection{Research Problems and Research Questions}
+
+\subsubsection{Usability of a \ms{} for \ogs{}} 
+
+\paragraph{Research Problem:} The usability of \ms{} suited to develop and
+operate an \og{}.
+
+\paragraph{Research Questions:}
+\begin{itemize}
+  \item Can an \og{} run in a pure \ms{} environment?
+  \item Is a \ms{} influenced architecture suitable to design an \og{}?
+  \item Is the added complexity during development tolerable?
+  \item Is the overhead introduced by \mss{} negligible? 
+\end{itemize}
+
+\subsubsection{Deployment and Operation}
+
+\paragraph{Research Problem:} The deployment and operation of a \ms{}
+application in a cloud cluster-environment.
+
+\paragraph{Research Questions:}
+\begin{itemize}
+  \item Which steps are necessary to operate an \og{} in a cluster-environment?
+  \item How well do \ogs{} operate in a cluster-environment?
+  \item How does a modern container engine assist in building and operating a
+  \ms{} driven application?
+  \item How can the deployment process be automated?
+  \item Which tools exist that help the developer with deployment?
+\end{itemize}
+
+\subsubsection{\ms{} Composition}
+\paragraph{Research Problem:} The composition of a set of \mss{} to form a coherent
+distributed application.
+
+\paragraph{Research Questions:}
+\begin{itemize}
+  \item What degree of composition is necessary for a \ms{} application to work?
+  \item What is the minimal set of static and dynamic information that is needed
+  for \ms{} composition?
+  \item Which of the common paradigms orchestration and choreography is suited
+  better for \ms{} composition?
+  \item Which middle-ware is most useful in providing \ms{} composition?
+\end{itemize}
+
+\subsubsection{\ms{} Coupling}
+\paragraph{Research Problem:} The degree to which \mss{} are semantically
+dependent on each other.
+
+\paragraph{Research Questions:}
+\begin{itemize}
+  \item How can multiple game features be developed in parallel in different
+  \mss{} while preserving the overall application behaviour?
+  \item What problems are introduced by coupling game features loosely? 
+  \item How does the consistency vs. performance trade-off impact \ogs{}?
+  \item What protocols help to reduce service coupling?
+  \item Can global static domain information help to reduce \ms{} coupling?
+\end{itemize}
+
+
+
+Development of a \ms{} application:
+\begin{itemize}
+  \item Usability 
+\end{itemize}
+
+
+\subsection{Hypotheses}
+
+To be more specific about the validation it must be defined what knowledge is
+elaborated in this thesis. This is described by asking the major knowledge
+questions.
+
+
+
+
+
+
+\section{Significance of the Study}
+
+Today we we see a large number of game development companies. There is a large
+number of companies that have established themselves over the last year
+\todo{Citation Needed.}. These triple A companies (AAA) have the budget to
+assign hundreds of workers to game projects with a budged of millions of
+dollars \todo{Cite to GTA5}.\\
+
+In the contrary we have many small independent that work in small teams. The
+keep the right on the intellectual property of their games and are not
+restricted by any financial backers. These companies need other types of
+financing.\todo{Backup with facts}. These factors limit the companies in the
+extent they can do games in.\\
+
+Hence indy-teams don't have the manpower to develop rich online game experiences
+from scratch because they lack the manpower. The fact that AAA companies don't
+share their knowledge about online game development further complicates this
+problem. The lack of tools in this area is another reason that indies struggle
+with dense online games. On the needed level of detail simply no middle ware
+exists.
+
+\section{Definitions}
+
+\section{Terminology Definitions}
+
+\subsection{Simple Online Game}
+
+A Online Game where where players are responsible to set up game servers. In
+these environments the players make the game rules. Usually those are small scale
+games which are played in a couple of session and the game state is saved
+locally on the client. Examples are old LAN style games like for example Quake,
+Age of Empires, or Diablo 2. If any online matchmaking exists for these games,
+there is no centralized rule enforcement system in place.
+
+\subsection{Rich Online Game}
+
+These online games only require the player to download the game client or eaven
+to just play it in the browers. That Game state of all players is stored on the
+server infrastructure. A part from the game experience comes from this aspect of
+an online managed game state. The rules must be enforced on the server
+environment.
+
+\section{Matchmaking}
+
+Matchmaking is a process that helps players to find each other for an online
+game. 
+
+\section{Problem Research}
+
+It would be best if every research would be done completely platform
+independent. This would inquire very general approaches to document and state
+the findings. \todo{cite to Lewis} Lewis said that if you have implemented
+something then you have understood it. Since modern programming languages are
+turing complete it is proven that it is possible to apply the developed concepts 
+also to other programming languages.
+\question{Ist dies legitim? Es würde mir enorm helfen.}
+
+\section{Delimitations, Limitations, and Assumptions}

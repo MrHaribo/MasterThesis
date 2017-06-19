@@ -1,0 +1,229 @@
+\chapter{Methods}
+
+The research problems that are topic of this thesis are very variegated. For the
+examination of the problems it is therefor necessary to access each problem in a
+specifically suited method. 
+
+
+
+\subsection{Structure of the Thesis}
+
+This thesis is the third part of a three semester project.
+
+\begin{itemize}
+  \item In the first semester (Project thesis 1) is an incorporation into
+  Microservices and the online game domain. It consists of mostly literature
+  research which results in a comprehensive documentation of these topics
+  \item The second semester is about the implementation of game features with
+  Microservices and is devoted to the feasibility study of a Microservice
+  architecture for online game development. A working prototype is the result of
+  the second part.
+  \item The third part is about the elaboration of the previous result
+  	\begin{itemize}
+  	  \item A one click solution for developers to start with online game
+  	  development. The development process should feel as closely as possible to
+  	  offline game development.
+  	  \item Introduction of PCG features to further ease the development of
+  	  online games.
+  	  \item Examination of advanced Microservice topics in this regard such as
+  	  the deployment of a Microservice cluster with a cluster manager and to 
+  	  evaluate composition of a Microserice environment concretely choreography
+  	  vs. orchestration. Composition is the glue that keeps a Microservice
+  	  environment together. A major result of this part of the project is
+  	  to obtain validation feedback for the solution.
+	\end{itemize}
+  
+\end{itemize}
+
+\section{Subject Pool}
+
+\subsection{\ms{} Tenets in Relation to Online Games}
+
+\subsection{Microservice Specific Challenges}
+\subsection{Conceptual Problems in \ms{} Online Game Envirunments}
+\subsection{Microservice Contribution to Online Games}
+\subsection{Development of a \ms{} Driven Online Game}
+\subsection{Procedural Content Generation in Online Games}
+
+\section{Instrumentation}
+\subsection{Available Technology}
+
+\subsubsection{Cloud Service Provider}
+
+MicroNet is designed to run in the cloud. It is therefore mandatory to evaluate
+the major cloud service infrastructure providers according to their usability
+for online games.
+
+One problem in regards to these service providers is payment. Although they
+provide a free tier to test their infrastructure, a credit card has to be
+pledged as security. In the case the limit is overdrawn a fee will be charged.
+This risk cannot be taken in this thesis. 
+
+\paragraph{Google Cloud Gaming Solutions}
+
+Google offers a solution to deploy rich online games in the cloud. It basically
+a setup for the existing google cloud infrastructure with additional
+functionality to to provide build in matchmaking matchmaking. For this purpose
+it provides an API that is available in a number of programming languages.
+
+The MicroNet service that provides the matchmaking functionality has to be
+altered if the Google solution for matchmaking wants to be used. 
+
+To operate a game driven by MicroNet in the Google Cloud the Google App Engine
+can be used to run the services of the MicroNet framework and the Google Compute
+Engine can be used to run the game simulation servers. ActiveMQ that is used for
+messaging can be used with Google Cloud by using Bitnami.
+
+\paragraph{Amazon Game Lift}
+
+Amazon GameLift is very similar to Google Gaming Solutions. It also provides a
+matchmaking solution and the option to communicate with the game backend running
+in the Amazon cloud. An advantage of the amazon solution is that it provides an
+API for all the major game engines like Unity3D or Unreal Engine 4. Amazon also
+provides its own game engine with the name Lumberyard.
+
+\paragraph{A Dedicated Server}
+
+The most general way to deploy the MicroNet framework is on a dedicated server
+hardware. This could be either a cluster of bare metal servers with a sufficient
+networking capabilities or a set of virtual servers running somewhere in the
+cloud. Either way the result is a set of hosts running linux and have a public
+ip address.
+
+For this thesis a virtual server at the HSR will be the test setup. This
+infrastructure is also available at the major cloud service providers.
+
+\paragraph{Docker}
+
+Docker is a very powerful paradigm to run software. Instead of installing a
+software on a host and running it native it is packaged in a container and a
+container engine on the host is running it instead. This greatly eases the
+deployment of software since the developer can run it anywhere as long as it
+runs in Docker.\\
+
+Docker is the foundation for the easy deployment of MicroNet. It is used to hide
+all the dependencies that the framework has from the developer. This is possible
+because to all major dependencies of the Framework dockerhub provides reference
+containers that can be used to deploy features. This goes for all dependencies
+namely speaking: ActiveMQ containers and Postgres containers. Since the
+framework is written in Java developers can simply use openJDK containers to
+easily deploy their own services.\\
+
+It is also possible to let a \ms{} participate in the framework that is not
+running in docker. in that case it can simply communicate with the framework
+over the message broker from any host.\\
+
+Another interesting docker container is hydra which provides a OAuth2 and
+OpenID implementation. It can be used to make the framework and the game more
+secure. But this might be overkill for the system that is aimed to be small and
+simple. It is easier to use the ActiveMQ security functionality instead.\\
+
+\paragraph{Docker Compose}
+
+Docker Compose is a way to describe a complex application consisting of multiple
+Docker containers. This approach is used to deploy the whole MicroNet framework
+with one click. Is is possible to automatically update the docker-compose file
+at compile-time and therefore keep the deployment description in sync with the
+framework code.
+
+Docker Compose is also the foundation for the usage of Docker Swarm. With docker
+Swarm a Docker application can be distributed on multiple hosts. 
+
+\paragraph{Docker for Windows}
+
+One requirement for game development is the support for Windows development
+machines. Since Windows is the most-widely used development OS for games it is
+mandatory that MicroNet can be fully developed with a Windows machine. 
+
+The Docker for Windows Version feels very close to the native version on Linux.
+One problem regarding Docker for Windows is that it does not run native an on
+all Windows versions since HyperV is required for it to work. As a work-around
+Tocker Tools can be used but this makes the deployment process more complicated.
+
+\subsubsection{Maven}
+
+Apache Maven is a build tool for Java Programs. It defines a build process that
+includes running tests and finally deploying to program in a repository. Maven
+helps to build a bridge between the actual code of a service and the integration
+into the framework. For this purpose it a build script format that defines the
+dependencies and additional build instructions. This makes it possible do
+abstract the manual installation process of MicroNet. 
+
+So spare the developer of an online game to cope with the edit complicated Maven
+scripts (.pom files) these pon files are generated by the eclipse MicroNet
+tools.
+
+\subsection{Design Science Methodology}
+\subsection{Vertical Slice Prototype}
+
+\section{Procedures}
+
+\subsection{Lab Research}
+
+\subsection{Eclipse}
+
+Since MicroNet makes usage of various thirs party libraries and tools there
+needs to be a way to manage them all. This purpose solves the Eclipse tools for
+MicroNet. The MicroNet Tools is a set of plug-ins that are partially independent
+of each other. They all help the developer to implement game specific \mss{}.
+
+Since the UI of an Eclipse plug-in is written with the SWT library it can easily
+be exported to a standalone tool that does not require Eclipse. However any code
+related feature do require the Eclipse IDE.
+
+\subsubsection{Service Generation}
+
+Allows the developer to not worry about boiler plate code of setting up the
+service in the framework. This covers the setup of the appropriate networking
+solution according to the environment. This allows the developer to focus on the
+actual service code.
+
+\subsubsection{Code Assist}
+
+The Code Assist plug-in helps the developer to keep track of functionality
+provided by other services. It allows a type-safe communication between
+services. The information that is needed to give these API proposals is
+extracted from the service implementation at compile time. The information is
+then shared via the version control system. This process is manually and the
+developer must check in and probably merge his changes. 
+
+The format of the distribute API description is not relevant because it is a
+machine-readable format and the developer sees it in a polished form.
+
+\subsubsection{Management UI}
+
+The management UI plug-in helps the developer to get an overview over the whole
+game application. It helps the manage the versions of services of the game
+services as well as the versions of dependencies. This plug-in highly relies on
+the description of the maven projects.
+
+\subsection{Field Research}
+
+\section{Statistical Analysis}
+
+The results of the previous semesters are to this point only of hypothetical
+nature. The main goal this semester is therefore to validate the findings up to
+now.\\
+
+Validation for the run-time aspect of the solution:
+
+\begin{enumerate}
+  \item To prove that the solution holds in regard to run-time is necessary to
+  give proper validation feedback for the combination of Microservices and
+  Online Games. It must be shown the running framework is able to scale at
+  run-time. In a first instance this is done by performing lab-research in the
+  form of small scale play test with some elected test players.
+  \item One more sophisticated approach is to perform TAR on the run-time
+  validation. This would mean to test the MicroNet with the alpha version of the
+  Spacegame prototype in a long running tests that is available for the public. 
+\end{enumerate}
+
+Validation of the development-time aspect of the solution:
+
+\begin{enumerate}
+  \item It must be proven that the proposed development solution is actually
+  usable and as simple as proposed.
+\end{enumerate}
+
+This validation research is made according to design science methods and
+teminology.

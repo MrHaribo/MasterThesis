@@ -1,0 +1,23 @@
+\usepackage{color}
+\usepackage[xindy,toc,acronym]{glossaries}
+
+\input{glos} 
+\makeglossaries
+
+\newcommand{\ms}{Microservice}
+\newcommand{\mss}{Microservices}
+\newcommand{\og}{Online Game}
+\newcommand{\ogs}{Online Games}
+
+%% \todo{} command.
+%
+% Outputs red TODOs in the document. Requires \usepackage{color}.
+%
+% Usage: \todo{Document the TODO command.}
+%
+% Comment out second line to disable.
+\newcommand{\todo}[1]{}
+\renewcommand{\todo}[1]{{\color{red} TODO: {#1}}}
+
+\newcommand{\question}[1]{}
+\renewcommand{\question}[1]{{\color{green} Question for Advisor: {#1}}}
