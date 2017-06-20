@@ -4,7 +4,8 @@
 
 The main purpose of this thesis is to incorporate the two research areas \mss{}
 and \ogs{}. Both areas have individually been the topic of intense research
-lately \todo{Citation needed} but no research exists on how to combine the two.
+lately \todo{Citation needed} but very little research exists on how to combine
+the two.
 
 In regard to the \mss{} domain this thesis serves as a base for discussion about
 \ms{} applications. Specifically the development and operation a set of \mss{} is
@@ -12,11 +13,11 @@ explained in detail. Of particular interest is the topic of how to facilitate
 the composition of \mss{} and how to deploy a \ms{} application in a modern could
 environment.
 
-This thesis also provides a proof of concept that it is possible to
-develop \ogs{} using \mss{}. For this purpose a vertical slice prototype is
-developed to showcase the necessary fragments that make up a working \og{} in
-the \ms{} world. Furthermore the prototype serves as a simple development
-example of how to reproduce the development process of an \og{}. Is intended to
+This thesis also provides a proof of concept that it is possible to develop
+\ogs{} using \mss{}. For this purpose a vertical slice prototype is provided to
+showcase the necessary fragments that make up a working \og{} in the \ms{}
+world. Furthermore this prototype serves as a simple development example of how
+to reproduce the development process of \ogs{}. The prototype is intended to
 live on after this thesis ends and will continuously improved in the future.
 
 As a secondary objective the usability of the recently very popular
@@ -172,29 +173,166 @@ complex area of \og{} development.
 
 \section{Definitions}
 
-\section{Terminology Definitions}
+This thesis is aimed to be a direct reference for developing \ogs{} with \mss{}.
+Because of this the thesis is of very technical nature. Most concepts developed
+in this thesis have a reference implementation in the prototyped developed
+during this thesis. 
 
-\subsection{Simple Online Game}
+This section clarifies all terminology that is used to define the concepts
+developed in this thesis from a technical point of view.
 
-A Online Game where where players are responsible to set up game servers. In
-these environments the players make the game rules. Usually those are small scale
-games which are played in a couple of session and the game state is saved
-locally on the client. Examples are old LAN style games like for example Quake,
-Age of Empires, or Diablo 2. If any online matchmaking exists for these games,
-there is no centralized rule enforcement system in place.
+\subsection{Games and \ogs{}}
 
-\subsection{Rich Online Game}
+Since this thesis is mainly aimed at readers interested in the \ms{} domain it
+is mandatory to provide a reasonable introduction in games itself an which
+technical requirements they introduce. This helps to frame influence that \ogs{}
+can possibly have when built using \mss{}.
 
-These online games only require the player to download the game client or eaven
-to just play it in the browers. That Game state of all players is stored on the
-server infrastructure. A part from the game experience comes from this aspect of
-an online managed game state. The rules must be enforced on the server
-environment.
+\subsubsection{Video Games}
 
-\section{Matchmaking}
+A video game is simply a game played on a digital device e.g. PC, smartphone, or
+gaming consoles. The technical details how all of these games are developed
+varies greatly depending on various factors like genres, platforms, culture and
+so on. Since this thesis does not make any restrictions on the kind of game
+under development a common basis for all games must be established. This common
+basis is that all games have some audiovisual interface (game client) which
+represents the game. 
 
-Matchmaking is a process that helps players to find each other for an online
-game. 
+\subsubsection{The Game Simulation}
 
+The game simulation is a logical abstraction of the game and is responsible to
+keep track of the state of game objects as the game progresses. In most games
+the game simulation is realized with a physics engine along with code
+that steers the simulation.
+
+The game simulation is usually tightly coupled with the rendering process that
+presents the game to the player. This is due to the nature of the most basic graphics
+libraries like DirectX or OpenGL which are in under the hood used in most video
+games. These graphic libraries do the rendering on one process on the computer
+(main render thread). There is currently a lot of research conducted on how to
+parallelize the render thread \todo{Citation needed} but for the meantime it is
+not possible. Therefor we can view the game simulation as a single process bound
+by the render thread.
+
+\subsubsection{\ogs{}}
+An \og{} can be seen as an extension to a traditional video game. In addition to
+the audiovisual representation the player not only interacts with the game
+simulation but also with other players playing at the same time at another
+location. But in practice the added asynchronism forces a completely different
+application design in comparison to traditional single-player games.
+
+\paragraph{Simple \ogs{}}
+
+Simple \ogs{} are single-player games with added multi-player features.
+In simple \ogs{} players are responsible to set up game environment. These can
+be client-server or peer-to-peer scenarios. In these environments the players
+have full control over the game rules.
+
+Usually simple games are of small scale and are played in confined game
+sessions. The of the game session is kept locally on the client. Examples of
+such simple games are for example Quake, Age of Empires, or Diablo 2. Lately it
+has become popular for simple games to provide a matchmaking service that helps
+players to find each other for game sessions. This matchmaking functionality is
+responsible to initiate the game session on all clients but does not interfere
+in a running game session meaning there is no centralized rule enforcement
+system in place. Cheating clients are a common problem for this type of games.
+
+\paragraph{Rich \ogs{}}
+
+Rich \ogs{} take the control over the game environment away from the
+player. This means that the game is simulated on a server environment and the
+game client is a mere representation device. In this setup the game state is
+persisted on the server side allowing. This allows for a set of features that
+make \ogs{} so interesting. For example an achievement of the player in the game
+is recorded by the server and published to all other player playing the game.
+This permanent achievements reward the player of a rich online game with a
+satisfaction that can be compared with likes on a social media platform. 
+
+Rich \ogs{} only require the player to download the game client or even to just
+play the game in the brower which in this case is the audiovisual game client.
+That game state of all players is distributed by the server environment to all
+players. The clients on the other hand send requests to the server environment
+to stimulate the game in some way.
+
+\subsection{Procedural Content Generation}
+
+Procedural Content Generation (PCG) has always been an integral part of game
+development and has gained recent popularity because of prominent games that
+make extensive use of PCG. Some examples are Minecraft, Terraria, No Mans Sky to
+only name a few.
+
+PCG is the process of automatically generating game content. A canonical
+example in this regard is vegetation generation. The developer only needs to
+supply certain parameters like for example color distribution and branching
+factor. The game simulation then 
+
+\subsection{\mss{}}
+
+Microservices are an implementation approach for a service-oriented
+architecture\todo{Cite ZIO}. In SOA an application is split into logical units
+that each solve one specific task. A problem of traditional SOA is that these
+individual services are coupled using a service bus which contains a large
+amount of domain knowledge which is used to allow communications between
+services. \mss{} reverse this principal and use the smart endpoints - dumb pipes
+paradigm. This makes the service bus obsolete. As a result the whole
+application is more robust to changes because there is no central processing
+unit exposed as a single point of failure.
+
+\subsubsection{\ms{} Tenets}
+
+In the article Microservices tenets: Agile approach to service development and
+deployment O.Zimmermann provides seven \ms{} tenets to describe the properties
+of \ms{} applications. According to the tenets a correlation between game
+specific requirements and \ogs{} can be made. In the course of this thesis the
+\ms{} tenets will be used as an indicator to show that \mss{} are suitable for
+\og{} applications.
+
+The remainder of this section will give a brief overview over all seven tenets.
+
+\paragraph{Fine-grained Interfaces and Single Responsibility}
+
+Every \ms{} should offer all of its functionality in the form of a fine grained
+interface that decouples the service implementation from its interface. This
+interface is usually a REST/HTTP and is accessible via a reverse proxy. Each
+\ms{} should only have one responsibility in regards to the domain.
+
+\paragraph{Domain-Driven-Design (DDD)}
+
+The responsibility of a \ms{} should be derived from the domain meaning that is
+solves exactly one aspect of the domain. If one aspect of the domain would lead
+to a large \ms{} it can be an indicator that the granularity of the services
+might be wrong.
+
+\paragraph{IDEAL}
+\paragraph{Polyglot Programming and Persistence}
+\paragraph{Lightweight Containers}
+\paragraph{Decentralized Continuous delivery}
+\paragraph{DevOps}
+
+\subsubsection{\ms{} Composition}
+
+\subsubsection{\ms{} Deployment}
+
+\subsubsection{\ms{} Development}
 
 \section{Delimitations, Limitations, and Assumptions}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
