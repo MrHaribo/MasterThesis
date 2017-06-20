@@ -90,45 +90,85 @@ dependent on each other.
   \item Can global static domain information help to reduce \ms{} coupling?
 \end{itemize}
 
+\subsubsection{\ms{} Development}
+\paragraph{Research Problem:} The development process of a \ms{} application.
 
+\paragraph{Research Questions:}
 
 Development of a \ms{} application:
 \begin{itemize}
-  \item Usability 
+  \item What separates \ms{} development from regular development?
+  \item Which is the minimal number of steps ``from code to cloud''?
+  \item Which tools help with \ms{} development?
+  \item Which development tools make the development process significantly
+  simpler?
 \end{itemize}
-
 
 \subsection{Hypotheses}
 
-To be more specific about the validation it must be defined what knowledge is
-elaborated in this thesis. This is described by asking the major knowledge
-questions.
+The essence of the research problems can be condensed to a set of hypotheses
+which correspond with the different research areas. All hypotheses are
+verified in the course of this thesis to prove that \mss{} are suited to
+build an \og{}. 
 
+\subsubsection{\ogs{} and \mss{} Hypothesis}
+It is possible to build an \og{} as a pure \ms{} application by
+respecting all seven \ms{} tenets.
 
+\subsubsection{Required Features Hypothesis}
+A minimal set of features is required to build a distributed \og{}: Networking,
+persistence, serialization, session management and game engine integration.
 
+\subsubsection{Stability and Performance Hypothesis} 
+Microservices allow to separate the performance critical real-time game
+simulation in regards to computing, bandwidth and latency requirements from the
+non time-critical backend functionality of an online game. This allows arbitrary
+scaling.
 
+\subsubsection{Simple Development Hypothesis} 
+Microservice can make the complicated process of developing online games simpler
+by splitting up a complex game domain into small parts that can be developed
+independently.
 
+\subsubsection{Reproducibility Hypothesis} 
+It is possible to completely prevent initial costs to kick of the development
+process using only free/open-source technologies. This allows to reproduce the
+development process anywhere at any time.
 
 \section{Significance of the Study}
 
-Today we we see a large number of game development companies. There is a large
-number of companies that have established themselves over the last year
-\todo{Citation Needed.}. These triple A companies (AAA) have the budget to
-assign hundreds of workers to game projects with a budged of millions of
-dollars \todo{Cite to GTA5}.\\
+\mss{} are a very modern approach to realize a Service Oriented Architecture
+(SOA). While SOA is not something new and has been in use for more then a decade
+\todo{Citation needed} \mss{} are a cutting edge implementation approach to SOA
+which has gained popularity only in the recent years. Therefore the theory and
+references of how to actually develop and operate such a \ms{} environment are
+rather sparse. This thesis servers as a complete reference for all relevant
+aspects that have to be taken into account when an application (especially an
+\og{}) is developed using \mss{}.
 
-In the contrary we have many small independent that work in small teams. The
-keep the right on the intellectual property of their games and are not
-restricted by any financial backers. These companies need other types of
-financing.\todo{Backup with facts}. These factors limit the companies in the
-extent they can do games in.\\
+In regards to \ogs{} \mss{} have gained recent popularity. This is due to the
+fact that large game development companies (>100 developers) prosecute \ogs{}
+with million of player playing at the same time. For these games to scale the
+traditional approach of running an \og{} as a monolithic application is not
+sufficient. These large companies have large budgets at their disposal to
+realize such an \og{}.
 
-Hence indy-teams don't have the manpower to develop rich online game experiences
-from scratch because they lack the manpower. The fact that AAA companies don't
-share their knowledge about online game development further complicates this
-problem. The lack of tools in this area is another reason that indies struggle
-with dense online games. On the needed level of detail simply no middle ware
-exists.
+But this is not the case for smaller independent game development companies.
+Independent companies are not constraint by founders and are therefor the main
+driver for innovation in the game industry at the moment. But these  indy-teams don't
+have the manpower to develop rich \ogs{} from scratch because the lack of
+manpower and financial resources. Also AAA companies don't share their knowledge
+about \og{} development to an extent that would allow indies to develop rich
+\ogs{}.
+
+Further \og{} development introduces the aspect of distribution within the game
+application which is by definition a hard problem \todo{Citation needed}. There
+is a lot of existing information on how to cope with asynchronism in game
+development\todo{Cite: Gambetta}. However these references are mostly very low
+level and leave a lot of responsibility to the developer. This added complexity
+is whats holding back creative minds to develop rich \ogs{}. This thesis should
+serve as a reference for these independent developers to gain a foothold in the
+complex area of \og{} development.
 
 \section{Definitions}
 
@@ -156,14 +196,5 @@ environment.
 Matchmaking is a process that helps players to find each other for an online
 game. 
 
-\section{Problem Research}
-
-It would be best if every research would be done completely platform
-independent. This would inquire very general approaches to document and state
-the findings. \todo{cite to Lewis} Lewis said that if you have implemented
-something then you have understood it. Since modern programming languages are
-turing complete it is proven that it is possible to apply the developed concepts 
-also to other programming languages.
-\question{Ist dies legitim? Es würde mir enorm helfen.}
 
 \section{Delimitations, Limitations, and Assumptions}
