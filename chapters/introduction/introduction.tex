@@ -126,6 +126,15 @@ simulation in regards to computing, bandwidth and latency requirements from the
 non time-critical backend functionality of an online game. This allows arbitrary
 scaling.
 
+\subsubsection{Composition Hypothesis}
+Code Generation backed by a game meta model is enough information to compose a
+set of \mss{} semantically to compound a rich \og{}.
+
+\subsubsection{Deployment Hypothesis}
+The deployment process of game a \ms{} application can be simplifies to an
+extent that the process can be understood by reading instruction of the size of
+one screen.
+
 \subsubsection{Simple Development Hypothesis} 
 Microservice can make the complicated process of developing online games simpler
 by splitting up a complex game domain into small parts that can be developed
@@ -194,25 +203,55 @@ A video game is simply a game played on a digital device e.g. PC, smartphone, or
 gaming consoles. The technical details how all of these games are developed
 varies greatly depending on various factors like genres, platforms, culture and
 so on. Since this thesis does not make any restrictions on the kind of game
-under development a common basis for all games must be established. This common
-basis is that all games have some audiovisual interface (game client) which
-represents the game. 
+under development a common basis for all games must be established. In this
+regard the classical Model-View-Control pattern can be used to identify the
+logical artifacts that make up a game: 
 
-\subsubsection{The Game Simulation}
+\begin{itemize}
+  \item \textbf{Model:} The game model artifact holds the game state.
+  \item \textbf{View:} The game presentation artifact presents the game state to
+  the player.
+  \item \textbf{Control:} The game simulation artifact progressed the game
+  state and is responsible to accept player input.
+\end{itemize}
 
-The game simulation is a logical abstraction of the game and is responsible to
-keep track of the state of game objects as the game progresses. In most games
-the game simulation is realized with a physics engine along with code
-that steers the simulation.
+\paragraph{Game Simulation}
 
-The game simulation is usually tightly coupled with the rendering process that
-presents the game to the player. This is due to the nature of the most basic graphics
-libraries like DirectX or OpenGL which are in under the hood used in most video
-games. These graphic libraries do the rendering on one process on the computer
-(main render thread). There is currently a lot of research conducted on how to
-parallelize the render thread \todo{Citation needed} but for the meantime it is
-not possible. Therefor we can view the game simulation as a single process bound
-by the render thread.
+The game simulation can be seen as a logical abstraction of a game. The
+simulation is responsible to update the state of all relevant game objects to
+progress the state of the game as a whole. In most games the game simulation is
+realized with a physics engine along with code that steers the simulation.
+
+\paragraph{Game Presentation}
+
+The game presentation is responsible render the game state on the player
+device's screen. Changes in the game state must be made visible by the game
+presentation as soon as possible.
+
+The game simulation is usually tightly coupled with the game presentation. This
+is due to the nature of the most basic graphics libraries like DirectX or OpenGL
+which are foundation of most video games. These graphic libraries typically have
+one main render loop. Within this loop the developer gets a chance to update
+every game object before it is drawn to the screen. As a consequence the game
+simulation cannot be completely separated from the presentation process. More
+information on graphics libraries can be found in the book Real-Time
+Rendering\cite{RTR3}. Furthermore the web-page of the book provides a
+comprehensive selection on related literature and technical examples.
+
+\paragraph{Game Model}
+
+The game model consists of a meta model containing a set of object types and an
+instantiation of this meta model which represents the game state. The game
+simulation operates upon the game state to progress the game. Static data
+like for example audiovisual information for the game presentation is directly
+stored in the meta model and can be referenced by the game state.
+
+\paragraph{Game Engines}
+All the artifacts of a game as described in the previous three sections are
+fairly low level. To relieve the developer from these low level tasks usually
+game engines are used. These game engines come with comprehensive editors, tools
+and libraries that abstract the complex low level functionality. This allows the
+developer to focus the effort on the core parts of the game. 
 
 \subsubsection{\ogs{}}
 An \og{} can be seen as an extension to a traditional video game. In addition to
@@ -224,35 +263,38 @@ application design in comparison to traditional single-player games.
 \paragraph{Simple \ogs{}}
 
 Simple \ogs{} are single-player games with added multi-player features.
-In simple \ogs{} players are responsible to set up game environment. These can
-be client-server or peer-to-peer scenarios. In these environments the players
-have full control over the game rules.
+In simple \ogs{} players are responsible to set up game's multi-player
+environment. These can be client-server or peer-to-peer scenarios. In these
+environments the players have full control over the game rules.
 
 Usually simple games are of small scale and are played in confined game
-sessions. The of the game session is kept locally on the client. Examples of
-such simple games are for example Quake, Age of Empires, or Diablo 2. Lately it
-has become popular for simple games to provide a matchmaking service that helps
-players to find each other for game sessions. This matchmaking functionality is
-responsible to initiate the game session on all clients but does not interfere
-in a running game session meaning there is no centralized rule enforcement
-system in place. Cheating clients are a common problem for this type of games.
+sessions. The state of the game session is stored locally on the client.
+Examples of such simple games are for example Quake, Age of Empires, or Diablo
+2. Lately it has become popular for simple games to provide a matchmaking
+service that helps players to find each other for game sessions. This
+matchmaking functionality is responsible to initiate the game session on all
+clients but does not interfere in a running game session meaning there is no
+centralized rule enforcement system in place. Cheating clients are a common
+problem for this type of games.
 
 \paragraph{Rich \ogs{}}
 
-Rich \ogs{} take the control over the game environment away from the
-player. This means that the game is simulated on a server environment and the
-game client is a mere representation device. In this setup the game state is
-persisted on the server side allowing. This allows for a set of features that
-make \ogs{} so interesting. For example an achievement of the player in the game
-is recorded by the server and published to all other player playing the game.
-This permanent achievements reward the player of a rich online game with a
-satisfaction that can be compared with likes on a social media platform. 
+Rich \ogs{} take the control over the game environment away from the player.
+This means that the game is simulated on a server environment meaning that the
+game client is only responsible for the presentation of the game and for sending
+inputs to the server but not for simulating the game. In this setup the game
+state is persisted on the server side. The persistence of the game state in this
+fashion allows for a set of features which really separate \ogs{} from simple
+online or offline video games.
 
-Rich \ogs{} only require the player to download the game client or even to just
-play the game in the brower which in this case is the audiovisual game client.
-That game state of all players is distributed by the server environment to all
-players. The clients on the other hand send requests to the server environment
-to stimulate the game in some way.
+Most noticeable is the feature of virtual property. In rich \ogs{} it is usually
+possible to gain an advantage when it is player a lot. This gives the player a
+sense of power and the motivation to play the game for longer. This can be
+compared to the satisfaction that is triggers when a person receives a like on a
+social media platform.
+
+Rich \ogs{} are also very comfortable for the players. The players only need to
+download the game client to play the game.
 
 \subsection{Procedural Content Generation}
 
@@ -294,20 +336,100 @@ The remainder of this section will give a brief overview over all seven tenets.
 Every \ms{} should offer all of its functionality in the form of a fine grained
 interface that decouples the service implementation from its interface. This
 interface is usually a REST/HTTP and is accessible via a reverse proxy. Each
-\ms{} should only have one responsibility in regards to the domain.
+\ms{} should only have one responsibility in regards to the domain. This allows
+services to be deployed, changed, replaced and scaled independently.
 
 \paragraph{Domain-Driven-Design (DDD)}
 
-The responsibility of a \ms{} should be derived from the domain meaning that is
-solves exactly one aspect of the domain. If one aspect of the domain would lead
-to a large \ms{} it can be an indicator that the granularity of the services
-might be wrong.
+The responsibility of a \ms{} should be derived from the domain concept. Each
+service is dedicated to exactly one aspect of the domain. If this aspect is very
+extensive it can lead to a large \ms{} which is not desirable. This can be an
+indicator that the granularity of the services might be wrong. Granularity is
+the most challenging part of DDD\cite{millett2015patterns}.
 
 \paragraph{IDEAL}
+
+The IDEAL tenet is a collection of cloud patterns. These patterns to partially
+overlap with several other tenets like single responsibility or decentralized
+continuous delivers. None the less this tenet is is a great indicator to
+validate that an application respects the major cloud principals. C. Fehling et
+al. provides a good overview over the  IDEAL Cloud Application Properties
+summarized in this section\cite{fehling2015cloud}.
+
+\subparagraph{Isolated State}
+A \ms{} should be stateless meaning that request that the \ms{} fulfils should
+be completely confined in itself. This means that \mss{} are not allowed to
+store date in-memory between requests. Instead the state should be persisted in
+a data storage provided by the cloud e.g. another \ms{}.
+
+\subparagraph{Distribution}
+To allow an application to scale, its functionality is spread out among several
+different \mss{}. These shards are then deployed in cloud environments which are
+large distributed system themselves. \ms{} applications are a natural match for
+the distributed nature of cloud environments.
+
+\subparagraph{Elasticity}
+Elasticity inquires that the application can be scaled during operation. When
+the need of scaling arises it must be possible to add and remove \mss{} without
+affecting the stability of the whole system.
+
+\subparagraph{Automated Management}
+In order to quickly react to scaling demands or to recover from failure the
+management approach to these scenarios should be fully automated.
+
+\subparagraph{Loose Coupling}
+
+The dependencies among \mss{} should be reduced as much as possible. It is not
+feasible to reduce dependencies to zero because without any dependencies the
+application is not able to work as a whole unit. If the amount of dependencies
+is manageable the impact of adding and removing new functionality can be kept
+to a minimum.
+
 \paragraph{Polyglot Programming and Persistence}
+
+The polyglot tenet is the main driver when it comes to \ms{} confinement. It
+states that a \ms{} has no restriction on storage paradigms and implementation
+details. As a consequence each \ms{} can be designed in a way that best suits
+its purpose.
+
+This is especially crucial for persistence. The approach of having one big
+database for the whole \ms{} application is called an integration database and
+is an anti-pattern for \mss{}. With polyglot persistence each \ms{} can use the
+storage paradigm that is best suited for it. This eliminates the need for a
+central persistence solution and therefore the single point of failure.
+
+Polyglot programming allows development teams to work with the languages and
+tools that they are used to. This greatly speeds up the development process.
+
 \paragraph{Lightweight Containers}
+
+Lightweight containers are the enabling technology for a \ms{} application.
+Containers allow to build each \ms{} in its own confined environment. Containers
+guarantee that the \ms{} runs with the exact same configuration despite
+different environment (developers pc, build and test server, cloud provider).
+
+Containers allow for easy deployment and scaling of a \ms{} application. They
+also allow rolling updated meaning that a part of the application can be
+exchanged without interrupting the operation of the application.
+
 \paragraph{Decentralized Continuous delivery}
+
+Continuous delivery is the ability to extend an existing \ms{} application which
+is already in production. The main goal is to deliver these extension safely
+quickly and regular. Decentralized in this regard means the absence of a central
+artifact that has to be delivered every time the application changes.
+
 \paragraph{DevOps}
+
+DevOps are the glue between the development and the operation of a \ms{}
+application. The idea is that these engineers are already part of the project
+during the initial development of an application. This gives the DevOps of a
+certain application a deep understanding of the technical requirements of the
+application. This also allows to test the deployment process very early. When a
+\ms{} application is in production the DevOps engineers have enough insight in
+the application internals to be able co cope with most problems that arise.
+A. Earnshaw published a blog-post that describes DevOps very
+well\cite{earnshaw2013devops}.
 
 \subsubsection{\ms{} Composition}
 
