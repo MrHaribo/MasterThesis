@@ -191,6 +191,7 @@ This section clarifies all terminology that is used to define the concepts
 developed in this thesis from a technical point of view.
 
 \subsection{Games and \ogs{}}
+\label{sub:games}
 
 Since this thesis is mainly aimed at readers interested in the \ms{} domain it
 is mandatory to provide a reasonable introduction in games itself an which
@@ -433,12 +434,129 @@ well\cite{earnshaw2013devops}.
 
 \subsubsection{\ms{} Composition}
 
+\ms{} composition is a very wide term and therefore need to be further
+specified. For this purpose composition can be split into the two sub topics:
+Physical composition and logical composition.
+
+For \ms{} composition is it always possible to categorize a solution according
+to the composition paradigms: Orchestration and Choreography. Orchestration
+states that a set of \mss{} is composed by a central intelligence unit which is
+responsible to keep the application healthy. Choreography implies that there is
+no central intelligence and the cluster of \mss{} as a whole is responsible to
+guarantee the stability of the application.
+
+\paragraph{Physical Composition}
+
+Physical composition is the discipline to bring a set of \mss{} onto a
+physical computing environment, usually the cloud. The the case of the cloud the
+term physical is understood as the appropriation of computing, memory, disc
+space and networking capabilities.
+
+Physical composition is usually enabled using composition engines like for
+example docker-compose, docker-swarm, Apache Mesos or Kubernetes. The majority
+of the composition engine use an orchestration approach. 
+
+\paragraph{Logical Composition}
+
+Logical composition is the aspect of how a set of confined \ms{} is working
+together to solve to goal of the application as a whole. The logical composition
+cannot be automated and is therefore a task that the developers of an
+applications have to cope themselves. 
+
+Logical composition of a \ms{} application has two major requirements that must
+be satisfied. The services have to know how to find each other and the services
+must be aware of the communication semantics. 
+
+Usually the logical composition is realized with an RESTful API description that
+can be accessed via a HTTP. Especially for regular web applications a vast
+choice of middle-ware is available. For example Swagger, JaxRS, JSON API, and
+API Blueprint just to name a few.
+
+The composition paradigm that is used for logical composition is very dependent
+on the type of application under development. In an orchestration solution there
+would be one central point where \mss{} could look up crucial information like
+message formats and service locations. In an choreography solution the this
+information would be distributed among all services to form a mesh of
+information about the application cluster. In this case information can be
+requested from any \ms{} in the system.
+
 \subsubsection{\ms{} Deployment}
+
+\ms{} deployment comprise the whole process that is necessary to bring an application
+from the development stage into production. This process includes several steps: 
+
+\begin{itemize}
+  \item Bring the application code along with eventual dependencies into the
+  service containers.
+  \item Upload the application containers to the cloud
+  \item Prepare the application on the server side
+  \item Start the application as a whole by starting all service containers
+  \item Scale the application according to operational needs
+  \item Set up backup and recovery solutions for the application
+  \item Deploy monitoring solution to keep track of the application
+\end{itemize}
+
+While most of these processes can be automated in the long term it requires a
+lot of effort to bring these deployment automation practices into place.
 
 \subsubsection{\ms{} Development}
 
+\ms{} development consists of the whole process of designing an application
+using an approach suited for \ms{}, writing the code for the application, manage
+the collaboration of different developers on the same project.
+
 \section{Delimitations, Limitations, and Assumptions}
 
+Several limitations have a big influence on this thesis. 
+
+\subsection{\ms{} are Developed by Teams}
+One of the greatest advantages of \mss{} is that they allow to split the
+development on a complex application into small shards that can be developed by
+small flexible individual teams. This aspect of \mss{} can only be analyzed
+conceptually because this thesis is a one-man project.
+
+\subsection{Zero Budget}
+Cloud service providers like Amazon or Google offer a free tier to evaluate
+their cloud capabilities. But even this free tiers of subscription require a
+valid credit card for the case that the free quota is exceeded. This is a risk
+that the HSR did not want to bear. As a consequence the testing environment for
+the prototype developed in this thesis is a virtual server provided by HSR. This
+setup makes it difficult to finalize the process of game development with \mss{}
+because in a real world example companies would rely on cloud service provider
+to have a stable cloud computing environment. It is also a pity because both
+Google and Amazon just recently released dedicated solutions for how to deploy
+\ogs{} on their environments. Evaluating these solutions would have been a very
+interesting topic.
+
+\subsection{Limitations introduced by games}
+As explained in \autoref{sub:games} the way games are built itself is a huge
+limitations on the design of a \og{} application. To analyze all aspects of game
+development in detail is out of scope for this thesis. Instead this thesis takes
+a more general approach by viewing the rendering any physics engine details as a
+black box. This allows to focus on the logical parts of \og{} development, the
+game model and the game simulation which is most relevant in regards to a \ms{}
+realization.
+
+\subsection{Time Constraint}
+In the original plan for this thesis the topic Procedural Content Generation
+(PCG) was intended to be research very detailed. But since the topics:
+Deployment and composition required a lot more effort then anticipated, the time
+budget for PCG shrunk close to zero. Because of this PCG will only receive minor
+attention in this thesis. 
+
+Another aspect that intensified this problem is the fact that this thesis is the
+third out out a series of three and a lot of work was necessary to conclude the
+project as a whole.
+
+\subsection{Delimitation}
+
+There are also some delimitations (limitations that can be lifted) that became
+apparent during this thesis:\\
+
+Games are usually developed using Microsoft Windows. But cloud developers tend
+to use mainly Linux tools. Because of this many tools are cumbersome to use on
+Windows platforms and therefore greatly hinder the development process. It is a
+side-goal of this thesis to facilitate the whole process on Windows. 
 
 
 
