@@ -1,66 +1,172 @@
 \chapter{Methods}
 
-The research problems that are topic of this thesis are very variegated. For the
-examination of the problems it is therefor necessary to access each problem in a
-specifically suited method. 
+This thesis is the third and final part of a three semester project. The
+substance of the past two theses was to build a foundation for the incorporation
+of \mss{} and \ogs{}. 
 
-\section{Methods for Research Problems}
+The first project thesis consists of mostly literature about the topics \ogs{}
+and \mss{}. The result is a comprehensive documentation of these two topics. The
+essence of the document is the descriptions of a set of artifact that are
+required to produce a fully functional \og{}.
 
-\subsection{Deployment}
-Evaluation of 3rd party libraries (DevOps work)
+During the second project thesis the theory established in thesis one was put
+into practice. This was realized by implementing a prototype with the minimal
+set of artifacts that are required to showcase the feasibility of \og{}
+development with \mss{}. The results of the second project theses is a
+feasibility study along with a fully functional prototype of an \og{} build
+with \mss{}.
 
-\subsection{Composition}
-Expert Opinion on Model Approach
-
-\subsection{Development}
-Expert Opinion
-
-\subsection{Operations}
-Play Tests
-
-
-
-
-\subsection{Structure of the Thesis}
-
-This thesis is the third part of a three semester project.
-
-\begin{itemize}
-  \item In the first semester (Project thesis 1) is an incorporation into
-  Microservices and the online game domain. It consists of mostly literature
-  research which results in a comprehensive documentation of these topics
-  \item The second semester is about the implementation of game features with
-  Microservices and is devoted to the feasibility study of a Microservice
-  architecture for online game development. A working prototype is the result of
-  the second part.
-  \item The third part is about the elaboration of the previous result
-  	\begin{itemize}
-  	  \item A one click solution for developers to start with online game
-  	  development. The development process should feel as closely as possible to
-  	  offline game development.
-  	  \item Introduction of PCG features to further ease the development of
-  	  online games.
-  	  \item Examination of advanced Microservice topics in this regard such as
-  	  the deployment of a Microservice cluster with a cluster manager and to 
-  	  evaluate composition of a Microserice environment concretely choreography
-  	  vs. orchestration. Composition is the glue that keeps a Microservice
-  	  environment together. A major result of this part of the project is
-  	  to obtain validation feedback for the solution.
-	\end{itemize}
-  
-\end{itemize}
+This third and final thesis is mainly about the elaboration of the previous tho
+theses. This includes the examination of the open research problems listed in
+\autoref{sub:problems} and the finalization of the prototype that was initially
+developed during the second project thesis. This prototype serves as a reference
+on how to develop and operate \ogs{} using a \mss{} environment.
 
 \section{Subject Pool}
+\label{sec:subject_pool}
+
+The research problems that this thesis aims to solve are very variegated. To
+gain an overview over all the activities that have to be conducted in the course
+of this thesis the research problems can be collated to concrete subjects. These
+subjects can then be examined individually.
 
 \subsection{\ms{} Tenets in Relation to Online Games}
 
-\subsection{Microservice Specific Challenges}
-\subsection{Conceptual Problems in \ms{} Online Game Envirunments}
-\subsection{Microservice Contribution to Online Games}
+This is the major subject of this thesis and will therefore receive a lot of
+attention. The research goal of this subject is to research every \ms{} tenet
+according to its requirements in regards to \ogs{}. This is done in the form of
+a requirements analysis of every tenet and a proposal on how to suffice them.
+Examples for these solutions are implemented in the prototype and serve as a
+demonstration. \todo{Ref to Result Section}
+
+\subsection{Challenges Introduced by \mss{}}
+
+It is challenging to suffice all \ms{} tenets for \og{} development. Most
+noticeable the IDEAL tenet on specifically isolated state represents the biggest
+challenge. This is because a game is always stateful. For example the location
+of all chess pieces on a chess board is the state of the chess game. Since
+\mss{} are always stateless the full game state must be sent with every game
+message to provide true service confinement. In a simple game like chess this
+might be possible but in a rich \og{} this is just no feasible. 
+
+This challenge also exists in other computer science disciplines and is called
+session management. In the case of \ogs{} sessions of players have to be
+tracked but also the sessions of the game itself (e.g. one round of chess).
+
+This challenge leads to another challenge namely game model access. Since the
+game state is shared among multiple \mss{} a flexible approach is needed to
+provide access to session data to the services.
+
+The remaining challenges have already been discussed in the previous two project
+theses.
+
+\subsection{\ms{} Infrastructure}
+
+The \ms{} infrastructure subject is a collection of all topics that have to be
+considered when operating a \ms{} environment. The content of this subject is
+not restricted to the \ogs{} and can be applied to any domain.
+
+\subsubsection{Requirements for \ms{} Composition}
+
+The examination of the requirements for \ms{} composition can be grouped into
+logical and physical composition (explained in \autoref{subsub:composition})
+requirements.
+
+The requirements for physical composition of \ms{} \og{} environments are very
+similar to the requirements of classical business applications. The article of
+O.Wolf provides a very good overview of the aspects of \ms{} composition and
+discusses the paradigms orchestration and choreography in detail \cite{wolf_ms}.
+Also C.Pahl and B.Lee provide a comprehensive paper that discusses requirements
+to compose containerized applications in the cloud \cite{pahl2015containers}.
+
+The requirements for logical composition are in essence very simple. Physical
+composition offers a way for \mss{} to find each other. Logical composition is
+on top of physical composition responsible that the services understand each
+other.
+
+\subsubsection{Deployment of a \ms{} Environment}
+
+The deployment topic contains all aspects that have to be considered when a
+production environment for a \ms{} application is realized. This includes the
+continuous integration process that is responsible to build the application code
+and deploy the executable files to the production environment.
+
+Deployment also covers the aspect of choosing an appropriate cloud service
+provider to that provides the physical infrastructure for the production
+environment.
+
+\subsubsection{Service Persistence}
+
+The polyglot persistence approach proposed for \mss{} is only partially usable.
+This is because a large portion of the state data (for example player data)
+is essentially used by every service. With polyglot persistence only one
+\ms{} would have direct access to this frequently requested data. This
+inevitably leads to a bottle neck.
+
+\paragraph{Durability}
+
+In \ms{} environments databases are often deployed as \mss{} themselves.
+Therefor it is in fact possible to loose the data stored in the containers. To
+cope with this a durable solution is needed that adds a layer of redundancy to
+guarantee that no data is lost. 
+
+\subsubsection{Service Consistency}
+
+One omnipresent problem with distribution is data consistency throughout the
+application. For \ogs{} consistency is not as critical as like in for example
+the medical industry but still undesirable. Also usually it is possible to spend
+real money in an \og{} and therefore strong consistency is required for parts of
+the application. 
+
+\subsubsection{Service Monitoring}
+
+In order to keep track on the health of a \ms{} application it is mandatory to
+have live information on the status of the application. This includes a
+visualization of the overall performance of the whole system and also for
+individual services.
+
+This topic also includes notification on events happening in the system like for
+example notifications on system failure or regular operational reports. 
+
+\subsection{Networking in \ogs{}}
+
+Networking is obviously a critical part of \og{} development. it is important
+that developers understand which implications the networked functionality has
+on the game. Networking in video games is a well documented subject. An
+essential reference for networking in \ogs{} is the blog of G.Gambetta\cite{}
+about fast-paced multi-player. It is a great reference to understand the low
+level aspects of networking in games.
+
+
 \subsection{Development of a \ms{} Driven Online Game}
+
 \subsection{Procedural Content Generation in Online Games}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Instrumentation}
+
 \subsection{Available Technology}
 
 \subsubsection{Cloud Service Provider}
@@ -171,7 +277,50 @@ tools.
 \subsection{Design Science Methodology}
 \subsection{Vertical Slice Prototype}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Procedures}
+
+\section{Method Selection for Research Problems}
+
+The subject pool discussed in \autoref{sec:subject_pool} are very variegated.
+For the examination of the subjects it is therefor necessary to access each
+subject with in a specifically suited method. The research problems can be
+summarized into four problem domains which allows to choose the the optimal
+research method for each domain individually.
+
+\subsection{Composition}
+Expert Opinion on Model Approach
+
+\subsection{Deployment}
+Evaluation of 3rd party libraries (DevOps work)
+
+
+\subsection{Development}
+Expert Opinion
+
+A one click solution for developers to start with online game
+  	  development. The development process should feel as closely as possible to
+  	  offline game development.
+
+\subsection{Operations}
+Play Tests
 
 \subsection{Lab Research}
 
