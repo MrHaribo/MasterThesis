@@ -1,5 +1,176 @@
 \section{Instrumentation}
 
+As a first step to examine the subjects defined in \autoref{sec:subject_pool} a
+clear definition of the technical foundation to reproduce the subjects during
+the lab research (\autoref{sub:lab_reserach}) has to be made. For this purpose a
+comparison of available technology is provided along with a proposal on how to
+choose between similar available technologies.
+
+\subsection{MicroNet: A Reference Implementation}
+
+The prototype that has been already mentioned prior \todo{Exact reference}
+several times is actually a collection of prototypes representing a reference
+implementation on how to realize an \og{} using \ms{}.
+
+The development title of this reference implementation is MicroNet.
+MicroNet consists of the following components:
+
+\begin{itemize}
+  \item A core framework that provides run-time libraries required to operate a
+  \ms{} \og{} application cluster.
+  \item A small reference implementation on how to build an \og{} with MicroNet
+  \item A service catalogue which contains reference implementation of
+  functionality that is commonly uses in \ogs{}.
+  \item A tool-set to simplify the development process of an \og{} 
+\end{itemize}
+
+\subsubsection{Common Functionality}
+
+The polyglot programming tenet states that a \ms{} is free to choose its
+implementation details. For the actual realization of a \ms{} application
+this aspect introduces a number of challenges. 
+
+It breaks the DRY (don't repeat yourself) principle if the same piece of
+functionality is simply copied among multiple services. To cope with this a
+solution is needed that on one hand does respect the DRY principle and on the
+other hand provides a mechanism to share similar functionality among services.
+
+One solution for this dilemma is to provide a reference solution that furnishes
+a service with common functionality. This reference solution can be used to
+build \mss{} which have no special technology requirement quickly.
+
+In the prototype this aspect is tackled using a reference implementation
+developed in Java. Java is in theory platform independent and therefore a good
+choice to provide a general solution for \mss{} application design and
+implementation. \mss{} with extended requirements are free not to rely on the
+common solution and participate in the cluster autonomous.
+
+\subsubsection{Application data}
+
+As explained in \autoref{sub:games} an \og{} game operates on data. This data
+must be suitable to be persisted and to be sent over a network (these aspects
+have been discussed in project thesis 2 \todo{ref}). There is an literally
+infinite number of ways on how to treat application data like for example Json,
+XML, CVS, Strings, binary data, and HTML just to name a few.
+
+Since \ogs{} are very time critical the fastest and therefore a binary data
+format would introduce the least overhead. But since binary serialization
+introduces a large amount of additional work during development it can be
+considered an optimization\cite{gafferon2017games} and therefore a simpler data
+format can be chosen for the prototype. Json is a good compromize in this regard
+because it has an acceptable overhead, is human readable and also very popular.
+
+\subsubsection{Networking}
+
+An integral part of \ogs{} is networking. In regards of \mss{} the most common
+approaches to networking are RESTful HTTP or Messaging. Messaging offers
+several advantages over pure HTTP that are quite useful to make a \ms{}
+application robust: Message queues are persistent and in case a service is
+unavailable the messages are buffered and delivered as soon as the service
+is available again. Furthermore it is possible to combine multiple message
+brokers to a mesh to provide fail-over functionality. These aspects make a
+message broker the optimal choice to facilitate networking for \ms{} \og{}
+applications. Networking has been discussed in detail in project thesis one
+\todo{Cite Thesis 1}.
+
+\subsection{Development Environment}
+
+The decision to propose Java as the main programming language for \mss{} allows
+to derive a set of assumptions that simplify the development process of \ms{}
+applications.
+
+\subsubsection{Java as the Main Programming Language}
+
+The latest Java Version 8 introduced functional programming into Java. With
+functional programming it is possible to inject code into methods in a
+convenient way. They are a perfect match to allow the developer to inject his
+own code into a framework. MicroNet makes excessive use of this possibility.
+
+Java enables the utilization of Apache Maven which is a very powerful software
+project management and comprehension tool. It allows the describe and automate
+the build process of a java applications. It also simplifies the process of
+integrating third party java libraries into the application and the majority of
+the java libraries are available as maven artifacts.
+
+\subsubsection{Code Generation}
+
+Java version 6 introduced annotation processing in the standard java build
+process. This makes it very simple to provide framework functionality closely
+related to the actual \og{}. Annotation processing coupled with code generation
+are one major driver to facilitate the composition of \mss{}.
+
+\subsubsection{The Eclipse IDE}
+
+When it comes to Java development the Eclipse IDE is very popular. This is
+backed by the fact that Eclipse has been around since \todo{Date} and has gone
+though a long maturing process. Meanwhile Eclipse is a very robust development
+environment not only for Java but also for many other programming languages. 
+
+The way Eclipse is built makes it very easy to extend it. It is basically a set
+of plug-ins that together form the IDE. The developer can write it's own
+plug-ins to tailor the development process to his needs. 
+
+MicroNet uses the Eclipse plug-in functionality to integrate \ms{} specific
+development tools into Eclipse. With mininal effort it is also possible to
+extract the MicroNet plug-ins to standalone applications. This however is out of
+scope for this thesis.
+
+\subsection{Container Engine}
+
+Containers are a very powerful modern approach to run software. Instead of
+installing a software directly on a host it is instead installed in a container.
+The container can then run among other containers in a container engine as a
+virtual machine. The container engine can be installed on any host that is
+supported. This approach greatly increases the portability of software and
+allows developers to build software once and run it anywhere as long as the
+container engine is available.-
+
+\subsubsection{Docker}
+
+Docker is the most widely used container technology and a de-facto standard
+\todo{Citation needed}. The docker ecosystem provides with Dockerhub a central
+registry for available Docker containers. This centralized approach makes is
+easy to install required dependencies on a system as long as docker is
+installed.
+
+\paragraph{Docker Compose}
+
+Docker Compose is a way to describe a complex application consisting of multiple
+Docker containers. With this approach it is possible to build or run a complete
+\ms{} application with a single command. The structure of docker-compose is
+also very well suited for automation. The compose script is in yaml format which
+many libraries support.
+
+Docker Compose is also the foundation to deploy a distributed application in
+Docker Swarm explained in \autoref{sub:composition_engines}.
+
+\paragraph{Docker for Windows}
+
+As mentioned in \todo{Ref to Windows Requirement} the whole \og{} development
+process must be realizable in Windows. Fortunately the Docker for Windows Client
+is a very sophisticated tool that feels very close to the original Docker
+version on Linux. One problem regarding Docker for Windows is that it does not
+run on Windows versions which do not support HyperV. As a work-around developers
+can use the Docker Toolbox. Docker Toolbox uses VirtualBox to provide the
+same functionality as stand alone Docker but with the price of a little bit more
+complexity during setup.
+
+\subsection{Composition Engines}
+\label{sub:composition_engines}
+
+\subsection{Database Solution}
+\subsection{Source and Artifact Control}
+\subsection{Cloud Service Provider}
+
+
+
+
+
+
+
+
+
+
 \subsection{Available Technology}
 
 \subsubsection{Cloud Service Provider}
@@ -47,65 +218,11 @@ ip address.
 For this thesis a virtual server at the HSR will be the test setup. This
 infrastructure is also available at the major cloud service providers.
 
-\paragraph{Docker}
 
-Docker is a very powerful paradigm to run software. Instead of installing a
-software on a host and running it native it is packaged in a container and a
-container engine on the host is running it instead. This greatly eases the
-deployment of software since the developer can run it anywhere as long as it
-runs in Docker.\\
 
-Docker is the foundation for the easy deployment of MicroNet. It is used to hide
-all the dependencies that the framework has from the developer. This is possible
-because to all major dependencies of the Framework dockerhub provides reference
-containers that can be used to deploy features. This goes for all dependencies
-namely speaking: ActiveMQ containers and Postgres containers. Since the
-framework is written in Java developers can simply use openJDK containers to
-easily deploy their own services.\\
 
-It is also possible to let a \ms{} participate in the framework that is not
-running in docker. in that case it can simply communicate with the framework
-over the message broker from any host.\\
 
-Another interesting docker container is hydra which provides a OAuth2 and
-OpenID implementation. It can be used to make the framework and the game more
-secure. But this might be overkill for the system that is aimed to be small and
-simple. It is easier to use the ActiveMQ security functionality instead.\\
+\subsection{Game Engine}
 
-\paragraph{Docker Compose}
+\subsection{The Spacegame Prototype}
 
-Docker Compose is a way to describe a complex application consisting of multiple
-Docker containers. This approach is used to deploy the whole MicroNet framework
-with one click. Is is possible to automatically update the docker-compose file
-at compile-time and therefore keep the deployment description in sync with the
-framework code.
-
-Docker Compose is also the foundation for the usage of Docker Swarm. With docker
-Swarm a Docker application can be distributed on multiple hosts. 
-
-\paragraph{Docker for Windows}
-
-One requirement for game development is the support for Windows development
-machines. Since Windows is the most-widely used development OS for games it is
-mandatory that MicroNet can be fully developed with a Windows machine. 
-
-The Docker for Windows Version feels very close to the native version on Linux.
-One problem regarding Docker for Windows is that it does not run native an on
-all Windows versions since HyperV is required for it to work. As a work-around
-Tocker Tools can be used but this makes the deployment process more complicated.
-
-\subsubsection{Maven}
-
-Apache Maven is a build tool for Java Programs. It defines a build process that
-includes running tests and finally deploying to program in a repository. Maven
-helps to build a bridge between the actual code of a service and the integration
-into the framework. For this purpose it a build script format that defines the
-dependencies and additional build instructions. This makes it possible do
-abstract the manual installation process of MicroNet. 
-
-So spare the developer of an online game to cope with the edit complicated Maven
-scripts (.pom files) these pon files are generated by the eclipse MicroNet
-tools.
-
-\subsection{Design Science Methodology}
-\subsection{Vertical Slice Prototype}
