@@ -1,0 +1,111 @@
+\section{Instrumentation}
+
+\subsection{Available Technology}
+
+\subsubsection{Cloud Service Provider}
+
+MicroNet is designed to run in the cloud. It is therefore mandatory to evaluate
+the major cloud service infrastructure providers according to their usability
+for online games.
+
+One problem in regards to these service providers is payment. Although they
+provide a free tier to test their infrastructure, a credit card has to be
+pledged as security. In the case the limit is overdrawn a fee will be charged.
+This risk cannot be taken in this thesis. 
+
+\paragraph{Google Cloud Gaming Solutions}
+
+Google offers a solution to deploy rich online games in the cloud. It basically
+a setup for the existing google cloud infrastructure with additional
+functionality to to provide build in matchmaking matchmaking. For this purpose
+it provides an API that is available in a number of programming languages.
+
+The MicroNet service that provides the matchmaking functionality has to be
+altered if the Google solution for matchmaking wants to be used. 
+
+To operate a game driven by MicroNet in the Google Cloud the Google App Engine
+can be used to run the services of the MicroNet framework and the Google Compute
+Engine can be used to run the game simulation servers. ActiveMQ that is used for
+messaging can be used with Google Cloud by using Bitnami.
+
+\paragraph{Amazon Game Lift}
+
+Amazon GameLift is very similar to Google Gaming Solutions. It also provides a
+matchmaking solution and the option to communicate with the game backend running
+in the Amazon cloud. An advantage of the amazon solution is that it provides an
+API for all the major game engines like Unity3D or Unreal Engine 4. Amazon also
+provides its own game engine with the name Lumberyard.
+
+\paragraph{A Dedicated Server}
+
+The most general way to deploy the MicroNet framework is on a dedicated server
+hardware. This could be either a cluster of bare metal servers with a sufficient
+networking capabilities or a set of virtual servers running somewhere in the
+cloud. Either way the result is a set of hosts running linux and have a public
+ip address.
+
+For this thesis a virtual server at the HSR will be the test setup. This
+infrastructure is also available at the major cloud service providers.
+
+\paragraph{Docker}
+
+Docker is a very powerful paradigm to run software. Instead of installing a
+software on a host and running it native it is packaged in a container and a
+container engine on the host is running it instead. This greatly eases the
+deployment of software since the developer can run it anywhere as long as it
+runs in Docker.\\
+
+Docker is the foundation for the easy deployment of MicroNet. It is used to hide
+all the dependencies that the framework has from the developer. This is possible
+because to all major dependencies of the Framework dockerhub provides reference
+containers that can be used to deploy features. This goes for all dependencies
+namely speaking: ActiveMQ containers and Postgres containers. Since the
+framework is written in Java developers can simply use openJDK containers to
+easily deploy their own services.\\
+
+It is also possible to let a \ms{} participate in the framework that is not
+running in docker. in that case it can simply communicate with the framework
+over the message broker from any host.\\
+
+Another interesting docker container is hydra which provides a OAuth2 and
+OpenID implementation. It can be used to make the framework and the game more
+secure. But this might be overkill for the system that is aimed to be small and
+simple. It is easier to use the ActiveMQ security functionality instead.\\
+
+\paragraph{Docker Compose}
+
+Docker Compose is a way to describe a complex application consisting of multiple
+Docker containers. This approach is used to deploy the whole MicroNet framework
+with one click. Is is possible to automatically update the docker-compose file
+at compile-time and therefore keep the deployment description in sync with the
+framework code.
+
+Docker Compose is also the foundation for the usage of Docker Swarm. With docker
+Swarm a Docker application can be distributed on multiple hosts. 
+
+\paragraph{Docker for Windows}
+
+One requirement for game development is the support for Windows development
+machines. Since Windows is the most-widely used development OS for games it is
+mandatory that MicroNet can be fully developed with a Windows machine. 
+
+The Docker for Windows Version feels very close to the native version on Linux.
+One problem regarding Docker for Windows is that it does not run native an on
+all Windows versions since HyperV is required for it to work. As a work-around
+Tocker Tools can be used but this makes the deployment process more complicated.
+
+\subsubsection{Maven}
+
+Apache Maven is a build tool for Java Programs. It defines a build process that
+includes running tests and finally deploying to program in a repository. Maven
+helps to build a bridge between the actual code of a service and the integration
+into the framework. For this purpose it a build script format that defines the
+dependencies and additional build instructions. This makes it possible do
+abstract the manual installation process of MicroNet. 
+
+So spare the developer of an online game to cope with the edit complicated Maven
+scripts (.pom files) these pon files are generated by the eclipse MicroNet
+tools.
+
+\subsection{Design Science Methodology}
+\subsection{Vertical Slice Prototype}

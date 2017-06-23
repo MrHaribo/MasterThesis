@@ -1,0 +1,149 @@
+\section{Subject Pool}
+\label{sec:subject_pool}
+
+The research problems that this thesis aims to solve are very variegated. To
+gain an overview over all the activities that have to be conducted in the course
+of this thesis the research problems can be collated to concrete subjects. These
+subjects can then be examined individually.
+
+\subsection{\ms{} Tenets in Relation to Online Games}
+
+This is the major subject of this thesis and will therefore receive a lot of
+attention. The research goal of this subject is to research every \ms{} tenet
+according to its requirements in regards to \ogs{}. This is done in the form of
+a requirements analysis of every tenet and a proposal on how to suffice them.
+Examples for these solutions are implemented in the prototype and serve as a
+demonstration. \todo{Ref to Result Section}
+
+\subsection{Challenges Introduced by \mss{}}
+
+It is challenging to suffice all \ms{} tenets for \og{} development. Most
+noticeable the IDEAL tenet on specifically isolated state represents the biggest
+challenge. This is because a game is always stateful. For example the location
+of all chess pieces on a chess board is the state of the chess game. Since
+\mss{} are always stateless the full game state must be sent with every game
+message to provide true service confinement. In a simple game like chess this
+might be possible but in a rich \og{} this is just no feasible. 
+
+This challenge also exists in other computer science disciplines and is called
+session management. In the case of \ogs{} sessions of players have to be
+tracked but also the sessions of the game itself (e.g. one round of chess).
+
+This challenge leads to another challenge namely game model access. Since the
+game state is shared among multiple \mss{} a flexible approach is needed to
+provide access to session data to the services.
+
+The remaining challenges have already been discussed in the previous two project
+theses.
+
+\subsection{\ms{} Infrastructure}
+
+The \ms{} infrastructure subject is a collection of all topics that have to be
+considered when operating a \ms{} environment. The content of this subject is
+not restricted to the \ogs{} and can be applied to any domain.
+
+\subsubsection{Requirements for \ms{} Composition}
+
+The examination of the requirements for \ms{} composition can be grouped into
+logical and physical composition (explained in \autoref{subsub:composition})
+requirements.
+
+The requirements for physical composition of \ms{} \og{} environments are very
+similar to the requirements of classical business applications. The article of
+O.Wolf provides a very good overview of the aspects of \ms{} composition and
+discusses the paradigms orchestration and choreography in detail \cite{wolf_ms}.
+Also C.Pahl and B.Lee provide a comprehensive paper that discusses requirements
+to compose containerized applications in the cloud \cite{pahl2015containers}.
+
+The requirements for logical composition are in essence very simple. Physical
+composition offers a way for \mss{} to find each other. Logical composition is
+on top of physical composition responsible that the services understand each
+other.
+
+\subsubsection{Deployment of a \ms{} Environment}
+
+The deployment topic contains all aspects that have to be considered when a
+production environment for a \ms{} application is realized. This includes the
+continuous integration process that is responsible to build the application code
+and deploy the executable files to the production environment.
+
+Deployment also covers the aspect of choosing an appropriate cloud service
+provider to that provides the physical infrastructure for the production
+environment.
+
+\subsubsection{Service Persistence}
+
+The polyglot persistence approach proposed for \mss{} is only partially usable.
+This is because a large portion of the state data (for example player data)
+is essentially used by every service. With polyglot persistence only one
+\ms{} would have direct access to this frequently requested data. This
+inevitably leads to a bottle neck.
+
+\paragraph{Durability}
+
+In \ms{} environments databases are often deployed as \mss{} themselves.
+Therefor it is in fact possible to loose the data stored in the containers. To
+cope with this a durable solution is needed that adds a layer of redundancy to
+guarantee that no data is lost. 
+
+\subsubsection{Service Consistency}
+
+One omnipresent problem with distribution is data consistency throughout the
+application. For \ogs{} consistency is not as critical as like in for example
+the medical industry but still undesirable. Also usually it is possible to spend
+real money in an \og{} and therefore strong consistency is required for parts of
+the application. 
+
+\subsubsection{Service Monitoring}
+
+In order to keep track on the health of a \ms{} application it is mandatory to
+have live information on the status of the application. This includes a
+visualization of the overall performance of the whole system and also for
+individual services.
+
+This topic also includes notification on events happening in the system like for
+example notifications on system failure or regular operational reports. 
+
+\subsection{Networking in \ogs{}}
+
+Networking is obviously a critical part of \og{} development. it is important
+that developers understand which implications the networked functionality has
+on the game. Networking in video games is a well documented subject. An
+essential reference for networking in \ogs{} is the blog of G.Gambetta\cite{}
+about fast-paced multi-player. It is a great reference to understand the low
+level aspects of networking in games.
+
+
+\subsection{Development of a \ms{} Driven Online Game}
+
+A number of tools in addition to the basic IDE can simplify the development
+process of \ms{}. Many tools in this regard exist an can be of great value if
+properly used. 
+
+The following properties are desirable when selecting or developing tools:
+
+\begin{itemize}
+  \item Reduce the time needed to introduce new \mss{}
+  \item Allow the developer focus on domain logic and not boilerplate code
+  \item Increasing the automation level of continuous integration (deployment)
+  \item Provide functionality to cope with \mss{} composition (both physical
+  and logical composition)
+  \item Visualization of operational statistics, communication flows and domain
+  specific data like the game model.
+\end{itemize}
+
+\subsection{Procedural Content Generation in Online Games}
+
+Procedural Content Generation (PCG) a strategy to produce game content
+procedurally. PCG is an efficient way to reduce the effort needed by designers
+to produce all the content needed for a game. Game content produced this way can
+lack the desired quality and therefore manual intervention by game designers is
+always required. PCG has become very popular in recent years
+\cite{lee2014procedural} and is therefor a very interesting research topic in
+regards to its usability for \og{} development.
+
+PCG is usually realized using search-based methods. Especially evolutionary
+algorithms perform very well. Some examples are: Fractal and noise algorithms,
+grammars and L-systems, Planning algorithms, and many more. The book Procedural
+Content Generation in Games \cite{shaker2014procedural} is a very comprehensive
+summary on the topic which is currently widely researched in academia.
