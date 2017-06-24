@@ -81,7 +81,7 @@ applications.
 
 \subsubsection{Java as the Main Programming Language}
 
-The latest Java Version 8 introduced functional programming into Java. With
+The latest Java version 8 introduced functional programming into Java. With
 functional programming it is possible to inject code into methods in a
 convenient way. They are a perfect match to allow the developer to inject his
 own code into a framework. MicroNet makes excessive use of this possibility.
@@ -158,18 +158,199 @@ complexity during setup.
 \subsection{Composition Engines}
 \label{sub:composition_engines}
 
+The physical \ms{} composition topic is a pure technology evaluation problem.
+The selection of technologies for evaluation is the first aspect to consider in
+this regard. Among the many available solution the three well known solutions
+for \ms{} composition are compared: Kubernetes, Apache Mesos and Docker Swarm.
+
+\subsubsection{Evaluation Criteria}
+
+In order to compare these three composition solutions X properties are defined
+and examined for each technology. The categories are chosen according to the
+experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
+\cite{lerilli2012cloud_eval_criteria} \cite{voras2011evaluating}.
+
+\paragraph{The Virtualization Layer}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{The Storage Layer}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{The Management Layer}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Initial Provisioning Time}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Ease of Use/ Ease of Setup}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Reduce of Technology Complexity}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Customization}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Infrastructure Monitoring and Reporting Ability}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Customization}
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Exclusivity}
+
+If the relationship goes sour, how easy is it extract your legacy data?
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+
+\paragraph{Exclusivity}
+
+If the relationship goes sour, how easy is it extract your legacy data?
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Application Description Format}
+
+If the relationship goes sour, how easy is it extract your legacy data?
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+ 
+\paragraph{Supported Eco Systems}
+
+If the relationship goes sour, how easy is it extract your legacy data?
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Scalability}
+
+If the relationship goes sour, how easy is it extract your legacy data?
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\paragraph{Liecence}
+
+If the relationship goes sour, how easy is it extract your legacy data?
+
+\begin{center}
+  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+    \hline
+    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    4 & 5 & 6 \\
+    \hline
+  \end{tabular}
+\end{center}
+ 
 \subsection{Database Solution}
 \subsection{Source and Artifact Control}
 \subsection{Cloud Service Provider}
-
-
-
-
-
-
-
-
-
 
 \subsection{Available Technology}
 
