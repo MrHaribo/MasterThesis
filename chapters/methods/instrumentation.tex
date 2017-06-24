@@ -228,6 +228,8 @@ technology supports.
   \end{tabular}
 \end{center}
 
+
+\newpage
 \paragraph{The Storage Layer}
 
 Since container live only non-permanently in memory the composition engine must
@@ -276,6 +278,7 @@ disk.
   \end{tabular}
 \end{center}
 
+\newpage
 \paragraph{The Management Layer}
 
 The management layer is responsible to provide an interface to run application
@@ -426,10 +429,6 @@ If the relationship goes sour, how easy is it extract your legacy data?
 \subsection{Source and Artifact Control}
 \subsection{Cloud Service Provider}
 
-\subsection{Available Technology}
-
-\subsubsection{Cloud Service Provider}
-
 MicroNet is designed to run in the cloud. It is therefore mandatory to evaluate
 the major cloud service infrastructure providers according to their usability
 for online games.
@@ -439,7 +438,7 @@ provide a free tier to test their infrastructure, a credit card has to be
 pledged as security. In the case the limit is overdrawn a fee will be charged.
 This risk cannot be taken in this thesis. 
 
-\paragraph{Google Cloud Gaming Solutions}
+\subsubsection{Google Cloud Gaming Solutions}
 
 Google offers a solution to deploy rich online games in the cloud. It basically
 a setup for the existing google cloud infrastructure with additional
@@ -454,7 +453,7 @@ can be used to run the services of the MicroNet framework and the Google Compute
 Engine can be used to run the game simulation servers. ActiveMQ that is used for
 messaging can be used with Google Cloud by using Bitnami.
 
-\paragraph{Amazon Game Lift}
+\subsubsection{Amazon Game Lift}
 
 Amazon GameLift is very similar to Google Gaming Solutions. It also provides a
 matchmaking solution and the option to communicate with the game backend running
@@ -462,7 +461,7 @@ in the Amazon cloud. An advantage of the amazon solution is that it provides an
 API for all the major game engines like Unity3D or Unreal Engine 4. Amazon also
 provides its own game engine with the name Lumberyard.
 
-\paragraph{A Dedicated Server}
+\subsubsection{A Dedicated Server}
 
 The most general way to deploy the MicroNet framework is on a dedicated server
 hardware. This could be either a cluster of bare metal servers with a sufficient
@@ -472,8 +471,6 @@ ip address.
 
 For this thesis a virtual server at the HSR will be the test setup. This
 infrastructure is also available at the major cloud service providers.
-
-
 
 
 
