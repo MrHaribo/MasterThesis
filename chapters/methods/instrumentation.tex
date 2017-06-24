@@ -155,6 +155,24 @@ can use the Docker Toolbox. Docker Toolbox uses VirtualBox to provide the
 same functionality as stand alone Docker but with the price of a little bit more
 complexity during setup.
 
+\subsection{Cloud Service Providers}
+
+Meanwhile is very popular for a company to use the infrastructure of the major
+cloud service providers to deploy their infrastructure \cite{roberts2016aws}
+\cite{pronschinske2015turbine}. This offer a stability and performance that 
+cannot be achieved by a proprietary server center \cite{gai2012towards}.
+
+Because of this trend it is mandatory to take largest players in this market
+as a reference on how to deploy modern distributed applications. Therefore the
+usability of a technology is partially dependent of the integration solution for
+the major cloud providers. Amazon Cloud (AWS) and Google Cloud Platform (GCP)
+are the major cloud service providers that are considered in this thesis.
+
+It has to be mentioned that due to the limitation mentioned in \autoref{sub:zero_buget}
+these cloud service providers cannot be examined in practice. However the
+comprehensive documentation of these providers allows to gain an insight into
+their technology.
+
 \subsection{Composition Engines}
 \label{sub:composition_engines}
 
@@ -165,40 +183,134 @@ for \ms{} composition are compared: Kubernetes, Apache Mesos and Docker Swarm.
 
 \subsubsection{Evaluation Criteria}
 
-In order to compare these three composition solutions X properties are defined
-and examined for each technology. The categories are chosen according to the
-experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
+In order to compare these three composition solutions X properties are examined
+for each technology. The categories are chosen according to the experience of
+cloud experts in the industry \cite{toll2016cloud_expert_eval}
 \cite{lerilli2012cloud_eval_criteria} \cite{voras2011evaluating}.
 
 \paragraph{The Virtualization Layer}
 
+The virtualization technology used to operate a cluster of \mss{}. The
+virtualization technology is tightly coupled with the different Eco systems the
+technology supports.
+
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Supports AWS, GCP (using the Coogle Compute Engine - GCE), Microsoft Azure,
+    Joyent, OpenStack, VMWare, bare metal and localhost deployments.
+    
+    -Minikube is a way to run and test Kubernetes localhost deployments. It
+    supports the VM drivers: virtualbox, vmwarefusion, kvm, and xhyve.
+    
+    -CoreOS is a way to install Kubernetes on bare metal.&
+    
+    -Mesos consists of a master daemon that manages agent daemons running on
+    each cluster node. Each daemon can run containers as tasks. 
+    
+    -Mesos supports Docker containers but also offers a proprietary solution in
+    the form of Mesos Containerizers. solution.
+    
+    -With Mesosphere DC/OS (the datacenter operating system) bare metal
+    installations are possible. &
+    
+    -Multiple Docker Daemons to provide a cluster of nodes. 
+    
+    -Docker Daemons are available for Windows, MacOS, and Linux. Under Linux
+    Docker is realized with native Linux Containers. The native Windows
+    installation uses HyperV.
+    
+    -Docker Toolbox provides a way of using Docker with virtualbox.
+    
+    -Docker Daemons are also available for AWS and Azure.\\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{The Storage Layer}
 
+Since container live only non-permanently in memory the composition engine must
+provide a way for containers to persist data that exceeds the lifetime of a
+container. The storage layer is also provides the possibility to share data
+among containers.
+
+Polyglot database solutions often use containers to run DBMS system. The storage
+layer provided by the composition engine is then used to persist the data on
+disk.
+
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Kubernetes uses an approach called Persistent Volumes to provide a common
+    API to manage the storage layer. 
+    
+    -Supports the storage technologies of: GCP, AWS, Azure, NFS, Vsphere,
+    VMware and more.&
+
+    -It is suggested to use accessible storage outside the containers for
+    example a database (NoSQL/SQL)
+    
+    -Offers Persistent Volumes comparable to the local filesystem. They
+    live on after a task terminates and other tasks can consume the persisted
+    data during execution.
+    
+    -The Docker Containerizer supports the Docker Volume Plug-in & 
+     
+    -Host-Based persistence allows multiple containers to one shared volume
+    bypassing the union file-system. Data corruption can be the consequence.
+    
+    -Implicit Per-Container Storage is a storage sandbox per container on
+    the host. When a container is removed, so is it's sandbox.
+    
+    -Explicit Shared Storage (Data Volumes) mounts an explicit location on the
+    host within one or more containers allowing shared read-write access to
+    a common directory.
+    
+    -The dependency on the host file-system makes containers non portable. To
+    cope with this it is possible to provide Data Volumes though a shared
+    file-system like Ceth, GlusterFS, or NFS and expose it though a consistent
+    namespace.\\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{The Management Layer}
 
+The management layer is responsible to provide an interface to run application
+stacks or single containers in the virtualization layer.
+
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
-    \hline
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
+  	\hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -kubectl is the main command line tool to control a Kubernetes cluster.
+    
+    -kubefed is a command line tool to federate multiple clusters
+
+	-minikube is a command line tool to administrate localhost clusters
+    
+    -The Web UI (Dashboard) offers a graphical user interface to manage nodes,
+    deployments, and volumes in the cluster 
+    
+    -Kompose tool to translate docker-compose applications&
+    
+    -Specific Tools DevOps and Developers
+    
+    -Several API client libraries to control the cluster 
+    
+    -No graphical user interface to manage the cluster is available out of the
+    box&
+    
+    -docker-compose command line tool to describe and build containerized
+    applications
+    
+    -docker stack command line tool to manage an application stack 
+    
+    -No graphical user interface to manage the cluster is available out of the
+    box\\
+    
     \hline
   \end{tabular}
 \end{center}
@@ -206,7 +318,7 @@ experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
 \paragraph{Initial Provisioning Time}
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -214,10 +326,10 @@ experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
   \end{tabular}
 \end{center}
 
-\paragraph{Ease of Use/ Ease of Setup}
+\paragraph{Ease of Use}
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -225,21 +337,10 @@ experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
   \end{tabular}
 \end{center}
 
-\paragraph{Reduce of Technology Complexity}
+\paragraph{Reduction of Technology Complexity}
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
-    \hline
-    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
-    \hline
-  \end{tabular}
-\end{center}
-
-\paragraph{Customization}
-
-\begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -250,7 +351,7 @@ experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
 \paragraph{Infrastructure Monitoring and Reporting Ability}
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -261,7 +362,7 @@ experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
 \paragraph{Customization}
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -274,21 +375,7 @@ experience of cloud experts in the industry \cite{toll2016cloud_expert_eval}
 If the relationship goes sour, how easy is it extract your legacy data?
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
-    \hline
-    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
-    \hline
-  \end{tabular}
-\end{center}
-
-
-\paragraph{Exclusivity}
-
-If the relationship goes sour, how easy is it extract your legacy data?
-
-\begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -301,20 +388,7 @@ If the relationship goes sour, how easy is it extract your legacy data?
 If the relationship goes sour, how easy is it extract your legacy data?
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
-    \hline
-    \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
-    \hline
-  \end{tabular}
-\end{center}
- 
-\paragraph{Supported Eco Systems}
-
-If the relationship goes sour, how easy is it extract your legacy data?
-
-\begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -327,7 +401,7 @@ If the relationship goes sour, how easy is it extract your legacy data?
 If the relationship goes sour, how easy is it extract your legacy data?
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
@@ -340,7 +414,7 @@ If the relationship goes sour, how easy is it extract your legacy data?
 If the relationship goes sour, how easy is it extract your legacy data?
 
 \begin{center}
-  \begin{tabular}{ | p{4.2cm} | p{4.2cm} | p{4.2cm} | }
+  \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     4 & 5 & 6 \\
