@@ -1,8 +1,47 @@
 \section{Procedures}
 
+Procedures describe the actions that have to be taken in order to evaluate the
+research problems defined in \autoref{sub:problems}.
+
+These actions can separated into the three categories: Lab research, field
+research, and statistical analysis.
+
+\subsection{Lab Research}
+\label{sub:lab_reserach}
+
+A major goal of the lab research is to examine the \ms{} infrastructure
+requirements listed in \autoref{sub:infrastructure}. The following table
+illustrates how the instrumentation described in \autoref{sub:instrumentation}
+is used to examine the infrastructure requirements. 
+
+\begin{center}
+  \begin{tabular}{ l | l | l | l | l | l | }
+    &\textbf{Composition}&\textbf{Deployment}&\textbf{Persistence}&\textbf{Consistency}&\textbf{Monitoring}\\\hline
+    \textbf{MicroNet}\\\hline
+    \textbf{Development Environment}\\\hline
+    \textbf{Container Engine}\\\hline
+    \textbf{Cloud Service Providers}\\\hline
+    \textbf{Composition Engines}\\\hline
+    \textbf{Message Broker}\\\hline
+    \textbf{Database}\\\hline
+    \textbf{Source Control}\\\hline
+    \textbf{ Dedicated Server}\\\hline
+  \end{tabular}
+\end{center}
+
+
+\subsection{Field Research}
+
+\subsection{Statistical Analysis}
+
 \subsection{Method Selection for Research Problems}
 
-The subject pool discussed in \autoref{sec:subject_pool} are very variegated.
+Based on the Infrastructure described in \autoref{sub:infrastructure} concrete
+strategies can now be defined on how to investigate the subjects defined in
+\autoref{sec:subject_pool}.
+
+\subsubsection{}
+
 For the examination of the subjects it is therefor necessary to access each
 subject with in a specifically suited method. The research problems can be
 summarized into four problem domains which allows to choose the the optimal
@@ -25,44 +64,8 @@ A one click solution for developers to start with online game
 \subsubsection{Operations}
 Play Tests
 
-\subsection{Lab Research}
-\label{sub:lab_reserach}
 
-\subsection{Eclipse}
 
-Since MicroNet makes usage of various thirs party libraries and tools there
-needs to be a way to manage them all. This purpose solves the Eclipse tools for
-MicroNet. The MicroNet Tools is a set of plug-ins that are partially independent
-of each other. They all help the developer to implement game specific \mss{}.
 
-Since the UI of an Eclipse plug-in is written with the SWT library it can easily
-be exported to a standalone tool that does not require Eclipse. However any code
-related feature do require the Eclipse IDE.
 
-\subsubsection{Service Generation}
 
-Allows the developer to not worry about boiler plate code of setting up the
-service in the framework. This covers the setup of the appropriate networking
-solution according to the environment. This allows the developer to focus on the
-actual service code.
-
-\subsubsection{Code Assist}
-
-The Code Assist plug-in helps the developer to keep track of functionality
-provided by other services. It allows a type-safe communication between
-services. The information that is needed to give these API proposals is
-extracted from the service implementation at compile time. The information is
-then shared via the version control system. This process is manually and the
-developer must check in and probably merge his changes. 
-
-The format of the distribute API description is not relevant because it is a
-machine-readable format and the developer sees it in a polished form.
-
-\subsubsection{Management UI}
-
-The management UI plug-in helps the developer to get an overview over the whole
-game application. It helps the manage the versions of services of the game
-services as well as the versions of dependencies. This plug-in highly relies on
-the description of the maven projects.
-
-\subsection{Field Research}
