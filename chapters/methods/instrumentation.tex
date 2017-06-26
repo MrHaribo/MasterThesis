@@ -198,6 +198,10 @@ technology supports.
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
+    -Pods are the smallest unit that make up a deployment. A pod is one
+    autonomous unit of the application stack. They can confine one or more
+    containers.
+    
     -Supports AWS, GCP (using the Coogle Compute Engine - GCE), Microsoft Azure,
     Joyent, OpenStack, VMWare, bare metal and localhost deployments.
     
@@ -215,7 +219,8 @@ technology supports.
     -With Mesosphere DC/OS (the datacenter operating system) bare metal
     installations are possible. &
     
-    -Multiple Docker Daemons to provide a cluster of nodes. 
+    -Multiple Docker Daemons on different physical machines to provide a cluster
+    of nodes.
     
     -Docker Daemons are available for Windows, MacOS, and Linux. Under Linux
     Docker is realized with native Linux Containers. The native Windows
@@ -318,109 +323,227 @@ stacks or single containers in the virtualization layer.
   \end{tabular}
 \end{center}
 
-\paragraph{Initial Provisioning Time}
+\paragraph{Provisioning Time}
+
+The initial provisioning time and time to scale up and down the application.
+For detailed data on this property the provisioning time that is needed to
+deploy the demo application on all technology stacks can be measured.
+These measurements include the time needed to understand the documentation to a
+sufficient extent as well as the time needed to install the necessary software
+and to deploy the demo application.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    $<$ 3 days & Not Evaluated & $<$ 1 day \\
     \hline
   \end{tabular}
 \end{center}
 
+\newpage
 \paragraph{Ease of Use}
+
+The impression of simplicity that the deployment of the demo application
+causes.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -The dashmoard is a easy to understand way to use the Kubernetes cluster.
+    
+    -On Windows the setup of minikube is cumbersome.
+    
+    -Kubernetes proprietary scripts are complicated and hard to get right &
+    
+    
+    -Mesos is hard to set up because of it's set of dependencies like Zookeeper
+    or the different schedulers.
+    
+    -Ease of operation is not evaluated for Mesos& 
+    
+    -When Native Docker is understood by the developer Docker Swarm is very
+    easy to understand
+    
+    -Docker Swarm is very slim, so a full picture of the technology can be
+    gained very quickly.\\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{Reduction of Technology Complexity}
 
+The reduction of technology complexity is considered in regard to networking
+among container, persistent storage among containers and the effort needed to
+integrate dependencies in a application.
+
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -The Web UI provides with services and descovery, workloads, and persistent
+    volumes a convenient way to abstract core tenchnologies.
+    
+    -Dependencies can be abstracted using dedicated containers. Containers are
+    made available using private registries or the Google, Amazon or Azure
+    Container Registries.&
+    
+    -The agents have to be configured according to networking and storage.
+    
+    -Containers can be used to abstract dependencies. & 
+    
+    -The Docker Engine allows to define overlay networks. This aspect of
+    Docker is not trivial and requires knowledge in regards to overlay
+    networks.
+    
+    -Persistent storage and networking can be defined via the docker-compose
+    file.
+    
+    -Dependency abstraction is provided by Docker-hub, a central docker image
+    repository. Docker hub is not restricted to Docker-Swarm.\\
     \hline
   \end{tabular}
 \end{center}
 
+\newpage
 \paragraph{Infrastructure Monitoring and Reporting Ability}
+
+The ability to observe a running \ms{} application stack. This includes alerts
+on abnormal situations as well as the visual representation of statistics and
+metrics.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Heapster as a cluster-wide aggregator of monitoring and event data.
+    
+    -cAdvisor as an open source container resource usage and performance
+    analysis agent. 
+    
+    -A Grafana setup with InfluxDB as a very popular combination for monitoring&
+    
+    -Mesos nodes report a set of statistics and metrics that
+    enable cluster operators to monitor resource usage and detect abnormal
+    situations early.
+    
+    -Observability metrics in the following categories are available:
+    Resources, Masters, Agents, Frameworks, Tasks, Messages, Event queues
+    and more& 6
+    
+    -Does not provide a built-in solution for reporting.
+    
+    -Depends on the underlying infrastructure for reporting.
+    
+    -Grafana in addition to cAdvisor and Prometheus can be used to implement an
+    open source reporting and monitoring solution.\\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{Customization}
 
+The ability to provide new functionality or change existing behaviour. 
+
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Custom API types allow to define new resource that the user wants to add to
+    the Kubernetes API 
+    
+    -Add-ons can be used extend the functionality of Kubernetes.
+    
+    -Network plug-ins are currently in alpha.& 
+    
+    -Allows to add custom framework schedulers in C++, Go, Haskell, Java, Python
+    and Scala
+    
+    -RENDLER provides as example framework implementation & 
+    
+    -Extensions possible using the Docker Engine managed plug-in system
+    
+    -Provides SDKs for Docker Engine API in Python and GO. These APIs are tested
+    by Docker maintainers.
+    
+    -Third party libraries in: C/C++, C\#, Java, and more.\\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{Exclusivity}
 
-If the relationship goes sour, how easy is it extract your legacy data?
+How easy is it extract your legacy data, upon a technology change or upon
+deprecation of a technology?
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Proprietary solution prevents direct re-usage of an application stack. & 
+    
+    -Mesos Containerizers are not portable but Docker Containerizers are. &
+    
+    -The full application stack can be translated to another technology very
+    easily due to Docker base technology nature.\\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{Application Description Format}
 
-If the relationship goes sour, how easy is it extract your legacy data?
+The format that is used to describe an application stack.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Kubernetes deployment description in .yml format & 
+    
+    -Task Group API & 
+    
+    -docker-compose file in .yml format. \\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{Scalability}
 
-If the relationship goes sour, how easy is it extract your legacy data?
+The ability of the technology to scale an application stack according to
+performance requirements.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Horizontal Pod auto-scaling allows Kubernetes to automatically scale the
+    number of pods based on observed CPU utilization. & 
+    
+    -CD/OS provides auto-scaling with Marathon & 
+    
+    -Provides no auto-scaling mechanism but manual scaling is very simple and
+    can therefore me automated.
+    \\
     \hline
   \end{tabular}
 \end{center}
 
 \paragraph{Liecence}
 
-If the relationship goes sour, how easy is it extract your legacy data?
+The licence the technology is released under.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    4 & 5 & 6 \\
+    -Apache License 2.0 & 
+    
+    -Apache License 2.0 & 
+    
+    -Comunity Editon (free) 
+    
+    -Enterprise Edition with a per node / per year fee\\
     \hline
   \end{tabular}
 \end{center}
