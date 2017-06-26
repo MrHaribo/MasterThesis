@@ -547,57 +547,102 @@ The licence the technology is released under.
     \hline
   \end{tabular}
 \end{center}
- 
+
+\subsection{Message Broker}
+
+ActiveMQ is used as a message broker to provide communication capabilities to
+\mss{}. For security reasons two separate message brokers are used. One is
+exposed to the public Internet and accepts user connections. A second broker is
+responsible to forward messages application internally. A reverse proxy (API
+Gateway) is used to interconnect the two. The message broker evaluation has been
+conducted in project thesis one \todo{Cite Thesis 1}.
+
 \subsection{Database Solution}
+
+The polyglot persistence tenet states that every \ms{} should use the data base
+solution that is best suited for its requirements.
+
+As described in paragraph The Storage Layer in \autoref{sub:composition_engines}
+databases are often offered to services containers as database containers. But
+for real production environments this approach can be to
+unstable\cite{cazorla2017db_containers}. The proposition is to use containerized
+databases for localhost deployments to test functionality but to install a
+dedicated database system for production.
+
+In regards to \og{} session management is a big concern as highlighted in
+\autoref{sub:ms_challenges} and \autoref{sub:infrastructure}. Session management
+can be facilitated using a distributed cache such as Redis which is very
+container friendly. Also NoSQL databases offer functionality that allows session
+management.
+
+For the prototype PostgreSQL is used as an easy to containerize relational
+database and Couchbase is used to store session information. Couchbase is also
+used to make game model described in \autoref{sub:games} highly available.
+
 \subsection{Source and Artifact Control}
+
+All the source source of this thesis is available on
+github\cite{micronet2017doku}. The github page also contains the user user
+manual in HTML format.
+
+MicroNet is also Available on Maven Central to allow easy integration into java
+projects.
+
+All the the dependencies like the message broker or the database are available
+on Docker Hub.
+
 \subsection{Cloud Service Provider}
 
-MicroNet is designed to run in the cloud. It is therefore mandatory to evaluate
-the major cloud service infrastructure providers according to their usability
-for online games.
-
-One problem in regards to these service providers is payment. Although they
-provide a free tier to test their infrastructure, a credit card has to be
-pledged as security. In the case the limit is overdrawn a fee will be charged.
-This risk cannot be taken in this thesis. 
+The major could service providers Amazon and Google provide dedicated solutions
+to hosting \og{} environments. These solution solutions are deeply integrated
+into the respective cloud solutions of the provider and offer additional
+functionality to ease the deployment of \ogs{}.
 
 \subsubsection{Google Cloud Gaming Solutions}
 
-Google offers a solution to deploy rich online games in the cloud. It basically
-a setup for the existing google cloud infrastructure with additional
-functionality to to provide build in matchmaking matchmaking. For this purpose
-it provides an API that is available in a number of programming languages.
-
-The MicroNet service that provides the matchmaking functionality has to be
-altered if the Google solution for matchmaking wants to be used. 
-
-To operate a game driven by MicroNet in the Google Cloud the Google App Engine
-can be used to run the services of the MicroNet framework and the Google Compute
-Engine can be used to run the game simulation servers. ActiveMQ that is used for
-messaging can be used with Google Cloud by using Bitnami.
+Google's solution to deploy rich \ogs{} in the cloud is basically a setup
+for the existing Google cloud infrastructure with additional functionality to
+provide matchmaking. For this purpose the Google Compute Engine API is used
+which is available in a number of programming languages like Java, C\#, GO,
+Phthon, NodeJS, and others. This covers the majority of game engines which
+allows em to use the Google Gaming Solution.
 
 \subsubsection{Amazon Game Lift}
 
-Amazon GameLift is very similar to Google Gaming Solutions. It also provides a
-matchmaking solution and the option to communicate with the game backend running
-in the Amazon cloud. An advantage of the amazon solution is that it provides an
-API for all the major game engines like Unity3D or Unreal Engine 4. Amazon also
-provides its own game engine with the name Lumberyard.
+Amazon GameLift is very similar to Google Gaming Solutions as it also provides
+a matchmaking solution. This is realized by a backend framework running in the
+Amazon cloud. This backend is customizable by the developer. 
 
-\subsubsection{A Dedicated Server}
+GameLift also offers an API which allows game simulation servers to incorporate
+with the backend. This API is available for all the major game engines
+like Unity3D or Unreal Engine 4. Amazon also provides its own game engine with
+the name Lumberyard.
 
-The most general way to deploy the MicroNet framework is on a dedicated server
-hardware. This could be either a cluster of bare metal servers with a sufficient
-networking capabilities or a set of virtual servers running somewhere in the
-cloud. Either way the result is a set of hosts running linux and have a public
-ip address.
+\subsection{Dedicated Server}
 
-For this thesis a virtual server at the HSR will be the test setup. This
-infrastructure is also available at the major cloud service providers.
+The most general way to deploy \ms{} application is a dedicated server. In this
+regard a dedicated server could be either a be a bare metal server of a virtual
+server in the cloud. In both cases the environment is very similar for the
+developer: A set of hosts running Linux which are reachable over the Internet.
 
-
+For this thesis a virtual server at the HSR will be used as test setup for the
+prototype. This type of infrastructure is also available at the major cloud
+service providers.
 
 \subsection{Game Engine}
 
+The game engine used to evaluate the usability of the prototype in regards to
+game engine integration is Unity3D. Unity3D is a very popular game engine and is
+permanently improved. An evaluation of different game engines can be found in
+project thesis 1\todo{Cite Thesis 1}.
+
 \subsection{The Spacegame Prototype}
+
+The Spacegame prototype is a project that I was working on during my free
+time. Since my master studies span over four semester but i only wrote three
+theses I found some time during the additional semester to build a prototype
+of a real world game. I was hoping that i would find time during this semester
+next to the studies to work on the prototype but this expectation was not
+achieved. As a result the Spacegame prototype will not be representative by the
+end of this thesis.
 
