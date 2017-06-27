@@ -1,68 +1,129 @@
 \section{Procedures}
 
-Procedures describe the actions that have to be taken in order to evaluate the
-research problems defined in \autoref{sub:problems}.
+The research methods used to examine the research problems explained in
+\autoref{sub:problems} can be categorized into three areas: Literature
+research, lab research, field research, and statistical analysis.
 
-These actions can separated into the three categories: Lab research, field
-research, and statistical analysis.
+Each category provides a framework to enable research for one or more of the
+more concrete research subject defined in \autoref{sec:subject_pool}. Table X
+shows which research methods are used for each research subject.
+
+\begin{center}
+  \begin{tabular}{ l | c | c | c | c | }
+  
+  	&\begin{turn}{90}\textbf{Literature}\end{turn}
+  	&\begin{turn}{90}\textbf{Lab Research}\end{turn}
+  	&\begin{turn}{90}\textbf{Field Research}\end{turn}
+  	&\begin{turn}{90}\textbf{Statistical}\end{turn}
+  	\\\hline
+    
+    
+    \textbf{Microservice Tenets in Relation to Online Games}&x&&&\\\hline
+    \textbf{Challenges Introduced by Microservices}&&x&x&\\\hline
+    \textbf{Microservice Infrastructure}&x&x&&\\\hline
+    \textbf{Networking in Online Games}&&&x&x\\\hline
+    \textbf{Development of a Microservice Driven Online Game}&&x&x&x\\\hline
+    \textbf{Procedural Content Generation in Online Games}&x&&&\\\hline
+  \end{tabular}
+\end{center}
+
+The specific methods used in each category are derived from the design
+science methodology principles\cite{wieringa2014design_science}.
+
+\subsection{Literature Research}
+
+Literature plays only a minor role in this thesis because the theoretical
+foundation of this thesis has already been laid in the last two projects. None
+the less literature is always consulted to give a theoretical backing to
+findings of this thesis.\\
+
+Especially in the topic of \ms{} infrastructure a deep study of the
+documentation of composition engines and cloud service providers was necessary
+to highlight advantages and differences.\\
+
+To gain a sophisticated opinion about the \ms{} tenets several articles and blog
+posts \todo{citation needed} are consulted to back findings about \ms{} with
+opinions from the industry.\\
+
+in regards to PCG the the book Procedural Content Generation In
+Games\cite{shaker2014procedural} was studied in detail to identify PCG methods
+which are usable for \ogs{}.
 
 \subsection{Lab Research}
 \label{sub:lab_reserach}
 
-A major goal of the lab research is to examine the \ms{} infrastructure
-requirements listed in \autoref{sub:infrastructure}. The following table
-illustrates how the instrumentation described in \autoref{sub:instrumentation}
-is used to examine the infrastructure requirements. 
+The majority of the research conducted during this thesis is lab research. This
+is due to the very technical nature of the subject. 
+
+The method used in lab research is the same for all research subjects namely
+single-case experiments\cite{wieringa2014design_science}. Single-case
+experiments examine one aspect of a problem domain under isolation.\\
+
+Single-case experiments are conducted to examine all technical aspects of \mss{}
+in regards to \ogs{} in a practical way. This includes the \ms{} infrastructure
+requirements listed in \autoref{sub:infrastructure}, the deployment of \mss{}
+and the challenges introduced by \mss{}.
+
+All technical aspects can be examined on the basis of the instrumentation
+artifact described in \autoref{sub:instrumentation}.
+
+Table X shows which instrumentation artifact is used to examine each
+technical aspects. 
 
 \begin{center}
   \begin{tabular}{ l | l | l | l | l | l | }
-    &\textbf{Composition}&\textbf{Deployment}&\textbf{Persistence}&\textbf{Consistency}&\textbf{Monitoring}\\\hline
-    \textbf{MicroNet}\\\hline
-    \textbf{Development Environment}\\\hline
-    \textbf{Container Engine}\\\hline
-    \textbf{Cloud Service Providers}\\\hline
-    \textbf{Composition Engines}\\\hline
-    \textbf{Message Broker}\\\hline
-    \textbf{Database}\\\hline
-    \textbf{Source Control}\\\hline
-    \textbf{ Dedicated Server}\\\hline
+    &\begin{turn}{90}\textbf{Composition}\end{turn}
+    &\begin{turn}{90}\textbf{Deployment}\end{turn}
+    &\begin{turn}{90}\textbf{Persistence}\end{turn}
+    &\begin{turn}{90}\textbf{Consistency}\end{turn}
+    &\begin{turn}{90}\textbf{Monitoring}\end{turn}
+    \\\hline
+    
+    
+    \textbf{MicroNet}&x&x&x&x&x\\\hline
+    \textbf{Development Environment}&x&x&&&x\\\hline
+    \textbf{Container Engine}&x&x&&&\\\hline
+    \textbf{Cloud Service Providers}&x&x&x&x&x\\\hline
+    \textbf{Composition Engines}&x&x&&&x\\\hline
+    \textbf{Message Broker}&x&&&x&\\\hline
+    \textbf{Database}&&&x&x&\\\hline
+    \textbf{Source Control}&&x&&&\\\hline
+    \textbf{Dedicated Server}&x&x&x&x&x\\\hline
   \end{tabular}
 \end{center}
 
-
 \subsection{Field Research}
+
+To further back the findings gathered during the lab research field research is
+conducted. But this is only possible to a limited extent because field research
+is very preparation intensive. 
+
+\subsubsection{Technical Action Research (TAR)}
+
+Technical Action Research (TAR) allows to test a designed solution in a real
+world context. This approach both gives the researcher a deep insight in the real
+problem domain. A secondary result of TAR are usable concept or design that
+can be used in commercial projects.
+
+TAR has been conducted in this thesis in the form of a series of play-test based
+on the MicroNet prototype and the Spacegame Prototype.
+
+\subsubsection{Expert Opinion}
+
+Expert opinion validation is used to verify the approach that is used to
+develop \ogs{} with \mss{}. This is especially effective for the development
+aspect of a \ms{} driven \og{}. The experts will be Students, Game Developers
+and Software Developers.
 
 \subsection{Statistical Analysis}
 
-\subsection{Method Selection for Research Problems}
+Since this thesis is mainly on exploratory basis the gathering of empirical data
+has proven to be difficult. Especially the gathering of operational data from
+field research is very cumbersome and also require a lot of effort to process
+the data into a form that is usable for this report.
 
-Based on the Infrastructure described in \autoref{sub:infrastructure} concrete
-strategies can now be defined on how to investigate the subjects defined in
-\autoref{sec:subject_pool}.
-
-\subsubsection{}
-
-For the examination of the subjects it is therefor necessary to access each
-subject with in a specifically suited method. The research problems can be
-summarized into four problem domains which allows to choose the the optimal
-research method for each domain individually.
-
-\subsubsection{Composition}
-Expert Opinion on Model Approach
-
-\subsubsection{Deployment}
-Evaluation of 3rd party libraries (DevOps work)
-
-
-\subsubsection{Development}
-Expert Opinion
-
-A one click solution for developers to start with online game
-  	  development. The development process should feel as closely as possible to
-  	  offline game development.
-
-\subsubsection{Operations}
-Play Tests
+Because of this reason the statistical analysis will be limited to the
+evaluation of the data gathered during expert opinion validation. 
 
 
 
