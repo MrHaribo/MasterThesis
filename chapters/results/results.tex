@@ -1,81 +1,41 @@
 \chapter{Results}
 
-\section{Solutions to the Research Problems}
-\subsection{Order of Presentation}
+The primary demand on this thesis is that it delivers results which are
+usable in practice and not only of theoretical nature. To make the results
+practically relevant a lot of attention goes to the implementation of the
+prototype which showcases the concepts developed in this thesis.
 
-\section{Descriptive Analysis}
+\section{Order of Presentation}
 
-\subsection{\ms{} Tenet Specific Solutions}
+The range of results has grown greatly over the course of this thesis. The
+different areas in which results are worked out are all dedicated to the
+research problems explained in \autoref{sub:problems}. The areas in which
+results are provided are:
 
-\subsection{Contradictions of the Solutions in a Pure \ms{} World}
-
-\subsection{Description of the MicroNet Framework}
-
-Microservices reduce the complexity of an online game by splitting the game
-domain into small shards that can be developed independently. These shards are
-established by a domain driven design (DDD) approach. Each type of Microservice
-is repsonsible to handle all aspects of the domain shard completly (cohesion).
-This reduces the need to invest effort in inter service.\\
-
-How does MicroNet help the developer to develop large online games:
 \begin{itemize}
-  \item MicroNet does not reinvent the wheel for online game development
-  \item MicroNet works in conjunction with existing technologies, specifically popular game engines
-  \item MicroNet tries to make the developer aware of the problems that are encountered during the development process
-  \item While using MicroNet the developer learns the process of online game development 
-  \item It helps the developers to get the difficult tasks like consistency of a
-  asynchronous system right
+  \item \item Proposition for an  open source technology stack to fully build and
+  deploy a \og{} driven by \mss{}
+  \item MicroNet as a reference implementation of a \ms{} \og{} development and
+  operation framework using the proposed technology stack
+  \item Guidelines on how to respect the \ms{} tenets in a \og{} \ms{}
+  application.
+  \item Validation of the usability of the framework using data gathered with an
+  expert survey 
 \end{itemize}
 
-What does MicroNet provide in this regard:
-\begin{itemize}
-  \item Provides a clear architecture for the game back-end
-  \item Allows to develop individual game features independently
-  \item Provides a simple protocol definition that helps the developers to loosely couple game features
-  \item Offers standard solutions for technical requirements: Messaging
-  functionality and Persistence functionality	
-\end{itemize}
+This chapter provides a detailed description of all result areas in the order
+that they are listed above. Special attention will go to the explanation of
+MicroNet and the concepts which are used to realize it.
 
-\subsection{Eclipse Tools}
+\newpage
+\input{chapters/results/technology_stack}
+\newpage
+\input{chapters/results/micro_net}
+\newpage
+\input{chapters/results/tenet_guidelines}
+\newpage
+\input{chapters/results/validation_survey}
 
-Since MicroNet makes usage of various thirs party libraries and tools there
-needs to be a way to manage them all. This purpose solves the Eclipse tools for
-MicroNet. The MicroNet Tools is a set of plug-ins that are partially independent
-of each other. They all help the developer to implement game specific \mss{}.
-
-Since the UI of an Eclipse plug-in is written with the SWT library it can easily
-be exported to a standalone tool that does not require Eclipse. However any code
-related feature do require the Eclipse IDE.
-
-\subsubsection{Service Generation}
-
-Allows the developer to not worry about boiler plate code of setting up the
-service in the framework. This covers the setup of the appropriate networking
-solution according to the environment. This allows the developer to focus on the
-actual service code.
-
-\subsubsection{Code Assist}
-
-The Code Assist plug-in helps the developer to keep track of functionality
-provided by other services. It allows a type-safe communication between
-services. The information that is needed to give these API proposals is
-extracted from the service implementation at compile time. The information is
-then shared via the version control system. This process is manually and the
-developer must check in and probably merge his changes. 
-
-The format of the distribute API description is not relevant because it is a
-machine-readable format and the developer sees it in a polished form.
-
-\subsubsection{Management UI}
-
-The management UI plug-in helps the developer to get an overview over the whole
-game application. It helps the manage the versions of services of the game
-services as well as the versions of dependencies. This plug-in highly relies on
-the description of the maven projects.
-
-\subsection{PCG Solutions for Online Game}
-
-\subsection{A Solution for \ms{} Development}
 
 \section{Results of Statistical Testing}
 
