@@ -1,0 +1,49 @@
+\subsection{MicroNet Tools}
+
+Since MicroNet makes usage of various thirs party libraries and tools there
+needs to be a way to manage them all. This purpose solves the Eclipse tools for
+MicroNet. The MicroNet Tools is a set of plug-ins that are partially independent
+of each other. They all help the developer to implement game specific \mss{}.
+
+Since the UI of an Eclipse plug-in is written with the SWT library it can easily
+be exported to a standalone tool that does not require Eclipse. However any code
+related feature do require the Eclipse IDE.
+
+\subsubsection{Annotations}
+ (Design by contract)
+
+\subsubsection{Code Generation}
+
+Allows the developer to not worry about boiler plate code of setting up the
+service in the framework. This covers the setup of the appropriate networking
+solution according to the environment. This allows the developer to focus on the
+actual service code.
+
+\subsubsection{Code Assist}
+
+The Code Assist plug-in helps the developer to keep track of functionality
+provided by other services. It allows a type-safe communication between
+services. The information that is needed to give these API proposals is
+extracted from the service implementation at compile time. The information is
+then shared via the version control system. This process is manually and the
+developer must check in and probably merge his changes. 
+
+The format of the distribute API description is not relevant because it is a
+machine-readable format and the developer sees it in a polished form.
+
+\subsubsection{Service Explorer}
+
+The management UI plug-in helps the developer to get an overview over the whole
+game application. It helps the manage the versions of services of the game
+services as well as the versions of dependencies. This plug-in highly relies on
+the description of the maven projects.
+
+\subsubsection{Launch Utility}
+
+\paragraph{Build Configuration}
+
+\paragraph{Run/Debug Configuration}
+
+\subsubsection{Model Editor}
+
+\subsubsection{Deployment}
