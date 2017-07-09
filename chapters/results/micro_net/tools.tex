@@ -1,23 +1,76 @@
 \subsection{MicroNet Tools}
 
-Since MicroNet makes usage of various thirs party libraries and tools there
-needs to be a way to manage them all. This purpose solves the Eclipse tools for
-MicroNet. The MicroNet Tools is a set of plug-ins that are partially independent
-of each other. They all help the developer to implement game specific \mss{}.
+The MicroNet tools are a collection of Eclipse plug-ins. Eclipse was chosen due
+to the primary Java nature of MicroNet. This allows to develop Java \mss{} very
+quickly. But the MicroNet Tools also offer a solution to integrate other
+technologies into a \ms{} application. This language independence is
+accomplished by using Json as a low level information exchange format. As long a
+a technology supports Json it can participate in the application. Another
+requirement is that the technology has access to the message broker.
 
-Since the UI of an Eclipse plug-in is written with the SWT library it can easily
-be exported to a standalone tool that does not require Eclipse. However any code
-related feature do require the Eclipse IDE.
+Since the user interface (UI) of an Eclipse plug-in is written using the swing
+window toolkit (SWT) library it can easily be exported to be a standalone tool
+decoupled from Eclipse. With this approach it is possible to port the MicroNet
+Tools to other Platforms as long as they support a JVM.
+
+The MicroNet Tools have been completely developed within this last semester
+thesis and are the major contribution to four of the hypotheses listed in
+\autoref{sub:hypothesis}: The composition, deployment, simple development, and 
+reproducibility hypotheses.
+
+\subsubsection{Files and Folders Structure}
+
+To allow loose coupling of a \ms{} application the MicroNet makes a few
+assumptions on how to organize files and folders:
+
+\begin{itemize}
+  \item The eclipse workspace folder must contain one project folder for each
+  \ms{}
+  \item For automated integration of a \ms{} its project folder must be either a
+  Java/Maven project or must contain a Dockerfile.
+ \item One shared folder to exchange the Shared Model and the Service API must
+ be present
+\end{itemize}  
 
 \subsubsection{Annotations}
- (Design by contract)
+
+MicroNet annotations allow to define a service in a very lean way. A service is
+defined by annotating a arbirtary class with the
+@MessageService(uri=``mn://service\_name'') annotation. Within the service class
+methods can be annotated @MessageListener(uri=``/api\_method'') to act as
+message handlers. \todo{Screenshot}
+
+MicroNet annotation are basically an implementation of the design by contract
+pattern. A service defines preconditions on request payloads and
+defines postconditions on response payloads.
+ 
+ \paragraph{Annotation Processing}
+ 
+Java Annotations can be either be used during run-time or processed during
+compilation-time. MicroNet only processes annotations at compile-time. Since
+Java version 6 the annotation processing process is tightly integrated into the
+standard Java build process. This makes the annotation process platform
+independent and can be reproduced in a standard java build, a Maven build or an
+Eclipse build\footnote{Annotation processing is done by the Java compiler and
+tests showed that the execution is slightly different for the mentioned build
+systems.}.
+
+Annotation processing is also the entry point for code generation. Even if no
+annotation are present the code generation for the model can be done either way.
 
 \subsubsection{Code Generation}
 
-Allows the developer to not worry about boiler plate code of setting up the
-service in the framework. This covers the setup of the appropriate networking
-solution according to the environment. This allows the developer to focus on the
-actual service code.
+Code generation allows the developer to omit  the boiler plate code that is
+needed to set up the service in the framework. This covers the setup of the
+appropriate networking solution according to the environment and the generation
+of the executable class of the \ms{}. This simplification allows the developer
+to focus more on the actual domain logic of the \ms{}. It also spares the
+developer in having to register the service within the application. The
+registration is done implicit by the annotation processor.
+
+\paragraph{Service Generation}
+
+\paragraph{Model Generation}
 
 \subsubsection{Code Assist}
 
