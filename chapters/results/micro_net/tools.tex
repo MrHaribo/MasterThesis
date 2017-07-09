@@ -68,35 +68,132 @@ to focus more on the actual domain logic of the \ms{}. It also spares the
 developer in having to register the service within the application. The
 registration is done implicit by the annotation processor.
 
+Code generation is implemented using the Java Poet library. It allows for
+typesafe generation of Java classes and is very easy to use. 
+
 \paragraph{Service Generation}
 
+The annotations that define message service and the message listeners are used
+to build the executable class of a \ms{}. The executable class registers all
+message listeners with the networking system. In addition the annotated @Start
+and @Stop methods are called at application start respectively at service
+termination. The generated main method encompasses the start/stop functionality
+and the listener registration in a defined set-up sequence.
+
 \paragraph{Model Generation}
+
+The model generation process is completely independent from the service
+generation and is used to translate the game model which is defined in Json to
+java POJOs (plain old Java objects). This process can also be reproduced in
+other programming languages by using similar mechanisms. 
+
+The challenge is not the generation itself but the editing of the model that is
+generated and its representation. \todo{correct references.}
 
 \subsubsection{Code Assist}
 
 The Code Assist plug-in helps the developer to keep track of functionality
-provided by other services. It allows a type-safe communication between
-services. The information that is needed to give these API proposals is
-extracted from the service implementation at compile time. The information is
-then shared via the version control system. This process is manually and the
-developer must check in and probably merge his changes. 
+provided by other services. It allows to enforce type-safety by using the pre-
+and postconditions defined by the MicroNet annotations.
 
-The format of the distribute API description is not relevant because it is a
-machine-readable format and the developer sees it in a polished form.
+Code Assist is implemented by using the correspondent Eclipse extension point.
+It allows to add custom entries to the code completion list box. This
+functionality is used to offer the MicroNet API to the developer any time he
+types ``mn://''. The proposals are filtered according to what the developer
+types.
+
+The type safety concept yet not implemented can be used in addition to verify is
+the message exchange is adequate according to the pre- and postconditions of the
+API. Upon violation the compiler can generate an error which forces the
+developer to fix the issue before a build can be executed. Although possible the
+implementation involves parsing the Java abstract syntax tree (AST) and this
+effort is out of the scope of this thesis.\todo{screenshot}
 
 \subsubsection{Service Explorer}
 
-The management UI plug-in helps the developer to get an overview over the whole
+The service explorer helps the developer to get an overview over the whole
 game application. It helps the manage the versions of services of the game
-services as well as the versions of dependencies. This plug-in highly relies on
-the description of the maven projects.
+services as well as dependency management. The service explorer supports Java,
+Maven and Docker projects.
+
+The service explorer can also be used to quickly edit the configuration of
+services. This includes the port configuration as well as service linkage for
+the Docker overlay network.
+
+The service explorer can also be used to compose the game application. This is
+done by selecting if a service is part of the Maven build and/or part of the
+Docker container build process.
 
 \subsubsection{Launch Utility}
 
-\paragraph{Build Configuration}
+The launch utility brings order to the vast different possibilities of how to
+orchestrate \ms{} application with containers. Many different configurations are
+needed to develop, test and deploy a \ms{} application.
 
-\paragraph{Run/Debug Configuration}
+\paragraph{Local Native}
+
+The native configuration runs or debugs a game application as a set of native
+Java applications. This makes debugging very fast and the integration in Eclipse
+provides many useful debugging tools. To launch multiple Java applications at
+once the CDT Lanuch Group plug-in is used. It composes multiple launch
+configurations into a single configuration. Upon start all contained
+applications are started individually. No build step is needed for this
+configuration.
+
+In the native configuration it is easiest to run dependencies as standalone
+installations on the host. Since the native configuration is solely used during
+development this allows to also test the dependencies isolated from the composed
+application.
+
+\paragraph{Local Containerized}
+
+The local containerized configuration is meant to reproduce the deployment
+process on the local developer machine. For this purpose Maven and Docker
+compose/swarm are used. 
+
+A local Maven build of the complete application is done by aggregating the
+individual Maven service projects into a master .pom file. The master .pom can
+be used to build the whole application at once. Which services are aggregated to
+the master .pom file can be configured via. the service explorer.
+
+A local Docker is defined by a docker-compose file. The file is also defined by
+configuring services via the service explorer. The build process is simply
+invoked by building the docker-compose file.
+
+To run the local containerized application the local docker engine can be used.
+Docker-compose is installed native with most docker installation or can be
+installed separately. If the application is started using Docker compose or
+docker swarm makes a minor difference but several differences in networking or
+container linkage require to test bock approaches for an application.
+
+\paragraph{Cloud Containerized}
+
+The final step of \ms{} application deployment is cloud deployment. The idea
+behind containerized application is that this process is meant to be fully
+equivalent on different systems. This also holds for \ms{} driven \og{} and
+therefore if the application is working with the local containerized
+configuration the cloud configuration is only a few steps away.
+
+Due to the restriction mentioned in \todo{ref budget} the production environment
+of \mn{} is a virtual server in the HSR network. The deployment process is
+mainly based on this environment. Since this a very general setup the process
+can easily be reproduced on other environments.
+
+In order to deploy a MicroNet \ms{} application the developer must perform these
+steps under the assumption that the server runs a fresh Linux installation.
+
+\begin{itemize}
+  \item Install: Docker Engine, Java, Maven and Git
+  \item Initialize docker swarm (master and worker machines)
+  \item Pull the game application repository (containing all service projects
+  and the shared folder)
+  \item Build the application using the master .pom file (annotation processing
+  is performed during this step)
+  \item Containerize the application using docker-compose API
+  \item Launch the application in the docker swarm using the docker stack API 
+\end{itemize}
+
+This sounds like a lot of steps but in fact most of these steps only take a few
+seconds and only consist of very few console commands.
 
 \subsubsection{Model Editor}
-
-\subsubsection{Deployment}
