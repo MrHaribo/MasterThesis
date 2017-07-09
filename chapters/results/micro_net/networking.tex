@@ -46,6 +46,16 @@ The reverse proxy is in fact also the API gateway. An API gateway is a standard
 approach to offer the service API to the users. Upon reception of a message the
 gateway can filter it according to a white- or blacklisting approach.
 
+\paragraph{Message Parameters}
+
+One useful feature that MicroNet provides are typed message parameters. The
+parameters are defined using Parameter Codes and the Template Types both defined
+int the Shared Model.
+
+Message parameters spare the developer with the need to define a different
+payload for each message transfer. For example slightly different messages can
+be distinguished by parameter codes.
+
 \subsubsection{Connection Authentication}
 
 One challenge is to authenticate user connections. Since multiple gateways are

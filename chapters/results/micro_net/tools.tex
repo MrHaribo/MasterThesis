@@ -197,3 +197,56 @@ This sounds like a lot of steps but in fact most of these steps only take a few
 seconds and only consist of very few console commands.
 
 \subsubsection{Model Editor}
+
+The model editor is the last feature that was introduced in MicroNet tools. It
+is the final solution on how to cope with logical \ms{} composition in a visual
+way. Since the game model is of very theoretical nature it is not suited to be
+edited directly in its underlying Json format. Because of this the model editor
+is especially important to allow convenient editing of the game model underlying
+a game application.
+
+The model edit is basically a graph editor visualizing a direct representation
+of the game graph to allow to extending and changing the graph. The graph has
+three root nodes for which each span a model tree.
+
+\paragraph{Parameter Code List}
+
+The parameter code tree is simply a flat list of String constants which defines
+all parameter codes used throughout the application. This global approach allows
+to substitute the parameter codes strings with numbers which is more space
+efficient. Since parameters are used very often this has a noticeable impact on
+bandwidth requirements.
+
+The datatype of the parameters is defined by using templates of the shared
+model.
+
+\paragraph{Template Tree}
+
+The template tree allows to edit the game type graph. Object Types defined using
+the template tree can be used for message transfer and persistence. Templates
+are descriptions of domain objects that can be used to generate data classes
+using code generation.
+
+A template consists of a set of fields of the following types: STRING, NUMBER,
+BOOLEAN, CHAR, ENUM, LIST, SET, MAP, and COMPONENT. The types are derived from
+the Java types since they are well documented and can be redefined in other
+programming languages using the Java language specification.
+
+The COMPONENT type can be any other template type. In this case the component is
+contained in the data class as a struct and not as a reference. Also template
+types can be derived from other templates. This is realized using Java
+inheritance.
+
+\paragraph{Prefab Tree}
+
+The prefab tree is the ``physical'' representation of the game graph. It
+contains actual instances of template types. This can be used by game designer
+to pre-define game objects. The prefab tree is directly compatible with the
+serailization component provided by MicroNet. This allows services to use the
+generated model to directly serialize and de-serialize game objects from the
+database or from payloads and parameters during message transfers.
+
+The prefab tree can either be persisted in the file-system or persisted in the
+database. Either way the prefab approach allows for very convenient and
+consistent handling of game data.
+
