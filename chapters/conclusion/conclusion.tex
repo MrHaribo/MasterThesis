@@ -4,78 +4,11 @@ In this concluding section of the thesis I want to give my own opinion about the
 topics \mss{} and \ogs{}. My own view on the topics is heavily influenced by my
 background as a programmer and hobby game developer.
 
-\section{Summary of Findings}
 
-The research motivation for this thesis is \ms{} development, especially
-\ms{} composition and deployment. In these two areas I gathered a lot of
-knowledge during this thesis and in this section I want to share the findings
-that i find most relevant. These findings represent my attempt to answer the
-knowledge questions in \autoref{sub:hypothesis}.
-
-\subsection{Usability of a \ms{} for Online Games}
-
-\noindent
-\textbf{Can an Online Game run in a \ms{} environment?}
-
-Yes, it is possible to run an \og{} in a \ms{} environment. I has already been
-done in the industry (\cite{pronschinske2015turbine}) and MicroNet is an example
-on how to accomplish this.\\
-
-\noindent
-\textbf{Is a Microservice influenced architecture suitable to design an Online
-Game?}
-
-The design of a \mss{} application heavily influences the way \ogs{} are
-developed. This type of architecture forces the developer to split up the game
-logic into small shard of \ms{} ``size''. This enforces that large domain chunks
-which have high cohesion (like for example all player related functionality)
-have to be split into smaller chunks. It is sometimes difficult to achieve
-needed functionality this way. A good example of this aspect is the shop service
-which served is explained in detail in \todo{autoref thesis 2}.
-
-\noindent
-\textbf{Is the added complexity during development tolerable?}
-
-\ms{} indeed  adds an overhead during development. This effort pays off later
-since scaling and extending of the application are simplified greatly. The added
-effort occurs mainly at the beginning of a game project for example to set up
-the continuous integration work-flow. For large teams (AAA companies) this
-overhead can be neglected since a DevOps team can positioned to cope with these
-boiler plate tasks beforehand and during the project.
-
-For small teams (independent developers) however the overhead can be quite
-troublesome. Once the development environment for \ms{}is set up the effort is
-equivalent to regular \og{} development. MicroNet is aimed to fill exactly this
-gab and make it easier to start with \ms{} driven \og{} development.
-
-\noindent
-\textbf{Do \mss{} have enough performance to drive a fast-paced \ogs{}?}
-
-This question is very hard to answer in the context of this thesis. To give
-sophisticated assumptions about the performance of a \ms{} application a  
-full-fledged test game and a large enough group of testers is needed. The
-Spacegame which I developed in my free time is not compete enough to fulfill
-this role. During this semester i had basically no time at all to improve the
-stability of the Spacegame to a level suited for TAR. Also the acquisition of
-testers can be quite challenging since it involves a lot of community work
-which is out of scope for this thesis.
+\input{chapters/conclusion/summary_of_findings}
+\input{chapters/conclusion/conclusions_by_results}
+\input{chapters/conclusion/further_research}
 
 
 
-\subsection{Reasons to use \mss{}}
 
-\subsection{Tools are a Big Help}
-
-\subsection{Achieving Platform Independence}
-
-\section{Conclusions Drawn my Results}
-
-\subsection{Hypotheses Verification}
-
-\subsection{\ms{} Tenet Guidelines}
-
-\subsection{Contradictions to a Pure \ms{} World}
-
-\subsection{Questions for Practitioners}
-
-\section{Recommendations for Further Research}
