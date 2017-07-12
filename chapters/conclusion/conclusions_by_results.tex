@@ -1,7 +1,370 @@
-\section{Conclusions Drawn my Results}
+\section{Conclusions Drawn by Results}
+
+This conclusion represent my proposal for the most important points that need to
+be considered when an \og{} is realized with \mss{}. It summarized all important
+aspects of this thesis which are relevant fore \ms{} \og{} development.
 
 \subsection{\ms{} Tenet Guidelines}
 
-\subsection{Contradictions to a Pure \ms{} World}
+I suggest using the \ms{} tenets to design an \og{} application using a \ms{}
+driven design. In this section I provide guidelines on how to suffice each
+tenet.
+
+\subsubsection{Fine-grained Interfaces and Single Responsibility}
+
+A fine grained interface to a game application can be achieved by directly
+exposing the API offered by the \mss{}. This allows other  \mss{} to use the
+interface in a very specialized way (only accessing the functionality truly
+needed). The major challenge in to make the interface available to all services
+and clients.
+
+Several MicroNet components are dedicated to facilitate fine-grained interfaces.
+The MicroNet Annotation tool allows to define the interface. MicroNet
+CodeAssists offers the interface to the developer. MicroNet annotation
+processing exports the API and automatically integrates the API into the service
+executable. The API gateway is responsible to enforce security policies to
+restrict external access to parts of the API.
+
+The single responsibility aspect must be tackled by choosing the ``right''
+service granularity. Right means that the service must be neither be to small or
+to large\footnote{100 lines of code appeared to be a good upper bound as an
+indicator that a certain service is to large.}. The granularity is also heavily
+influenced by the DDD tenet. Service granularity has been discussed in
+\todo{ref thesis 2} in detail.
+
+\subsubsection{Domain-Driven-Design (DDD)}
+
+I consider domain driven design a technique which makes software development
+significantly easier to understand. To design a \ms{} according to technical
+domains like for example a database service or a serialization service
+makes little sense for most applications. Instead the domain driven approach
+helps greatly to understand the application as a developer. DDD is also a useful
+approach to achieve service confinement and to define its interface.
+
+With the Shared Model and the service catalogue, MicroNet provides an
+implementation approach to DDD. Both components help the developer to define
+the application according to the problem domain (game under development).
+
+\subsubsection{IDEAL}
+
+\paragraph{Isolated State}
+
+To make game services stateless is a task that is up to the developer of the
+\og{}. It requires discipline to achieve a truly stateless system. Any data that
+must be persisted must always be stored in a external storage solution like a
+relational or NoSQL database. This is the only state representation of a truely
+stateless \og{}. 
+
+MicroNet softens the stateless tenet by allowing synchronous messages (request
+response). This allows services to wait a short amount of time for a response
+that is expected to be available quickly. In cases when the processing service
+needs longer to process a message than the timeout it must send a notification
+to the requesting peer to convey that the result will be sent later
+asynchronously. The problem here is that the asynchronous result will never be
+sent, maybe because the processing service fails. This can lead to lost
+transaction. Persistent logging of requests is the only way to cope with this
+problem.
+
+The session store is a concept used by MicroNet to persist session information
+and make it available to multiple services. Since this approach decouples the
+game data from the game logic it makes it easier to keep services stateless. The
+drawback is the overhead in development to store and load data from the session
+store instead of just having the sate in memory. 
+
+Finally the fact that games are state-full in general \todo{cite} has an
+influence on state isolation of a \ms{} \og{} application. The simulating
+services which are not state-full add additional complexity to the system
+because each of these services must be reachable individually. For this purpose
+\mn{} uses the game session concept. It defines the process that is necessary to
+start, stop, monitor and access game sessions running on simulation services.
+\todo{Matchmaking process}
+
+	
+\paragraph{Distribution}
+
+The distribution aspect is already tackled by using a \ms{} application design.
+\mss{} in general build a distributed system by definition.
+	
+\paragraph{Elasticity}
+
+Elasticity can be guaranteed for all services which allow to run multiple
+instances simultaneously. Since these services are all stateless an infinite
+number can be deployed in parallel to support player demands. 
+
+But there might be cases that a service may only exist once (for example the
+round service in the sample game\todo{ref}). These singleton services are not
+elastic can cannot scale. These services must be as minimalistic as possible and
+it must be able to restart them on failure without loosing the game application
+state.
+
+Since the storage layer is extracted from the \mss{} it can introduce a
+bottleneck. To cope with this the scaling functionality for the used storage
+technology must be used. MicroNet uses a Couchbase NoSQL database which can be
+scaled very well maintaining a quorum for data consistency. 
+
+A relational database always represents a bottleneck. But in cases a a
+relational database is necessary like for example for sensitive data where ACID
+transactions are required it is important to keep these database as slim as
+possible. Having multiple relational databases on multiple physical host can
+also help to relieve databases. 
+	
+\paragraph{Automated Management}
+
+The automation of containerized application management is very excessive task
+and falls into DevOps business. Many existing tools help in this regard: Docker
+and Maven both offer CLI which is very well suited for automation with shell
+scripts. Git allows to automate the source control and also offers a CLI that
+can be automated using scripts. Although not evaluated in this thesis, Jenkins
+provides a way to completely automate the build and test process. Jenkins
+supports git and maven and is therefore very well suited for MicroNet.
+
+MicroNet also provides a selection of tools to help automate \ms{} application
+management. The Launch Utility provides shortcuts compose the application and
+to execute the build process.
+
+\paragraph{Loose Coupling}
+
+Loose coupling of \mss{} is the key to make them extendable and replaceable.
+Loose coupling can be achieved by logically compose the services using a shared
+mechanism and leaving the implementation to the service. The physical
+composition which might introduce service coupling can be abstracted using a
+composition engine which can be seen as a black box to minimize dependencies. .
+
+MicroNet achieves loose coupling by relying on the message broker as the only
+physical dependency. As soon as a service can communicate with message broker it
+is able to participate within the \ms{} application. 
+
+In addition to receiving messages, services must also understand messages.
+In Micronet this is achieved by using the shared model to make message semantics
+known throughout the application.
+
+The session store is another concept of MicroNet with encourages loose coupling.
+It allows services to store data and not care about what is happening with it.
+The format of the data in the session is chosen according to the shared model.
+This allows services to see the session store as a black box and to just query
+data they care about.
+
+\subsubsection{Polyglot Programming and Persistence}
+
+The polyglot programming and persistence tenet is very helpful to introduce
+foreign technology in a application. It allows to choose the best suited
+technology for every problem while maintaining the overall application
+behaviour.
+
+MicroNet offers two persistence solutions to showcase polyglot persistence.
+PostgreSQL as a durable relational database to allow strong consistency and
+Couchbase as a NoSQL database for eventual consistency and session management.
+
+The polyglot programming strategy is used in MicroNet by also supporting C\#
+besides Java. C\# is the programming language used to develop Unity3D games. The
+integration of a service written in a foreign programming language requires that
+the MicroNet Networking functionality is available in the foreign language.
+ActiveMQ which is used for MicroNet messaging offers many access possibilities
+which allows the integration af many programming languages to be compatible with
+MicroNet.
+
+\subsubsection{Lightweight Containers}
+
+Containers are the enabling technology for \ms{} application. Without containers
+it would be nearly impossible to maintain the state of a \ms{} application. 
+
+Docker is the number one container engine in this regard and can be considered a
+defacto standard. I have to admit that i did not evaluate other container
+technologies because of this reason. I believe Docker will maintain strong
+position because the latest improvements of the engine are quite promising.
+
+The benefit I appreciate the most about containers is the ability to download
+and start dependencies quickly without going though a complex installation
+process. This makes it very easy to evaluate new technologies.
+
+\subsubsection{Decentralized Continuous delivery}
+
+I did not examine this topic as intensive as other topics. The reason for this
+is that MicroNet was never meant to reach production level where continuous
+delivery would be mandatory.
+
+Although in my opinion a \ms{} application designed according to the \ms{}
+tenets is very well suited for continuous delivery. Services can be replaces
+very easily even at run-time performing a rolling update. New functionality can
+be added by introducing new services.
+
+One aspect specifically for \og{} is the delivery of the game client containing
+all graphical assets to display the game on the client. When service
+functionality changes it can be necessary that a new client version needs to
+be shipped. The patching is very noticeable to the players.
+
+\subsubsection{DevOps}
+
+During the development of a \ms{} application DevOps tasks are very frequent.
+The responsibility to bring and maintain the application to the production
+environment is a very excessive process which is not over after application
+release. 
+
+Because each service can have multiple dependencies that each must be compatible
+with the system the DevOps effort grows with the application. 
+
+DevOps work is mostly command line work which I could experience first hand
+while evaluating composition and deployment technologies for \mss{}. In the end
+it all boils down to excessively using the terminal to configure the
+application. 
+
+The DevOps work can be reduced by developing tools to automate the DevOps tasks.
+MicroNet does this by generating scripts automatically. Therefore the DevOps
+engineer only must execute instead of additionally writing it. 
+
 
 \subsection{Questions for Practitioners}
+
+In his positioning paper\todo{cite olaf} O.Zimmermann provides nine questions
+for practitioners to gather experiences about \ms{} concepts and to provide a
+common discussion basis. Although these questions are mainly aimed at developers
+in the software industry my findings during this thesis can also contribute a
+proposal to the practitioner questions.\\
+
+\textit{1. Can you share any experiences and/or hint how to ``sell'' an
+investment in microservices to business stakeholders(e.g., project sponsors, product managers,
+C-level man-agement in business and IT organizations)? How well do these
+experiences and hints relate to and/or align with the microservices tenets?}\\
+
+The benefits which of \mss{} offer in regards to maintenance and scalability
+will not immediately pay off at project release but during the lifetime of the
+application. But it is hard to explain to business stakeholder because the might
+not know the effort needed to maintain legacy applications. One very positive
+experience is that working services are very stable and can stay unchanged over
+a long time due to service isolation. This allows developers to only work on
+small parts of the application while the majority stays unchanged. 
+
+\mss{} are also very well suited to organize large development teams for large
+projects into smaller independent teams. This allows for much more control over
+the size of development teams.\\
+
+\textit{2. In which business domain and socio-technical context(or application
+genre and software operating range w.r.t. quality attributes) have you applied
+microservicesconcepts and technologies - either successfully or
+unsuccessfully?}\\
+
+This thesis is an example of how to apply \mss{} to the game domain. It appears
+that the combination of the two works quite promising.\\
+
+\textit{3. Which microservices principles (e.g., ``independently deployable
+services'') did you use in your microservices architecture designs, and how did you
+implement them (patterns, frameworks, middleware, tools)? Did you deploy to
+public or private cloud offerings (e.g. AmazonLambdas, Google Cloud Function) or to
+more traditional application hosting environments?}\\
+
+The \ms{} which this thesis is based upon are the \ms{} tenets defined by
+O.Zimmermann. The goal of this thesis was to respect all \ms{} tenets.
+MicroNet serves as a reference on how to implement all tenets.
+
+The deployment process is also cover by MicroNet especially the MicroNet tools.
+Both Amazon Cloud and Google cloud have only evaluated via literature research
+and therefore no statement about the quality of these providers can be made.
+
+\textit{4. How do you see the relationship between REST and microservices? Is
+the usage of Web protocols required and sufficient? Or is RESTful HTTP only one of several
+valid remote communication options in the microservices architect’s toolbox and,
+if so, what are the decision drivers when choosing an option?}\\
+
+REST is in my opinion a requirement to achieve the desired stateless \ms{}
+application behaviour. But for the game domain the traditional RESTful HTTP
+approach is just not suited. A more flexible and optimization friendly
+communication solution is needed. A message broker fulfills this role perfectly.
+The main drivers behind this decision is the persistence which a message broker
+offers along with functionality like topics and connection handling. 
+
+\textit{5. How did you find an adequate/a suited service cut (e.g.,how
+small/fine is small/fine enough)? How can DDD (and/or other approaches to application
+scoping and functional partitioning) be applied to decompose monoliths into
+services—practitioners have reported that they would welcome guidance that is
+more concrete than the rather frequently stated advice ``define a bounded
+context for each domain concept to be exposed as service''?}\\
+
+Service size is the factor that matters the most in my opinion. A small service
+is easy to maintain and a new developer can gasp the functionality of a \ms{}
+quickly. With small I mean that the service size should be less then 2-3 IDE
+screens.
+
+\textit{6. How did you overcome ``distribution classics'' design challenges such
+as service lifecycle management, data representation/schema mismatches, service
+versioning and evolution (e.g., change of interface in terms of syntax and/or
+semantics), and error handling on your projects?}\\
+
+The distribution classics are mainly covered by the MircoNet composition
+concepts. The Shared Model and API represents the solution to overcome
+representation/schema problems. Service versioning and evolition is supported by
+the service explorer and lifecycle management is taken care of by the
+composition engine.
+
+\textit{-- Did you define machine-readable service contracts? If so, what
+should they cover and how should they be expressed (e.g., are all REST maturity
+required,including support for Hypertext as the Engine of Application State
+(HATEOAS), is billing information included)? If not, how did you achieve
+syntactic and semantic interoperability between service consumers and
+providers?}\\
+
+HTTP is not used at all within MicroNet at the moment. Instead the service
+contracts are defined by the service API.  
+
+\noindent
+\textit{-- How did you deal with audit requirements, e.g.,Completeness,
+Accuracy, and Validity of, as well as Restricted access to financially relevant business
+objects (e.g., CAVR controls)?}\\
+
+MicroNet guarantees the consistency of financial business object by relying on
+strong consistency of a relational database using ACID transaction. But since
+this kind of transaction is only a minor part for \og{} this was not covered in
+detail in this thesis.
+
+\noindent
+\textit{-- Should overall, end-to-end data integrity be ensured in microservices
+architectures, either centrally or decentrally? If so, how to manage views,
+foreign key relationships and other semantic links across microservice
+boundaries? And how to backup an entire service landscape at once (atomic system
+snapshot, incremental backup)?}\\
+
+I suggest to completely rely on eventual consistency whenever possible. Eventual
+consistency is offered by NoSQL databases like Couchbase for example. End-to-end
+data integrity is only needed for financially relevant actors as mentioned
+above. Since Couchbase is document oriented it is schemaless foreign keys can be
+modeled acoording to the needs of the developer. Micronet shares the semantics
+over service boundaries using the shared Model.
+
+\textit{7. Do you have any advice/guidance how to compose microservices into end
+user client applications? How about application-level intermediaries, i.e., can
+microservices also be clients of other microservices? If so, how to avoid
+microservice deployment dependency and dynamic invocation “spaghetti” (e.g.,
+cycles, overly deep invocation chains)? Do you see a need for/can you recommend
+any tools, libraries, frameworks, middleware that can assist with this task, or
+is plain old development(applying state-of-the-art software engineering
+practices) sufficient?}\\
+
+\ms{} composition is one major topic of this thesis but it is difficult to give
+a all mighy answer to this question. Microservices can indeed talk to each other
+and I find this approach very useful to distribute application behaviour over
+multiple services. I can recommend Docker, Docker-compose and docker swarm as
+the most helpful tools for \ms{} composition. 
+
+\textit{8. Can you report on your technical and organizational scaling
+strategies (e.g., when having to deal with large services landscapes and rich/complex domain
+models with hundreds or thousands of interconnected entities)? Which tactics and
+patterns support these strategies well?}\\
+
+This question cannot be anserwed by a thesis if this small scale.
+
+\textit{9. Which research and development challenges for a broad and sustainable
+adoption of microservices can the service-oriented computing community derive
+from your experience?}\\
+
+To cope with the statelessness of a \ms{} application is the biggest challenge
+during development. This goes hand in hand with the consitency problems that
+will arise inevitably.
+
+Another challenge is to deal with low level networking for the application. A
+network wise complex application like an \og{} need a vast number of ports and
+protocols that must be suported and configured. The container engine as an
+additional layer futher complicates this problem.
+
+Also the address shortage of IPv4 address makes it difficult to develop
+networked applications for the future. Almost all networking solutions rely on
+IPv4 technology but you cant just go to the supermarket and buy one. This
+problem might intensify over time. 
