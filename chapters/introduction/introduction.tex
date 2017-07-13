@@ -2,41 +2,39 @@
 
 \section{Purpose of the Study}
 
-The main purpose of this thesis is to incorporate the two research areas \mss{}
-and \ogs{}. Both areas have individually been the topic of intense research
-lately \todo{Citation needed} but very little research exists on how to combine
-the two.
+This thesis is about the incorporation of the two research areas \mss{} and
+\ogs{}. Both areas have individually been the topic of intense research lately
+(\mss{}:\cite{zimmermann2016microservices}, \cite{di2017research},
+\ogs{}:\cite{bosch2017towards}, \cite{smed2017algorithms},
+\cite{liu2017apparatus}) but very little research exists on how to combine the
+two.
 
 In regard to the \mss{} domain this thesis serves as a base for discussion about
-\ms{} applications. Specifically the development and operation a set of \mss{} is
-explained in detail. Of particular interest is the topic of how to facilitate
-the composition of \mss{} and how to deploy a \ms{} application in a modern could
-environment.
+\ms{} applications. Specifically the development and operation a \ms{}
+application is explained in detail. Of particular interest is the topic of how
+to facilitate the composition of \mss{} and how to deploy a \ms{} application in
+a modern could environment.
 
-This thesis also provides a proof of concept that it is possible to develop
-\ogs{} using \mss{}. For this purpose a vertical slice prototype is provided to
-showcase the necessary fragments that make up a working \og{} in the \ms{}
-world. Furthermore this prototype serves as a simple development example of how
-to reproduce the development process of \ogs{}. The prototype is intended to
-live on after this thesis ends and will continuously improved in the future.
+Another goal of this thesis is to provide a proof of concept that it is possible
+to develop \ogs{} using \mss{}. For this purpose a vertical slice prototype of a
+\ms{} driven \og{} is developed to showcase the necessary fragments that make up
+a working \og{} using a \ms{} design. Furthermore this prototype serves as a
+simple development example of how to reproduce the development process of
+\ogs{}. The idea behind the prototype is to make it simple enough for newcomers
+in \og{} development to be understood.
 
-As a secondary objective the usability of the recently very popular
-\todo{Citation needed} Procedural Content Generation (PCG) is also discussed in
-this thesis.
 
 \section{Theoretical framework}
 
 To curtail the infinite amount of research problems that the topics \ogs{} and
 \mss{} offer a theoretical framework can be used. Within the framework the
-abstract research problems are translated to research questions that cover the
-area of interest sufficiently. According to the research questions hypotheses
-can be formulated. The verification of these hypotheses is the final goal of
-this thesis.
+abstract research problems are gathered are translated to research questions
+that cover the area of interest sufficiently. According to the research
+questions hypotheses can be formulated. The verification of these hypotheses is
+the substance of this thesis.
 
 \subsection{Research Problems and Research Questions}
 \label{sub:problems}
-
-\todo{Formulate according to template}
 
 \subsubsection{Usability of a \ms{} for \ogs{}} 
 
@@ -48,7 +46,8 @@ operate an \og{}.
   \item Can an \og{} run in a \ms{} environment?
   \item Is a \ms{} influenced architecture suitable to design an \og{}?
   \item Is the added complexity during development tolerable?
-  \item Do \mss{} have enough performance to drive a fast-paced \ogs{}? 
+  \item Do \ms{} applications have enough performance to drive a fast-paced
+  \ogs{}?
 \end{itemize}
 
 \subsubsection{Deployment and Operation}
@@ -140,36 +139,40 @@ development process anywhere at any time.
 
 \mss{} are a very modern approach to realize a Service Oriented Architecture
 (SOA). While SOA is not something new and has been in use for more then a decade
-\todo{Citation needed} \mss{} are a cutting edge implementation approach to SOA
-which has gained popularity only in the recent years. Therefore the theory and
-references of how to actually develop and operate such a \ms{} environment are
-rather sparse. This thesis servers as a complete reference for all relevant
-aspects that have to be taken into account when an application (especially an
-\og{}) is developed using \mss{}.
+\cite{josuttis2007soa}, \mss{} are a cutting edge implementation approach to SOA
+which has gained popularity only in the recent years\cite{rajeev2016ms_popular}.
+Unfortunately literature and practical references of how to actually develop and
+operate such a \ms{} environment are rather sparse. This thesis servers as a
+complete reference for all relevant aspects that have to be taken into account
+when an application (especially an \og{}) is developed using \mss{}.
 
-In regards to \ogs{} \mss{} have gained recent popularity. This is due to the
-fact that large game development companies (>100 developers) prosecute \ogs{}
-with million of player playing at the same time. For these games to scale the
-traditional approach of running an \og{} as a monolithic application is not
-sufficient. These large companies have large budgets at their disposal to
+In regards to \ogs{}, \mss{} have gained recent popularity. This is due to the
+fact that large game development companies ($>$100 developers) prosecute \ogs{}
+with million of player playing at the same time\cite{pronschinske2015turbine}.
+For these games to scale the traditional approach of running an \og{} as a
+monolithic application is not sufficient. These AAA\footnote{Triple A (AAA) is
+a designation of large game development companies that is commonly used in the
+game development industry.} companies have large budgets at their disposal to
 realize such an \og{}.
 
-But this is not the case for smaller independent game development companies.
-Independent companies are not constraint by founders and are therefor the main
-driver for innovation in the game industry at the moment. But these  indy-teams don't
-have the manpower to develop rich \ogs{} from scratch because the lack of
-manpower and financial resources. Also AAA companies don't share their knowledge
-about \og{} development to an extent that would allow indies to develop rich
-\ogs{}.
+But this is not the case for smaller independent game development companies
+(Indies). Indies rely on direct sales of there games in online stores like
+Steam, iOS store, or Google Play Store. This makes Indies not constraint by any
+financial backer and are therefor they are a main driver for innovation in the
+game industry at the moment. But these indy-teams don't have the manpower to
+develop complex \ogs{} from scratch because they lack manpower and often
+financial resources. Also AAA companies share their knowledge about \og{}
+development only sparsely which further impedes \og{} development.
 
-Further \og{} development introduces the aspect of distribution within the game
-application which is by definition a hard problem \todo{Citation needed}. There
-is a lot of existing information on how to cope with asynchronism in game
-development\todo{Cite: Gambetta}. However these references are mostly very low
-level and leave a lot of responsibility to the developer. This added complexity
-is whats holding back creative minds to develop rich \ogs{}. This thesis should
-serve as a reference for these independent developers to gain a foothold in the
-complex area of \og{} development.
+In general \og{} development introduces the aspect of distribution within a game
+application which is a hard problem \cite{pneuli1990distributed},
+\cite{kupermann2001synthesizing}. There is a lot of existing information on how
+to cope with asynchronism in game development\cite{gambetta_fast_paced},
+\cite{gafferon2017games}. However these references are mostly very low level and
+leave a lot of responsibility to the developer. This added complexity is whats
+holding back creative minds to develop immersive \ogs{}. This thesis is meant to
+serve as a reference for indy developers to gain a foothold in the complex area
+of \og{} development.
 
 \section{Definitions}
 
