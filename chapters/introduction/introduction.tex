@@ -176,56 +176,72 @@ of \og{} development.
 
 \section{Definitions}
 
-This thesis is aimed to be a direct reference for developing \ogs{} with \mss{}.
-Because of this the thesis is of very technical nature. Most concepts developed
-in this thesis have a reference implementation in the prototyped developed
-during this thesis. 
-
-This section clarifies all terminology that is used to define the concepts
-developed in this thesis from a technical point of view.
+This definition section clarifies all terminology that is used to define the
+concepts developed in this thesis from a technical point of view.
 
 \subsection{Design Science Methodology}
 
-Design science offers the definition of a scientific framework that can be used
-to formally define and describe real world research problems. Along with the
+Design science provides the definition of a scientific framework that can be
+used to formally define and describe real world research problems. Along with the
 definition on how to conduct scientific research is also provides very useful
 templates to formally frame research problems and research questions. The
-research problems of this thesis are framed using the design science principles.
-The paper Design Science, The Design Cycle \& Theoretical Frameworks
+research problems of this thesis are framed using these design science
+principles. The paper Design Science, The Design Cycle \& Theoretical Frameworks
 \cite{biedermann2016design_science} provides a good overview on the topic.
 
 \subsection{Games and \ogs{}}
 \label{sub:games}
 
 Since this thesis is mainly aimed at readers interested in the \ms{} domain it
-is mandatory to provide a reasonable introduction in games itself an which
-technical requirements they introduce. This helps to frame influence that \ogs{}
-can possibly have when built using \mss{}.
+is mandatory to provide a reasonable introduction into games an which technical
+requirements they introduce. This also allows to highlight differences between
+\ogs{} and regular business applications developed using \mss{}.
 
 \subsubsection{Video Games}
 
 A video game is simply a game played on a digital device e.g. PC, smartphone, or
 gaming consoles. The technical details how all of these games are developed
-varies greatly depending on various factors like genres, platforms, culture and
-so on. Since this thesis does not make any restrictions on the kind of game
-under development a common basis for all games must be established. In this
-regard the classical Model-View-Control pattern can be used to identify the
-logical artifacts that make up a game: 
+varies greatly depending on different factors like genres, platforms, culture
+and so on. This thesis does not make any restrictions on the kind of game
+under development and instead establishes a common basis which supports all
+games. For this purpose the classical Model-View-Control pattern can be used to
+identify the logical artifacts that make up a game: 
 
 \begin{itemize}
-  \item \textbf{Model:} The game model artifact holds the game state.
-  \item \textbf{View:} The game presentation artifact presents the game state to
-  the player.
-  \item \textbf{Control:} The game simulation artifact progressed the game
-  state and is responsible to accept player input.
+  \item \textbf{Model:} The \textit{game model} artifact stores the game state.
+  \item \textbf{View:} The \textit{game presentation} artifact presents the game
+  state to the player.
+  \item \textbf{Control:} The \textit{game simulation} artifact progresses the
+  game state and is responsible to accept player input.
 \end{itemize}
+
+This can be best explained with an example. In the iconic game Super Mario
+(\autoref{fig:super_mario}) the player runs through a course of blocks,
+platforms, enemies, coins, and much more. In Super Mario the game model
+represents the state of the game consists of the positioning, the type and the
+size of blocks, the placement of enemies and the coins that Mario earned. The
+simulation defines the progress of a Mario Game. The simulation both has an
+autonomous part (enemies walk on their own) and an input sensitive parts (Mario
+walk 3 Blocks/second when the player presses a direction). Finally the
+representation presents the game to the player by rendering the model to the
+game screen. Blocks are represented by static textures and moving actors like
+Mario or Gumba are represented by moving animated sprites.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{images/super_mario}
+	\caption{A screenshot of the iconic Super Mario Game. It shows all three
+	artefacts of a game: The model (positions of blocks), the simulation (Mario
+	jumping), and the representation (textures and sprites).}
+	\label{fig:super_mario}
+\end{figure}
 
 \paragraph{Game Simulation}
 
-The game simulation can be seen as a logical abstraction of a game. The
-simulation is responsible to update the state of all relevant game objects to
-progress the state of the game as a whole. In most games the game simulation is
-realized with a physics engine along with code that steers the simulation.
+The game simulation is a logical abstraction of a game. The simulation is
+responsible to update the state of all relevant game objects to progress the
+state of the game as a whole. In most games the game simulation is realized with
+a physics engine along with game logic that steers the simulation.
 
 \paragraph{Game Presentation}
 
@@ -236,94 +252,156 @@ presentation as soon as possible.
 The game simulation is usually tightly coupled with the game presentation. This
 is due to the nature of the most basic graphics libraries like DirectX or OpenGL
 which are foundation of most video games. These graphic libraries typically have
-one main render loop. Within this loop the developer gets a chance to update
-every game object before it is drawn to the screen. As a consequence the game
-simulation cannot be completely separated from the presentation process. More
-information on graphics libraries can be found in the book Real-Time
-Rendering\cite{RTR3}. Furthermore the web-page of the book provides a
-comprehensive selection on related literature and technical examples.
+one main render loop. Within this loop the developer gets a chance to apply
+input to every game object before it is drawn to the screen. As a consequence
+the game simulation cannot be completely separated from the presentation
+process. The book Real-Time Rendering\cite{RTR3} is a good reference on graphics
+libraries. Furthermore the web-page of the book provides a comprehensive
+selection on related literature and technical examples.
 
 \paragraph{Game Model}
 
-The game model consists of a meta model containing a set of object types and an
-instantiation of this meta model which represents the game state. The game
-simulation operates upon the game state to progress the game. Static data
-like for example audiovisual information for the game presentation is directly
-stored in the meta model and can be referenced by the game state.
+The game model consists of a meta model containing a set of object types and
+physical model which is an instantiation of the meta model representing the game
+state. The game simulation operates upon the game state to progress the game.
+Static data like for example audiovisual information like textures, model, or
+sound files which are only used for the game presentation and not for the
+simulation are stored directly in the meta model. Static data can be referenced
+by the presentation as needed.
 
-\paragraph{Game Engines}
+\subsubsection{Game Engines}
 All the artifacts of a game as described in the previous three sections are
-fairly low level. To relieve the developer from these low level tasks usually
-game engines are used. These game engines come with comprehensive editors, tools
-and libraries that abstract the complex low level functionality. This allows the
-developer to focus the effort on the core parts of the game. 
+fairly low level. To relieve the developer from the need to cope with these low
+level artefacts game engines are used. Game engines come with comprehensive
+editors, tools and libraries to abstract complex low level functionality to
+allow developers to focus the effort on the core parts of the game.
 
 \subsubsection{\ogs{}}
-An \og{} can be seen as an extension to a traditional video game. In addition to
-the audiovisual representation the player not only interacts with the game
+An \og{} are a special case of traditional video games. In addition to the
+audiovisual representation the player not only interacts with the game
 simulation but also with other players playing at the same time at another
-location. But in practice the added asynchronism forces a completely different
-application design in comparison to traditional single-player games.
+location. \og{} introduce asynchronism to games which forces a completely
+different application design in comparison to traditional single-player games.
 
 \paragraph{Simple \ogs{}}
 
-Simple \ogs{} are single-player games with added multi-player features.
-In simple \ogs{} players are responsible to set up game's multi-player
-environment. These can be client-server or peer-to-peer scenarios. In these
-environments the players have full control over the game rules.
+\begin{figure}
+	\centering
+	\includegraphics[width=5cm]{images/SimpleOnlineGame}
+	\caption{In a simple \og{} one player hosts a game session and other players
+	connect to it.}
+	\label{fig:simple_online_game}
+\end{figure}
 
-Usually simple games are of small scale and are played in confined game
-sessions. The state of the game session is stored locally on the client.
+Simple \ogs{} are very similar to single-player games with the addition that
+some enemies or companions are played by other human players. In simple \ogs{}
+players are responsible to set up game's multi-player environment (hosting the
+game session and connection to it). These can be client-server or peer-to-peer
+scenarios. In any case one player is always responsible to host the game
+(\autoref{fig:simple_online_game}). In simple online games the players have full
+control over the game rules. This makes them comparable to classical board games
+in a sense that all players agree to a set of rules. Cheating is therefore not
+an issue most of the time.
+
 Examples of such simple games are for example Quake, Age of Empires, or Diablo
-2. Lately it has become popular for simple games to provide a matchmaking
+2. Lately it has become popular for simple \ogs{} to provide a matchmaking
 service that helps players to find each other for game sessions. This
 matchmaking functionality is responsible to initiate the game session on all
-clients but does not interfere in a running game session meaning there is no
-centralized rule enforcement system in place. Cheating clients are a common
-problem for this type of games.
+clients but does nothing beyond that. Hence the session is simulated locally on
+one of the clients. This client has zero latency to the simulation and has
+therefore an advantage over the other players. In this setting cheating clients
+are a common problem since the hosting player can basically influence the game
+at will.
 
 \paragraph{Rich \ogs{}}
 
-Rich \ogs{} take the control over the game environment away from the player.
-This means that the game is simulated on a server environment meaning that the
-game client is only responsible for the presentation of the game and for sending
-inputs to the server but not for simulating the game. In this setup the game
-state is persisted on the server side. The persistence of the game state in this
-fashion allows for a set of features which really separate \ogs{} from simple
-online or offline video games.
+\begin{figure}
+  \centering
+  \includegraphics[width=.4\linewidth]{images/MMO}
+  \caption{In an MMO environment all players connect to a single MMO server.}
+  \label{fig:mmo}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics[width=.8\linewidth]{images/RichOnlineGame}
+  \caption{Modern \og{} simulate game sessions on servers to provide the best
+  player experience.}
+  \label{fig:rich_online_game}
+\end{figure}
 
-Most noticeable is the feature of virtual property. In rich \ogs{} it is usually
-possible to gain an advantage when it is player a lot. This gives the player a
-sense of power and the motivation to play the game for longer. This can be
-compared to the satisfaction that is triggers when a person receives a like on a
-social media platform.
+While continuously gaining popularity simple \ogs{} also went through an
+evolution. The most noticeable improvement is that modern \ogs{} often take the
+control over the game environment away from the player. This means that the game
+is simulated on a server environment and the local game client is only
+responsible for the presentation of the game and for sending inputs to the
+server. In this setup the game state is persisted on the server side in a
+persistent storage. The persistence of the game state in this fashion allows for
+a set of features which really separate today's \ogs{} from the classical simple
+online or offline video games. These modern \ogs{} will be referred to as rich
+\og{} in this thesis.
 
 Rich \ogs{} are also very comfortable for the players. The players only need to
-download the game client to play the game.
+download the game client to play the game and is spared any environment setup.
 
-\subsection{Procedural Content Generation}
+The first occurrences of rich \og{} have been MMOs. In MMOS the player controls
+an avatar in a persistent virtual word playing against the environment
+(monsters, traps, dungeons, \ldots) and other player (combat, trading, chatting,
+\ldots). MMOs are simulated using a single dedicated server to simulate the
+whole game (see \autoref{fig:mmo}). This limits the number of player who can
+participate simultaneously in the game\footnote{In the very popular MMO World of
+Warcraft the player number per server is limeted to about 10'000 simultaneous
+players.}. MMOs solve this problem by adding or removing complete instances of
+the full game. But this approach does not scale very well since player number
+can vary greatly.
+
+Besides MMOs many rich \ogs{} exist in various genres like: First Pirson
+Shooters (Counter Strike, Battlefield, Overwatch), Multiplayer Online Battle
+Arena Games MOBAs (League of Legends, Dota 2), Sport Games (FIFA, NHL, Golf),
+Car Racing Games, and many more. What all these games have in common is that
+they are simulated in a server environment (\autoref{fig:rich_online_game} shows
+and example of such a server environment). This allows for a completely fair and
+cheat safe game sessions. This solution provides the best possible experience
+for \ogs{}. The drawback is that running the simulation services has
+considerable computing and bandwidth requirements which can be very expensive.
+
+\subsubsection{Procedural Content Generation}
 
 Procedural Content Generation (PCG) has always been an integral part of game
 development and has gained recent popularity because of prominent games that
-make extensive use of PCG. Some examples are Minecraft, Terraria, No Mans Sky to
-only name a few.
+make extensive use of PCG. Some examples are Minecraft, Terraria
+(\autoref{fig:terraria}), No Mans Sky to only name a few.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{images/terraria}
+	\caption{A screenshot of Terraria which makes intensive use of PCG. The game
+	world is different every time the game is player. This encourages
+	replayability.}
+	\label{fig:terraria}
+\end{figure}
 
 PCG is the process of automatically generating game content. A canonical
 example in this regard is vegetation generation. The developer only needs to
 supply certain parameters like for example color distribution and branching
-factor. The game simulation then 
+factor. The game then creates all the vegetation before the game starts or even
+dynamically as needed.
+
+PCG also allows generate levels, quests, weapons, vehicles, and even sounds. A
+good reference for PCG is the book Procedural Content Generation In
+Games\cite{shaker2014procedural}. It contains many useful PCG methods and gives
+a good overview on the topic.
 
 \subsection{\mss{}}
 
-Microservices are an implementation approach for a service-oriented
-architecture\todo{Cite ZIO}. In SOA an application is split into logical units
-that each solve one specific task. A problem of traditional SOA is that these
-individual services are coupled using a service bus which contains a large
-amount of domain knowledge which is used to allow communications between
-services. \mss{} reverse this principal and use the smart endpoints - dumb pipes
-paradigm. This makes the service bus obsolete. As a result the whole
-application is more robust to changes because there is no central processing
-unit exposed as a single point of failure.
+\mss{} are an implementation approach for a service-oriented architecture (SOA)
+\cite{zimmermann2016microservices}. In SOA an application is decomposed into
+logical units that each solve one specific task. A problem of traditional SOA is
+that these individual services are coupled using a service bus which contains a
+large amount of domain knowledgeto realize service integration. \mss{} reverse
+this principal and use the smart endpoints - dumb pipes paradigm. This makes the
+service bus obsolete and as a result the whole application is more robust to
+changes because there is no central processing unit exposed as a single point of
+failure.
 
 \subsubsection{\ms{} Tenets}
 
@@ -331,8 +409,8 @@ In the article Microservices tenets: Agile approach to service development and
 deployment O.Zimmermann provides seven \ms{} tenets to describe the properties
 of \ms{} applications. According to the tenets a correlation between game
 specific requirements and \ogs{} can be made. In the course of this thesis the
-\ms{} tenets will be used as an indicator to show that \mss{} are suitable for
-\og{} applications.
+\ms{} tenets will be used as an indicator to show that \mss{} are suitable to
+drive \og{} applications.
 
 The remainder of this section will give a brief overview over all seven tenets.
 
@@ -346,20 +424,20 @@ services to be deployed, changed, replaced and scaled independently.
 
 \paragraph{Domain-Driven-Design (DDD)}
 
-The responsibility of a \ms{} should be derived from the domain concept. Each
-service is dedicated to exactly one aspect of the domain. If this aspect is very
-extensive it can lead to a large \ms{} which is not desirable. This can be an
-indicator that the granularity of the services might be wrong. Granularity is
-the most challenging part of DDD\cite{millett2015patterns}.
+The responsibility of a \ms{} should be derived from the problem domain and each
+service should be dedicated to exactly one aspect of the domain. If one domain
+aspect is very extensive it can lead to a large \ms{} which is not desirable.
+This can be an indicator that the granularity of the services might be wrong.
+Granularity is the most challenging part of DDD\cite{millett2015patterns}.
 
 \paragraph{IDEAL}
 
-The IDEAL tenet is a collection of cloud patterns. These patterns to partially
+The IDEAL tenet is a collection of cloud patterns. These patterns do partially
 overlap with several other tenets like single responsibility or decentralized
 continuous delivers. None the less this tenet is is a great indicator to
-validate that an application respects the major cloud principals. C. Fehling et
+validate if an application respects the major cloud principals. C. Fehling et
 al. provides a good overview over the  IDEAL Cloud Application Properties
-summarized in this section\cite{fehling2015cloud}.
+which is summarized in this section\cite{fehling2015cloud}.
 
 \subparagraph{Isolated State}
 A \ms{} should be stateless meaning that request that the \ms{} fulfils should
@@ -375,8 +453,8 @@ the distributed nature of cloud environments.
 
 \subparagraph{Elasticity}
 Elasticity inquires that the application can be scaled during operation. When
-the need of scaling arises it must be possible to add and remove \mss{} without
-affecting the stability of the whole system.
+the need of scaling arises it must be possible to add and remove \ms{} instances
+without affecting the stability of the whole system.
 
 \subparagraph{Automated Management}
 In order to quickly react to scaling demands or to recover from failure the
@@ -386,9 +464,9 @@ management approach to these scenarios should be fully automated.
 
 The dependencies among \mss{} should be reduced as much as possible. It is not
 feasible to reduce dependencies to zero because without any dependencies the
-application is not able to work as a whole unit. If the amount of dependencies
-is manageable the impact of adding and removing new functionality can be kept
-to a minimum.
+application is not able to function as a whole unit. The goal is to keep the
+amount of dependencies low to keep the impact of adding and removing new
+functionality to a minimum.
 
 \paragraph{Polyglot Programming and Persistence}
 
@@ -397,18 +475,21 @@ states that a \ms{} has no restriction on storage paradigms and implementation
 details. As a consequence each \ms{} can be designed in a way that best suits
 its purpose.
 
-This is especially crucial for persistence. The approach of having one big
-database for the whole \ms{} application is called an integration database and
-is an anti-pattern for \mss{}. With polyglot persistence each \ms{} can use the
+Polyglot persistence is especially crucial for \ms{} applications. The classical
+approach of having one big database for the whole application is called an
+integration database and is an anti-pattern for \mss{} since it introduces a
+single point of failure. With polyglot persistence each \ms{} can use the
 storage paradigm that is best suited for it. This eliminates the need for a
 central persistence solution and therefore the single point of failure.
 
 Polyglot programming allows development teams to work with the languages and
-tools that they are used to. This greatly speeds up the development process.
+tools that they are used to. This greatly speeds up the development process. It
+also allows to integrate arbitrary technology into the application like for
+example legacy systems.
 
 \paragraph{Lightweight Containers}
 
-Lightweight containers are the enabling technology for a \ms{} application.
+Lightweight containers are an enabling technology for \ms{} applications.
 Containers allow to build each \ms{} in its own confined environment. Containers
 guarantee that the \ms{} runs with the exact same configuration despite
 different environment (developers pc, build and test server, cloud provider).
@@ -426,14 +507,15 @@ artifact that has to be delivered every time the application changes.
 
 \paragraph{DevOps}
 
-DevOps are the glue between the development and the operation of a \ms{}
-application. The idea is that these engineers are already part of the project
-during the initial development of an application. This gives the DevOps of a
-certain application a deep understanding of the technical requirements of the
-application. This also allows to test the deployment process very early. When a
-\ms{} application is in production the DevOps engineers have enough insight in
-the application internals to be able co cope with most problems that arise.
-A. Earnshaw published a blog-post that describes DevOps very
+DevOps engineers are the glue between the development and the operation of a
+\ms{} application. The idea is that these engineers are already part of the
+project during the initial development of an application and stay responsible
+for the application after release. This gives the DevOps of a certain
+application a deep understanding of the technical requirements of the
+application. It also allows to test the deployment process very early.
+When a \ms{} application is in production the DevOps engineers have enough
+insight in the application internals to be able co cope with most problems that
+arise. A. Earnshaw published a blog-post that describes DevOps very
 well\cite{earnshaw2013devops}.
 
 \subsubsection{\ms{} Composition}
@@ -443,12 +525,12 @@ well\cite{earnshaw2013devops}.
 specified. For this purpose composition can be split into the two sub topics:
 Physical composition and logical composition.
 
-For \ms{} composition is it always possible to categorize a solution according
-to the composition paradigms: Orchestration and Choreography. Orchestration
-states that a set of \mss{} is composed by a central intelligence unit which is
-responsible to keep the application healthy. Choreography implies that there is
-no central intelligence and the cluster of \mss{} as a whole is responsible to
-guarantee the stability of the application.
+\ms{} composition can be categorize into two composition paradigms:
+Orchestration and Choreography. Orchestration states that a set of \mss{} is
+composed by a central intelligence unit which is responsible to manage the
+application. Choreography implies that there is no central intelligence
+and the cluster of \mss{} as a whole is responsible to guarantee the stability
+of the application.
 
 \paragraph{Physical Composition}
 
@@ -464,9 +546,9 @@ of the composition engine use an orchestration approach.
 \paragraph{Logical Composition}
 
 Logical composition is the aspect of how a set of confined \ms{} is working
-together to solve to goal of the application as a whole. The logical composition
-cannot be automated and is therefore a task that the developers of an
-applications have to cope themselves. 
+together to solve to goal of the application as a whole. There is no
+general solution for logical composition which is why the developers of an
+applications have to cope with this task themselves.
 
 Logical composition of a \ms{} application has two major requirements that must
 be satisfied. The services have to know how to find each other and the services
@@ -477,13 +559,13 @@ can be accessed via a HTTP. Especially for regular web applications a vast
 choice of middle-ware is available. For example Swagger, JaxRS, JSON API, and
 API Blueprint just to name a few.
 
-The composition paradigm that is used for logical composition is very dependent
-on the type of application under development. In an orchestration solution there
-would be one central point where \mss{} could look up crucial information like
-message formats and service locations. In an choreography solution the this
-information would be distributed among all services to form a mesh of
-information about the application cluster. In this case information can be
-requested from any \ms{} in the system.
+The composition paradigm (Orchestration or Choreography) that is used for
+logical composition is very dependent on the type of application under
+development. In an orchestration solution there would be one central point where
+\mss{} could look up crucial information like message formats and service
+locations. In an choreography solution the this information would be distributed
+among all services to form a mesh of information about the application cluster.
+In this case information can be requested from any \ms{} in the system.
 
 \subsubsection{\ms{} Deployment}
 
@@ -494,7 +576,7 @@ from the development stage into production. This process includes several steps:
   \item Bring the application code along with eventual dependencies into the
   service containers.
   \item Upload the application containers to the cloud
-  \item Prepare the application on the server side
+  \item Prepare the application on the cloud side
   \item Start the application as a whole by starting all service containers
   \item Scale the application according to operational needs
   \item Set up backup and recovery solutions for the application
@@ -512,7 +594,8 @@ the collaboration of different developers on the same project.
 
 \section{Delimitations, Limitations, and Assumptions}
 
-Several limitations have a big influence on this thesis. 
+This section lists several limitations which had an influence on this
+thesis.
 
 \subsection{\ms{} are Developed by Teams}
 One of the greatest advantages of \mss{} is that they allow to split the
@@ -525,34 +608,34 @@ conceptually because this thesis is a one-man project.
 Cloud service providers like Amazon or Google offer a free tier to evaluate
 their cloud capabilities. But even this free tiers of subscription require a
 valid credit card for the case that the free quota is exceeded. This is a risk
-that the HSR did not want to bear. As a consequence the testing environment for
-the prototype developed in this thesis is a virtual server provided by HSR. This
-setup makes it difficult to finalize the process of game development with \mss{}
-because in a real world example companies would rely on cloud service provider
-to have a stable cloud computing environment. It is also a pity because both
-Google and Amazon just recently released dedicated solutions for how to deploy
-\ogs{} on their environments. Evaluating these solutions would have been a very
-interesting topic.
+that the HSR did not want to bear. As a consequence the target environment for
+this thesis is a virtual server provided by HSR. This setup makes it difficult
+to finalize the process of game development with \mss{} because in a real world
+example companies would rely on cloud service provider to have a stable cloud
+computing environment. It is also a pity because both Google and Amazon just
+recently released dedicated solutions for how to deploy \ogs{} on their
+environments. Evaluating these solutions would have been a very interesting
+topic.
 
 \subsection{Limitations introduced by games}
-As explained in \autoref{sub:games} the way games are built itself is a huge
-limitations on the design of a \og{} application. To analyze all aspects of game
-development in detail is out of scope for this thesis. Instead this thesis takes
-a more general approach by viewing the rendering any physics engine details as a
-black box. This allows to focus on the logical parts of \og{} development, the
-game model and the game simulation which is most relevant in regards to a \ms{}
-realization.
+As explained in \autoref{sub:games} the way video games are built itself is a
+huge limitations on the design of an \og{} application. To analyze all problems
+which occur in this regard is out of scope for this thesis. Instead this thesis
+takes a more general approach by viewing the rendering any physics engine
+details as a black box. This allows to focus on the interesting parts of \og{}
+development, the game model and the game simulation which is most relevant in
+regards to a \ms{} realization.
 
 \subsection{Time Constraint}
 In the original plan for this thesis the topic Procedural Content Generation
-(PCG) was intended to be research very detailed. But since the topics:
+(PCG) was intended to be researched in great detail. But since the topics:
 Deployment and composition required a lot more effort then anticipated, the time
 budget for PCG shrunk close to zero. Because of this PCG will only receive minor
-attention in this thesis. 
+attention in this thesis.
 
 Another aspect that intensified this problem is the fact that this thesis is the
-third out out a series of three and a lot of work was necessary to conclude the
-project as a whole.
+third out out a series of three and a lot of effort was necessary to conclude
+the project as a whole.
 
 \subsection{Delimitation}
 
@@ -562,7 +645,10 @@ apparent during this thesis:\\
 Games are usually developed using Microsoft Windows. But cloud developers tend
 to use mainly Linux tools. Because of this many tools are cumbersome to use on
 Windows platforms and therefore greatly hinder the development process. It is a
-side-goal of this thesis to facilitate the whole process on Windows. 
+side-goal of this thesis to facilitate the whole process on Windows
+satisfactory.\\
+
+
 
 
 
