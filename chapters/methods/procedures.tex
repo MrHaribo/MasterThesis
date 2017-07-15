@@ -1,12 +1,12 @@
 \section{Procedures}
 
 The research methods used to examine the research problems explained in
-\autoref{sub:problems} can be categorized into three areas: Literature
+\autoref{sub:problems} can be categorized into four areas: Literature
 research, lab research, field research, and statistical analysis.
 
 Each category provides a framework to enable research for one or more of the
-more concrete research subject defined in \autoref{sec:subject_pool}. Table X
-shows which research methods are used for each research subject.
+more concrete research subject defined in \autoref{sec:subject_pool}. The table
+below shows which research methods are used for each research subject.
 
 \begin{center}
   \begin{tabular}{ l | c | c | c | c | }
@@ -18,7 +18,6 @@ shows which research methods are used for each research subject.
   	\\\hline
     
     
-    \textbf{Microservice Tenets in Relation to Online Games}&x&&&\\\hline
     \textbf{Challenges Introduced by Microservices}&&x&x&\\\hline
     \textbf{Microservice Infrastructure}&x&x&&\\\hline
     \textbf{Networking in Online Games}&&&x&x\\\hline
@@ -32,22 +31,22 @@ science methodology principles\cite{wieringa2014design_science}.
 
 \subsection{Literature Research}
 
-Literature plays only a minor role in this thesis because the theoretical
-foundation of this thesis has already been laid in the last two projects. None
-the less literature is always consulted to give a theoretical backing to
-findings of this thesis.\\
+Literature only plays a minor role in this thesis because the theoretical
+foundation on \mss{} and \ogs{} has already been established in the last two
+project theses. None the less literature is consulted in relevant areas to give
+a theoretical backing to findings of this thesis.\\
 
 Especially in the topic of \ms{} infrastructure a deep study of the
-documentation of composition engines and cloud service providers was necessary
+documentation of composition engines and cloud service providers was made
 to highlight advantages and differences.\\
 
-To gain a sophisticated opinion about the \ms{} tenets several articles and blog
-posts \todo{citation needed} are consulted to back findings about \ms{} with
-opinions from the industry.\\
+Since many sophisticated information about the \mss{} is shared via articles
+and blog posts this type of references is considered valuable to back findings
+with opinions of domain experts in the software industry.\\
 
 in regards to PCG the the book Procedural Content Generation In
 Games\cite{shaker2014procedural} was studied in detail to identify PCG methods
-which are usable for \ogs{}.
+which are usable for \og{} development.
 
 \subsection{Lab Research}
 \label{sub:lab_reserach}
@@ -60,15 +59,14 @@ single-case experiments\cite{wieringa2014design_science}. Single-case
 experiments examine one aspect of a problem domain under isolation.\\
 
 Single-case experiments are conducted to examine all technical aspects of \mss{}
-in regards to \ogs{} in a practical way. This includes the \ms{} infrastructure
-requirements listed in \autoref{sub:infrastructure}, the deployment of \mss{}
-and the challenges introduced by \mss{}.
+in regards to \ogs{} in a practical way. This includes the examination of the
+\ms{} infrastructure requirements listed in \autoref{sub:infrastructure}, the
+composition of \mss{}, the deployment of \mss{}, and the challenges introduced
+by \mss{}.
 
 All technical aspects can be examined on the basis of the instrumentation
-artifact described in \autoref{sub:instrumentation}.
-
-Table X shows which instrumentation artifact is used to examine each
-technical aspects. 
+artifact described in \autoref{sub:instrumentation}. The table below shows which
+instrumentation artifact is used to examine each technical aspects.
 
 \begin{center}
   \begin{tabular}{ l | l | l | l | l | l | }
@@ -81,14 +79,18 @@ technical aspects.
     
     
     \textbf{MicroNet}&x&x&x&x&x\\\hline
-    \textbf{Development Environment}&x&x&&&x\\\hline
+    \textbf{Java as Programming Language}&x&&&&\\\hline
+    \textbf{Application Data Format}&x&&x&x&\\\hline
+    \textbf{Networking Technologies}&x&&&x&\\\hline
     \textbf{Container Engine}&x&x&&&\\\hline
     \textbf{Cloud Service Providers}&x&x&x&x&x\\\hline
     \textbf{Composition Engines}&x&x&&&x\\\hline
-    \textbf{Message Broker}&x&&&x&\\\hline
-    \textbf{Database}&&&x&x&\\\hline
-    \textbf{Source Control}&&x&&&\\\hline
+    \textbf{Database Solution}&&&x&x&\\\hline
+    \textbf{Source and Artifact Control}&&x&&&\\\hline
+    \textbf{Cloud Service Provider Gaming Solutions}&x&x&x&x&x\\\hline
     \textbf{Dedicated Server}&x&x&x&x&x\\\hline
+    \textbf{Game Engine}&x&x&x&x&x\\\hline
+    \textbf{Spacegame Prototype}&x&x&x&x&x\\\hline
   \end{tabular}
 \end{center}
 
@@ -102,28 +104,27 @@ is very preparation intensive.
 
 Technical Action Research (TAR) allows to test a designed solution in a real
 world context. This approach both gives the researcher a deep insight in the real
-problem domain. A secondary result of TAR are usable concept or design that
-can be used in commercial projects.
+world problem domain. A secondary result of TAR is that the developed concepts
+or designs can be used to help a stakeholder in real world projects.
 
 TAR has been conducted in this thesis in the form of a series of play-test based
-on the MicroNet prototype and the Spacegame Prototype.
+on the MicroNet and the Spacegame Prototype.
 
 \subsubsection{Expert Opinion}
 
-Expert opinion validation is used to verify the approach that is used to
-develop \ogs{} with \mss{}. This is especially effective for the development
-aspect of a \ms{} driven \og{}. The experts will be Students, Game Developers
-and Software Developers.
+Expert opinion is used to validate the proposed development approach of
+MicroNet. The experts solve a series of simple tasks with MicroNet and after
+that share their impressions with a questionnaire. The chosen experts are master
+students, game developers and software engineers.
 
 \subsection{Statistical Analysis}
 
 Since this thesis is mainly on exploratory basis the gathering of empirical data
 has proven to be difficult. Especially the gathering of operational data from
-field research is very cumbersome and also require a lot of effort to process
-the data into a form that is usable for this report.
-
-Because of this reason the statistical analysis will be limited to the
-evaluation of the data gathered during expert opinion validation. 
+field research is very cumbersome and also require a lot of effort to collect
+the data and extract any meaningful information out of it. Because of this
+reason the statistical analysis will be limited to the evaluation of the data
+gathered during expert opinion validation.
 
 
 

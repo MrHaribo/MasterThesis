@@ -418,9 +418,9 @@ The remainder of this section will give a brief overview over all seven tenets.
 
 Every \ms{} should offer all of its functionality in the form of a fine grained
 interface that decouples the service implementation from its interface. This
-interface is usually a REST/HTTP and is accessible via a reverse proxy. Each
-\ms{} should only have one responsibility in regards to the domain. This allows
-services to be deployed, changed, replaced and scaled independently.
+interface is usually exposed via REST/HTTP and is accessible via a reverse
+proxy. Each \ms{} should only have one responsibility in regards to the domain.
+This allows services to be deployed, changed, replaced and scaled independently.
 
 \paragraph{Domain-Driven-Design (DDD)}
 
@@ -638,13 +638,15 @@ third out out a series of three and a lot of effort was necessary to conclude
 the project as a whole.
 
 \subsection{Delimitation}
+\label{sub:delimitations}
 
 There are also some delimitations (limitations that can be lifted) that became
 apparent during this thesis:\\
 
-Games are usually developed using Microsoft Windows. But cloud developers tend
-to use mainly Linux tools. Because of this many tools are cumbersome to use on
-Windows platforms and therefore greatly hinder the development process. It is a
+Games are usually developed using Microsoft Windows because it offers the
+largest ecosystem for game developers. But cloud developers tend to use mainly
+Linux tools. Because of this many tools are cumbersome to use on Windows
+platforms and therefore greatly hinder the development process. It is a
 side-goal of this thesis to facilitate the whole process on Windows
 satisfactory.\\
 
