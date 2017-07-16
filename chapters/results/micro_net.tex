@@ -1,34 +1,31 @@
 \section{MicroNet}
 
 MicroNet is a framework to develop and operate \ms{} applications. It is
-designed to be especially support rich \ogs{}. MicroNet also provides all
-needed to develop and operate an \og{}.
+designed to be especially support rich \ogs{} but is not restricted to this
+domain. MicroNet also provides all needed tools and examples to showcase how to
+develop and operate an \og{}.
 
 \subsection{Characteristics of MicroNet}
 
-Microservices reduce the complexity of an online game by splitting the game
-domain into small shards that can be developed independently. These shards are
-defined by a domain driven design (DDD) approach.\\
+To reduce the complexity of an \og{} development a \ms{} approach can be used by
+splitting the domain of a game game into small shards that can be developed
+independently. These shards are defined using a domain driven design (DDD)
+approach. This is the general concept behind MicroNet.\\
 
-How does MicroNet help in \og{} development:
+In addition to the general concept MicroNet is designed according to four
+guidelines to provide a lean and agile \og{} development process:
 \begin{itemize}
-  \item MicroNet does not reinvent the wheel for online game development
-  \item MicroNet works in conjunction with existing technologies, specifically popular game engines
-  \item MicroNet tries to make the developer aware of the problems that are encountered during the development process
-  \item While using MicroNet the developer learns the process of online game development 
-  \item It helps the developers to get the difficult tasks like consistency of a
-  asynchronous system right
+  \item MicroNet does not reinvent the wheel for online game development but
+  instead makes use existing technologies, specifically popular game engines
+  \item MicroNet tries to make the developer aware of the problems that are
+  encountered during the development process as early as possible
+  
+  \item Using MicroNet aims to help the developer to learn the process of \og{}
+  development and solve related problems
+  \item MicroNet supports the developers in realizing the especially
+  difficult aspects of communication and consistency in a \ms{} application
 \end{itemize}
-
-What does MicroNet provide in this regard:
-\begin{itemize}
-  \item Provides a clear architecture for the game back-end
-  \item Allows to develop individual game features independently
-  \item Provides a simple protocol definition that helps the developers to loosely couple game features
-  \item Offers standard solutions for technical requirements: Messaging
-  functionality and Persistence functionality	
-\end{itemize}
-
+\input{chapters/results/micro_net/online_games_with_micronet}
 \input{chapters/results/micro_net/architecture}
 \input{chapters/results/micro_net/networking}
 \input{chapters/results/micro_net/composition_concepts}
