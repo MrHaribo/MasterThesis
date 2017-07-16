@@ -17,8 +17,8 @@ of the technology stack.
 
 \subsection{Core Technologies}
 
-The core technologies have mostly been defined in the prior two project thesis.
-This section gives a short summary on the chosen technology.
+The core technologies have mostly been defined and tested in the prior two
+project thesis. This section gives a short summary on the chosen technologies.
 
 \subsubsection{Networking}
 
@@ -30,12 +30,11 @@ This section gives a short summary on the chosen technology.
 messages and delivers them as soon as a receiver is available. This allows for a
 robust persistent messaging. Message brokers have been evaluated during
 project thesis one. ActiveMQ is the networking foundation of MicroNet and
-has proven to be very stable.
+has proven to be very stable. ActiveMQ provides a Java JMS library which
+provides a way to easily integrate ActiveMQ in Java applications.
 
-PostgreSQL is available on Docker Hub as a Docker image and can therefore
+ActiveMQ is available on Docker Hub as a Docker image and can therefore
 be integrated into a \ms{} application very easily using a composition engine.
-
-
 
 
 \subsubsection{Persistence}
@@ -47,12 +46,13 @@ be integrated into a \ms{} application very easily using a composition engine.
 
 \textbf{PostgreSQL} is a very mature open source relational database. It is
 available on all major platforms which allows for comfortable testing and
-deployment. Since version 9.2 PostgreSQL supports the json data-type. This makes
+deployment. Since version 9.2 PostgreSQL supports the Json data-type which makes
 it trivial to control the data flow from the network to the database.
 
-PostgreSQL is also available on Docker hub and therefore allows quick
-deployment. For production purposes a native installation of PostgreSQL is
-suggested to provide the needed stability as explained in \todo{ref}.\\
+PostgreSQL is also available on Docker hub and can therefore be integrated
+quickly. For production purposes a native installation of PostgreSQL is
+suggested to provide the needed stability as explained in
+\autoref{sub:database_solutions}.\\ 
 
 
 \begin{wrapfigure}{r}{4cm}
@@ -61,16 +61,16 @@ suggested to provide the needed stability as explained in \todo{ref}.\\
 
 \noindent
 \textbf{Couchbase} is a NoSQL database realized as a Json document store. The
-Json affinity of Couchbase integrates very well in the technology stack.
+Json affinity of Couchbase integrates very well with the the technology stack.
 Couchbase has its own query language called N1QL which allows aggregated
 querries between multiple documents. Also access on sub-document level is
 possible to allow fine grained data access.
 
-Couchbase can run in a cluster and maintains a quorum on document to provide
-eventual consistency on writes which allows to scale the database system.
-Couchbase also provides timeouts of documents which can be used to imitate
-\textit{session store} behaviour. This neglects the need for a distributed
-caching system like Redis for example. 
+Couchbase can run in a cluster and maintains a quorum on each documents to
+provide eventual consistency on writes. The cluster functionality can be used to
+scale the database system. Couchbase also provides timeouts of documents which
+can be used to imitate \textit{session store} behaviour. This neglects the need
+for a distributed caching system like Redis for example.
 
 Even if Couchbase exists as a Docker image it is advised to install
 Coutchbase native for production for the reasons explained in
@@ -86,9 +86,9 @@ Coutchbase native for production for the reasons explained in
 serialize Java objects to Json strings and vice versa. An advantage of Gson is that
 also supports generic collections like hash-maps.
 
-The main advantage of Gson is it's simplicity. The simplicity goes to the
-cost of performance especially for the de-serialization of json strings.
-Because of this reason simpel Json serialization is only usable is the
+The main advantage of Gson is it's simplicity. The simplicity goes to the cost
+of performance especially for the de-serialization of json strings.
+Because of this reason simple Gson serialization is only usable in areas where a
 performance hit does not influence the application behaviour.
 
 \subsubsection{Game Engine}
@@ -97,7 +97,7 @@ performance hit does not influence the application behaviour.
     \includegraphics[width=4cm]{images/dependencies/Unity3D}
 \end{wrapfigure}
     
-Unity3D is very popular among independent developers because it has no
+\textbf{Unity3D} is very popular among independent developers because it has no
 initial financial barrier. Unity is very well documented and has a very
 healthy community to provide aid for development problems.
 
@@ -113,8 +113,9 @@ polyglot programming.
 \subsection{Supplementary Technologies}
 
 The supplementary technologies have been under intense evaluation during this
-thesis. The result of this evaluation is a set of technologies which work well
-together, are easy to learn and are open source or have a community edition.
+thesis. The result of this evaluation is a set of augmenting technologies which
+work well together, are easy to learn, and are open source or have a community
+edition (free of charge and maintained by the community).
 
 \subsubsection{Container Engine}
 
@@ -123,11 +124,11 @@ together, are easy to learn and are open source or have a community edition.
     \includegraphics[width=3cm]{images/dependencies/docker}
 \end{wrapfigure}
 
-Docker has already been mentioned several times during this thesis. The
-essence is that it all boils down to Docker being an enabler technology.
-This is because all other technologies support Docker in some way. This
-aspect makes the Docker Engine a reliable intermediate layer between the
-actual hardware and the application that is running. 
+\textbf{Docker} has already been mentioned several times during this document.
+The essence about Docker is that it is an enabler technology. This is because all
+other composition and container technologies support Docker in some way. This
+aspect makes the Docker Engine a reliable intermediate layer between the actual
+hardware and the application running on it.
 
 
 \subsubsection{Composition Engine}
@@ -137,7 +138,7 @@ actual hardware and the application that is running.
     \includegraphics[width=2.4cm]{images/dependencies/docker-compose}
 \end{wrapfigure}
 
-Docker compose is basically only a CLI application which translates a
+\textbf{Docker-compose} is basically only a CLI application which translates a
 docker-compose file into a set of docker commands which are executed
 sequentially. The result is a containerized application running on a single
 host. Docker-compose is very helpful to quickly deploy a \ms{} application
@@ -147,72 +148,74 @@ composed application in the cloud using docker-swarm.\\
 \newpage
 
 \begin{wrapfigure}{r}{4cm}
-    \includegraphics[width=4cm]{images/dependencies/docker-swarm}
+	\hspace*{0.4cm}
+    \includegraphics[width=3.3cm]{images/dependencies/docker-swarm}
 \end{wrapfigure}
 
-Docker-swarm allows to run containerized applications on a cluster of docker
-machines. A docker machine is simply a host running a docker engine. Docker
-swarm allows to set up application stack purely with docker commands or by
-deploying a stack defined in a docker-compose file. Docker swarm offers
-multiple scheduling strategies which distribute the containers among the
-available docker machines.
+\textbf{Docker-swarm} allows to run containerized applications on a cluster of
+docker machines. A docker machine is simply a host running a docker engine. Docker
+swarm allows to set the services of an application individually using the docker
+stack CLI or by deploying the whole application stack using a docker-compose
+file. Docker swarm offers multiple scheduling strategies which distribute the
+containers among the available docker machines.
 
-The major advantage of docker-swarm is its simplicity. The set of command
-needed to control the cluster is very limited and therefore very easy to
-understand. Also since it is the native Docker composition technology it is
-a natural match for Docker applications.
+The major advantage of docker-swarm is its simplicity. Only a few commands are
+needed to control the cluster and therefore docker-swarm is easy to understand.
+Also since it is the native Docker composition technology it is a natural match
+for containerized Docker applications.
 
-One noticable disadvantage is the lack of several convenience features like
+One noticeable disadvantage is the lack of several convenience features like
 a build-in dashboard or auto-scaling support. This is not a big concern
-since many third party dashboard tools like Grafana are available and
-auto-scaling can be added with a little implementation effort. 
+since many third party dashboard tools like for example Grafana are available
+and auto-scaling can be added with a little bit of implementation effort. 
 
 \subsubsection{Continuous Integration}
 
 Continuous integration is generally a party of every software project and \og{}
-are no exception. The continuous integration process is developed to the point
-where a central build system like Jenkins can unify the whole build process
-but this aspect is not covered in this thesis.\\
+are no exception. In this thesis the continuous integration process is examined
+up to the point where all individual steps of the process are defined. From here
+a central build system like Jenkins can take over an unify the whole build
+process but this aspect is not covered in this thesis.\\
 
 \begin{wrapfigure}{r}{4cm}
     \includegraphics[width=4cm]{images/dependencies/maven}
 \end{wrapfigure}
 
-Maven provides a convenient way to define the build process of Java
+\textbf{Maven} provides a convenient way to define the build process of Java
 applications. For the game back-end services which are mainly written in Java
 this is a perfect match to define the build process.
 
-Maven also works very well in conjunction with Docker. The Maven Docker image
-allows for easily integrate the Java build process into the Docker build
+Maven also works very well in conjunction with Docker. A dedicated Maven Docker
+image allows for easily integrate the Java build process into the Docker build
 process by executing the Maven build inside the target container. This approach
-removes the need of any local java or Maven installation. 
+removes the need of any local Java or Maven installation. 
 
-The drawback of the completely in-container Maven build is performance. Maven
-downloads ``the whole Internet'' within the container to build the application.
-This is not useful during development where short build times are mandatory. To
-cope with this problem the maven build can be conducted on the host system and
-only the binaries are send to the Docker daemon for the container build. This
-makes the build much faster and has no real disadvantage because the process
-can be reproduced exactly on the build system and therefor also speeds up
-automated builds.
+The drawback of the completely in-container Maven build is it's performance.
+Maven downloads ``the whole Internet'' into every container to build the
+application. This is not useful during development where short build times are
+mandatory. To cope with this problem the Maven build can be conducted on the
+host system and only the binaries are send to the Docker daemon for the
+container build. This makes the build process much faster and has no real
+disadvantage because the process can be reproduced exactly on the build system
+and therefor also speeds up automated builds.
 
 Maven is also very useful to preserve a consistent versioning of \mss{}. The
 game application stack can be described using a master .pom file containing
-current version of all services. The master .pom file can be updated to
-introduce new versions of any service. The continuous integration process can
-be triggered at this point to perform a rolling update with the currently
+the required versions of all services. The master .pom file can be updated to
+introduce a new version of any service. The continuous integration process can
+be triggered at this point to perform a rolling update of the currently
 deployed application stack.\\
 	
 \begin{wrapfigure}{r}{4cm}
     \includegraphics[width=4cm]{images/dependencies/github}
 \end{wrapfigure}
 
-Git is the \textbf{Source Control System} that builds the foundation for the
-version control. Git allows to share Maven projects which in turn allows to
-reproduce the build process locally but also on a build server. 
+\textbf{Git} is the \textit{Source Control System} that builds the foundation
+for the version control. Git works great to share Maven projects which in turn
+allows to reproduce the build process locally and also on a build server.
 
 Github is used to provide any needed dependency used for the build process.
-This includes the MicroNet framework.
+MicroNet is also published via Github.
 
 \subsubsection{Interactive Development Environment (IDE)}
 
@@ -224,24 +227,21 @@ the source code of an application.\\
     \includegraphics[width=4cm]{images/dependencies/eclipse}
 \end{wrapfigure}
 
-Eclipse provides a very solid foundation to develop Java projects. The plug-in
-development environment of Eclipse allows to customize the development to an
-arbitrary extent. This aspect is especially useful because in regards to \ms{}
-development no specific tools are available to conduct the whole development
-process of a \ms{} application from the IDE to the cloud.
+\textbf{Eclipse provides} a very solid IDE to develop Java projects. The plug-in
+development environment of Eclipse allows to customize the IDE to an arbitrary
+extent. This aspect is especially useful because in regards to \mss{} because
+nearly no \ms{} development specific tools are available on the market. Also
+Eclipse provides a number of very useful plug-ins for Java development.
 
-Also Eclipse provides a number of very useful plug-ins which further ease the
-\ms{} development process.
-
-The \textbf{Docker Tools} for Eclipse are a visual explorer  for Docker images
+The \textit{Docker Tools} for Eclipse are a visual explorer  for Docker images
 and containers. It allows to quickly start, stop, build and remove containers
-without having to bother with the console.
+without having to bother with console commands.
 
-\textbf{Launch Groups} is a plug-in contributed by Eclipse CDT (C++ development
+\textit{Launch Groups} is a plug-in contributed by Eclipse CDT (C++ development
 plug-in for Eclipse). It is very useful to directly run or debug multiple
 applications at once. This allows to quickly bring up or terminate the whole
 application stack for testing purposes. Although CDT is required for Launch
-Groups it does not interfere with java development.
+Groups it does not interfere with Java development.
 
 
 
