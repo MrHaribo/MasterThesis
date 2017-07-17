@@ -3,8 +3,8 @@
 The MicroNet framework is a collection of components. Each component is
 confined in itself which allows simple replacement of components. The components
 are organized in three layers: The framework layer, the service catalogue layer,
-and the tools layer. \autoref{fig:architecture_layers} shows the layers and the
-components they contain.
+and the tools layer. \autoref{fig:architecture_layers} shows the layers and all
+the components they contain.
 
 \begin{figure}
   \centering
@@ -23,6 +23,7 @@ Responsibility Cards (CRC).
 The framework layer provides a uniform interface to the core functionality of
 MicroNet.\\
 
+\noindent
 \begin{tabular}{|l|l|}
     \cline{1-2}
     \multicolumn{2}{|c|}{} \\[-0.3cm]
@@ -32,7 +33,7 @@ MicroNet.\\
     Responsibility & Collaboration \\
     \cline{1-2}
     & \\[-0.2cm]
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Reliable Messaging System
           \item Connection Authentication
@@ -40,7 +41,7 @@ MicroNet.\\
         \end{itemize} 
     \end{minipage}
 	&
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Message Broker (ActiveMQ)
           \item Serialization Component
@@ -50,8 +51,7 @@ MicroNet.\\
     \hline
 \end{tabular}
 
-\vspace{0.5cm}
-
+\vspace{0.5cm} \noindent 
 \begin{tabular}{|l|l|}
     \cline{1-2}
     \multicolumn{2}{|c|}{} \\[-0.3cm]
@@ -61,7 +61,7 @@ MicroNet.\\
     Responsibility & Collaboration \\
     \cline{1-2}
     & \\[-0.2cm]
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Uniform Database Access
           \item Offer Relational Database 
@@ -70,7 +70,7 @@ MicroNet.\\
         \end{itemize} 
     \end{minipage}
 	&
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Relational DBMS (PostgreSQL)
           \item JDBC
@@ -81,8 +81,7 @@ MicroNet.\\
     \hline
 \end{tabular}
 
-\vspace{0.5cm}
-
+\vspace{0.5cm} \noindent 
 \begin{tabular}{|l|l|}
     \cline{1-2}
     \multicolumn{2}{|c|}{} \\[-0.3cm]
@@ -92,7 +91,7 @@ MicroNet.\\
     Responsibility & Collaboration \\
     \cline{1-2}
     & \\[-0.2cm]
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Uniform Serialization API
           \item Make serialization technology interchangeable
@@ -101,7 +100,7 @@ MicroNet.\\
         \end{itemize} 
     \end{minipage}
 	&
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Serialization Library (Gson)
         \end{itemize} 
@@ -112,9 +111,11 @@ MicroNet.\\
 
 \subsubsection{Service Catalogue Layer}
 
-The service catalogue was a major topic in the second semester thesis
-\todo{cite thesis 2}. This section will only give three examples of services.\\
+The service catalogue was a mainly developed in the second semester thesis
+\todo{Chapter 5 Prototype Implementation}. This section will exemplary give
+three examples of catalogue services.\\
 
+\noindent
 \begin{tabular}{|l|l|}
     \cline{1-2}
     \multicolumn{2}{|c|}{} \\[-0.3cm]
@@ -124,7 +125,7 @@ The service catalogue was a major topic in the second semester thesis
     Responsibility & Collaboration \\
     \cline{1-2}
     & \\[-0.2cm]
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Receive and filter requests from clients
           \item Forward requests to \mss{}
@@ -133,7 +134,7 @@ The service catalogue was a major topic in the second semester thesis
         \end{itemize} 
     \end{minipage}
 	&
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Account Service (connection authentication)
         \end{itemize} 
@@ -142,8 +143,7 @@ The service catalogue was a major topic in the second semester thesis
     \hline
 \end{tabular}
 
-\vspace{0.5cm}
-
+\vspace{0.5cm} \noindent 
 \begin{tabular}{|l|l|}
     \cline{1-2}
     \multicolumn{2}{|c|}{} \\[-0.3cm]
@@ -153,14 +153,14 @@ The service catalogue was a major topic in the second semester thesis
     Responsibility & Collaboration \\
     \cline{1-2}
     & \\[-0.2cm]
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item User Registration
           \item User Authentication
         \end{itemize} 
     \end{minipage}
 	&
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Account Database (PostgreSQL)
         \end{itemize} 
@@ -169,8 +169,7 @@ The service catalogue was a major topic in the second semester thesis
     \hline
 \end{tabular}
 
-\vspace{0.5cm}
-
+\vspace{0.5cm} \noindent 
 \begin{tabular}{|l|l|}
     \cline{1-2}
     \multicolumn{2}{|c|}{} \\[-0.3cm]
@@ -180,14 +179,14 @@ The service catalogue was a major topic in the second semester thesis
     Responsibility & Collaboration \\
     \cline{1-2}
     & \\[-0.2cm]
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Player Inventory (Carried Items)
           \item Bank (Item Storage)
         \end{itemize} 
     \end{minipage}
 	&
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Item Database (PostgreSQL)
         \end{itemize} 
@@ -198,12 +197,12 @@ The service catalogue was a major topic in the second semester thesis
 
 \subsubsection{Tools Layer}
 
-The development of the tool layer was a major part of this thesis. At a first
-glance the tool layer's main purpose is to provide aid with the tenet
-decentralized continuous delivery. But the tools layer has also the
-responsibility to allow \ms{} application development in a way that is suitable
-for \og{} development.\\
+The development of the tool layer was a major part of the lab research. The
+tools layer's main purpose is to provide aid with the tenet decentralized
+continuous delivery. But the tools layer has also the responsibility to adapt
+\ms{} application development to be suitable for \og{} development.\\
 
+\noindent
 \begin{tabular}{|l|l|}
     \cline{1-2}
     \multicolumn{2}{|c|}{} \\[-0.3cm]
@@ -213,7 +212,7 @@ for \og{} development.\\
     Responsibility & Collaboration \\
     \cline{1-2}
     & \\[-0.2cm]
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Framework functionality\footnotemark 
           \item Boilerplate code reduction
@@ -221,9 +220,9 @@ for \og{} development.\\
         \end{itemize} 
     \end{minipage}
 	&
-    \begin{minipage}{6.5cm}
+    \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Account Database (PostgreSQL)
+          \item Shared Model (to export the API)
         \end{itemize} 
     \end{minipage}
 	\\ & \\
@@ -233,3 +232,143 @@ for \og{} development.\\
 \footnotetext{The user code is
           called by the framework (application skeleton) opposed to the user
           code calling a library (well-defined operations).}
+          
+\vspace{0.5cm} \noindent      
+\begin{tabular}{|l|l|}
+    \cline{1-2}
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \multicolumn{2}{|c|}{Code Assist} \\ 
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \cline{1-2}
+    Responsibility & Collaboration \\
+    \cline{1-2}
+    & \\[-0.2cm]
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Present the Shared API to the developer
+          \item Auto-completion of URIs
+          \item Recognize API usage errors at compile-time
+        \end{itemize} 
+    \end{minipage}
+	&
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Shared Model (to import the API)
+        \end{itemize} 
+    \end{minipage}
+	\\ & \\
+    \hline
+\end{tabular}
+
+\vspace{0.5cm} \noindent         
+\begin{tabular}{|l|l|}
+    \cline{1-2}
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \multicolumn{2}{|c|}{Code Generation} \\ 
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \cline{1-2}
+    Responsibility & Collaboration \\
+    \cline{1-2}
+    & \\[-0.2cm]
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Generate the MicroNet Framework integration classes
+          \item Generate POJOs from the Shared Model
+        \end{itemize} 
+    \end{minipage}
+	&
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Shared Model (to import the API and Template Types)
+          \item Java compiler (annotation processing)
+        \end{itemize} 
+    \end{minipage}
+	\\ & \\
+    \hline
+\end{tabular}
+
+\vspace{0.5cm} \noindent         
+\begin{tabular}{|l|l|}
+    \cline{1-2}
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \multicolumn{2}{|c|}{Service Explorer} \\ 
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \cline{1-2}
+    Responsibility & Collaboration \\
+    \cline{1-2}
+    & \\[-0.2cm]
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Management visual interface for the application (UI)
+          \item Compose the application out of catalogue and developed game
+          services
+        \end{itemize} 
+    \end{minipage}
+	&
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Service Catalogue
+          \item Launch Utility (to provide the UI)
+        \end{itemize} 
+    \end{minipage}
+	\\ & \\
+    \hline
+\end{tabular}
+
+\vspace{0.5cm} \noindent      
+\begin{tabular}{|l|l|}
+    \cline{1-2}
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \multicolumn{2}{|c|}{Model Editor} \\ 
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \cline{1-2}
+    Responsibility & Collaboration \\
+    \cline{1-2}
+    & \\[-0.2cm]
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Define and edit the shared model as template types
+          \item Instantiate templates as prefabs
+          \item Synchronize the Shared Model between developers
+        \end{itemize} 
+    \end{minipage}
+	&
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Shared Model (CRUD)
+          \item Database Component (for sharing)
+        \end{itemize} 
+    \end{minipage}
+	\\ & \\
+    \hline
+\end{tabular}
+
+\vspace{0.5cm} \noindent        
+\begin{tabular}{|l|l|}
+    \cline{1-2}
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \multicolumn{2}{|c|}{Launch Utility} \\ 
+    \multicolumn{2}{|c|}{} \\[-0.3cm]
+    \cline{1-2}
+    Responsibility & Collaboration \\
+    \cline{1-2}
+    & \\[-0.2cm]
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          	\item Build the composed application
+			\item Simplify application deployment
+          	\item Provide launch configurations for local deployments 
+        \end{itemize} 
+    \end{minipage}
+	&
+    \begin{minipage}{0.47\textwidth}
+        \begin{itemize}
+          \item Maven (build)
+          \item Docker (build \& run)
+          \item Docker-compose (compose the application)
+          \item optionally uses CDT Launch Groups and Eclipse Docker Tools
+        \end{itemize} 
+    \end{minipage}
+	\\ & \\
+    \hline
+\end{tabular}
