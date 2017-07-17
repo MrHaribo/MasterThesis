@@ -8,6 +8,9 @@
 \usepackage{lipsum}
 \usepackage{placeins}
 \usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
 \usepackage[thinlines]{easytable}
 \usepackage{enumitem}
 \usepackage{longtable}
@@ -21,6 +24,8 @@
 \newcommand{\mss}{Microservices}
 \newcommand{\og}{Online Game}
 \newcommand{\ogs}{Online Games}
+
+\newcommand{\code}[1]{\texttt{#1}}
 
 %% \todo{} command.
 %
@@ -44,5 +49,24 @@
     numbersep=8pt,
     showstringspaces=false,
     breaklines=true,
-    frame=lines
+}
+
+\definecolor{javared}{rgb}{0.6,0,0} % for strings
+\definecolor{javagreen}{rgb}{0.25,0.5,0.35} % comments
+\definecolor{javapurple}{rgb}{0.5,0,0.35} % keywords
+\definecolor{javadocblue}{rgb}{0.25,0.35,0.75} % javadoc
+ 
+\lstset{language=Java,
+	basicstyle=\small\ttfamily,
+	keywordstyle=\color{javapurple}\bfseries,
+	stringstyle=\color{javared},
+	commentstyle=\color{javagreen},
+	morecomment=[s][\color{javadocblue}]{/**}{*/},
+	numbers=left,
+	numberstyle=\tiny\color{black},
+	stepnumber=1,
+	numbersep=8pt,
+	tabsize=4,
+	showspaces=false,
+	showstringspaces=false
 }

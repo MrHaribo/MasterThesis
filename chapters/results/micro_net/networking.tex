@@ -1,7 +1,9 @@
 \subsection{Networking}
 \label{sub:networking}
-Networking in MicroNet has been discussed in detail in project thesis one. This
-section only provides a short summary of the topic.\\
+Networking in MicroNet has been discussed in detail in \todo{6.5 Networking
+Implementation} in project thesis one. The original implementation was
+improved over the course of all three theese and this section provides a summary
+of the final implementation solution of networking.
 
 Networking is the most fundamental aspect of an \og{} development and crucial
 for the stability of \ms{} applications. The networking concept for \ms{}
@@ -11,40 +13,103 @@ implementation.
 
 In MicroNet this network abstraction is realized by defining a set of networking
 capabilities that must be supported by the underlying network technology. These
-capabilities are represented in the form of a Java interface. Standard services
-can therefore communicate over the messaging interface injected by the
-framework. This makes the underlying technology exchangeable. This allows
-platform independence as long as the services are written in Java.
+capabilities are represented in the form the \code{IPeer} Java interface shown
+in \autoref{lst:ipeer_interface}. Standard services can therefore communicate
+over an instantiation of the \code{IPeer} interface injected by the framework.
+This makes the underlying technology exchangeable since the interface is stable.
+This allows platform independence as long as the services are written in Java.
+
+\begin{figure}
+	\begin{lstlisting}[language=Java,firstnumber=1] 
+public interface IPeer {
+	void startup(URI host);
+	void shutdown();
+	
+	void sendRequest(URI destination, Request request);
+	void sendRequest(URI destination, Request request, 
+		Consumer<Response> handler);
+		
+	Response sendRequestBlocking(URI destination, Request request);
+	Response sendRequestBlocking(URI destination, Request request,
+		int timeout);
+		
+	void listen(String path, Consumer<Request> handler);
+	void listen(String path, Function<Request, Response> handler);
+}
+	\end{lstlisting}
+  	\caption{The iPeer interface must be implemented to participate in MicroNet
+  	applications.}
+  	\label{lst:ipeer_interface}
+\end{figure}
+
+MicroNet implements this networking interface by relying on ActiveMQ as a
+message broker. Although it would be possible to replace ActiveMQ as the
+MicroNet networking technology this is out of the scope of this thesis to be
+validated in practice. As a result MicroNet is heavily dependent on ActiveMQ.
 
 According to the polyglot programming tenet it is a requirement that arbitrary
-technologies can participate in a \ms{} application. In this case an adapter
-must be used to couple the external service with the application. The adapter
-can be an be a implementation of the messaging interface in another language. In
-this case the underlying messaging technology must provide an API for the
-respective language. In the case of MicroNet ActiveMQ is used as the
-message broker which provides a JMS API. JMS ports are also available for other
-languages like for example the NMS API for C\#. This API is used to make the
-Unity3D engine accessible from MicroNet.
+technologies can participate in a \ms{} application despite the tight coupling
+to ActiveMQ. To accomplish this an adapter must be implemented to couple the
+foreign technology with the application. The adapter can be an be an
+implementation of an equivalent messaging interface in another programming
+language using one of the many proposed ways to integrate with ActiveMQ like for
+example RESTful HTTP, JMS, .NET, C/C++, Go, Node.js, Python, and more.
 
-To abstract underlying technical details it is assumed that all message
-transfers of MicroNet are reliable (TCP). This is for the purpose of simplicity
-over performance. Faster message transfers can be seen as an optimization but
-this is not the topic of this thesis.
+For game engine integration the messaging interface has also to be implemented
+in the respective technology of the engine. In the case of MicroNet ActiveMQ
+Unity3D is used as the refernce game engine which is written in C\#. For this
+purpose the NMS API which is a .NET port of the Java Message Service (JMS)
+interface is used to make MicroNet accessible from the Unity3D game engine.
 
 \subsubsection{Messaging System}
 
 Messaging in MicroNet evolves around patterns: API Gateway, Reverse Proxy and
-Pipes and Filters.\\
+Pipes and Filters.
 
 MicroNet uses a reverse proxy to interchange messages from the public Internet
 with the internal network used by MicroNet. For this purpose two separate
 message brokers are used and only the public broker is exposed to the Internet.
 The gateway intercepts all messages from the public network and forwards them to
-the responsible \ms{}. Messages are filtered by the
+the responsible \ms{}. This is further detailed in the Messaging API section
+below.
 
 The reverse proxy is in fact also the API gateway. An API gateway is a standard
 approach to offer the service API to the users. Upon reception of a message the
 gateway can filter it according to a white- or blacklisting approach.
+
+\mss{} can access the messaging functionality by using the context object
+injected by the framework. \autoref{lst:service_communication} shows an example
+of two simple \mss{} communicating with each other. It has to be mentioned that
+the two services in the listing are fully functional except for the omitted
+inludes. The setup of the context and the \ms{} main function are completely
+abstracted by the framework.
+
+\begin{figure}
+\begin{lstlisting}[language=Java,firstnumber=1] 
+@MessageService(uri = "mn://foo")
+public class ServiceFoo {
+	@OnStart
+	public void onStart(Context context) {
+		URI destination = URI.create("mn://bar/hello");
+		Request request = new Request("Hello from Foo!");
+		context.getPeer().sendRequest(destination, request, response -> {
+			System.out.println("Received Response: " + response.getData());
+		});
+	}
+}
+
+@MessageService(uri = "mn://bar")
+public class ServiceBar {
+	@MessageListener(uri="/hello")
+	public Response helloHandler(Context context, Request request) {
+		System.out.println("Received Request: " + request.getData());
+		return new Response(StatusCode.OK, "Likewise, Bar");
+	}
+}
+\end{lstlisting}
+\caption{Two MicroNet services communicating with each other.}
+\label{lst:service_communication}
+\end{figure}
 
 \paragraph{Message Parameters}
 
@@ -52,19 +117,56 @@ One useful feature that MicroNet provides are typed message parameters. The
 parameters are defined using Parameter Codes and the Template Types both defined
 int the Shared Model.
 
-Message parameters spare the developer with the need to define a different
-payload for each message transfer. For example slightly different messages can
-be distinguished by parameter codes.
+Message parameters spare the developer with the need to define a specific
+payload for each message transfer individually. For example slightly different
+messages can be distinguished by only using parameter codes and leaving the
+payload unchanged.
+
+\begin{figure}
+\begin{lstlisting}[language=Java,firstnumber=1] 
+@MessageService(uri = "mn://foo")
+public class ServiceFoo {
+	@OnStart
+	public void onStart(Context context) {
+		URI destination = URI.create("mn://bar/hello");
+		Request request = new Request("Hello from Foo!");
+		request.getParameters().set(ParameterCode.ID, 42);
+		context.getPeer().sendRequest(destination, request);
+	}
+}
+@MessageService(uri = "mn://bar")
+public class ServiceBar {
+	@MessageListener(uri="/hello")
+	public void helloHandler(Context context, Request request) {
+		int parameter = request.getParameters().getInt(ParameterCode.ID);
+		System.out.println("Received Request with Parameter: " + parameter);
+	}
+}
+\end{lstlisting}
+\caption{Adding a parameter to a MicroNet message.}
+\label{lst:message_parameters}
+\end{figure}
+
+\autoref{lst:message_parameters} shows how services can transmit parameters
+along with a request. For responses this works exactly the same.
 
 \subsubsection{Connection Authentication}
 
-One challenge is to authenticate user connections. Since multiple gateways are
-active simultaneously the user sessions are stored in the session store in
-Couchbase. For unauthenticated connections the gateway only forwards login
-messages to the login service. upon success the processing gateway adds the user
-connection to the session store. Other gateways are then able to look up if a
-connection is authenticated. The advantage of this solution is that it scales
-very well. The downside is that it involves many reads to the session store.
+In regards to Internet applications security is always a concern. The backbone
+of distributed application security is user connection authentication.
+Since multiple gateways can be active simultaneously the integrity of the user
+has to be validated by the gateway with every request. The gateway validates the
+user request by looking up the user connection in the session store and
+comparing it to the connection the request was received from. If no user session
+is present in the session store the user connection is considered
+unauthenticated.
+
+For unauthenticated connections the gateway only forwards login messages to the
+login service. Upon a positive login response from the account service the
+processing gateway adds the user connection to the session store. Other gateways
+are then able to look up if a connection is authenticated. The advantage of this
+solution is that it scales very well. The downside is that it involves many
+reads to the session store.
 
 A requirement for this approach to work is that the underlying networking
 provides a way to correlate incoming messages with a connection. This can be
@@ -72,16 +174,20 @@ done generating a connection id hash based upon the user's IP/port combination.
 ActiveMQ has this capability already built in by providing a globally unique
 connection ID per connection.
 
-\subsubsection{Messaging API}
+The connection authentication process is further explained in
+\autoref{sub:session_management}.
 
-This messaging API of MicroNet offers the following functionality to promote
-stateless message transfers:
+\subsubsection{MicroNet Messaging API}
+
+The messaging API provided by a MicroNet applications is a direct implementation
+of the fine-grained interfaces tenet. It offers the following functionality to
+promote stateless message transfers:
 
 \begin{itemize}
   \item Sending a requests to a \ms{} either from a user or another \ms{}
   \item Sending a requests to a \ms{} and waiting for a response with a
-  short\footnote{15 seconds seem appropriate for most short requests.} timeout
-  either from a user or another \ms{}
+  short\footnote{5 - 15 seconds seems appropriate for most short requests.}
+  timeout either from a user or another \ms{}
   \item Sending an event to a user from a \ms{}
   \item Sending an event to a group of users from a \ms{}
   \item Sending a message to a topic, meaning to all subscribed \mss{}
@@ -91,3 +197,45 @@ stateless message transfers:
 These messaging capabilities are enough to model any arbitrary message transfer.
 It leaves a great degree of freedom and makes message transfer implementation
 very comfortable. 
+
+\begin{figure}
+	\centering
+	\hspace*{-1.5cm}
+	\includegraphics[width=1.2\textwidth]{images/architecture/MessagingAPI}
+	\caption{The API Gateway offers the MicroNet messaging API to the player.}
+	\label{fig:messaging_api}
+\end{figure}
+
+\autoref{fig:messaging_api} shows the communication between a user and a
+MicroNet application. The user in this scenario is already authenticated to the
+gateway only needs filter client quests according to access restrictions. The
+user sends his request to the \code{mn://request} queue which leads to an
+arbitrary gateway instance consuming the request. The gateway reads the
+\code{USER\_REQUEST} parameter from the request and forwards the message to the
+internal broker according to it. Depending on if the user expects a response
+within the defined timeout or if the no response is expected the gateway holds
+on to a temporary response queue which allows immediate responses. Such an
+immediate response can also indicate that the request will need longer to be
+processed and therefore the requester has to act accordingly and wait for an
+asynchronous response.
+
+These asynchronous responses are called events. An event can either be sent to a
+single user or to a group or players. For this purpose \mss{} can send a request
+to the \code{mn://forward} queue which is consumed by any gateway who in
+response forwards the event to the corresponding user or group.
+
+One last feature of the MicroNet messaging API is the ability to send messages
+to topics which can be subscribed by any service. This allows services to react
+on events happening throughout the application. This can be for example the
+\textit{new player connected} event.
+
+
+
+
+
+
+
+
+
+
+
