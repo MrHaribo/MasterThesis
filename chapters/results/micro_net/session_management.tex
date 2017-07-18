@@ -2,30 +2,34 @@
 \label{sub:session_management}
 
 MicroNet provides session management as a high level feature to tackle the
-integral part of session handling in a \og{}. Player sessions are essential to
-track actions of individual players and persist the progress of a player. Game
-sessions tackle the issue that \ogs{} are state-full and therefore game session
-in simulation services are unique. 
+integral part of state-full sessions in an \og{}. Player sessions are
+essential to track actions of individual players and persist the progress of
+each player individually. Game sessions tackle the issue that \og{} sessions are
+state-full and therefore the simulation of each game session is unique.
 
-Session management has been one major issue throughout thesis one, two and
-three. The final solution for session management relies on a NoSQL database.
+Session management has been one major issue throughout all three theses. The
+final solution for session management relies on Couchbase as a NoSQL database.
 
 \subsubsection{Player Sessions}
 
-The authentication process that has briefly been mentioned in
+The authentication process that has been mentioned briefly in
 \autoref{sub:networking} is responsible to establish player sessions. Once
-authenticated player sessions can be used to collate incoming messages to users.
-Player sessions can also be used to store frequently changing player data to
-allow fast and global access. In MicroNet the player sessions can be accessed
-through Couchbase.
+authenticated the player sessions can be used to collate incoming messages to
+users. Player sessions can also be used to store frequently changing player data
+to allow fast and global access. In MicroNet the player sessions can be accessed
+through Couchbase documents provided through the persistence component of
+MicroNet.
 
-One drawback that player session introduce is the fact that multiple API
+One drawback of the solution for player sessions is the fact that multiple API
 gateways each gateway needs the ability to look-up player connections to
 determine if the corresponding user is authenticated. This process has to be
-done upon every player message which leads a lot of access to NoSQL. Another
-possibility would be that the user needs to send a authentication cookie with
-every message. This method introduces significant bandwidth overhead which is
-worse. 
+done upon every player message which leads a lot of reading access to Couchbase.
+A possibility to reduce the amount of database reads would be to use a token
+that is created upon authentication which the user would have to send with every
+request. The drawback of this method is that it introduces a significant
+bandwidth overhead. It also requires to share the tocken with the user rhough a
+secure channel which has to be established. So the current solution is the most
+simple one but with the cost of many database reads.
 
 \begin{figure}
 	\centering
@@ -35,14 +39,14 @@ worse.
 \end{figure}
 
 \autoref{fig:player_sessions} shows the whole authentication process with the
-result of a established authenticated player connection. The message flow
+result of an established authenticated player connection. The message flow
 consists of the following steps:
 
 \begin{enumerate}
   \item The user sends a login request to the public broker.
   \item One API Gateway polls the message in a competing consumer fashion.
   \item The gateway forwards the login message to the internal broker using the
-  mn://account/login queue.
+  \textit{mn://account/login} queue.
   \item One Account Service polls the message in a competing consumer fashion.
   \item The Account Service authenticates the user using the Account Database.
   \item The account service returns the login response to a temporary queue held
@@ -54,8 +58,8 @@ consists of the following steps:
   \item The gateway returns the login response to a temporary queue held open by
   the requesting player.
   \item The player consumes the login response from a temporary queue. Upon
-  success he gains access to the game services (A, B, C, D\footnote{In step D
-  the API Gateway must verify if the player connection is already
+  success he gains access to the game services (sequence: A, B, C, D\footnote{In
+  step D the API Gateway must verify if the player connection is already
   authenticated. If the player is not authenticated no messages are forwarded.},
   E).
 \end{enumerate}
@@ -84,18 +88,18 @@ The join process consists of the following steps:
 \begin{enumerate}
   \item The player sends a join request for game session B to the API gateway
   via the public message broker.
-  \item The gateway service forwards the message to the mn://world/join queue
-  via the internal message broker.
+  \item The gateway service forwards the message to the \textit{mn://world/join}
+  queue via the internal message broker.
   \item One world service polls the message in a competing consumer fashion
-  \item The world service checks is the session already exists in the session
+  \item The world service checks if the session already exists in the session
   store. If not, the world service adds the game session to the session store,
   marks it as \textit{isOpening} and initiates the game session opening process (capital
   letter sequence in \autoref{fig:game_sessions}). In this case or if the
-  session is currently opening the world service adds the player to a waiting
-  queue for the session.
+  session is already flagged as \textit{isOpening} the world service adds the
+  player to a waiting queue for the session.
   \item If the game session is open the world service directly
-  forwards the IP/Port combination to the player.  In this case the session is
-  not open or opening a ``please wait'' response is forwarded to the player.
+  forwards the IP/Port combination to the player.  if it is not open or
+  just opening a ``please wait'' response is forwarded to the player.
   \item The join response is consumed by a temporary queue held open by the API
   Gateway. The gateway forwards the join response to the player via the public
   broker.
@@ -114,24 +118,26 @@ session is ready. This process consists of the following steps:
 
 \begin{enumerate}[label=\Alph*.]
     \item The World Service sends an open region request to the
-    mn://instance-open queue.
-    \item One free simulation instance polls the open request in a competing
-    consumer fasion.
-    \item Once the simulation service is up and running, sends a simulation
-    instance ready to the mn://world/instance/ready queue via the internal
-    message broker.
+    \textit{mn://instance-open queue}.
+    \item One free simulation instance polls the open region request in a
+    competing consumer fashion.
+    \item Once the simulation service is up and running it sends a simulation
+    instance ready message to the \textit{mn://world/instance/ready} queue via
+    the internal message broker.
     \item One World Service polls the instance ready message in a competing
     consumer fashion.
     \item The World Service marks the game session as \textit{isOpen} in the
     session store.
-    \item The World service sends a broadcast event request to the
-    mn://gateway/broadcast/event queue containing the IP/Port combination of the
-    simulation service, addressed to all player is the waiting queue of the game
-    session.
+    \item The World service sends a broadcast event request to the API Gateway
+    using the \textit{mn://gateway/broadcast/event} queue. The event containes
+    the the IP/Port combination of the simulation service which is hosting the
+    game session. A list of all player IDs  which are registered for the
+    session is sent along with the broadcast event request using parameters to
+    make the gateway aware of all recipients of the event.
     \item One API Gateway polls the broadcast requests in a competing consumer
-    fashion
-    \item The Gateway broadcasts the join event to all waiting players. From
-    then on the regular session flow (a, c, c, \ldots) starts.
+    fashion \item The Gateway broadcasts the join event to all waiting players
+    according to the recipients list. From then on the regular game session
+    message flow (sequence: a, c, c, \ldots) starts.
 \end{enumerate}
 
 
