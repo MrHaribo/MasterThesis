@@ -9,8 +9,8 @@ accomplished by using Json as a low level information exchange format. As long a
 a technology supports Json it can participate in the application. Another
 requirement is that the technology has access to the message broker.
 
-Since the user interface (UI) of an Eclipse plug-in is written using the swing
-window toolkit (SWT) library it can easily be exported to be a standalone tool
+Since the user interface (UI) of an Eclipse plug-in is written using the Swing
+Window Toolkit (SWT) library it can easily be exported to be a standalone tool
 decoupled from Eclipse. With this approach it is possible to port the MicroNet
 Tools to other Platforms as long as they support a JVM.
 
@@ -32,6 +32,21 @@ assumptions on how to organize files and folders:
  \item One shared folder to exchange the Shared Model and the Service API must
  be present
 \end{itemize}  
+
+\begin{figure}
+	\centering
+	\includegraphics[width=9cm]{images/tools/folder_structure}
+	\caption{Example folder structure of a MicroNet application workspace.}
+	\label{fig:folder_structure}
+\end{figure}
+
+\autoref{fig:folder_structure} shows an example folder structure of a MicroNet
+application workspace. The shared folder in this case is simply a folder within the
+workspace. The figure also shows three canonical examples of project folders.
+The AccountDB folder represents a containerized PostgreSQL database. The
+AccountService folder is a standard MicroNet Maven/Java service project. The
+activemq folder contains only a Dockerfile which is the minimal requirement to
+participate in a MicroNet application.
 
 \subsubsection{Annotations}
 
