@@ -1,9 +1,10 @@
 \subsection{Testability}
 
-The testing concept for \ms{} applications is can be easily integrated in the
+The testing concept for \ms{} applications relies on the integrated in the
 Maven build process of the application. Since the services expose their API as
-Java functions testing can bypass networking for testing. 
+Java functions testing can bypass networking for testing. The handler functions
+are called directly in the test classes.
 
-One problem with \ms{} testing is the access to the database. This can be solved
-by using a containerized database that can be started before any tests are
-executed. 
+One problem with \ms{} testing is the access to the database. To spare the
+developer with the need to mock the database a containerized database that can
+be started before any tests are executed.

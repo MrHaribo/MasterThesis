@@ -459,15 +459,15 @@ docker-swarm environment may look like.
 \subsubsection{Model Editor}
 
 The model editor is the last feature that was introduced in MicroNet tools. It
-is the final solution on how to cope with logical \ms{} composition in a visual
-way. Since the game model is of very theoretical nature it is not suited to be
-edited directly in its underlying Json format. Because of this the model editor
-is especially important to allow convenient editing of the game model underlying
-a game application.
+is the final solution on how to cope with logical \ms{} composition through the
+shared model in a visual way. Since the game model is designed to be mainly
+machine-readable it is not suited to be edited directly in the underlying Json
+files. The model editor is designed to allow convenient defining and editing of
+the model in a way which is especially useful for \og{} application.
 
-The model edit is basically a graph editor visualizing a direct representation
+The model editor is basically a graph editor visualizing a direct representation
 of the game graph to allow to extending and changing the graph. The graph has
-three root nodes for which each span a model tree.
+three root nodes of which each span a model tree.
 
 \paragraph{Parameter Code List}
 
@@ -477,36 +477,38 @@ to substitute the parameter codes strings with numbers which is more space
 efficient. Since parameters are used very often this has a noticeable impact on
 bandwidth requirements.
 
-The datatype of the parameters is defined by using templates of the shared
-model.
-
 \paragraph{Template Tree}
 
-The template tree allows to edit the game type graph. Object Types defined using
-the template tree can be used for message transfer and persistence. Templates
-are descriptions of domain objects that can be used to generate data classes
-using code generation.
+The template tree allows to edit the game's template type graph. Object Types
+defined using the template tree can be used for message transfer and
+persistence. Templates are descriptions of domain objects and are used to
+generate shared model classes (POJOs) during code generation.
 
-A template consists of a set of fields of the following types: STRING, NUMBER,
-BOOLEAN, CHAR, ENUM, LIST, SET, MAP, and COMPONENT. The types are derived from
-the Java types since they are well documented and can be redefined in other
-programming languages using the Java language specification.
+A template consists of a set of fields that can be of the following types:
+STRING, NUMBER, BOOLEAN, CHAR, ENUM, LIST, SET, MAP, and COMPONENT. The types
+are derived from the Java types since they are well documented and can be
+redefined in other programming languages using the Java language specification.
 
-The COMPONENT type can be any other template type. In this case the component is
-contained in the data class as a struct and not as a reference. Also template
-types can be derived from other templates. This is realized using Java
-inheritance.
+The COMPONENT type can be any other template type. A component is represented as
+a field in the data class. Also template types can be derived from
+other templates. The derivation is realized using regular Java inheritance.
+
+\todo{screenshot}
 
 \paragraph{Prefab Tree}
 
-The prefab tree is the ``physical'' representation of the game graph. It
-contains actual instances of template types. This can be used by game designer
-to pre-define game objects. The prefab tree is directly compatible with the
-serailization component provided by MicroNet. This allows services to use the
-generated model to directly serialize and de-serialize game objects from the
-database or from payloads and parameters during message transfers.
+The prefab tree is a ``physical'' instantiation of the game graph. It contains
+actual instances of template types. This can be used by game designer to
+pre-define game objects that are later used in the game. The prefab tree is
+directly compatible with the serialization component provided by MicroNet. The
+generated model classes which represent the template types can be used to
+directly serialize and de-serialize game objects which are part of the
+prefab-tree. The serialized data can directly be stored in the database or
+be used as payload or parameters for message transfers.
 
 The prefab tree can either be persisted in the file-system or persisted in the
-database. Either way the prefab approach allows for very convenient and
-consistent handling of game data.
+database in Json format. The prefab approach allows for very convenient and
+consistent handling of game data both during development and operation.
+
+\todo{screenshot}
 
