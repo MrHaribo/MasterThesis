@@ -1,118 +1,133 @@
 \section{Summary of Findings}
 
-The research motivation for this thesis is \ms{} development, especially
-\ms{} composition and deployment. In these two areas I gathered a lot of
-knowledge during this thesis and in this section I want to share the findings
-that i find most relevant. These findings represent my attempt to answer the
-knowledge questions in \autoref{sub:problems}.
+The research motivation for this thesis is to understand \ms{} development and
+especially \ms{} composition and deployment. In these two areas I gathered a lot
+of knowledge during this thesis and in this section I want to share the findings
+that I find most relevant. The findings are presented as answers to the
+knowledge questions in listed in \autoref{sub:problems}.
 
 \subsection{Usability of a \ms{} for Online Games}
+\label{sub:usability_ms_og}
 
 \noindent
 \textbf{Can an Online Game run in a \ms{} environment?}
 
 Yes, it is possible to run an \og{} in a \ms{} environment. I has already been
-done in the industry (\cite{pronschinske2015turbine}) and MicroNet is an example
-on how to accomplish this.\\
+done in the industry (\cite{pronschinske2015turbine}) and MicroNet also
+provides a complete example on how to run an \og{} using \mss{}.\\
 
 \noindent
 \textbf{Is a Microservice influenced architecture suitable to design an Online
 Game?}
 
-The design of a \mss{} application heavily influences the way \ogs{} are
-developed. This type of architecture forces the developer to split up the game
-logic into small shard of \ms{} ``size''. This enforces that large domain chunks
-which have high cohesion (like for example all player related functionality)
-have to be split into smaller chunks. It is sometimes difficult to achieve
-needed functionality this way. A good example of this aspect is the shop service
-which served is explained in detail in \todo{autoref thesis 2}.\\
+The design of a \og{} \mss{} application heavily influences the way \ogs{} are
+developed. The \ms{} driven design forces the developer to split up the game
+logic into small shard of \ms{} ``size'' which is not a simple task.
+Sometimes it means that large domain chunks which have in a monolith would have
+a high cohesion have to be split up which complicates the application logic due
+to distribution circumstances. It is difficult to make a distributed system
+behave exactly the same as a monolith. The canonical example of this regard is
+the shop service according to which this problem was explained in detail in
+project thesis two \todo{5.8.3 Shop}.
+
+Therefore the distribution aspect complicates development but also allows for
+a much more scalable and extendable design. For an \og{} that is
+planned to live for a long time a \ms{} influenced architecture is very well
+suited.\\
 
 \noindent
 \textbf{Is the added complexity during development tolerable?}
 
-\ms{} indeed  adds an overhead during development. This effort pays off later
-since scaling and extending of the application are simplified greatly. The added
-effort occurs mainly at the beginning of a game project for example to set up
-the continuous integration work-flow. For large teams (AAA companies) this
-overhead can be neglected since a DevOps team can positioned to cope with these
-boiler plate tasks beforehand and during the project.
+\mss{} indeed  add an overhead during development. This effort pays off
+since scaling and extending of the application are simplified greatly in the
+later course of the project. The added effort occurs mainly at the beginning of
+a game project for example to set up the continuous integration work-flow. For
+large teams (AAA companies) this overhead can be neglected since a DevOps team
+can positioned to cope with these boiler plate tasks beforehand and during the
+project.
 
 For small teams (independent developers) however the overhead can be quite
-troublesome. Once the development environment for \ms{}is set up the effort is
-equivalent to regular \og{} development. MicroNet is aimed to fill exactly this
-gab and make it easier to start with \ms{} driven \og{} development.\\
+troublesome. Once the development environment for \ms{}is set up the effort
+during development is mostly equivalent to regular \og{} development but the
+provisioning time can have quite an impact. MicroNet is aimed to fill exactly
+this gab and make it easier to start with \ms{} driven \og{} development.
+
+The development of MicroNet itself is a good example for front up effort in
+\ms{} development. By the end of this thesis the framework has matured and
+meanwhile the development of game functionality is noticeable simplified
+compared to the early versions of MicroNet.\\
 
 \noindent
 \textbf{Do \mss{} have enough performance to drive a fast-paced \ogs{}?}
 
 This question is very hard to answer in the context of this thesis. To give
-sophisticated assumptions about the performance of a \ms{} application a  
+sophisticated assumptions about the performance of a \ms{} application a
 full-fledged test game and a large enough group of testers is needed. The
-Spacegame which I developed in my free time is not compete enough to fulfill
-this role. During this semester i had basically no time at all to improve the
-stability of the Spacegame to a level suited for TAR. Also the acquisition of
-testers can be quite challenging since it involves a lot of community work
-which is out of scope for this thesis.
+Spacegame is not mature enough at this point to fulfill this role. During this
+semester i had basically no time at all to improve the stability of the
+Spacegame to a level suited for TAR. Also the acquisition of testers can be
+quite challenging since it involves a lot of community work which is out of
+scope for this thesis.
 
 \subsection{Deployment and Operation}
 
 \noindent
-\textbf{Which steps are necessary to bring a \ms{} driven \og{} “from code to
-the cloud”?}
+\textbf{Which steps are necessary to bring a \ms{} driven \og{} ``from code to
+the cloud''?}
 
 From code to could includes all steps necessary to build and deploy the complete
 \ms{} \og{} application. It is assumed the the application code is fully
 functional and tested. It is also assumed that the target environment is set-up
-correctly meaning the Docker engine is running and all dependencies mentioned in
-\todo{ref dependencies} are installed. The steps are:
+correctly meaning the container engine is running in cluster mode and all
+necessary dependencies are installed and accessible to the cluster (message
+broker, databases). From this point the necessary steps are:
 
 \begin{itemize}
   \item Build the executable of each \ms{} locally
-  \item Build a Docker container each containing a service executable along with
-  all required dependencies locally
-  \item Test the application locally
-  \item Upload the complete application code to the target environment using git
-  or ftp
+  \item Build a Docker container for each service containing the service
+  executable along with all required dependencies locally
+  \item Test the composed application locally using local deployment
+  configurations
+  \item Upload the complete application code to the target environment using ftp
+  or git via SSH
   \item Build the application on the target environment using the same
   configuration as locally
-  \item Optionally start dependencies which are not integrated in the
-  application
-  \item Start the application using the docker CLI 
+  \item Start dependencies which are not integrated in the application
+  \item Start the application using the container engine CLI via SSH  
 \end{itemize}
 
 \noindent
 \textbf{How can the deployment process be automated?}
 
-Maven and Docker are great to reduce and automate the number of steps performed
-by the developer to deploy a \ms{} application. The launch utility of MicroNet
-combines both techniques by automating the generation and execution of the
-docker-compose respectively the master .pom file which further reduces the
-number of manual steps.
+Maven and Docker are great technologies to reduce and automate the number of
+steps performed by the developer to deploy a \ms{} application. The launch
+utility of MicroNet combines both techniques by automating the generation and
+execution of the docker-compose respectively the master .pom file which further
+reduces the number of manual steps.
 
-The MicroNet Launch utility provides shortcuts for all deployment steps
-locally. The process of uploading and starting the application on the target
-environment varies greatly according to the chosen solution. My recommendation
-is therefore to execute the necessary console commands by hand on the server
-terminal. The MicroNet documentation provides a guide on how to do
-this\cite{micronet2017doku}.\\
+The MicroNet Launch utility provides shortcuts for all deployment steps locally.
+The process of uploading and starting the application on the target environment
+varies greatly according to the chosen cloud provider. My recommendation for
+could deployment is therefore to execute the necessary console commands by hand
+on the server terminal via SSH. The MicroNet documentation provides a guide on
+how to do this\cite{micronet2017doku} for a MicroNet application.\\
 
 \noindent
 \textbf{How well do \ogs{} run in a cluster-environment?}
 
-As already mentioned in \todo{autoref no Tar possible} it was difficult to
+As already mentioned in \autoref{sub:usability_ms_og} that it was difficult to
 gather real world performance data on \ms{} driven \ogs{}. But despite that the
 few play tests using the Spacegame prototype that where conducted showed that
-MicroNet works in general. 
+MicroNet works in general.
 
 Several short (10minutes) play tests over the Internet with
 testers in Berlin, Vienna, Switzerland and Liechtenstein showed that the
-Networking concept of MicroNet is robust enough for a unreliable Network like
-the Internet.
+Networking solution of MicroNet is in general robust enough for a unreliable
+Network like the Internet.
 
 One extended test of the Spacegame in a Local Area Network (LAN) with 6
-simultanious player also went very smoothly. But since this semester I had no
-time at all to work on the Spacegame, no additional play tests have been
-possible during this semester.\\
+simultaneous players also went very smoothly. This was the only larger test
+ever conducted with MicroNet and is therefore not representative.\\
 
 \noindent
 \textbf{How does a modern container engine assist in deploying and operating a
@@ -122,30 +137,36 @@ A big part of effort during this thesis went to the evaluation of composition
 solutions of containerized application. Containers are a great tool to
 completely omit the need of installing dependencies. During development of an
 application you will often encounter the situation: ``Aha, there is a
-container available for this dependency, very nice!''
+container available for this dependency so i dont need to install anything, very
+nice!''
 
 This general availability of dependencies as containers makes it very simple to
 test new technology without going through a complex installing process. Although
-the dynamic nature of containers are sometimes a burden when it comes to overlay
-networks and shared volumes. There aspects of containerization are quite complex
-even for Docker which i consider reasonably simple.
+the dynamic nature of containers can sometimes be a burden when it comes to
+overlay networks and shared volumes. There aspects of containerization are quite complex
+even for Docker which I consider reasonably simple.
 
 Kubernetes and Mesos despite being very powerful solution but are very complex
 and setting up an application can be quite the challenge. My recommendation is
 to use Kubernetes if enough resources are available to set up such a system from
 scratch or if a cloud service provider like Amazon or Google is used to deploy
-the application. These providers natively support Kubernetes applications.\\
+the application. These providers natively support Kubernetes applications. For
+small teams I recommend using docker-swarm in a first step because it is easy
+to get started with. It is possible later to translate a docker-swarm
+application to Kubernetes with	conceivable effort.\\
 
 \noindent
 \textbf{Which tools exist that help the developer with deployment?}
 
-I did not find many tools that assist in the deployment process of \ms{}
-applications. I believe this is because of the very diverse natures of \ms{}
-applications. Since each service is developed individually no tools are needed
-to for the development of the overall application.
+Except for development tools for Web applications I did not find many tools that
+assist in the deployment process of generic \ms{} applications. I believe this
+is because of the very diverse natures of \ms{} applications. Since each service
+is developed individually and they are usually composed using RESTful HTTP no
+tools are needed to control the overall deployment process of an application.
 
 MicroNet challenges this practice by providing a set of tools to exactly
-simplify this aspect. 
+simplify the deployment a \ms{} application as a whole. Basically the whole
+MicroNet tool-set helps in this regard.
 
 \subsection{\ms{} Composition}
 
@@ -153,19 +174,21 @@ simplify this aspect.
 \textbf{What degree of composition is necessary for a \ms{} application
 to work?}
 
-The application data and communication are the only concepts needed to logically
-compose a \ms{} application. The data concept is needed to make provide a common
-data access layer to facilitate session management and ``Stammdaten''
-functionality. Communication concept is needed to define the format and the
-semantics of message transfers. Both of these aspects are covered by MicroNet.
+The Shared Model and the Shared API are the only concepts needed to logically
+compose a \ms{} application. The Shared Model is needed to provide a common data
+access layer to facilitate session management and durable persistence
+functionality. The Shared API concept is needed to define the format and the
+semantics of message transfers.
 
 For physical composition it is enough to rely on a composition engine like
 Docker Swarm. Since these engines are very good at abstracting physical
-environment circumstances I always recommend using a composition engine.\\
+environment circumstances I always recommend using a composition engine. The
+message broker is also an important part of the physical composition concept
+because it allows services to find each other.\\
 
 \noindent
 \textbf{Which of the common paradigms orchestration and choreography is suited better
-for \ms{} composition?}
+for \ms{} composition in \ogs{}?}
 
 For physical composition orchestration is very popular since most composition
 engines (all three evaluated) are orchestration solution. Im not aware of a
@@ -176,35 +199,43 @@ abstract concept. One way to think of it that a \ms{} does never know the state
 of its environment (e.g. if another service is available). This design requires
 the intense use of time-outs, retries, and roll-backs. In my opinion
 choreography is hard to get right but provides the best results in
-application robustnes and scaling.\\
+application robustness and scaling.
 
+The MicroNet concepts Shared Model and Shared API are concepts which are
+inspired by choreographical composition. \\
+
+\newpage
 \noindent
 \textbf{Which middle-ware is most useful in providing \ms{} composition?}
 
-In regard the three composition engines I consider Docker Swarm as the simplest
-to learn but with a shortage of convenience features. Kubernetes offers alot of
-build in functionality to the price of a much more complicated application
-development. Apache Mesos although not examined in detail appears to be
-somewhere between the two. It offers many features but i found the documentation
-not as comprehensive as the other two.\\
+In regard to the three evaluated composition engines I consider Docker Swarm as
+the simplest to learn but with a shortage of convenience features. Kubernetes
+offers a lot of built-in functionality to the price of a much more complicated
+application provisioning. Apache Mesos although not examined in detail appears
+to be somewhere between the two. It offers many features and is reasonably
+simple but I found the documentation not as comprehensive as the other two.\\
 
 \noindent
 \textbf{How can multiple game features be developed in parallel in different
 \mss{} while preserving the overall application behaviour?}
 
-\mss{} must first of all define a clean fine grained interface through its API.
-MicroNet then provides assistance in offering the API to other \mss{}
-\todo{bzw}, the developers developing it. This allows to rely on functionality
-provided by other \ms{} teams without knowing any implementation details and
-use the networked API functionality like it where local function calls. 
+\mss{} must first of all define a clean fine grained interface through through
+API. MicroNet then through Code Assist provides assistance in offering the
+Shared API to developers of other \mss{} which then can access the API via
+MicroNet messaging. This allows to rely on functionality provided by other \ms{}
+teams without knowing any implementation details and use the networked API
+functionality like it where local function calls.
 
-The same goes for persistence in regards on how to access data in a \ms{}. This
-data access must be universal to allow a \ms{} to operate on the ``Stammdaten''.
-In reality this means that data is stored in databases or caches. Since a
-service is usually designed so multiple instances of it can be deployed
-(exceptions \todo{ref}) programmers cannot store data in memory (e.g. member
-variables). This would lead to a state-ful service which is poison for \ms{}
-applications.\\
+Since the polyglot persistence tenet allows to exclude database implementation
+from the general application design which encourages independent development on
+persistence solutions. However in an \og{} the base data of the application is
+accessed very frequently by basically all services and therefore the concept of
+a session store offers a \ms{} friendly solution to persistence in distributed
+applications.
+
+MicroNet softens the polyglot persistence tenet by providing an application wide
+session store via Couchbase. The session store allows uniform access over all
+the application according to the types defined in the shared model.\\
 
 \noindent
 \textbf{What problems are introduced by coupling game features loosely?}
@@ -214,31 +245,41 @@ separation and service interfaces very early. A change in this architecture
 critical decisions can propagate over multiple services.
 
 One critical point of coupling in a \og{} application is player specific data.
-Since in every game this data is the integral part of the game and is basically
-related to the whole game application it is difficult to split such a cetral
-domain. One solution to cope with this is to use a mechanism like a shared cache
-or a NoSQL database to provide the player specific data to the services. This
-solution provides the necessary performance and does not break the \ms{}
-principles.\\
+Since player data is the integral part of almost every game and is often closely
+related to the whole game application. It is difficult to split such a central
+domain into multiple sub-domains. The solution is to use a mechanism like a
+shared caching mechanism like the session store to provide the player specific
+data to the services. This solution provides the necessary performance and does
+not break the \ms{} principles.
+
+Another problem is that splitting a feature into multiple services inevitably
+increases the amount ob bandwidth required in the application internal network.
+Usually this should not be a problem since the internal network are mostly
+local area networks (LANs).\\
 
 \noindent
 \textbf{How does the consistency vs. performance trade-off impact \ogs{}?}
 
 Fast-paced games are very performance critical. This regard has been discussed
-in detail in \todo{ref thesis 1}. In this thesis the performance issues have
-been simplified by separating the performance requirements of the real-time
-aspects from the ones of the game from the back-end functionality which is not
-that performance critical. The performance of an application can always be
-improved by profiling it and improving its bottlenecks.
+in detail in project thesis one \todo{3.3 Network Game Technology}. In this
+thesis the performance issues have been simplified by separating the
+requirements of the performance critical real-time simulation of the game from
+the back-end functionality of the game which is not that performance critical.
+Like with any other application the performance of \ogs{} can be improved by
+profiling the application and identifying bottlenecks which can be improved.
 
 The consistence requirements of \ogs{} can also be separated into two groups.
 Strong consistency for important transaction (when they include real money
-transaction, or significant time effort by the player) and non-important
-transactions (moving the avatar in a MMO).
+transaction, or significant time effort by the player is involved) and
+non-important transactions (moving the avatar in a MMO).
 
-There is always a trade-off between the two \todo{citation needed} and MicroNet
-is more on the performance then on the persistence side. In my opinion players
-will tolerate minor discrepancies in the game in general works solid.\\
+There is always a trade-off between consistency and performance as stated by
+\cite{wada2011data}, \cite{olston2000offering}, and
+\cite{franklin1997transactional}. MicroNet emphasises on performance whenever
+possible based on the assumption that players in general are very modest and
+will tolerate minor discrepancies in the game if they have fun in general. For
+financial relevant transaction however performance can be disregarded and full
+attention can go to realize strong consistency.\\
 
 \noindent
 \textbf{What protocols help to reduce service coupling?}
@@ -248,9 +289,10 @@ of REST I agree with the common opinion that it is the way to go for \mss{}. In
 regard to way REST is realized i prefer a message broker over a web service.
 This is because the message broker offers much more flexibility with the message
 format and provides functionality like persistence and topics which a web server
-does not. Also REST it is possible to implement REST only partially and still
-achieve similar results. The divergence to pure rest has been discussed in
-\todo{ref thesis 1}.\\
+does not. Also it is possible to implement REST only partially while still
+achieving a similar loosely coupled design. The divergence to pure REST
+has been discussed in project thesis one \todo{4.5.3 Common Communication
+Mechanisms}.\\
 
 \subsection{\ms{} Development}
 
@@ -262,10 +304,13 @@ monolithic application development. The major challenge is to develop
 functionality in a way which is suitable for \ms{}. This is for example to keep
 a service stateless or to find errors that span over multiple services. 
 
+Also networking is always an integral part of every \ms{} application and it
+can be cumbersome to develop a good networking infrastructure.\\
+
 \noindent
 \textbf{Which tools help with \ms{} development?}
 
-The MicroNet tools in this regard a specifically designed to help with \ms{}
+The MicroNet tools in this regard are specifically designed to help with \ms{}
 development. 
 
 Additionally the Docker Tools for Eclipse help to quickly manage
