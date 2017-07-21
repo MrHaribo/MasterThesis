@@ -1,10 +1,41 @@
 \section{Recommendations for Further Research}
 
-\subsection{Shared Model Code Injection}
+Several topics could not be treated during this semester mostly because of the
+time constrains.
+
+\subsection{Shared Model Logic Code Injection}
 \label{sub:model_code_injection}
+
+One limitation of the shared model is that the generated model classes (POJOs)
+do not allow to to add any logic to them. This would be helpful to share
+functionality in a way that is decoupled from any programming language. One
+possibility would be to use Java Script as an interpretable language which can
+be injected into model classes. Java script interpreters are available in many
+languages which would allow a very portable way to make application logic
+available in a \ms{} application.
 
 \subsection{Shared Model Automatic Database Integration}
 
+One purpose that the shared model is designed to is to make it automatically
+compatible with the database solution. This is not implemented in the current
+version of MicroNet. The proposed design for this feature is to provide a
+DataAccess layer via the MicroNet framework which offers a comprehensive API to
+query and update objects in the database using the shared model as a the driver.
+
 \subsection{Message Listener AST parsing}
 
+Momentarily the MicroNet annotations are quite cumbersome because to fully
+describe a message listener all used message parameters have to be listed. This
+aspect could be simplified by parsing the AST of the message listener and
+perform reference counting of parameters to automatically deduce parameters of a
+message listener. 
+
 \subsection{Game Engine Game Model Integration}
+
+The shared model is also designed in a way that is compatible with the game
+graph data structure of game engines. It would be possible to realize an
+automated integration of the MicroNet shared model into the game engine game
+graph. In a system of this nature game objects which are currently part of the
+game simulation could be updated automatically using an event based messages.
+This feature would simplify the networking implementation of the game simulation
+greatly.
