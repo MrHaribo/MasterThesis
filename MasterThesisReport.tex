@@ -4,9 +4,14 @@
 
 \include{config} 
 
-\begin{document}
+\input{glos} 
+\makeglossaries 
 
-%\tableofcontents
+\begin{document}
+ 
+\tableofcontents 
+
+
 
 \input{chapters/introduction/introduction}
 \input{chapters/methods/methods}
@@ -15,6 +20,10 @@
 
 \bibliography{lit}
 \bibliographystyle{alpha}
+
+\printglossaries
+
+\listoffigures
 
 \appendix
 \input{chapters/appendix/project_plan}
