@@ -9,7 +9,7 @@ In addition to this core technology, supplementary technologies are needed to
 help fulfill the deployment and the simple development hypothesis
 (\autoref{sub:hypothesis}). These technologies are: Container engine,
 composition engine, continuous integration solution, source control system, and
-interactive development environment (IDE).
+\glsreset{ide}\gls{ide}.
 
 The rest of this section describes each technology and states advantages and
 disadvantages along with the arguments which are decisive for the composition
@@ -46,8 +46,8 @@ be integrated into a \ms{} application very easily using a composition engine.
 
 \textbf{PostgreSQL} is a very mature open source relational database. It is
 available on all major platforms which allows for comfortable testing and
-deployment. Since version 9.2 PostgreSQL supports the Json data-type which makes
-it trivial to control the data flow from the network to the database.
+deployment. Since version 9.2 PostgreSQL supports the \gls{json} data-type which
+makes it trivial to control the data flow from the network to the database.
 
 PostgreSQL is also available on Docker hub and can therefore be integrated
 quickly. For production purposes a native installation of PostgreSQL is
@@ -59,12 +59,11 @@ suggested to provide the needed stability as explained in
     \includegraphics[width=4cm]{images/dependencies/couchbase}
 \end{wrapfigure}
 
-\noindent
-\textbf{Couchbase} is a NoSQL database realized as a Json document store. The
-Json affinity of Couchbase integrates very well with the the technology stack.
-Couchbase has its own query language called N1QL which allows aggregated
-querries between multiple documents. Also access on sub-document level is
-possible to allow fine grained data access.
+\noindent \textbf{Couchbase} is a NoSQL database realized as a \gls{json}
+document store. The \gls{json} affinity of Couchbase integrates very well with the the
+technology stack. Couchbase has its own query language called N1QL which allows
+aggregated querries between multiple documents. Also access on sub-document
+level is possible to allow fine grained data access.
 
 Couchbase can run in a cluster and maintains a quorum on each documents to
 provide eventual consistency on writes. The cluster functionality can be used to
@@ -83,11 +82,11 @@ Coutchbase native for production for the reasons explained in
 \end{wrapfigure}
 
 \textbf{Gson} from Google offers a very convenient out-of-the-box approach to
-serialize Java objects to Json strings and vice versa. An advantage of Gson is that
-also supports generic collections like hash-maps.
+serialize Java objects to \gls{json} strings and vice versa. An advantage of
+Gson is that also supports generic collections like hash-maps.
 
 The main advantage of Gson is it's simplicity. The simplicity goes to the cost
-of performance especially for the de-serialization of json strings.
+of performance especially for the de-serialization of \gls{json} strings.
 Because of this reason simple Gson serialization is only usable in areas where a
 performance hit does not influence the application behaviour.
 
@@ -102,7 +101,7 @@ initial financial barrier. Unity is very well documented and has a very
 healthy community to provide aid for development problems.
 
 Unity3D provides a rich editor that allows to prototype games quickly. It
-also offers a rich C\# API which allows to write any imaginable game logic. 
+also offers a rich C\# \gls{api} which allows to write any imaginable game logic. 
 
 For this thesis it is in particular interesting how well the combination of
 C\# game logic and Java back-end logic works in regards to the \ms{} tenet
@@ -219,7 +218,7 @@ MicroNet is also published via Github.
 
 \subsubsection{Interactive Development Environment (IDE)}
 
-IDE is a wide term for a tool that simplifies the development process of a
+\gls{ide} is a wide term for a tool that simplifies the development process of a
 software program. Usually it provides comprehensive tools that assist in writing
 the source code of an application.\\
 
@@ -227,11 +226,12 @@ the source code of an application.\\
     \includegraphics[width=4cm]{images/dependencies/eclipse}
 \end{wrapfigure}
 
-\textbf{Eclipse provides} a very solid IDE to develop Java projects. The plug-in
-development environment of Eclipse allows to customize the IDE to an arbitrary
-extent. This aspect is especially useful because in regards to \mss{} because
-nearly no \ms{} development specific tools are available on the market. Also
-Eclipse provides a number of very useful plug-ins for Java development.
+\textbf{Eclipse provides} a very solid \gls{ide} to develop Java projects. The
+plug-in development environment of Eclipse allows to customize the \gls{ide} to
+an arbitrary extent. This aspect is especially useful because in regards to
+\mss{} because nearly no \ms{} development specific tools are available on the
+market. Also Eclipse provides a number of very useful plug-ins for Java
+development.
 
 The \textit{Docker Tools} for Eclipse are a visual explorer  for Docker images
 and containers. It allows to quickly start, stop, build and remove containers

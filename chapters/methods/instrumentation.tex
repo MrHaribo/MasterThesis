@@ -4,21 +4,21 @@
 The first step to examine the subjects defined in \autoref{sec:subject_pool} is
 to define a clear technical foundation used to reproduce the subjects during lab
 research (\autoref{sub:lab_reserach}). This section contains an analysis of
-available technology is provided along with a proposal on how to choose between
-similar available technologies.
+available technology along with a proposal on how to choose between similar
+available technologies.
 
 \subsection{MicroNet: A Reference Implementation}
 
 MicroNet is the working title of the prototype that serves as a reference
-implementation on how to realize an \og{} using \ms{}. The implementation of a
-prototype was already issue of the last two semesters thesis and this thesis
-aims to finalize and release MicroNet.
+implementation of how to realize an \og{} using \mss{}. The implementation of a
+prototype was already an issue of the last two semester theses and this thesis
+aims at finalizing and releasing MicroNet.
 
 MicroNet consists of the following components:
 
 \begin{itemize}
   \item A core framework that provides run-time libraries required to operate a
-  \ms{} \og{} application cluster.
+  \ms{} \og{} application cluster
   \item A small reference implementation on how to build an \og{} with MicroNet
   \item A service catalogue which contains reference implementation of
   functionality that is commonly used in \ogs{}.
@@ -28,23 +28,22 @@ MicroNet consists of the following components:
 \subsection{Java as Programming Language}
 
 Java was chosen as the primarily used programming language at the beginning of
-project thesis one because it is the promoted programming language of HSR. In
-general the polyglot programming tenet states that a \ms{} is free to choose its
-implementation details according to its requirements. For the realization of a
-\ms{} application this tenet tends to break the the don't repeat yourself (DRY)
-principle if the same piece of functionality is simply copied among multiple
-services.
+project thesis one because it is the promoted programming language at \gls{hsr}.
+In general the polyglot programming tenet states that a \ms{} is free to choose
+its implementation details according to its requirements. For the realization of
+a \ms{} application this tenet tends to break the \gls{dry} principle if the
+same piece of functionality is simply copied among multiple services.
 
 The strong commitment to Java as a programming language offers the
-advantage that functionality can be shared among service using Java features
+advantage that functionality can be shared among services using Java features
 and therefore allows to quickly develop an application while preventing
 duplicated code.
 
-The downside to a prominent programming language is that in order to still allow
+The downside of a prominent programming language is that in order to still allow
 polyglot programming additional functionality has to be provided to allow
 foreign services to communicate with the application. The storage paradigm of
-foreign services is based on to the polyglot persistence tenet not a concern in
-this regard.
+foreign services is based on the polyglot persistence tenet and therefore not a
+concern in this regard.
 
 \subsubsection{Java 8 Lambdas}
 
@@ -56,27 +55,27 @@ own code into a framework. MicroNet makes excessive use of this possibility.
 \subsubsection{Apache Maven}
 
 Java enables the utilization of Apache Maven which is a very powerful software
-project management and comprehension tool. It allows the describe and automate
-the build process of a java applications. It also simplifies the process of
-integrating third party java libraries into the application and the majority of
-the java libraries are available as Maven artifacts.
+project management and a comprehension tool. It permits to describe and automate
+the build process of a Java application. It also simplifies the process of
+integrating third party Java libraries into the application, and the majority of
+Java libraries are available as Maven artifacts.
 
-\subsubsection{Annotation processing and Code Generation}
+\subsubsection{Annotation Processing and Code Generation}
 
 Java version 6 introduced annotation processing in the standard java build
-process. This is a very powerful concepts which allows to generate code at
+process. It is a very powerful concept which can be used to generate code at
 compile time according to annotated classes and methods. Annotation processing
 paired with code generation can spare the developer a lot of boilerplate code.
 
 \subsubsection{The Eclipse IDE}
 
-For Java development the Eclipse IDE is very popular. This is backed by the fact
-that Eclipse has been around since 2004 and has gone though a long
+For Java development the Eclipse \gls{ide} is very popular. This is backed by
+the fact that Eclipse has been around since 2004 and has gone through a long
 maturing process since then. Meanwhile Eclipse is a very robust development
 environment not only for Java but also for many other programming languages.
 
 The way Eclipse is built makes it very easy to extend it. It is basically a set
-of plug-ins that together form the IDE. A developer can develop his own
+of plug-ins that together form the \gls{ide}. A developer can develop his own
 plug-ins to tailor the development process of an application according to his
 needs.
 
@@ -86,49 +85,53 @@ development tools into Eclipse.
 \subsection{Application Data Format}
 
 As explained in \autoref{sub:games} an \og{} game always has a state. The state
-is represented as a set of dynamic data in the game model.
-The format of this data must be suitable for both  to be persisted and to be
-sent over a network.
+is represented as a set of dynamic data in the game model. The format of this
+data must be suitable for both persistence and network communications.
+Respecting both requirements makes the application code reusable and cleaner.
 
-There is an literally infinite number of ways on how to format application data.
-Some examples are: Json, XML, CVS, Strings, binary data, and HTML.
+There is an literally infinite number of ways of how to format application data.
+Some examples are: \gls{json}, \gls{xml}, \gls{cvs}, Strings, binary data, and
+\gls{html}.
 
-Since fast-faced \ogs{} are very performance critical the fastest and therefore
-a binary data format would introduce the least overhead. But since binary
-serialization introduces a large amount of additional work during development it
-can be considered an optimization\footnote{\cite{gafferon2017games} shows many
-tricks on how to reduce \og{} network bandwith using binary serialization.} and
-therefore a simpler data format will be used for MicroNet.
-Json is a good choice in this regard because it has an acceptable overhead,
-is human readable and also very popular.
+Since fast-faced \ogs{} are very performance critical the fastest - and
+therefore a binary data format - would introduce the least overhead. But since
+binary serialization includes a large amount of additional work during
+development it can be considered an
+optimization\footnote{\cite{gafferon2017games} shows many tricks of how to
+reduce \og{} network bandwith using binary serialization.}, and therefore a
+simpler data format will be used for MicroNet.
+\gls{json} is a good choice in this regard because it has an acceptable
+overhead, is human readable and also very popular.
 
 \subsection{Networking Technologies}
 
 As explained in \autoref{sub:networking_in_online_games} networking is an
-integral part of every \og{}. The \ms{} tenet fine-grained interfaces and single
-responsibility states the most common approaches to networking for \ms{}
-applications is RESTful HTTP. But as explained in \todo{ 3.3 Network Game
-Technology} for \ogs{} using a message broker offers several advantages over
-pure HTTP while still allowing to expose the API as RESTful HTTP.
-
-Message brokers are quite useful to make a \ms{} application robust:
-They provide persistent message queues so if no service is listening on a
-specific queue the undelivered messages are buffered and delivered as soon as a
-service becomes available to process the messages. This allows the realization of a self
-repairing application. Furthermore it is possible to combine multiple message
-brokers to form a mesh of brokers to provide resilience to message broker
-fail-over. The advantages which a message brokers provide make them the optimal
-choice to facilitate networking for \ms{} \og{} applications.
+integral part of every \og{}. The \ms{} tenet on fine-grained interfaces and
+single responsibility states that most common approaches to networking for \ms{}
+applications are RESTful \gls{http} solutions. But as explained in section 3.3
+Network Game Technology of project thesis one \cite{biedermann2015project1} for
+\ogs{} using a message broker offers several advantages over pure \gls{http}
+while still allowing the exposition of the \gls{api} as RESTful \gls{http}.
 
 \subsubsection{Message Broker}
 
-ActiveMQ is used as a message broker to provide communication capabilities to
-\mss{}. For security reasons two separate message brokers are used. One is
-exposed to the public Internet and accepts user connections. A second broker is
-responsible to forward messages application internally. A reverse proxy (API
-Gateway) is used to interconnect the two. The message broker evaluation has been
-conducted in project thesis one in \todo{4.5 Communication Mechanisms in a
-\ms{} Architecture}.
+Message brokers are quite useful to strengthen a \ms{} application's robustness:
+They provide persistent message queues, so if no service is listening to a
+specific queue the undelivered messages are buffered and delivered as soon as a
+service becomes available to process the messages. This allows the realization
+of a self repairing application. Furthermore it is possible to combine multiple
+message brokers to form a mesh of brokers that provides resilience to message
+broker fail-overs. The advantages of message brokers make them the optimal
+choice to facilitate networking for \ms{} \og{} applications.
+
+ActiveMQ is used as a message broker within a MicroNet application to provide
+communication capabilities to \mss{}. For security reasons two separate message
+brokers are used. One is exposed to the public Internet and accepts user
+connections. A second broker is responsible to forward messages to the
+application internally. A reverse proxy (API Gateway) is used to interconnect
+the two. The message broker evaluation has been conducted in project thesis one
+\cite{biedermann2015project1} in section 4.5 Communication Mechanisms in a \ms{}
+Architecture.
 
 \subsection{Container Engine}
 
@@ -136,8 +139,8 @@ Containers are a very powerful modern approach to run software. Instead of
 installing a software directly on a host it is instead installed in a container.
 The container can then be started among other containers in a container engine
 as a virtual machine. The only dependency that containers introduce is the
-container engine which must be installed the host. The host can be anything : A
-developer laptop, a dedicated server, or a virtual server in the cloud.
+container engine which must be installed on the host. The host can be anything :
+A developer laptop, a dedicated server, or a virtual server in the cloud.
 This approach greatly increases the portability of software and allows
 developers to build software once and run it anywhere as long as the container
 engine is available.
@@ -146,50 +149,51 @@ engine is available.
 
 Docker is the most widely used container technology and a de-facto standard
 since most container engines support docker containers. The docker ecosystem
-provides with Dockerhub a central registry for available Docker containers to
-be used by developers. This centralized approach makes is easy to
-download required dependencies on a system as long as docker is installed.
+provides a central registry for available Docker containers to be used by
+developers called Dockerhub. This centralized approach makes it easy to download
+required dependencies on a system as long as the Docker engine is installed.
 
 \paragraph{Docker Compose}
 
 Docker Compose is a way to describe a complex application consisting of multiple
-Docker containers. It allows to build or run a complete \ms{} application with a
-single command. The structure of docker-compose is also very well suited for
-automation it is in .yaml format which is supported by many libraries.
+Docker containers. It is used to build or run a complete \ms{} application with
+a single command. The structure of docker-compose is also very well suited for
+automation since it is formatted in the well known .yaml format which is
+supported by many libraries.
 
 Docker Compose is also the foundation to deploy a distributed application in
-Docker Swarm which is explained in \autoref{sub:composition_engines}.
+Docker Swarm, which is explained in \autoref{sub:composition_engines}.
 
 \paragraph{Docker for Windows}
 
-As mentioned in \autoref{sub:delimitations} the whole \og{} development
-process must be realizable in Windows. Fortunately the Docker for Windows Client
-is a very sophisticated tool that feels very close to the original Docker
-version on Linux. One problem regarding Docker for Windows is that it does not
-run on Windows versions which do not support HyperV. As a work-around developers
-can use the Docker Toolbox. Docker Toolbox uses VirtualBox to provide the
-same functionality as stand alone Docker but with the price of a little bit more
-complexity during setup.
+As mentioned in \autoref{sub:delimitations} the whole \og{} development process
+must be realizable on Windows. Fortunately the Docker for Windows Client is a
+very sophisticated tool that feels very close to the original Docker version on
+Linux. One problem regarding Docker for Windows is that it does not run on
+Windows versions which do not support HyperV (Windows Home Edition). As a
+work-around developers may use the Docker Toolbox. Docker Toolbox uses
+VirtualBox to provide the same functionality like as the stand alone Docker but
+with the price of a little bit more complexity during setup.
 
 \subsection{Cloud Service Providers}
 
-Currently it is very popular for companies to use the infrastructure of the
-major cloud service providers to deploy their infrastructure
+Currently it has become very popular for companies to use the infrastructure of
+the major cloud service providers to deploy their infrastructure
 \cite{roberts2016aws}, \cite{pronschinske2015turbine}. The providers offer a
 stability and performance that cannot be achieved by a proprietary operated
 server center \cite{gai2012towards}.
 
-Because of this trend it is mandatory to consider largest players in this market
-as a reference on how to deploy modern distributed applications. Therefore the
-usability of a technology is partially influences cloud service provider
+Because of this trend it is mandatory to consider the largest players in this
+market as a reference on how to deploy modern distributed applications. Therefore the
+usability of a technology is partially influenced by cloud service present
 support. 
 
 Amazon Cloud (AWS) and Google Cloud Platform (GCP) are the major cloud service
 providers which are considered in this thesis. It has to be mentioned that due
 to the limitation mentioned in \autoref{sub:zero_buget} these cloud service
 providers cannot be examined in practice. However the comprehensive
-documentation that these providers provide allows to gain an insight into their
-technology.
+documentation that these providers provide allows us to gain an insight into
+their technology.
 
 \newpage
 \subsection{Composition Engines}
@@ -208,21 +212,21 @@ to the experience of cloud experts in the industry
 \cite{voras2011evaluating}.
 
 
-\paragraph{P1 - The Virtualization Layer}
+\paragraph{P1 - Virtualization Layer}
 
-The virtualization technology used by the composition engine to operate a
-cluster of \mss{}. The virtualization technology is tightly coupled with the
+Virtualization technology is used by the composition engine to operate a
+cluster of \mss{}. Virtualization technology is tightly coupled with the
 different platforms the technology supports.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    -Pods are the smallest unit that make up an application deployment. A pod is
-    one autonomous unit of the application stack. Pods can confine one or more
+    -Pods are the smallest units that make up an application deployment. A pod
+    is an autonomous unit of the application stack. Pods can confine one or more
     containers.
     
-    -Supports AWS, GCP (using the Coogle Compute Engine - GCE), Microsoft Azure,
+    -Supports AWS, GCP (using the Google Compute Engine - GCE), Microsoft Azure,
     Joyent, OpenStack, VMWare, bare metal and localhost deployments.
     
     -Minikube is a way to run and test Kubernetes localhost deployments. It
@@ -242,7 +246,7 @@ different platforms the technology supports.
     -Multiple Docker Daemons on different physical machines provide a cluster
     of nodes.
     
-    -Docker Daemons are available for Windows, MacOS, and Linux. Under Linux
+    -Docker Daemons are available for Windows, MacOS, and Linux. Within Linux
     Docker is realized with native Linux Containers. The native Windows
     installation uses HyperV.
     
@@ -255,15 +259,16 @@ different platforms the technology supports.
 
 
 \newpage
-\paragraph{P2 - The Storage Layer}
+\paragraph{P2 - Storage Layer}
 
-Since container live non-permanently in memory the composition engine must
-provide a way for containers to persist data that exceeds the lifetime of a
+Since containers only live non-permanently in cloud memory they have no
+dedicated physical storage attached to them. Therefore the composition engine
+must provide a way for containers to persist data that exceed the lifetime of a
 container. The storage layer also provides the possibility to share data among
 containers.
 
-Many DBMS system provide a containerized solution. The storage layer provided by
-the composition engine is then used by DBMS containers to persist the data on
+Many DBMS systems provide a containerized solution. The storage layer provided
+by the composition engine is then used by DBMS containers to persist the data on
 disk.
 
 \begin{center}
@@ -271,39 +276,39 @@ disk.
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     -Kubernetes uses an approach called Persistent Volumes to provide a common
-    API to manage the storage layer. 
+    \gls{api} to manage the storage layer. 
     
     -Supports the storage technologies of: GCP, AWS, Azure, NFS, Vsphere,
     VMware and more.&
 
     -It is suggested to use accessible storage outside the containers for
-    example a native database (NoSQL/SQL)
+    example a native database (NoSQL/SQL).
     
     -Offers Persistent Volumes comparable to the local filesystem. They
-    live on after a task terminates and other tasks can consume the persisted
-    data during execution.
+    are still accessible after a task terminates and other tasks can consume the
+    persisted data during execution.
     
-    -The Docker Containerizer supports the Docker Volume plug-in & 
+    -The Docker Containerizer supports the Docker Volume plug-in. & 
      
     -Host-based persistence allows multiple containers to access a shared
     volume on the host bypassing the union file-system. Data corruption can be
     the consequence.
     
     -Implicit Per-Container Storage is a storage sandbox per container on
-    the host. When a container is removed, so is it's storage sandbox.
+    the host. When a container is removed, so is it's a storage sandbox.
     
     -Explicit Shared Storage (Data Volumes) mounts an explicit location on the
     host within one or more containers allowing shared read-write access to
     a common directory.
     
-    -Data Volumes can be provided though a shared file-system like Ceth,
-    GlusterFS, or NFS and exposed though a consistent namespace.\\
+    -Data Volumes can be provided through a shared file-system like Ceth,
+    GlusterFS, or NFS and exposed through a consistent name-space.\\
     \hline
   \end{tabular}
 \end{center}
 
 \newpage
-\paragraph{P3 - The Management Layer}
+\paragraph{P3 - Management Layer}
 
 The management layer is responsible to provide an interface to start, stop and
 monitor an application stack or a single container in the virtualization layer.
@@ -314,30 +319,31 @@ monitor an application stack or a single container in the virtualization layer.
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
     -kubectl is the main command line tool to manage a Kubernetes cluster.
     
-    -kubefed is a command line tool to federate multiple clusters
+    -kubefed is a command line tool to combine and federate multiple
+    clusters.
 
-	-minikube is a command line tool to administrate localhost clusters
+	-minikube is a command line tool to administrate localhost clusters.
     
     -The Web UI (Dashboard) offers a graphical user interface to manage nodes,
-    deployments, and volumes in the cluster 
+    deployments, and volumes in the cluster.
     
-    -The kompose tool can be used to translate docker-compose applications to
-    Kubernetes applications&
+    -The kompose tool can be used to translate a docker-compose application to
+    a Kubernetes application. &
     
-    -Offers many specific command line tools for DevOps and Developers
+    -Offers many specific command line tools for DevOps and Developers.
     
-    -Supports several API client libraries to control the cluster 
+    -Supports several \gls{api} client libraries to control the cluster.
     
     -No graphical user interface to manage the cluster is available out of the
-    box&
+    box. &
     
     -docker-compose command line tool  can be used to describe and build
-    containerized applications
+    containerized applications.
     
-    -docker stack command line tool is used to manage an application stack 
+    -docker stack command line tool is used to manage an application stack.
     
     -No graphical user interface to manage the cluster is available out of the
-    box\\
+    box.\\
     
     \hline
   \end{tabular}
@@ -345,9 +351,9 @@ monitor an application stack or a single container in the virtualization layer.
 
 \paragraph{P4 - Provisioning Time}
 
-The initial provisioning time and time to scale up and down the application can
-be an indicator of the simplicity of a technology. The provisioning time can be
-compared by deploying a demo application with all composition engines.
+The initial provisioning time and the time to scale up and down the application
+can be an indicator of the simplicity of a technology. The provisioning time can
+be compared by deploying a demo application with all composition engines.
 These measurements include the time needed to understand the documentation to a
 sufficient extent as well as the time needed to install the necessary software
 to deploy the demo application.
@@ -364,7 +370,7 @@ to deploy the demo application.
 \newpage
 \paragraph{P5 - Ease of Use}
 
-The impression of simplicity that the deployment of the demo application
+Ease of use impression of simplicity that the deployment of the demo application
 makes.
 
 \begin{center}
@@ -376,22 +382,21 @@ makes.
     
     -On Windows the setup of minikube is cumbersome.
     
-    -Kubernetes proprietary scripts are complicated and hard to understand&
-    
+    -Kubernetes proprietary scripts are complicated and hard to understand. &
     
     -Mesos is hard to set up because it has many dependencies like Zookeeper
-    or the different schedulers.
+    or the different scheduling plug-ins.
     
-    -The ease of operation and monitoring was not evaluated for Mesos& 
+    -Ease of operation and monitoring was not evaluated for Mesos. & 
     
     -When Native Docker is understood by the developer Docker Swarm is very
-    easy to understand
+    easy to understand.
     
     -Docker Swarm is very slim, so a full picture of the technology can be
     gained very quickly.
     
     -Although no native dashboard exists the management of Docker with the
-    command line is very comfortable\\
+    command line is very comfortable.\\
     \hline
   \end{tabular}
 \end{center}
@@ -399,8 +404,8 @@ makes.
 \paragraph{P6 - Reduction of Technology Complexity}
 
 The reduction of technology complexity is considered in regard to networking
-among container, persistent storage among containers and the effort needed to
-integrate dependencies in a application.
+among containers, persistent storage among containers and the effort needed to
+integrate dependencies in an application.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
@@ -412,18 +417,19 @@ integrate dependencies in a application.
     -Dependencies can be abstracted using dedicated containers for dependencies.
     
     -Containers are shared among developers using private registries
-    or the Google, Amazon or Azure Container Registries.&
+    or Google, Amazon or Azure Container Registries.&
     
-    -The Mesos agents have to be configured according to networking and storage.
+    -Mesos agents have to be configured according to networking and storage.
     
     -Docker containers can be used to abstract dependencies. & 
     
-    -The Docker Engine allows to define overlay networks. This aspect of
-    Docker is not trivial and requires knowledge in regards to overlay
-    networks.
+    -The Docker Engine makes it possible to define overlay networks. This aspect
+    of Docker is not trivial and requires knowledge in regards to virtual
+    networking technologies.
     
-    -Persistent storage and networking can be defined via the docker-compose
-    file but knowledge about the storage technology is required.
+    -Persistent storage and networking can be defined via the Docker and
+    docker-compose files but knowledge about this storage technology is
+    required.
     
     -Dependency abstraction is provided by Docker-hub, the central docker image
     repository. Docker hub is not restricted to Docker-Swarm.\\
@@ -434,9 +440,9 @@ integrate dependencies in a application.
 \newpage
 \paragraph{P7 - Infrastructure Monitoring and Reporting Ability}
 
-The ability to observe a running \ms{} application stack. This includes alerts
-on abnormal situations as well as the visual representation of statistics and
-metrics.
+Infrastructure monitoring and reporting abilities include the ability to observe
+a running \ms{} application stack. This involves alerts on abnormal situations
+as well as the visual representation of statistics and metrics.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
@@ -445,17 +451,18 @@ metrics.
     -Heapster as a cluster-wide aggregator for monitoring and event data.
     
     -cAdvisor can be used as an open source container resource usage and
-    performance analysis tool
+    performance analysis tool.
     
-    -A Grafana setup with InfluxDB as a very popular combination for monitoring&
+    -A Grafana setup with InfluxDB is a very popular combination for
+    monitoring.&
     
     -Mesos nodes report a set of statistics and metrics that
     enable cluster operators to monitor resource usage and detect abnormal
-    situations early.
+    situations early enough.
     
     -Observability metrics in the following categories are available:
     Resources, Masters, Agents, Frameworks, Tasks, Messages, Event queues
-    and more&
+    and more.&
     
     -Does not provide a built-in solution for reporting.
     
@@ -469,28 +476,29 @@ metrics.
 
 \paragraph{P8 - Customization}
 
-The ability to provide new functionality or change existing behaviour. 
+Customization includes the ability to provide new functionality or change
+existing behaviour.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    -Custom API types allow the developer to define new functionality and add it
-    to the Kubernetes API
+    -Custom \gls{api} types allow the developer to define new functionality and add it
+    to the Kubernetes \gls{api}.
     
     -Add-ons can be developed to extend the functionality of Kubernetes.
     
     -Support for custom networking plug-ins are currently in alpha.& 
     
-    -Allows to add custom framework schedulers in C++, Go, Haskell, Java, Python
-    and Scala
+    -Is used to add custom framework schedulers in C++, Go, Haskell, Java,
+    Python and Scala.
     
-    -RENDLER provides an example framework implementation realized with Mesos& 
+    -RENDLER provides an example framework implementation realized with Mesos.& 
     
-    -Extensions can be made by using the Docker Engine managed plug-in system
+    -Extensions can be made by using the Docker Engine managed plug-in system.
     
-    -Provides SDKs for the Docker Engine API in Python and GO. These APIs are
-    tested by Docker maintainers.
+    -Provides SDKs for the Docker Engine \gls{api} in Python and GO. These
+    \glspl{api} are tested by Docker maintainers.
     
     -Third party SDKs are available in: C/C++, C\#, Java, and more.\\
     \hline
@@ -499,8 +507,8 @@ The ability to provide new functionality or change existing behaviour.
 
 \paragraph{P9 - Exclusivity}
 
-How easy is it extract your legacy data, upon a technology change or upon
-deprecation of a technology?
+Exclusivity involves the question of how easy is it extract your legacy data,
+upon a technology change or upon deprecation of a technology.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
@@ -518,15 +526,15 @@ deprecation of a technology?
 
 \paragraph{P10 - Application Description Format}
 
-The format that is used to describe an application stack.
+This is the format that is used to describe an application stack.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
     \hline
     \textbf{Kubernetes}&\textbf{Apache Mesos}&\textbf{Docker Swarm}\\\hline
-    -Kubernetes deployment description files in .yml format & 
+    -Kubernetes deployment description files in .yml format. & 
     
-    -Task Group API files (proprietary)& 
+    -Task Group \gls{api} files (proprietary). & 
     
     -docker-compose file in .yml format. \\
     \hline
@@ -535,7 +543,7 @@ The format that is used to describe an application stack.
 
 \paragraph{P11 - Scalability}
 
-The ability of the technology to scale an application stack according to
+This is the ability of the technology to scale an application stack according to
 performance requirements.
 
 \begin{center}
@@ -545,9 +553,9 @@ performance requirements.
     -Horizontal Pod auto-scaling allows Kubernetes to automatically scale the
     number of pods based on observed CPU utilization. & 
     
-    -CD/OS provides auto-scaling using Marathon & 
+    -CD/OS provides auto-scaling using Marathon. & 
     
-    -Provides no auto-scaling mechanism but manual scaling is very simple and
+    -Provides no auto-scaling mechanism, but manual scaling is very simple and
     can be automated with little effort.
     \\
     \hline
@@ -556,7 +564,7 @@ performance requirements.
 
 \paragraph{P12 - Liecence}
 
-The licence the technology is released under.
+This includes the licence the technology is released under.
 
 \begin{center}
   \begin{tabular}{ | p{4.5cm} | p{4.5cm} | p{4.5cm} | }
@@ -566,7 +574,7 @@ The licence the technology is released under.
     
     -Apache License 2.0 & 
     
-    -Comunity Editon (free) 
+    -Community Editon (free) 
     
     -Enterprise Edition with a per node / per year fee\\
     \hline
@@ -600,7 +608,7 @@ used to make game model described in \autoref{sub:games} highly available.
 
 All the source code of this thesis is available on
 github\cite{micronet2017doku}. The github page also contains the user user
-manual for MicroNet in HTML format.
+manual for MicroNet in \gls{html} format.
 
 MicroNet is also Available on Maven Central to allow easy integration into Java
 projects.
@@ -620,7 +628,7 @@ in \autoref{sub:zero_buget} these solution have only been examined briefly.
 
 Google's solution to deploy rich \ogs{} in the cloud is basically a setup
 for the existing Google cloud infrastructure with additional functionality to
-provide matchmaking. For this purpose the Google Compute Engine API is used
+provide matchmaking. For this purpose the Google Compute Engine \gls{api} is used
 which is available in a number of programming languages like Java, C\#, GO,
 Phthon, NodeJS, and others. This covers the majority of game engines and
 allows em to use the Google Gaming Solution.
@@ -631,10 +639,10 @@ Amazon GameLift is very similar to Google Gaming Solutions as it also provides
 a matchmaking solution. This is realized by a back-end framework running in the
 Amazon cloud. This back-end is customizable by the developer. 
 
-GameLift also offers an API which allows game simulation servers to incorporate
-with the backend. This API is available for all the major game engines
-like Unity3D or Unreal Engine 4. Amazon also provides its own game engine under
-the name Lumberyard.
+GameLift also offers an \gls{api} which allows game simulation servers to
+incorporate with the backend. This \gls{api} is available for all the major game
+engines like Unity3D or Unreal Engine 4. Amazon also provides its own game
+engine under the name Lumberyard.
 
 \subsection{Dedicated Server}
 

@@ -174,10 +174,10 @@ MicroNet tool-set helps in this regard.
 \textbf{What degree of composition is necessary for a \ms{} application
 to work?}
 
-The Shared Model and the Shared API are the only concepts needed to logically
+The Shared Model and the Shared \gls{api} are the only concepts needed to logically
 compose a \ms{} application. The Shared Model is needed to provide a common data
 access layer to facilitate session management and durable persistence
-functionality. The Shared API concept is needed to define the format and the
+functionality. The Shared \gls{api} concept is needed to define the format and the
 semantics of message transfers.
 
 For physical composition it is enough to rely on a composition engine like
@@ -201,7 +201,7 @@ the intense use of time-outs, retries, and roll-backs. In my opinion
 choreography is hard to get right but provides the best results in
 application robustness and scaling.
 
-The MicroNet concepts Shared Model and Shared API are concepts which are
+The MicroNet concepts Shared Model and Shared \gls{api} are concepts which are
 inspired by choreographical composition. \\
 
 \newpage
@@ -219,12 +219,12 @@ simple but I found the documentation not as comprehensive as the other two.\\
 \textbf{How can multiple game features be developed in parallel in different
 \mss{} while preserving the overall application behaviour?}
 
-\mss{} must first of all define a clean fine grained interface through through
-API. MicroNet then through Code Assist provides assistance in offering the
-Shared API to developers of other \mss{} which then can access the API via
-MicroNet messaging. This allows to rely on functionality provided by other \ms{}
-teams without knowing any implementation details and use the networked API
-functionality like it where local function calls.
+\mss{} must first of all define a clean fine grained interface through the
+\gls{api}. MicroNet then through Code Assist provides assistance in offering the
+Shared \gls{api} to developers of other \mss{} which then can access the
+\gls{api} via MicroNet messaging. This allows to rely on functionality provided
+by other \ms{} teams without knowing any implementation details and use the
+networked \gls{api} functionality like it where local function calls.
 
 Since the polyglot persistence tenet allows to exclude database implementation
 from the general application design which encourages independent development on
@@ -284,14 +284,14 @@ attention can go to realize strong consistency.\\
 \noindent
 \textbf{What protocols help to reduce service coupling?}
 
-Usually \ms{} provide a RESUful HTTP API to maximize availability. In the case
-of REST I agree with the common opinion that it is the way to go for \mss{}. In
-regard to way REST is realized i prefer a message broker over a web service.
-This is because the message broker offers much more flexibility with the message
-format and provides functionality like persistence and topics which a web server
-does not. Also it is possible to implement REST only partially while still
-achieving a similar loosely coupled design. The divergence to pure REST
-has been discussed in project thesis one \todo{4.5.3 Common Communication
+Usually \ms{} provide a RESUful \gls{http} \gls{api} to maximize availability.
+In the case of REST I agree with the common opinion that it is the way to go for
+\mss{}. In regard to way REST is realized i prefer a message broker over a web
+service. This is because the message broker offers much more flexibility with
+the message format and provides functionality like persistence and topics which
+a web server does not. Also it is possible to implement REST only partially
+while still achieving a similar loosely coupled design. The divergence to pure
+REST has been discussed in project thesis one \todo{4.5.3 Common Communication
 Mechanisms}.\\
 
 \subsection{\ms{} Development}

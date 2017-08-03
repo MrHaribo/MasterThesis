@@ -363,30 +363,30 @@ bandwidth requirements which can be very expensive.
 
 \subsubsection{Procedural Content Generation}
 
-Procedural Content Generation (PCG) has always been an integral part of game
+\gls{pcg} has always been an integral part of game
 development and has gained recent popularity because of prominent games that
-make extensive use of PCG. Some examples are Minecraft, Terraria
+make extensive use of \gls{pcg}. Some examples are Minecraft, Terraria
 (\autoref{fig:terraria}), No Mans Sky to only name a few.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=\textwidth]{images/terraria}
-	\caption{A screenshot of Terraria which makes intensive use of PCG. The game
+	\caption{A screenshot of Terraria which makes intensive use of \gls{pcg}. The game
 	world is different every time the game is played. This encourages
 	replayability.}
 	\label{fig:terraria}
 \end{figure}
 
-PCG is the process of automatically generating game content. A canonical
+\gls{pcg} is the process of automatically generating game content. A canonical
 example in this regard is vegetation generation. The developer only needs to
 supply certain parameters like for example color distribution and branching
 factor for trees. The game then creates all the vegetation before the game
 starts or even dynamically while the game progresses as needed.
 
-PCG also allows generate levels, quests, weapons, vehicles, and even sounds. A
-good reference for PCG is the book Procedural Content Generation In
-Games \cite{shaker2014procedural}. It contains many useful PCG methods and gives
-a good overview on the topic.
+\gls{pcg} also allows generate levels, quests, weapons, vehicles, and even
+sounds. A good reference for \gls{pcg} is the book Procedural Content Generation In
+Games \cite{shaker2014procedural}. It contains many useful \gls{pcg} methods and
+gives a good overview on the topic.
 
 \subsection{\mss{}}
 
@@ -419,13 +419,13 @@ interface is usually exposed via REST/HTTP and is accessible via a reverse
 proxy. Each \ms{} should only have one responsibility in regards to the domain.
 This allows services to be independently deployed, changed, replaced and scaled.
 
-\paragraph{Domain-Driven-Design (DDD)}
+\paragraph{Domain-Driven-Design}
 
 The responsibility of a \ms{} should be derived from the problem domain, and
 each service should be dedicated to exactly one aspect of the domain. If one
 domain aspect is very extensive it can lead to a large \ms{} which is not
 desirable. This can be an indicator that the granularity of the services might
-be wrong. Granularity is the most challenging part of DDD
+be wrong. Granularity is the most challenging part of \gls{ddd}
 \cite{millett2015patterns}.
 
 \paragraph{IDEAL}
@@ -555,10 +555,10 @@ Logical composition of a \ms{} application has two major requirements that must
 be satisfied. The services have to know how to find each other and the services
 must be aware of the communication semantics. 
 
-Usually logical composition is realized with an RESTful API description that
-can be accessed via a HTTP. Especially for regular web applications a vast
-choice of middle-ware is available, for example Swagger, JaxRS, JSON API, and
-API Blueprint just to name a few.
+Usually logical composition is realized with an RESTful \gls{api} description
+that can be accessed via a \gls{http}. Especially for regular web applications a
+vast choice of middle-ware is available, for example Swagger, JaxRS, JSON API,
+and API Blueprint just to name a few.
 
 The composition paradigm (Orchestration or Choreography) that is used for
 logical composition is strictly dependent on the type of application under
@@ -630,11 +630,11 @@ development, the game model and the game simulation, which is most relevant in
 regards to a \ms{} realization.
 
 \subsection{Time Constraint}
-In the original plan for this thesis the topic Procedural Content Generation
-(PCG) was intended to be researched in greater detail. But since the topics
-deployment and composition required a lot more effort than anticipated, the time
-budget for PCG shrunk close to zero. Because of this PCG will only receive minor
-attention in this thesis.
+In the original plan for this thesis the topic \glsreset{pcg} \gls{pcg} was
+intended to be researched in greater detail. But since the topics deployment and
+composition required a lot more effort than anticipated, the time budget for
+\gls{pcg} shrunk close to zero. Because of this \gls{pcg} will only receive
+minor attention in this thesis.
 
 Another aspect that intensified the time constraint is the fact that this thesis
 is the third out of a series of three and a lot of effort was necessary to

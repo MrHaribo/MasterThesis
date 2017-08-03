@@ -58,7 +58,7 @@ example RESTful HTTP, JMS, .NET, C/C++, Go, Node.js, Python, and more.
 For game engine integration the messaging interface has also to be implemented
 in the respective technology of the engine. In the case of MicroNet ActiveMQ
 Unity3D is used as the refernce game engine which is written in C\#. For this
-purpose the NMS API which is a .NET port of the Java Message Service (JMS)
+purpose the NMS \gls{api} which is a .NET port of the Java Message Service (JMS)
 interface is used to make MicroNet accessible from the Unity3D game engine.
 
 \subsubsection{Messaging System}
@@ -70,11 +70,11 @@ MicroNet uses a reverse proxy to interchange messages from the public Internet
 with the internal network used by MicroNet. For this purpose two separate
 message brokers are used and only the public broker is exposed to the Internet.
 The gateway intercepts all messages from the public network and forwards them to
-the responsible \ms{}. This is further detailed in the Messaging API section
+the responsible \ms{}. This is further detailed in the Messaging \gls{api} section
 below.
 
 The reverse proxy is in fact also the API gateway. An API gateway is a standard
-approach to offer the service API to the users. Upon reception of a message the
+approach to offer the service \gls{api} to the users. Upon reception of a message the
 gateway can filter it according to a white- or blacklisting approach.
 
 \mss{} can access the messaging functionality by using the context object
@@ -179,7 +179,7 @@ The connection authentication process is further explained in
 
 \subsubsection{MicroNet Messaging API}
 
-The messaging API provided by a MicroNet applications is a direct implementation
+The messaging \gls{api} provided by a MicroNet applications is a direct implementation
 of the fine-grained interfaces tenet. It offers the following functionality to
 promote stateless message transfers:
 
@@ -202,7 +202,7 @@ very comfortable.
 	\centering
 	\hspace*{-1.5cm}
 	\includegraphics[width=1.2\textwidth]{images/architecture/MessagingAPI}
-	\caption{The API Gateway offers the MicroNet messaging API to the player.}
+	\caption{The API Gateway offers the MicroNet messaging \gls{api} to the player.}
 	\label{fig:messaging_api}
 \end{figure}
 
@@ -224,7 +224,7 @@ single user or to a group or players. For this purpose \mss{} can send a request
 to the \code{mn://forward} queue which is consumed by any gateway who in
 response forwards the event to the corresponding user or group.
 
-One last feature of the MicroNet messaging API is the ability to send messages
+One last feature of the MicroNet messaging \gls{api} is the ability to send messages
 to topics which can be subscribed by any service. This allows services to react
 on events happening throughout the application. This can be for example the
 \textit{new player connected} event.

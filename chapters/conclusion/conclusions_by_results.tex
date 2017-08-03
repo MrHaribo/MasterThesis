@@ -14,41 +14,41 @@ on how to suffice each tenet.
 \subsubsection{Fine-grained Interfaces and Single Responsibility}
 
 A fine grained interface to a game application can be achieved by directly
-exposing the API offered by the \mss{}. This allows users and other  \mss{} to
-use the interface in a very specialized way by only accessing the functionality
-the truly need. The major challenge in to make the interface available to all
-services and clients.
+exposing the \gls{api} offered by the \mss{}. This allows users and other 
+\mss{} to use the interface in a very specialized way by only accessing the
+functionality the truly need. The major challenge in to make the interface
+available to all services and clients.
 
 Several MicroNet components are dedicated to facilitate fine-grained interfaces.
-The MicroNet annotation tool allows to define the interface. MicroNet
-code assists offers the interface to the developer. MicroNet annotation
-processing exports the API and automatically integrates the API into the service
+The MicroNet annotation tool allows to define the interface. MicroNet code
+assists offers the interface to the developer. MicroNet annotation processing
+exports the \gls{api} and automatically integrates the \gls{api} into the service
 executable. The API gateway is responsible to enforce security policies to
-regulate access control to restrict parts of the API. It is also responsible to
-offer the API to clients. \mss{} can access the API by only using the
-networking functionality of MicroNet.
+regulate access control to restrict parts of the \gls{api}. It is also
+responsible to offer the \gls{api} to clients. \mss{} can access the \gls{api}
+by only using the networking functionality of MicroNet.
 
 The single responsibility aspect must be tackled by choosing the ``right''
 service granularity. Right means that the service must be neither be to small or
 to large\footnote{100 lines of code appeared to be a good upper bound as an
 indicator that a certain service is to large.}. The granularity is also heavily
-influenced by the DDD tenet. A service should only offer the API for one
-specific aspect of the application domain. Violation of the single
+influenced by the \gls{ddd} tenet. A service should only offer the \gls{api} for
+one specific aspect of the application domain. Violation of the single
 responsibility can indicate that the problem domain of a service is to large and
 should be split into two or more sub domains.
 
-\subsubsection{Domain-Driven-Design (DDD)}
+\subsubsection{Domain-Driven-Design}
 
 I consider domain driven design a technique which makes software development
 significantly easier to understand. To design a \ms{} according to technical
 domains like for example a database service or a serialization service
 makes little sense for most applications. Instead the domain driven approach
 helps greatly to understand the application as a developer while still sufficing
-all technical requirements. DDD is also a useful approach to achieve a
-high service cohesion and can be used to define the service API.
+all technical requirements. \gls{ddd} is also a useful approach to achieve a
+high service cohesion and can be used to define the service \gls{api}.
 
 With the shared model and the service catalogue, MicroNet provides an
-implementation approach to DDD. Both components help the developer to define
+implementation approach to \gls{ddd}. Both components help the developer to define
 the application according to the problem domain (the game under development).
 
 \subsubsection{IDEAL}
@@ -109,15 +109,15 @@ and it must be able to restart them on failure without loosing the game state.
 Since the persistence layer is extracted from the \mss{} it can introduce a
 hidden bottleneck. To cope with this the scaling functionality of the underlying
 storage technology must be used. MicroNet uses a Couchbase NoSQL database which
-can be scaled very well maintaining a quorum on Json documents for data
+can be scaled very well maintaining a quorum on \gls{json} documents for data
 consistency.
 
 A relational database always represents a bottleneck. But also relational
 databases can be scaled up to a useful level in cases a relational database is
 necessary for an application. Having multiple independent relational databases
-on multiple physical host each dedicated to only one problem domain
-according to the DDD tenet (like for example a User Database) can also help to
-spread the load out to multiple relational databases.
+on multiple physical host each dedicated to only one problem domain according to
+the \gls{ddd} tenet (like for example a User Database) can also help to spread
+the load out to multiple relational databases.
 	
 \paragraph{Automated Management}
 

@@ -5,11 +5,11 @@ The MicroNet tools are a collection of Eclipse plug-ins. Eclipse was chosen due
 to the primary Java nature of MicroNet. This allows to develop Java \mss{} very
 quickly. But the MicroNet Tools also offer a solution to integrate other
 technologies into a \ms{} application. This language independence is
-accomplished by using Json as a low level information exchange format. As long a
-a technology supports Json it can participate in the application. Another
-requirement is that the technology has access to the message broker.
+accomplished by using \gls{json} as a low level information exchange format. As
+long a a technology supports \gls{json} it can participate in the application.
+Another requirement is that the technology has access to the message broker.
 
-Since the user interface (UI) of an Eclipse plug-in is written using the Swing
+Since the \gls{ui} of an Eclipse plug-in is written using the Swing
 Window Toolkit (SWT) library it can easily be exported to be a standalone tool
 decoupled from Eclipse. With this approach it is possible to port the MicroNet
 Tools to other Platforms as long as they support a JVM.
@@ -29,8 +29,8 @@ assumptions on how to organize files and folders:
   \ms{}
   \item For automated integration of a \ms{} its project folder must be either a
   Java/Maven project or must contain a Dockerfile.
- \item One shared folder to exchange the Shared Model and the Service API must
- be present
+ \item One shared folder to exchange the Shared Model and the Service \gls{api}
+ must be present
 \end{itemize}  
 
 \begin{figure}
@@ -55,7 +55,7 @@ A service is defined by annotating a arbitrary class in the service projects
 with the \textit{@MessageService(uri=``mn://service\_name'')} annotation. Within
 the service class listener methods can be annotated with the
 \textit{@MessageListener(uri=``/api\_method'')} annotation to define the
-reactive behaviour of the service according to the defined API. Examples of
+reactive behaviour of the service according to the defined \gls{api}. Examples of
 services defined by the annotation can be seen in
 \autoref{lst:service_communication} and \autoref{lst:message_parameters}.
 
@@ -207,10 +207,10 @@ class.}
 \paragraph{Model Generation}
 
 The model generation process is completely independent from the service
-generation and is used to translate the game model which is defined in Json to
-java POJOs (plain old Java objects). Because the MicroNet Model generation
-library is very slim it can also be reproduced in other programming languages
-with relative ease. \autoref{lst:generated_model_class} shows the
+generation and is used to translate the game model which is defined in
+\gls{json} to java POJOs (plain old Java objects). Because the MicroNet Model
+generation library is very slim it can also be reproduced in other programming
+languages with relative ease. \autoref{lst:generated_model_class} shows the
 \textit{UserValues} POJO generated out of the corresponding type template shown
 in \autoref{lst:template_type}.
 
@@ -250,13 +250,13 @@ paragraph Model Editor.
 \subsubsection{Code Assist}
 
 The Code Assist plug-in helps the developer to keep track of functionality
-provided by other services. It presents the Shared API in a type-safe way to
+provided by other services. It presents the Shared \gls{api} in a type-safe way to
 the developer by relying on the pre- and postconditions defined by MicroNet
 annotations.
 
 Code Assist is implemented by using the Eclipse code-completion extension point.
 This extension point allows to add custom entries to the code completion list
-box. This functionality is used to offer the MicroNet API to the developer any
+box. This functionality is used to offer the MicroNet \gls{api} to the developer any
 time he types \textit{``mn://''} in a source file. The proposals are filtered
 according to the developer's input.
 
@@ -445,9 +445,9 @@ installation.
   projects and the shared folder)
   \item Build the application class files using the master .pom file (annotation
   processing and code generation is performed during this step)
-  \item Containerize the application using docker-compose API and the generated
+  \item Containerize the application using docker-compose \gls{api} and the generated
   docker-compose file
-  \item Launch the application in Docker Swarm using the docker stack API 
+  \item Launch the application in Docker Swarm using the docker stack \gls{api} 
 \end{itemize}
 
 This sounds like a lot of steps but in fact the process is reasonably quick and
@@ -461,9 +461,9 @@ docker-swarm environment may look like.
 The model editor is the last feature that was introduced in MicroNet tools. It
 is the final solution on how to cope with logical \ms{} composition through the
 shared model in a visual way. Since the game model is designed to be mainly
-machine-readable it is not suited to be edited directly in the underlying Json
-files. The model editor is designed to allow convenient defining and editing of
-the model in a way which is especially useful for \og{} application.
+machine-readable it is not suited to be edited directly in the underlying
+\gls{json} files. The model editor is designed to allow convenient defining and
+editing of the model in a way which is especially useful for \og{} application.
 
 The model editor is basically a graph editor visualizing a direct representation
 of the game graph to allow to extending and changing the graph. The graph has
@@ -507,7 +507,7 @@ prefab-tree. The serialized data can directly be stored in the database or
 be used as payload or parameters for message transfers.
 
 The prefab tree can either be persisted in the file-system or persisted in the
-database in Json format. The prefab approach allows for very convenient and
+database in \gls{json} format. The prefab approach allows for very convenient and
 consistent handling of game data both during development and operation.
 
 \todo{screenshot}

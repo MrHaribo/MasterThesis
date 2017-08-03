@@ -32,7 +32,7 @@ abstracted by which framework component.
 
 It has to be mentioned that the dependency abstraction layer is a dependency
 itself and therefore it increases service coupling. But since the abstraction
-layer unifies dependency access it helps to respect the don't repeat yourself (DRY)
+layer unifies dependency access it helps to respect the \glsreset{dry}\gls{dry}
 principle and therefore increases overall cohesion of the application. 
 
 Since the MicroNet adaption layer is realized using Java wrapper libraries,
@@ -58,8 +58,8 @@ referred as the game graph. Two examples of game graphs are shown in
 \end{figure}
 
 The shared model concept is mainly inspired by game graph concept of game
-engines. The graph is represented by a Json document structure and can be shared
-either using a git repository or by using a development database. The Json
+engines. The graph is represented by a \gls{json} document structure and can be shared
+either using a git repository or by using a development database. The \gls{json}
 format helps to achieve platform independence.
 
 The shared model specifically allows to strongly type message transfers and
@@ -137,19 +137,19 @@ prefab of the \code{UserValues} object looks like.
 \subsubsection{Service API}
 
 The messaging system described in \autoref{sub:networking} is the main driver
-for logical composition in MicroNet applications. The service API is offered to
-the user by the API gateway in the form of a URI addressing. \mss{} can also use
-this scheme to find each other internally. The only requirement to use the API
-is to have access to the underlying message broker either trough the MicroNet
-networking component or a direct connection to ActiveMQ.
+for logical composition in MicroNet applications. The service \gls{api} is
+offered to the user by the \gls{api} gateway in the form of a URI addressing. \mss{}
+can also use this scheme to find each other internally. The only requirement to
+use the \gls{api} is to have access to the underlying message broker either trough the
+MicroNet networking component or a direct connection to ActiveMQ.
 
-The MicroNet service API is defined by using static URIs using the specific
+The MicroNet service \gls{api} is defined by using static URIs using the specific
 form: \textit{ms://servicename/fine/grained/api}. The host portion of the URI is
 used for participant discovery by using the message broker functionality to
 register queues for the specific service address, \textit{ms://servicename} in
 this example. The remainder of the URI, \textit{fine/grained/api} in this
-example represents the fine grained service API defined by the \ms{} according
-to tenet Fine-grained Interfaces. This Service API scheme of MicroNet is
+example represents the fine grained service \gls{api} defined by the \ms{} according
+to tenet Fine-grained Interfaces. This service \gls{api} scheme of MicroNet is
 inspired by a RESTful URI schema but is only static\footnote{Requests to URIs
 like \textit{mn://player/123341214/some/functionality} are not realized}. Within
 \mss{} the service API is defined using Java annotations described in paragraph
