@@ -2,9 +2,12 @@
 
 The MicroNet framework is a collection of components. Each component is
 confined in itself which allows simple replacement of components. The components
-are organized in three layers: The framework layer, the service catalogue layer,
+are organized in three layers: the framework layer, the service catalogue layer,
 and the tools layer. \autoref{fig:architecture_layers} shows the layers and all
 the components they contain.
+
+The layers and the components they contain are explained below using Component
+Responsibility Cards (CRC).
 
 \begin{figure}
   \centering
@@ -12,10 +15,6 @@ the components they contain.
   \caption{The layered architecture of MicroNet with the associated components.}
   \label{fig:architecture_layers}
 \end{figure}
-
-
-The layers and the components they contain are explained below using Component
-Responsibility Cards (CRC).
 
 \subsubsection{Framework Layer}
 
@@ -110,9 +109,9 @@ MicroNet.\\
 
 \subsubsection{Service Catalogue Layer}
 
-The service catalogue was a mainly developed in the second semester thesis
-\todo{Chapter 5 Prototype Implementation}. This section will exemplary give
-three examples of catalogue services.\\
+The service catalogue was mainly developed in the second semester thesis
+\cite{biedermann2016project2} in Chapter 5 Prototype Implementation.
+This section will give three representative examples of catalogue services.\\
 
 \noindent
 \begin{tabular}{|l|l|}
@@ -194,12 +193,12 @@ three examples of catalogue services.\\
     \hline
 \end{tabular}
 
-\subsubsection{Tools Layer}
+\subsubsection{Tool Layer}
 
-The development of the tool layer was a major part of the lab research. The
-tools layer's main purpose is to provide aid with the tenet decentralized
-continuous delivery. But the tools layer has also the responsibility to adapt
-\ms{} application development to be suitable for \og{} development.\\
+The development of the tool layer was a major part of the lab research. The tool
+layer's main purpose is to provide support for the tenet decentralized
+continuous delivery. But the tool layer also has the responsibility to adapt the
+\ms{} application development process to be suitable for \og{} development.\\
 
 \noindent
 \begin{tabular}{|l|l|}
@@ -229,7 +228,7 @@ continuous delivery. But the tools layer has also the responsibility to adapt
 \end{tabular}
 
 \footnotetext{The user code is
-          called by the framework (application skeleton) opposed to the user
+          called by the framework (application skeleton) as opposed to the user
           code calling a library (well-defined operations).}
           
 \vspace{0.5cm} \noindent      
@@ -298,7 +297,7 @@ continuous delivery. But the tools layer has also the responsibility to adapt
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Management visual interface for the application (UI)
+          \item Visual management interface for the application (UI)
           \item Compose the application out of catalogue and developed game
           services
         \end{itemize} 
@@ -365,7 +364,7 @@ continuous delivery. But the tools layer has also the responsibility to adapt
           \item Maven (build)
           \item Docker (build \& run)
           \item Docker-compose (compose the application)
-          \item optionally uses CDT Launch Groups and Eclipse Docker Tools
+          \item Optional use of CDT Launch Groups and Eclipse Docker Tools
         \end{itemize} 
     \end{minipage}
 	\\ & \\
