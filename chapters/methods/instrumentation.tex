@@ -586,43 +586,41 @@ This includes the licence the technology is released under.
 
 The polyglot persistence tenet states that every \ms{} should use the data base
 solution that is best suited for its requirements. As described in
-\autoref{sub:infrastructure} is it possible to offer databases to services
+\autoref{sub:infrastructure} it is possible to offer databases to service
 containers as database containers. For production environments however this
-approach can be to unstable \cite{cazorla2017db_containers}. Containerized
-databases can still be useful for localhost deployments to test functionality
-but for production environments a dedicated database system proves to be more
-stable.
+approach may be unstable \cite{cazorla2017db_containers}. Containerized
+databases can still be useful for localhost deployments in order to test
+functionality, but for production environments a dedicated database system
+proves to be more stable.
 
-Session management is a big concern in \og{} as highlighted in
-\autoref{sub:ms_challenges} and \autoref{sub:infrastructure}. Providing a
+Session management is a big concern in \ogs{} as highlighted in
+\autoref{sub:ms_challenges} and in \autoref{sub:infrastructure}. Providing a
 database solution for session management can be facilitated by using a
 distributed cache such as Redis which is a very container friendly solution.
 Also NoSQL databases offer data expiration functionality which can be used
-to for session management.
+for session management too.
 
-MicroNet uses PostgreSQL as an easy to containerize relational database and
-Couchbase as a NoSQL database to store session information. Couchbase is also
-used to make game model described in \autoref{sub:games} highly available.
+MicroNet uses PostgreSQL as an easy method to containerize a relational database
+and Couchbase as a NoSQL database to store session information. Couchbase is also
+used to make the game model as described in \autoref{sub:games} highly
+available.
 
 \subsection{Source and Artifact Control}
 
-All the source code of this thesis is available on
-github\cite{micronet2017doku}. The github page also contains the user user
-manual for MicroNet in \gls{html} format.
-
-MicroNet is also Available on Maven Central to allow easy integration into Java
-projects.
-
-All the the dependencies like the message broker or the databases are available
-on Docker Hub as Docker containers.
+All the source code of this thesis is available on github
+\cite{micronet2017doku}. The github page also contains the user manual for
+MicroNet in \gls{html} format. MicroNet is also Available on Maven Central to
+allow easy integration into Java projects. All the the dependencies like the
+message broker or the databases are available on Docker Hub as Docker
+containers.
 
 \subsection{Cloud Service Provider Gaming Solutions}
 
-The major could service providers Amazon and Google provide dedicated solutions
-to host \og{} environments. These solution solutions are deeply integrated
-into the respective cloud technology of the provider and offer additional
-functionality to ease the deployment of \ogs{}. Due to the restrictions mention
-in \autoref{sub:zero_buget} these solution have only been examined briefly.
+The major cloud service providers Amazon and Google provide dedicated solutions
+to host \og{} environments. These solutions are deeply integrated into the
+respective cloud technology of the provider and offer additional functionality
+in order to ease the deployment of \ogs{}. Due to the restrictions mention in
+\autoref{sub:zero_buget} these solutions have only briefly been examined.
 
 \subsubsection{Google Cloud Gaming Solutions}
 
@@ -631,7 +629,7 @@ for the existing Google cloud infrastructure with additional functionality to
 provide matchmaking. For this purpose the Google Compute Engine \gls{api} is used
 which is available in a number of programming languages like Java, C\#, GO,
 Phthon, NodeJS, and others. This covers the majority of game engines and
-allows em to use the Google Gaming Solution.
+allows them to use the Google Gaming Solution.
 
 \subsubsection{Amazon Game Lift}
 
@@ -646,33 +644,33 @@ engine under the name Lumberyard.
 
 \subsection{Dedicated Server}
 
-The simplest way to deploy \ms{} application is a dedicated server. Using only a
-single dedicated server for the application defies the advantages of \ms{}
+The simplest way to deploy a \ms{} application is a dedicated server. Using only
+a single dedicated server for the application defies the advantages of \ms{}
 applications to be robust and scalable. This approach has the same problem as a
 monolithic application.
 
-But all evaluated composition engines abstract the physical environment from the
-application and therefore the development and deployment process in basically
+But all the evaluated composition engines detach the physical environment from
+the application and therefore the development and deployment process is basically
 the same on a single machine or a cluster of nodes. Because of this reason a
 single machine is sufficient as a target environment for lab research.
 
-A dedicated server in this regard could be either a be a bare metal server of a
+A dedicated server in this respect could be either a bare metal server or a
 virtual server in the cloud. In both cases the environment is very similar for
-the developer: A hosts running Linux which are reachable over the
-Internet. For this thesis a virtual server at the HSR will be used for lab research.
+the developer: a host running Linux which is reachable over the Internet. For
+this thesis a virtual server at HSR will be used for lab research.
 
 \subsection{Game Engine}
 
 The game engine used to evaluate game engine integration in a \ms{} application
-is Unity3D. Unity3D is a very popular game engine and is permanently improved.
-An evaluation of different game engines has been conducted in project thesis one
-\todo{6.1.1 Game Engines}.
+is Unity3D. Unity3D is a very popular game engine and is permanently being
+improved. An evaluation of different game engines has been conducted in project
+thesis one \cite{biedermann2015project1} in section 6.1.1 Game Engines.
 
 \subsection{The Spacegame Prototype}
 
 The Spacegame prototype is a project that I am working on in my free time. Since
-my master studies span over four semester but i only wrote three theses I found
-some time during the additional semester to build a game prototype using
+my master studies have had a span over four semesters and I only wrote three
+theses I found some time during the additional semester to build a game prototype using
 MicroNet. The Spacegame prototype is an example of a more sophisticated game
 than the example game included in MicroNet.
 
