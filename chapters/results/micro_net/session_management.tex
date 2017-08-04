@@ -3,8 +3,8 @@
 
 MicroNet provides session management as a high level feature to tackle the
 integral part of state-full sessions in an \og{}. Player sessions are
-essential to track actions of individual players and persist the progress of
-each player individually. Game sessions tackle the issue that \og{} sessions are
+essential to track actions of individual players and individually persist the
+progress of each player. Game sessions tackle the issue that \og{} sessions are
 state-full and therefore the simulation of each game session is unique.
 
 Session management has been one major issue throughout all three theses. The
@@ -12,24 +12,27 @@ final solution for session management relies on Couchbase as a NoSQL database.
 
 \subsubsection{Player Sessions}
 
-The authentication process that has been mentioned briefly in
-\autoref{sub:networking} is responsible to establish player sessions. Once
+The authentication process that has been briefly mentioned in
+\autoref{sub:networking} is responsible for establishing player sessions. Once
 authenticated the player sessions can be used to collate incoming messages to
 users. Player sessions can also be used to store frequently changing player data
 to allow fast and global access. In MicroNet the player sessions can be accessed
-through Couchbase documents provided through the persistence component of
-MicroNet.
+through Couchbase documents provided by the persistence component of MicroNet.
 
-One drawback of the solution for player sessions is the fact that multiple API
-gateways each gateway needs the ability to look-up player connections to
+One drawback of the solution for player sessions is the fact that with multiple
+API gateways each gateway needs the ability to look up player connections to
 determine if the corresponding user is authenticated. This process has to be
-done upon every player message which leads a lot of reading access to Couchbase.
-A possibility to reduce the amount of database reads would be to use a token
-that is created upon authentication which the user would have to send with every
-request. The drawback of this method is that it introduces a significant
-bandwidth overhead. It also requires to share the tocken with the user rhough a
-secure channel which has to be established. So the current solution is the most
-simple one but with the cost of many database reads.
+done upon every player message which leads to a lot of reading access to
+Couchbase. A possibility to reduce the amount of database reads would be to use
+a token that is created upon authentication which the user would have to send
+with every request. The drawback of this method is that it introduces a
+significant bandwidth overhead. It also requires the token to be shared with the
+user through a secure channel which has to be established. So the current
+solution is the most simple one but with the cost of many database reads. In
+production the transmission of the user credentials must take place over a
+secure channel. For simplicity this aspect is omitted in the MicroNet prototype
+and also because this topic is well documented \cite{sun2015security},
+\cite{shieh2015methods}, and \cite{thanh2016embedding}.
 
 \begin{figure}
 	\centering
@@ -70,7 +73,7 @@ consists of the following steps:
 
 Game sessions are a strategy to deal with the state-fullness of \ogs{}. Game
 sessions are unique and a player can only be in one game session at a time. Game
-sessions are either infinitely or terminate at specific conditions. Either way
+sessions are either infinite or terminate at specific conditions. Either way
 the player must be able to find the correct simulation instance which hosts the
 game session he wants to participate in. MicroNet provides this functionality
 through the WorldService which is part of the service catalogue.
@@ -86,11 +89,11 @@ through the WorldService which is part of the service catalogue.
 The join process consists of the following steps:
 
 \begin{enumerate}
-  \item The player sends a join request for game session B to the API gateway
-  via the public message broker.
-  \item The gateway service forwards the message to the \textit{mn://world/join}
+  \item The player sends a join request for game session B to the API
+  gateway via the public message broker.
+  \item The gateway service forwards the request to the \textit{mn://world/join}
   queue via the internal message broker.
-  \item One world service polls the message in a competing consumer fashion
+  \item One world service polls the message in a competing consumer fashion.
   \item The world service checks if the session already exists in the session
   store. If not, the world service adds the game session to the session store,
   marks it as \textit{isOpening} and initiates the game session opening process (capital
@@ -100,15 +103,15 @@ The join process consists of the following steps:
   \item If the game session is open the world service directly
   forwards the IP/Port combination to the player.  if it is not open or
   just opening a ``please wait'' response is forwarded to the player.
-  \item The join response is consumed by a temporary queue held open by the API
-  Gateway. The gateway forwards the join response to the player via the public
-  broker.
-  \item The player consumes the join response using a temporary queue. In the
-  case the session was already open, the player can join right away. The regular
-  session flow (a, c, c, \ldots) starts now.
+  \item The join response is consumed by a temporary queue held open by
+  the API Gateway. The gateway forwards the join response to the player
+  via the public broker.
+  \item The player consumes the join response using a temporary queue.
+  In the case the session was already open, the player can join right away. The regular
+  session flow (a, b, c, \ldots) starts now.
 \end{enumerate}
 
-In the case the requested game session is not open when the player wants to
+In case the requested game session is not open when the player wants to
 join\footnote{It is a common case that the game session is not open, for
 example when the \og{} has many (thousands) of available game sessions.} the
 session must be started asynchronously and the player must be notified when the
@@ -129,15 +132,16 @@ session is ready. This process consists of the following steps:
     \item The World Service marks the game session as \textit{isOpen} in the
     session store.
     \item The World service sends a broadcast event request to the API Gateway
-    using the \textit{mn://gateway/broadcast/event} queue. The event containes
-    the the IP/Port combination of the simulation service which is hosting the
+    using the \textit{mn://gateway/broadcast/event} queue. The event contains
+    the IP/Port combination of the simulation service which is hosting the
     game session. A list of all player IDs  which are registered for the
     session is sent along with the broadcast event request using parameters to
     make the gateway aware of all recipients of the event.
     \item One API Gateway polls the broadcast requests in a competing consumer
-    fashion \item The Gateway broadcasts the join event to all waiting players
+    fashion 
+    \item The Gateway broadcasts the join event to all waiting players
     according to the recipients list. From then on the regular game session
-    message flow (sequence: a, c, c, \ldots) starts.
+    message flow starts (sequence: a, b, c, \ldots).
 \end{enumerate}
 
 

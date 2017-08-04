@@ -7,16 +7,18 @@ game is very simple it gives a good overview over the functionality of MicroNet.
 The sample game is a guessing game which is played in rounds of 15 seconds.
 In each round the players have to guess a number between 1 and 100. The players
 receive a score based on the proximity of the guess to the number. The score of
-all player is shown in a scoreboard. 
+all players is shown in a scoreboard. 
 
-The game client of the sample game is a standalone Java application using the
+The game client of the sample game is a stand-alone Java application using the
 Laterna console gui library. Laterna allows to develop window based GUIs for the
-terminal. This allows to run the game client also on server environments
-through the command line. \todo{screenshot}
+terminal. This allows the game client to be run also on server environments
+through the command line which can be used for testing purposes.
+
+\todo{screenshot}
 
 \autoref{fig:sample_game_flow} shows the communication of the sample game. The
-numeric sequence is the communication flow of a player vote and the capital
-letter sequence is the round control communication.\\
+numeric sequence 1,2,3,\ldots is the communication flow of a player vote and the
+capital letter sequence A,B,C,\ldots is the game round control communication.\\
 
 \begin{figure}
 	\centering
@@ -25,24 +27,26 @@ letter sequence is the round control communication.\\
 	\label{fig:sample_game_flow}
 \end{figure}
 
-The round control communication flow:
+\noindent
+The game round control communication flow:
 
 \begin{enumerate}[label=\Alph*.]
-  \item The round service broadcasts a new new round event. The new round event
+  \item The round service broadcasts a new round event. The new round event
   contains the guessed number for the next round.
   \item \begin{enumerate}[label=\arabic*.]
-    \item All voting services receive the new round event and store next the
+    \item All voting services receive the new round event and store the next
     guess number in memory.
   	\item One player service receives the new round event to issue a score
   	broadcast. The scores of all players are available through the session store.
   \end{enumerate}
-  \item The player service which received the new round event broadcasts a score
-  update event to all participating players.
-  \item Each player received the score update and updates its scoreboard
+  \item The player service which has received the new round event broadcasts a
+  score update event to all participating players.
+  \item Each player receives the score update and updates his scoreboard
   accordingly.
    
 \end{enumerate}
 
+\noindent
 The player voting communication flow:
 
 \begin{enumerate}
@@ -54,12 +58,13 @@ The player voting communication flow:
 \end{enumerate}
 
 It has to be mentioned that the round service is a singleton service. This is
-necessary to ensure that the new round event is broadcast only once. Problems
+necessary to ensure that the new round event is broadcasted only once. Problems
 like this are very common in distributed game development. To ensure the
 stability of the application despite having singleton services can be quite a
-challenge. One strategy is to keep singleton services as small as possible to
-leave little room for failure. In the case of a failure the composition engine
-must ensure that the singleton service is restarted. 
+challenge. One strategy is to keep the number of singleton services as small as
+possible and developing singleton services as minimalistic as possible to leave
+little room for failure. In the case of a failure the composition engine must
+ensure that the singleton service is restarted.
 
 A singleton service must be designed in a way that no crucial data is lost upon
 service failure and it must be possible to recover the state of a singleton

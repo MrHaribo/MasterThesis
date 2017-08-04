@@ -1,9 +1,9 @@
 \subsection{Networking}
 \label{sub:networking}
-Networking in MicroNet has been discussed in detail in \todo{6.5 Networking
-Implementation} in project thesis one. The original implementation was
-improved over the course of all three theese and this section provides a summary
-of the final implementation solution of networking.
+Networking in MicroNet has been discussed in detail in section 6.5 Networking
+Implementation in project thesis one \cite{biedermann2015project1}. The original
+implementation was improved in the course of all three theses and this section
+provides a summary of the final implementation solution of networking.
 
 Networking is the most fundamental aspect of an \og{} development and crucial
 for the stability of \ms{} applications. The networking concept for \ms{}
@@ -13,11 +13,12 @@ implementation.
 
 In MicroNet this network abstraction is realized by defining a set of networking
 capabilities that must be supported by the underlying network technology. These
-capabilities are represented in the form the \code{IPeer} Java interface shown
-in \autoref{lst:ipeer_interface}. Standard services can therefore communicate
-over an instantiation of the \code{IPeer} interface injected by the framework.
-This makes the underlying technology exchangeable since the interface is stable.
-This allows platform independence as long as the services are written in Java.
+capabilities are represented in the form of the \code{IPeer} Java interface
+shown in \autoref{lst:ipeer_interface}. Standard services can therefore
+communicate over an instantiation of the \code{IPeer} interface injected by the
+framework. This makes the underlying technology exchangeable since the interface
+is stable. This allows platform independence as long as the services are written
+in Java.
 
 \begin{figure}
 	\begin{lstlisting}[language=Java,firstnumber=1] 
@@ -49,13 +50,13 @@ validated in practice. As a result MicroNet is heavily dependent on ActiveMQ.
 
 According to the polyglot programming tenet it is a requirement that arbitrary
 technologies can participate in a \ms{} application despite the tight coupling
-to ActiveMQ. To accomplish this an adapter must be implemented to couple the
-foreign technology with the application. The adapter can be an be an
+with ActiveMQ. To accomplish this an adapter must be implemented to couple the
+foreign technology with the application. The adapter can be an
 implementation of an equivalent messaging interface in another programming
-language using one of the many proposed ways to integrate with ActiveMQ like for
-example RESTful HTTP, JMS, .NET, C/C++, Go, Node.js, Python, and more.
+language using one of the many proposed ways to integrate with ActiveMQ like
+RESTful HTTP, JMS, .NET, C/C++, Go, Node.js, Python, and more.
 
-For game engine integration the messaging interface has also to be implemented
+For game engine integration the messaging interface also has to be implemented
 in the respective technology of the engine. In the case of MicroNet ActiveMQ
 Unity3D is used as the refernce game engine which is written in C\#. For this
 purpose the NMS \gls{api} which is a .NET port of the Java Message Service (JMS)
@@ -73,16 +74,9 @@ The gateway intercepts all messages from the public network and forwards them to
 the responsible \ms{}. This is further detailed in the Messaging \gls{api} section
 below.
 
-The reverse proxy is in fact also the API gateway. An API gateway is a standard
-approach to offer the service \gls{api} to the users. Upon reception of a message the
-gateway can filter it according to a white- or blacklisting approach.
-
-\mss{} can access the messaging functionality by using the context object
-injected by the framework. \autoref{lst:service_communication} shows an example
-of two simple \mss{} communicating with each other. It has to be mentioned that
-the two services in the listing are fully functional except for the omitted
-inludes. The setup of the context and the \ms{} main function are completely
-abstracted by the framework.
+The reverse proxy in fact also is the API gateway. An API gateway is a standard
+approach offering the Service \gls{api} to the users. Upon reception of a
+message the gateway can filter it according to a white- or blacklisting approach.
 
 \begin{figure}
 \begin{lstlisting}[language=Java,firstnumber=1] 
@@ -111,14 +105,21 @@ public class ServiceBar {
 \label{lst:service_communication}
 \end{figure}
 
+\mss{} can access the messaging functionality by using the context object
+injected by the framework. \autoref{lst:service_communication} shows an example
+of two simple \mss{} communicating with each other. It has to be mentioned that
+the two services in the listing are fully functional without any additional
+code necessary. The setup of the context and the \ms{}'s main function are
+completely abstracted by the framework.
+
 \paragraph{Message Parameters}
 
-One useful feature that MicroNet provides are typed message parameters. The
+One useful feature that MicroNet provides are typed message parameters. These
 parameters are defined using Parameter Codes and the Template Types both defined
 int the Shared Model.
 
-Message parameters spare the developer with the need to define a specific
-payload for each message transfer individually. For example slightly different
+Message parameters spare the developer the need to individually define a
+specific payload for each message transfer. For example slightly different
 messages can be distinguished by only using parameter codes and leaving the
 payload unchanged.
 
@@ -134,6 +135,7 @@ public class ServiceFoo {
 		context.getPeer().sendRequest(destination, request);
 	}
 }
+
 @MessageService(uri = "mn://bar")
 public class ServiceBar {
 	@MessageListener(uri="/hello")
@@ -152,7 +154,7 @@ along with a request. For responses this works exactly the same.
 
 \subsubsection{Connection Authentication}
 
-In regards to Internet applications security is always a concern. The backbone
+Security is always a concern in regard to Internet applications. The backbone
 of distributed application security is user connection authentication.
 Since multiple gateways can be active simultaneously the integrity of the user
 has to be validated by the gateway with every request. The gateway validates the
@@ -166,11 +168,11 @@ login service. Upon a positive login response from the account service the
 processing gateway adds the user connection to the session store. Other gateways
 are then able to look up if a connection is authenticated. The advantage of this
 solution is that it scales very well. The downside is that it involves many
-reads to the session store.
+reads of the session store.
 
 A requirement for this approach to work is that the underlying networking
 provides a way to correlate incoming messages with a connection. This can be
-done generating a connection id hash based upon the user's IP/port combination.
+done generating a connection ID hash based upon the user's IP/port combination.
 ActiveMQ has this capability already built in by providing a globally unique
 connection ID per connection.
 
@@ -184,19 +186,15 @@ of the fine-grained interfaces tenet. It offers the following functionality to
 promote stateless message transfers:
 
 \begin{itemize}
-  \item Sending a requests to a \ms{} either from a user or another \ms{}
-  \item Sending a requests to a \ms{} and waiting for a response with a
-  short\footnote{5 - 15 seconds seems appropriate for most short requests.}
-  timeout either from a user or another \ms{}
+  \item Sending a request to a \ms{} either from a user or another \ms{}
+  \item Sending a request to a \ms{} and waiting for a response with a
+  short\footnote{5 - 15 seconds of timeout seem appropriate for most short
+  requests.} timeout either from a user or another \ms{}
   \item Sending an event to a user from a \ms{}
   \item Sending an event to a group of users from a \ms{}
   \item Sending a message to a topic, meaning to all subscribed \mss{}
   \item Named message parameters
 \end{itemize}
-
-These messaging capabilities are enough to model any arbitrary message transfer.
-It leaves a great degree of freedom and makes message transfer implementation
-very comfortable. 
 
 \begin{figure}
 	\centering
@@ -206,21 +204,25 @@ very comfortable.
 	\label{fig:messaging_api}
 \end{figure}
 
+These messaging capabilities are sufficient to model any arbitrary message
+transfer. They leave a great degree of freedom and make message transfer
+implementation very comfortable. 
+
 \autoref{fig:messaging_api} shows the communication between a user and a
-MicroNet application. The user in this scenario is already authenticated to the
+MicroNet application. The user in this scenario is already authenticated so the
 gateway only needs filter client quests according to access restrictions. The
 user sends his request to the \code{mn://request} queue which leads to an
 arbitrary gateway instance consuming the request. The gateway reads the
-\code{USER\_REQUEST} parameter from the request and forwards the message to the
-internal broker according to it. Depending on if the user expects a response
-within the defined timeout or if the no response is expected the gateway holds
-on to a temporary response queue which allows immediate responses. Such an
-immediate response can also indicate that the request will need longer to be
-processed and therefore the requester has to act accordingly and wait for an
-asynchronous response.
+\code{USER\_REQUEST} parameter from the request and according to it forwards the
+message to the internal broker. Depending on the situation if the user expects a
+response within the defined timeout or if no response is expected the
+gateway holds on to a temporary response queue which allows immediate responses.
+Such an immediate response can also indicate that the request will need longer
+to be processed and therefore the requestor has to act accordingly and wait for
+an asynchronous response.
 
 These asynchronous responses are called events. An event can either be sent to a
-single user or to a group or players. For this purpose \mss{} can send a request
+single user or to a group of users. For this purpose \mss{} can send a request
 to the \code{mn://forward} queue which is consumed by any gateway who in
 response forwards the event to the corresponding user or group.
 
