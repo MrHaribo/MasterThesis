@@ -1,7 +1,7 @@
 This is makeindex, version 2.15 [MiKTeX 2.9.6210 64-bit] (kpathsea + Thai support).
 Scanning style file ./MasterThesisReport.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file MasterThesisReport.glo....done (145 entries accepted, 0 rejected).
-Sorting entries....done (1078 comparisons).
-Generating output file MasterThesisReport.gls....done (95 lines written, 0 warnings).
+Scanning input file MasterThesisReport.glo....done (153 entries accepted, 0 rejected).
+Sorting entries....done (1154 comparisons).
+Generating output file MasterThesisReport.gls....done (103 lines written, 0 warnings).
 Output written in MasterThesisReport.gls.
 Transcript written in MasterThesisReport.glg.
