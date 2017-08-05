@@ -20,13 +20,14 @@ functionality they truly need. The major challenge is in making the interface
 available to all services and clients.
 
 Several MicroNet components are dedicated to facilitating fine-grained
-interfaces. The MicroNet annotation tool allows defining the interface.
-MicroNet code assists offer the interface to the developer. MicroNet annotation
-processing exports the \gls{api} and automatically integrates the \gls{api} into
-the generated service executable file. The API gateway is responsible for
-enforcing security policies to regulate access control to restrict parts of the
-\gls{api}. It is also responsible to offer the \gls{api} to clients. \mss{} can
-access the \gls{api} by only using the networking functionality of MicroNet.
+interfaces. The MicroNet \textit{Annotation} tool allows defining the interface.
+MicroNet \textit{Code Assist} offers the interface to the developer. MicroNet
+\textit{Annotation Processing} exports the \gls{api} and automatically
+integrates the \gls{api} into the generated service executable file. The API
+gateway is responsible for enforcing security policies to regulate access
+control to restrict parts of the \gls{api}. It is also responsible to offer the
+\gls{api} to clients. \mss{} can access the \gls{api} by only using the
+networking functionality of MicroNet.
 
 The single responsibility aspect must be tackled by choosing the ``right''
 service granularity. Right means that the service must be neither too small nor
@@ -45,11 +46,12 @@ domains like a database service or a serialization service makes little sense
 for most applications. Instead the domain driven approach greatly helps to
 understand the application as a developer while still answering all technical
 requirements. \gls{ddd} is also a useful approach to achieve a high service
-cohesion and can be used to define the service \gls{api}.
+cohesion and can be used to define the \textit{Service API}.
 
-With the shared model and the service catalogue, MicroNet provides an
-implementation approach to \gls{ddd}. Both components help the developer to define
-the application according to the problem domain (the game under development).
+With the \textit{Shared Model} and the service catalogue, MicroNet provides an
+implementation approach to \gls{ddd}. Both components help the developer to
+define the application according to the problem domain (the game under
+development).
 
 \subsubsection{IDEAL}
 
@@ -132,9 +134,10 @@ process. Jenkins supports Git and Maven and is therefore very well suited for
 MicroNet.
 
 MicroNet tools also provide a selection of utilities to help automating \ms{}
-application management. Its Launch Utility provides shortcuts to compose an
-application and to execute the build process locally. The service explorer
-provides a UI to automate the generation and execution of composition scripts.
+application management. Its \textit{Launch Utility} provides shortcuts to
+compose an application and to execute the build process locally. The
+\textit{Service Explorer} provides a UI to automate the generation and execution
+of composition scripts.
 
 \paragraph{Loose Coupling}
 
@@ -149,12 +152,12 @@ mandatory physical dependency. As soon as a service can communicate with the
 message broker it is able to participate within the \ms{} application. 
 
 In addition to receiving messages, services must also understand messages.
-In MicroNet this is achieved by using the shared model approach to make message
-semantics known throughout the application.
+In MicroNet this is achieved by using the \textit{Shared Model} approach to make
+message semantics known throughout the application.
 
 The session store is another concept of MicroNet with encourages loose coupling.
 It allows services to store data and not to care about how it is stored.
-The format of the data in the session store is based on the shared model.
+The format of the data in the session store is based on the \textit{Shared Model}.
 This allows services to see the session store as a black box and to just query
 the typed data they care about.
 
@@ -313,10 +316,10 @@ versioning and evolution (e.g., change of interface in terms of syntax and/or
 semantics), and error handling on your projects?}\\
 
 The distribution classics are mainly covered by the MircoNet composition
-concepts. The Shared Model and API represent the solution to overcome
-representation/schema problems. Service versioning and evolution is supported
-by the service explorer and lifecycle management is taken care of by the
-composition engine.\\
+concepts. The \textit{Shared Model} and \textit{Service API} represent the
+solution to overcome representation/schema problems. Service versioning and
+evolution is supported by the \textit{Service Explorer} and lifecycle management
+is taken care of by the composition engine.\\
 
 \textit{-- Did you define machine-readable service contracts? If so, what
 should they cover and how should they be expressed (e.g., are all REST maturity
@@ -326,9 +329,10 @@ syntactic and semantic interoperability between service consumers and
 providers?}\\
 
 HTTP is not used at all within MicroNet at the moment. Instead the service
-contracts are defined by the Shared API. The Shared API is defined in Json
-which is a machine readable language. Machine readability is used for code
-generation in order to make the Service API accessible by \mss{}.\\
+contracts are defined by the \textit{Service API}. The \textit{Service API} is
+defined in Json which is a machine readable language. Machine readability is
+used for code generation in order to make the \textit{Service API} accessible by
+\mss{}.\\
 
 \noindent \textit{-- How did you deal with audit requirements,
 e.g.,Completeness, Accuracy, and Validity of, as well as Restricted access to
@@ -353,7 +357,7 @@ integrity is only needed for financially relevant actors as mentioned above.
 Since Couchbase is document oriented it is schemaless, foreign keys can be
 modelled according to the needs of the developer using the query language of
 Couchbase. MicroNet shares the semantics over service boundaries using the
-shared model.\\
+\textit{Shared Model}.\\
 
 \textit{7. Do you have any advice/guidance how to compose microservices into end
 user client applications? How about application-level intermediaries, i.e., can

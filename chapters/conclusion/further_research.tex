@@ -6,15 +6,15 @@ time constraints.
 \subsection{Shared Model Logic Code Injection}
 \label{sub:model_code_injection}
 
-One limitation of the shared model is that the generated model classes (POJOs)
-do not allow adding any logic to them. This would however be helpful in order to
-share functionality in a way that is decoupled from any programming language.
-One possibility to inject code into model objects is to use a high level
-scripting language like Java Script or Lua. Interpreters of scripting languages
-are available on many different platforms and there is always the option do
-define a proprietary scripting language optimized for the problem domain.
-Interpreted scripting languages are a effortless and portable way to make
-application logic available throughout a \ms{} application.
+One limitation of the \textit{Shared Model} is that the generated model classes
+(POJOs) do not allow adding any logic to them. This would however be helpful in
+order to share functionality in a way that is decoupled from any programming
+language. One possibility to inject code into model objects is to use a high
+level scripting language like Java Script or Lua. Interpreters of scripting
+languages are available on many different platforms and there is always the
+option do define a proprietary scripting language optimized for the problem
+domain. Interpreted scripting languages are a effortless and portable way to
+make application logic available throughout a \ms{} application.
 
 Although it has to be mentioned that interpreting Java Script code always
 presents a security issue. This aspect has to be examined with absolute care.
@@ -25,32 +25,33 @@ process.
 
 \subsection{Shared Model Automatic Database Integration}
 
-One purpose that the shared model is designed for is to make it automatically
-compatible with the database solution. This is not implemented in the current
-version of MicroNet. The proposed design for this feature is to provide a
-DataAccess layer via the MicroNet framework which offers a comprehensive API to
-query and update objects in the database using the shared model as a the driver.
+One purpose that the \textit{Shared Model} is designed for is to make it
+automatically compatible with the database solution. This is not implemented in
+the current version of MicroNet. The proposed design for this feature is to
+provide a DataAccess layer via the MicroNet framework which offers a
+comprehensive API to query and update objects in the database using the
+\textit{Shared Model} as a the driver.
 
 \subsection{Message Listener AST parsing}
 
-Momentarily MicroNet annotations are quite cumbersome because to fully describe
-a message listener all the used message parameters have to be listed.
+Momentarily MicroNet \textit{Annotations} are quite cumbersome because to fully
+describe a message listener all the used message parameters have to be listed.
 This aspect could be simplified by parsing the \gls{ast} of the message listener
 and to perform reference counting of parameters to automatically deduce
 parameters of a message listener.
 
 \subsection{Game Engine Game Model Integration}
 
-The shared model is additionally designed in a way that is compatible with the
-game graph data structure of game engines. It would be possible to realize an
-automated integration of the MicroNet shared model within the game engine game
-graph. In a system of this nature game objects which are currently part of the
-game simulation could be automatically updated using an event based messages.
-The game simulation then could make use of so called views of game entities and
-their properties which are automatically updated by the framework. This way the
-developer is spared with manual synchronization of the game state and only needs
-to contribute code in a framework like fashion to cover events happening for
-views. An example uf such an event could be a \textit{onHealth} event which
-would cause the game client updates the health bar visuals accordingly. This
-dynamic entity view feature would greatly simplify the networking implementation
-of the game simulation.
+The \textit{Shared Model} is additionally designed in a way that is compatible
+with the game graph data structure of game engines. It would be possible to
+realize an automated integration of the MicroNet \textit{Shared Model} within
+the game engine game graph. In a system of this nature game objects which are
+currently part of the game simulation could be automatically updated using an
+event based messages. The game simulation then could make use of so called views
+of game entities and their properties which are automatically updated by the
+framework. This way the developer is spared with manual synchronization of the
+game state and only needs to contribute code in a framework like fashion to
+cover events happening for views. An example uf such an event could be a
+\textit{onHealth} event which would cause the game client updates the health bar
+visuals accordingly. This dynamic entity view feature would greatly simplify the
+networking implementation of the game simulation.

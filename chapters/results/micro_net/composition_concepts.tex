@@ -57,25 +57,27 @@ referred to as the game graph. Two examples of game graphs are shown in
   \label{fig:scenegraph}
 \end{figure}
 
-The shared model concept is mainly inspired by the game graph concept of game
-engines. The graph is represented by a \gls{json} document structure and can be shared
-either using a Git repository or by using a development database. The \gls{json}
-format helps to achieve platform independence.
+The \textit{Shared Model} concept is mainly inspired by the game graph concept
+of game engines. The graph is represented by a \gls{json} document structure and
+can be shared either using a Git repository or by using a development database.
+The \gls{json} format helps to achieve platform independence.
 
-The shared model is specifically useful to enable strongly typed message
-transfers and unified database access. The design of the shared model allows to
-integrate the game graph into a game engine because the concepts are closely
-related.
+The \textit{Shared Model} is specifically useful to enable strongly typed
+message transfers and unified database access. The design of the \textit{Shared
+Model} allows to integrate the game graph into a game engine because the
+concepts are closely related.
 
-The shared model represents the game graph in the form of two individual trees:
-The template tree and the prefab tree. The template tree is responsible for
-storing types. Types are templates to define all entities of the game. Entities
-are not restricted to one purpose and can be used to store or transmit domain
-data. Templates are plain data objects and can be thought of as the equivalent
-to Java POJOs. At the moment it is not possible to add game logic to templates.
-But this is planned for the future by using code injection (explained in
-\autoref{sub:model_code_injection}). \autoref{lst:template_type} shows an
-example of a template type in the template tree.
+The \textit{Shared Model} represents the game graph in the form of two
+individual trees: the \textit{Template Tree} and the \textit{Prefab Tree}. The
+\textit{Template Tree} is responsible for storing types. \textit{Template Types}
+are blueprints to define all entities of the game. Entities are not restricted
+to one purpose and can be used to store or transmit domain data.
+\textit{Template Types} are plain data objects and can be thought of as the
+equivalent to Java POJOs. At the moment it is not possible to add game logic to
+\textit{Template Types}. But this is planned for the future by using code
+injection (explained in \autoref{sub:model_code_injection}).
+\autoref{lst:template_type} shows an example of a \textit{Template Type} in the
+\textit{Template Tree}.
 
 \begin{figure}
 \begin{lstlisting}[language=json,firstnumber=1] 
@@ -99,26 +101,27 @@ example of a template type in the template tree.
   ]
 }
 \end{lstlisting}
-\caption{The template type for the UserValues domain object in the template
-tree.}
+\caption{The \textit{Template Type} for the UserValues domain object in the \textit{Template Tree}.}
 \label{lst:template_type}
 \end{figure}
 
-The types supported of the template tree are directly derived from the java
-types because they natively work with the Java side of MicroNet. The Java types
-are well documented in the Java language definition and can therefore be
+The types supported of the \textit{Template Tree} are directly derived from the
+java types because they natively work with the Java side of MicroNet. The Java
+types are well documented in the Java language definition and can therefore be
 replicated in other programming languages to achieve deterministic behaviour on
 all systems.
 The supported types are: STRING, NUMBER (INT, FLOAT, DOUBLE, \ldots), BOOLEAN,
 CHAR, ENUM, LIST, SET, MAP, and COMPONENT. More information about the supported
-types can be found in paragraph on the Model Editor in \autoref{sub:tools}.
+types can be found in paragraph on the \textit{Model Editor} in
+\autoref{sub:tools}.
 
-The second tree is the prefab tree. It is responsible for storing actual
-instances of templates representing the statical part of the game state. The
-prefab tree is a concept to allow game designers to define the properties of the
-game in a way which is directly understood by MicroNet and which can therefore
-be directly used to persist and synchronize the game. \autoref{lst:prefab_type}
-shows how a prefab of the \code{UserValues} object looks like.
+The second tree is the \textit{Prefab Tree}. It is responsible for storing
+actual instances of \textit{Template Types} representing the statical part of the game
+state. The \textit{Prefab Tree} is a concept to allow game designers to define the
+properties of the game in a way which is directly understood by MicroNet and
+which can therefore be directly used to persist and synchronize the game.
+\autoref{lst:prefab_type} shows how a \textit{Prefab} of the \code{UserValues}
+object looks like.
 
 \begin{figure}
 \begin{lstlisting}[language=json,firstnumber=1] 
@@ -130,7 +133,7 @@ shows how a prefab of the \code{UserValues} object looks like.
   }
 }
 \end{lstlisting}
-\caption{A prefab of the UserValues template type.}
+\caption{A \textit{Prefab} of the UserValues \textit{Template Type}.}
 \label{lst:prefab_type}
 \end{figure}
 
@@ -139,25 +142,25 @@ shows how a prefab of the \code{UserValues} object looks like.
 \subsubsection{Service API}
 
 The messaging system described in \autoref{sub:networking} is the main driver
-for logical composition in MicroNet applications. The Service \gls{api} is
+for logical composition in MicroNet applications. The \textit{Service API} is
 offered to the user by the \gls{api} gateway in the form of a URI addressing. \mss{}
 can also use this scheme to find each other internally. The only requirement to
 use the \gls{api} is to have access to the underlying message broker either
 through the MicroNet networking component or through a direct connection to
 ActiveMQ.
 
-The MicroNet service \gls{api} is defined by using static URIs using the
+The MicroNet \textit{Service API} is defined by using static URIs using the
 specific form: \textit{ms://servicename/fine/grained/api}. The host portion of
 the URI is used for participant discovery by using the message broker
 functionality to register queues at the specific service address,
 \textit{ms://servicename} in this example. The remainder of the URI,
-\textit{fine/grained/api} in this example represents the fine grained Service
-\gls{api} defined by the \ms{} according to tenet of Fine-grained Interfaces.
-This service \gls{api} scheme of MicroNet is inspired by a RESTful URI schema but is
-only static\footnote{Requests to URIs like
+\textit{fine/grained/api} in this example represents the fine grained
+\textit{Service API} defined by the \ms{} according to tenet of Fine-grained
+Interfaces. This \textit{Service API} scheme of MicroNet is inspired by a
+RESTful URI schema but is only static\footnote{Requests to URIs like
 \textit{mn://player/123341214/some/functionality} are not realized.}. Within
-\mss{} the service API is defined using Java annotations described in the
-paragraph Annotations in \autoref{sub:tools}.
+\mss{} the \textit{Service API} is defined using Java annotations described in
+the paragraph Annotations in \autoref{sub:tools}.
 
 \subsubsection{Service Catalogue}
 

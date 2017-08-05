@@ -104,12 +104,13 @@ utility of MicroNet combines both techniques by automating the generation and
 execution of the docker-compose and the master .pom file which further reduces
 the number of manual steps.
 
-The MicroNet Launch utility locally provides shortcuts for all deployment steps.
-The process of uploading and starting the application on the target environment
-varies greatly according to the chosen cloud provider. My recommendation for
-cloud deployment is therefore to execute the necessary console commands by hand
-on the server terminal via SSH. The MicroNet documentation provides a guide on
-how to do this \cite{micronet2017doku} for a MicroNet application.\\
+The MicroNet \textit{Launch Utility} locally provides shortcuts for all
+deployment steps. The process of uploading and starting the application on the
+target environment varies greatly according to the chosen cloud provider. My
+recommendation for cloud deployment is therefore to execute the necessary
+console commands by hand on the server terminal via SSH. The MicroNet
+documentation provides a guide on how to do this \cite{micronet2017doku} for a
+MicroNet application.\\
 
 \noindent
 \textbf{How well do \ogs{} run in a cluster environment?}
@@ -175,11 +176,11 @@ MicroNet toolset helps in this regard.
 \textbf{What degree of composition is necessary for a \ms{} application
 to work?}
 
-The Shared Model and the Shared \gls{api} are the only concepts needed to
-logically compose a \ms{} application. The Shared Model is needed to provide a
-common data access layer facilitating session management and a durable
-persistence functionality. The Shared \gls{api} concept is needed to define the
-format and the semantics of the message transfers.
+The \textit{Shared Model} and the \textit{Service API} are the only concepts
+needed to logically compose a \ms{} application. The \textit{Shared Model} is
+needed to provide a common data access layer facilitating session management and
+a durable persistence functionality. The \textit{Service API} concept is needed
+to define the format and the semantics of the message transfers.
 
 For physical composition it is enough to rely on a composition engine like
 Docker Swarm. Since these engines are very good at abstracting from physical
@@ -202,9 +203,9 @@ it. This design requires the intense use of time-outs, retries, and roll-backs
 to detect and relieve failures of \mss{}. In my opinion choreography is hard to
 get right but provides the best results in application robustness and scaling.
 
-The MicroNet concepts Shared Model and Shared \gls{api} are concepts which are
-inspired by choreographical composition. Also the loose coupling achieved
-through the message broker facilitates choreography.\\
+The MicroNet concepts \textit{Shared Model} and \textit{Service API} are
+concepts which are inspired by choreographical composition. Also the loose
+coupling achieved through the message broker facilitates choreography.\\
 
 \newpage
 \noindent
@@ -223,12 +224,12 @@ comprehensive as the other two.\\
 \mss{} while preserving the overall application behaviour?}
 
 \mss{} must first of all define a clean fine grained interface through the
-\gls{api}. MicroNet then provides assistance via Code Assist in offering the
-Shared \gls{api} to developers of other \mss{} who then can access the
-\gls{api} via MicroNet messaging. This is done to rely on functionality provided
-by other \ms{} teams without knowing any implementation details and to use the
-networked \gls{api} functionality like you would use a library via local
-function calls.
+\gls{api}. MicroNet then provides assistance via \textit{Code Assist} in
+offering the \textit{Service API} to developers of other \mss{} who then can
+access the \gls{api} via MicroNet messaging. This is done to rely on
+functionality provided by other \ms{} teams without knowing any implementation
+details and to use the networked \gls{api} functionality like you would use a
+library via local function calls.
 
 Since the polyglot persistence tenet allows database implementation to be
 excluded from the general application design, this encourages independent
@@ -239,7 +240,7 @@ in distributed applications.
 
 MicroNet softens the polyglot persistence tenet by providing an application wide
 session store via Couchbase. The session store allows uniform access over all
-the application according to the types defined in the shared model.\\
+the application according to the types defined in the \textit{Shared Model}.\\
 
 \noindent
 \textbf{What problems are introduced by loosely coupling game features?}
