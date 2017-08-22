@@ -1,8 +1,8 @@
 \chapter{Introduction}
 
-\section{Purpose of the Study}
+\section{Purpose of the Thesis}
 
-This thesis is about the incorporation of the two research areas \mss{} and
+This thesis investigates the two research areas \mss{} and
 \ogs{}. Both areas have individually been the topic of intense research lately
 (\mss{}:\cite{zimmermann2016microservices}, \cite{di2017research},
 \ogs{}:\cite{bosch2017towards}, \cite{smed2017algorithms},
@@ -10,10 +10,12 @@ This thesis is about the incorporation of the two research areas \mss{} and
 two.
 
 In regard to the \mss{} domain this thesis serves as a basis for the discussion
-about \ms{} applications. Specifically the development and operation of a \ms{}
-application is explained in detail. Of particular interest is the topic of how
-to facilitate the composition of \mss{} and how to deploy a \ms{} application in
-a modern cloud environment.
+about \ms{} applications. Especially the architecture of such distributed \ms{}
+applications is of particular interest. Architecture relevant aspects are
+both examined in theory and practically to propose a all-embracing recipe on how
+to develop and operate of a \ms{} application. Of particular interest is the
+topic of how to facilitate the composition of \mss{} and how to deploy a \ms{}
+application in a modern cloud environment.
 
 Another goal of this thesis is to provide proof of concept that it is possible
 to develop \ogs{} using \mss{}. For this purpose a vertical slice prototype of a
@@ -27,11 +29,18 @@ behind the prototype is to make this process simple enough for newcomers in
 \section{Theoretical framework}
 
 A theoretical framework is being used in order to curtail the infinite amount of
-research problems that the topics \ogs{} and \mss{} offer. Within the framework
-the abstract research problems are gathered and are translated into research
-questions that sufficiently cover the area of interest. According to the
-research questions hypotheses can be formulated. The verification of these
-hypotheses is the substance of this thesis.
+research problems that the topics \ogs{} and \mss{} offer. A theoretical
+framework is a \gls{dsm} construct used to frame research problems. \gls{dsm} is
+further detailed in \autoref{sub:dsm}.
+
+Within the framework the abstract research problems are gathered and are
+translated into research questions that sufficiently cover the area of interest.
+According to the research questions hypotheses can be formulated. These
+hypotheses are the condensed essence of the research questions and are well
+suited for formal verification. The verification of the hypotheses is the
+substance of this thesis and contributions to the verification are mentioned at
+relevant locations throughout this thesis. Answers to the research questions
+are proposed in the concluding \autoref{sub:summary_of_findings}.
 
 \subsection{Research Problems and Research Questions}
 \label{sub:problems}
@@ -97,42 +106,43 @@ following research questions:
 The essence of the research problems can be condensed into a set of hypotheses
 which correspond with the different research areas. All hypotheses are
 verified in the course of this thesis to prove that \mss{} are suited to
-build an \og{}. 
+build an \og{}.\\
 
-\subsubsection{Hypothesis on \ogs{} and \mss{}}
-It is possible to build an \og{} as a pure \ms{} application by
-respecting all seven \ms{} tenets.
+\noindent\textbf{Hypothesis on Required Features:}
+\textit{A minimal set of features is required to build a distributed \og{}:
+networking, persistence, serialization, session management and game engine
+integration.}\\
 
-\subsubsection{Hypothesis on Required Features}
-A minimal set of features is required to build a distributed \og{}: networking,
-persistence, serialization, session management and game engine integration.
+\noindent\textbf{Hypothesis on \ogs{} and \mss{}:}
+\textit{It is possible to build an \og{} as a pure \ms{} application by
+respecting all seven \ms{} tenets.}\\
 
-\subsubsection{Stability and Performance Hypothesis} 
-Microservices allow to separate the performance critical real-time game
+\noindent\textbf{Composition Hypothesis:}
+\textit{Code Generation backed by a game meta model is enough information to
+semantically compose a set of \mss{} to build a rich \og{}.}\\
+
+\noindent\textbf{Deployment Hypothesis:}
+\textit{The deployment process of a \ms{} driven \og{} application can be
+simplified to an extent that the process can be understood by reading the instruction which
+do not exceed the ``size of one screen''.}\\
+
+\noindent\textbf{Stability and Performance Hypothesis:} 
+\textit{Microservices allow to separate the performance critical real-time game
 simulation from the non time-critical backend functionality in regards to
 computing, bandwidth and latency requirements of an online game. This allows
-arbitrary scaling.
+arbitrary scaling.}\\
 
-\subsubsection{Composition Hypothesis}
-Code Generation backed by a game meta model is enough information to
-semantically compose a set of \mss{} to build a rich \og{}.
+\noindent\textbf{Simple Development Hypothesis:} 
+\textit{\mss{} can make the complicated process of developing online games
+simpler by splitting up a complex game domain into small parts that can be independently
+developed.}\\
 
-\subsubsection{Deployment Hypothesis}
-The deployment process of a \ms{} driven \og{} application can be simplified to
-an extent that the process can be understood by reading the instruction which
-do not exceed the ``size of one screen''.
+\noindent\textbf{Reproducibility Hypothesis:} 
+\textit{It is possible to completely prevent initial costs to kick off the
+development process using only free/open-source technologies. This allows to reproduce the
+development process anywhere at any time.}
 
-\subsubsection{Simple Development Hypothesis} 
-\mss{} can make the complicated process of developing online games simpler
-by splitting up a complex game domain into small parts that can be independently
-developed.
-
-\subsubsection{Reproducibility Hypothesis} 
-It is possible to completely prevent initial costs to kick off the development
-process using only free/open-source technologies. This allows to reproduce the
-development process anywhere at any time.
-
-\section{Significance of the Study}
+\section{Significance of the Thesis}
 
 \mss{} are a very modern approach to realize a \gls{soa}. While \gls{soa} is not
 something new and has been in use for more than a decade \cite{josuttis2007soa},
@@ -177,6 +187,7 @@ This definition section clarifies all the terminology that is used to define the
 concepts developed in this thesis from a technical point of view.
 
 \subsection{Design Science Methodology}
+\label{sub:dsm}
 
 Design science provides the definition of a scientific framework that can be
 used to formally define and describe real world research problems. Along with the
@@ -390,15 +401,28 @@ gives a good overview on the topic.
 
 \subsection{\mss{}}
 
-\mss{} are an implementation approach for a service-oriented architecture (SOA)
-\cite{zimmermann2016microservices}. In SOA an application is decomposed into
-logical units that each solve one specific task. A problem of traditional SOA is
-that these individual services are coupled using a service bus which contains a
-large amount of domain knowledge to realize service integration. \mss{} reverse
-this principal and use the smart endpoints - dumb pipes paradigm. This makes the
-service bus obsolete and as a result the whole application is more robust to
-changes because there is no central processing unit exposed as a single point of
-failure.
+\mss{} are an implementation approach for a \glsreset{soa}\gls{soa}
+\cite{zimmermann2016microservices}. In \gls{soa} an application is decomposed
+into logical units that each solve one specific task. In a \ms{} application
+each of these units is represented by a service that runs in an isolated
+process. A service is usually deployed in a container which supports isolation
+and simple replaceability. The services communicate over a lightweight shared
+inter process communication channel respecting the smart endpoints - dump pipes
+principle. C.Richardson's article ``Microservices: Decomposing Applications for
+Deployability and Scalability'' \cite{richardson2014mss} is a good introduction to
+\mss{}.
+
+Over the years many discussion about the differences and similarities between
+\gls{soa} and \mss{} took place \cite{little2017soaVSms},
+\cite{ogradly2017soaVSms}, and \cite{little2015soaVSms}. In his article ``The
+Difference between \gls{soa} and Microservices?'' M.Little collects arguments of
+experts in the \ms{} scene like D.North \cite{north2015mss} and
+J.Stenberg\cite{stenberg2014mss}. One trend that he highlights is that \gls{soa}
+is loosing popularity and \mss{} are gaining popularity. One reason for this
+could be that \gls{soa} is mainly a vendor driven effort whereas the \ms{}
+approach is driven far more by developers as he states. Also the success of
+\ms{} friendly platforms like AWS indicate that service driven platforms are an
+effective way of building applications that are resilient and scalable.
 
 \subsubsection{\ms{} Tenets}
 
@@ -406,10 +430,11 @@ In O.Zimmermann's article \ms{} tenets he provides seven \ms{} tenets to
 describe the properties of \ms{} applications
 \cite{zimmermann2016microservices}. According to the tenets a correlation
 between game specific requirements and \ogs{} can be made. In the course of this
-thesis the \ms{} tenets will be used as an indicator to show that \mss{} are
-suitable to drive \og{} applications.
+thesis a selection of the \ms{} tenets will be used as an indicator to show
+that \mss{} are suitable to drive \og{} applications.
 
-The remainder of this section will give a brief overview over all seven tenets.
+The remainder of this section will give a brief overview over all \ms{} tenets
+that are relevant for this thesis.
 
 \paragraph{Fine-grained Interfaces and Single Responsibility}
 
@@ -512,7 +537,7 @@ DevOps engineers are the glue between the development and the operation of a
 project during the initial development of an application and remain responsible
 for the application after it's release. This gives the DevOps of to a certain
 application a deep understanding of it's technical requirements. DevOps are also
-responsible to test the deployment process very early to guarantee a smooth
+responsible to test the deployment process early to guarantee a smooth
 transition to the production life-cycle of an application. When a \ms{}
 application is in production the DevOps engineers have enough insight into the
 application internals to be able co cope with most problems that arise in the
@@ -523,22 +548,28 @@ well \cite{earnshaw2013devops}.
 \label{subsub:composition}
 
 \ms{} composition is a very wide term and therefore needs to be further
-specified. For this purpose composition can be split into two sub topics:
-physical composition and logical composition.
+specified. For this purpose large domain composition can be split into two sub
+topics which are suited to be examined separately: physical composition and
+logical composition.
 
 \ms{} composition can be categorized into two composition paradigms:
-Orchestration and Choreography. Orchestration states that a set of \mss{} is
-composed by a central intelligence unit which is responsible for the management
-the application. Choreography implies that there is no central intelligence
-and the cluster of \mss{} as a whole is responsible to guarantee the stability
-of the application.
+Orchestration and Choreography \cite{varjoinen2014orchestrationVSchoreography},
+\cite{lublinsky2008orchestrationVSchoreography}. Orchestration states that a set
+of \mss{} is composed by a central intelligence unit which is responsible for
+the management the application \cite{cohen2015orchestration}. Choreography
+implies that there is no central intelligence and the cluster of \mss{} as a
+whole is responsible to guarantee the stability of the application
+\cite{millidge2015choreography}, \cite{vilas2016choreography}, and
+\cite{jellema2017choreography}.
 
 \paragraph{Physical Composition}
 
 Physical composition is the discipline to bring a set of \mss{} onto a
 physical computing environment, usually the cloud. In the case of the cloud the
 term physical is understood as the appropriation of computing, memory, disc
-space and networking capabilities.
+space and networking capabilities. In a cloud setting these physical
+requirements are covered by using a \gls{paas} solution
+\cite{lawton2008developing}, \cite{buyya2009modeling}.
 
 Physical composition is usually enabled using composition engines like for
 example docker-compose, docker-swarm, Apache Mesos or Kubernetes. The majority
@@ -552,8 +583,9 @@ general solution for logical composition, which is why the developers of an
 application have to cope with this task themselves.
 
 Logical composition of a \ms{} application has two major requirements that must
-be satisfied. The services have to know how to find each other and the services
-must be aware of the communication semantics. 
+be satisfied. The services have to know how to find each other
+\cite{rotter2017telecom} and the services must be aware of the communication
+semantics \cite{oberhauser2016microflows}.
 
 Usually logical composition is realized with an RESTful \gls{api} description
 that can be accessed via a \gls{http}. Especially for regular web applications a
@@ -603,8 +635,8 @@ thesis.
 \subsection{\mss{} are Developed by Teams}
 One of the greatest advantages of \mss{} is that they allow to split the
 development of a complex application into small shards that can be developed by
-small flexible individual teams. This aspect of \mss{} can only be analyzed
-conceptually because this thesis is a one-man project.
+small flexible individual teams \cite{anderson2017teams}. This aspect of \mss{}
+can only be analyzed conceptually because this thesis is a one-man project.
 
 \subsection{Zero Budget}
 \label{sub:zero_buget}
@@ -644,11 +676,11 @@ conclude the project as a whole.
 \label{sub:delimitations}
 
 Games are usually developed using Microsoft Windows because it offers the
-largest ecosystem for game developers. But cloud developers mainly tend to use 
-Linux tools. Because of this many tools are cumbersome to use on Windows
-platforms and therefore greatly hinder the development process. It is a
-side-goal of this thesis to facilitate the whole process on Windows in a more
-satisfactory way.\\
+largest ecosystem for game developers \cite{bolas2013games_dev_windows}. But my
+impression is that cloud developers mainly tend to use Linux tools. Because of
+this many tools are cumbersome to use on Windows platforms and therefore greatly
+hinder the development process. It is a side-goal of this thesis to facilitate
+the whole process on Windows in a more satisfactory way.\\
 
 
 
