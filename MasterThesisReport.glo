@@ -44,6 +44,7 @@
 \glossaryentry{PCG?\glossentry{pcg}|setentrycounter[]{page}\glsnumberformat}{24}
 \glossaryentry{PCG?\glossentry{pcg}|setentrycounter[]{page}\glsnumberformat}{24}
 \glossaryentry{DSM?\glossentry{dsm}|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{DSM?\glossentry{dsm}|setentrycounter[]{page}\glsnumberformat}{25}
 \glossaryentry{HSR?\glossentry{hsr}|setentrycounter[]{page}\glsnumberformat}{25}
 \glossaryentry{DRY?\glossentry{dry}|setentrycounter[]{page}\glsnumberformat}{25}
 \glossaryentry{IDE?\glossentry{ide}|setentrycounter[]{page}\glsnumberformat}{26}
@@ -70,6 +71,8 @@
 \glossaryentry{API?\glossentry{api}|setentrycounter[]{page}\glsnumberformat}{35}
 \glossaryentry{PCG?\glossentry{pcg}|setentrycounter[]{page}\glsnumberformat}{37}
 \glossaryentry{PCG?\glossentry{pcg}|setentrycounter[]{page}\glsnumberformat}{37}
+\glossaryentry{DSM?\glossentry{dsm}|setentrycounter[]{page}\glsnumberformat}{37}
+\glossaryentry{DSM?\glossentry{dsm}|setentrycounter[]{page}\glsnumberformat}{38}
 \glossaryentry{TAR?\glossentry{tar}|setentrycounter[]{page}\glsnumberformat}{38}
 \glossaryentry{TAR?\glossentry{tar}|setentrycounter[]{page}\glsnumberformat}{38}
 \glossaryentry{TAR?\glossentry{tar}|setentrycounter[]{page}\glsnumberformat}{38}
