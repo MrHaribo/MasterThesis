@@ -9,8 +9,14 @@ to develop and operate an \og{}.
 
 In order to reduce the complexity of an \og{} development a \ms{} approach can
 be used by splitting the domain of a game game into small shards that can be
-independently developed. These shards are defined using a \glsreset{ddd}
-\gls{ddd} approach. This is the general concept behind MicroNet.\\
+independently developed. These shards are defined using \glsreset{ddd}
+\gls{ddd} patterns, specifically the BoundedContext and the UbiquitousLanguage
+patterns \cite{fowler2003-2016ddd}. The BoundedContext pattern is used to define
+the boundaries of \mss{} according to game domain entities like players, items,
+levels, or vehicles. The UbiquitousLanguage pattern then allows to make these
+domain shards available in a terminology which is closely related to the game
+domain. This is the general concept that defines the architecture of MicroNet
+applications.\\
 
 In addition to the general concept MicroNet is designed according to four
 guidelines to provide a lean and agile \og{} development process:
