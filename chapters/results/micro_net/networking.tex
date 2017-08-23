@@ -71,8 +71,8 @@ MicroNet uses a reverse proxy to interchange messages from the public Internet
 with the internal network used by MicroNet. For this purpose two separate
 message brokers are used and only the public broker is exposed to the Internet.
 The gateway intercepts all messages from the public network and forwards them to
-the responsible \ms{}. This is further detailed in the Messaging \gls{api} section
-below.
+the responsible \ms{}. This is further detailed in the \textit{Messaging API}
+section below.
 
 The reverse proxy in fact also is the API gateway. An API gateway is a standard
 approach offering the \textit{Service API} to the users. Upon reception of a
@@ -181,7 +181,7 @@ The connection authentication process is further explained in
 
 \subsubsection{MicroNet Messaging API}
 
-The messaging \gls{api} provided by a MicroNet applications is a direct implementation
+The \textit{Messaging API} provided by a MicroNet applications is a direct implementation
 of the fine-grained interfaces tenet. It offers the following functionality to
 promote stateless message transfers:
 
@@ -200,7 +200,7 @@ promote stateless message transfers:
 	\centering
 	\hspace*{-1.5cm}
 	\includegraphics[width=1.2\textwidth]{images/architecture/MessagingAPI}
-	\caption{The API Gateway offers the MicroNet messaging \gls{api} to the player.}
+	\caption{The API Gateway offers the MicroNet \textit{Messaging API} to the player.}
 	\label{fig:messaging_api}
 \end{figure}
 
@@ -226,7 +226,7 @@ single user or to a group of users. For this purpose \mss{} can send a request
 to the \code{mn://forward} queue which is consumed by any gateway who in
 response forwards the event to the corresponding user or group.
 
-One last feature of the MicroNet messaging \gls{api} is the ability to send messages
+One last feature of the MicroNet \textit{Messaging API} is the ability to send messages
 to topics which can be subscribed by any service. This allows services to react
 on events happening throughout the application. This can be for example the
 \textit{new player connected} event.

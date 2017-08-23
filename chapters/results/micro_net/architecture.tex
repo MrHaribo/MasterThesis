@@ -33,9 +33,9 @@ MicroNet.\\
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Reliable Messaging System
-          \item Connection Authentication
-          \item Messaging \gls{api}
+          \item Provide an interface to the reliable messaging system
+          \item Correlate users and connection
+          \item Expose the Java \textit{Messaging API}
         \end{itemize} 
     \end{minipage}
 	&
@@ -61,10 +61,10 @@ MicroNet.\\
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Uniform Database Access
-          \item Offer Relational Database 
-          \item Offer NoSQL Database
-          \item Java \gls{api}
+          \item Provide uniform database access
+          \item Offer relational database
+          \item Offer NoSQL database
+          \item Expose the Java database \gls{api}
         \end{itemize} 
     \end{minipage}
 	&
@@ -91,10 +91,10 @@ MicroNet.\\
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Uniform Serialization \gls{api}
-          \item Make serialization technology interchangeable
-          \item \gls{json} serialization
-          \item Binary serialization
+          \item Expose the uniform serialization \gls{api}
+          \item Make the serialization technology interchangeable
+          \item Provide \gls{json} serialization
+          \item Provide binary serialization
         \end{itemize} 
     \end{minipage}
 	&
@@ -127,7 +127,7 @@ This section will give three representative examples of catalogue services.\\
         \begin{itemize}
           \item Receive and filter requests from clients
           \item Forward requests to \mss{}
-          \item Forward Events to clients
+          \item Forward events to clients
           \item Broadcast events to groups of clients
         \end{itemize} 
     \end{minipage}
@@ -153,8 +153,8 @@ This section will give three representative examples of catalogue services.\\
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item User Registration
-          \item User Authentication
+          \item Process user registrations
+          \item Process user authentications
         \end{itemize} 
     \end{minipage}
 	&
@@ -179,8 +179,8 @@ This section will give three representative examples of catalogue services.\\
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Player Inventory (Carried Items)
-          \item Bank (Item Storage)
+          \item Provide access to player inventories (carried items)
+          \item Provide access to player banks (item storage)
         \end{itemize} 
     \end{minipage}
 	&
@@ -212,9 +212,10 @@ continuous delivery. But the tool layer also has the responsibility to adapt the
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Framework functionality\footnotemark 
-          \item Boilerplate code reduction
-          \item Defining the shared messaging \gls{api}
+          \item Provide an entrypoint for the framework
+          functionality\footnotemark
+          \item Help to reduce boilerplate code 
+          \item Define the \textit{Service API}
         \end{itemize} 
     \end{minipage}
 	&
@@ -244,7 +245,7 @@ continuous delivery. But the tool layer also has the responsibility to adapt the
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
           \item Present the \textit{Service API} to the developer
-          \item Auto-completion of URIs
+          \item Show auto-completion of URIs
           \item Recognize \gls{api} usage errors at compile-time
         \end{itemize} 
     \end{minipage}
@@ -270,8 +271,8 @@ continuous delivery. But the tool layer also has the responsibility to adapt the
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Generate the MicroNet Framework integration classes
-          \item Generate POJOs from the Shared Model
+          \item Generate the MicroNet framework integration classes
+          \item Generate POJOs from the \textit{Shared Model}
         \end{itemize} 
     \end{minipage}
 	&
@@ -297,7 +298,7 @@ continuous delivery. But the tool layer also has the responsibility to adapt the
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Visual management interface for the application (UI)
+          \item Provide a visual management interface for the application (UI)
           \item Compose the application out of catalogue and developed game
           services
         \end{itemize} 
@@ -325,9 +326,10 @@ continuous delivery. But the tool layer also has the responsibility to adapt the
     & \\[-0.2cm]
     \begin{minipage}{0.47\textwidth}
         \begin{itemize}
-          \item Define and edit the Shared Model as Template Types
-          \item Instantiate Templates as Prefabs
-          \item Synchronize the Shared Model between developers
+          \item Define and edit the \textit{Template
+          Types} of the \textit{Shared Model} 
+          \item Instantiate \textit{Template Types} as \textit{Prefabs}
+          \item Synchronize the \textit{Shared Model} between developers
         \end{itemize} 
     \end{minipage}
 	&
