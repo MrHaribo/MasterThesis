@@ -74,9 +74,13 @@ The gateway intercepts all messages from the public network and forwards them to
 the responsible \ms{}. This is further detailed in the \textit{Messaging API}
 section below.
 
-The reverse proxy in fact also is the API gateway. An API gateway is a standard
-approach offering the \textit{Service API} to the users. Upon reception of a
-message the gateway can filter it according to a white- or blacklisting approach.
+The reverse proxy in fact also is the API Gateway. An API Gateway is an approach
+to offer the \textit{Service API} to the users. An API Gateway is a the single
+entry point for all clients. Upon reception of a message the API Gateway can
+filter it according to a white- or blacklisting approach and afterwards route it
+to the appropriate service. The MicroNet API Gateway is a direct implementation
+of the API Gateway pattern proposed by C.Richardson
+\cite{richardson2017apigateway}.
 
 \begin{figure}
 \begin{lstlisting}[language=Java,firstnumber=1] 
@@ -107,10 +111,10 @@ public class ServiceBar {
 
 \mss{} can access the messaging functionality by using the context object
 injected by the framework. \autoref{lst:service_communication} shows an example
-of two simple \mss{} communicating with each other. It has to be mentioned that
-the two services in the listing are fully functional without any additional
-code necessary. The setup of the context and the \ms{}'s main function are
-completely abstracted by the framework.
+of two simple \mss{} communicating with each other. The two services in the
+listing are fully functional without any additional code necessary. The setup of
+the context and the \ms{}'s main function are completely abstracted by the
+framework.
 
 \paragraph{Message Parameters}
 

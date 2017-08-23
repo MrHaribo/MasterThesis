@@ -22,16 +22,16 @@ engine or manually by programming the integration classes.
 A disadvantage of this setup is that the framework integration layer has to be
 realized for all the technologies used. This introduces quite an overhead, but
 it is compensated by the improved work-flow which is possible once the
-integration is done. It has to be mentioned that the implementation effort to
-realize the code generation part which generates the framework integration
-classes is rather small. Model definition and editing take care of most work in
-this regard. The code generation layer is only responsible to generate simple
-classes out of the well defined \gls{json} model files, which is a very
-feasible task being well documented through the MicroNet code generation plug-in
-which serves as a reference implementation. Also the developer always has the
-choice to integrate a foreign technology into MicroNet by using only ActiveMQ as
-the message broker bypassing the integration layer. ActiveMQ is easily portable
-since it offers many clients on all major platforms. 
+integration is done. The implementation effort to realize the code generation
+part which generates the framework integration classes is rather small. Model
+definition and editing take care of most work in this regard. The code
+generation layer is only responsible to generate simple classes out of the well
+defined \gls{json} model files, which is a very feasible task being well
+documented through the MicroNet code generation plug-in which serves as a
+reference implementation. Also the developer always has the choice to integrate
+a foreign technology into MicroNet by using only ActiveMQ as the message broker
+bypassing the integration layer. ActiveMQ is easily portable since it offers
+many clients on all major platforms.
 
 With the integration layer out of the way the developer is free to use the
 MicroNet tools to speed up and clarify the development process. This includes

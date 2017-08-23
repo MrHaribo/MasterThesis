@@ -20,7 +20,7 @@ to allow fast and global access. In MicroNet the player sessions can be accessed
 through Couchbase documents provided by the persistence component of MicroNet.
 
 One drawback of the solution for player sessions is the fact that with multiple
-API gateways each gateway needs the ability to look up player connections to
+API Gateway each gateway needs the ability to look up player connections to
 determine if the corresponding user is authenticated. This process has to be
 done upon every player message which leads to a lot of reading access to
 Couchbase. A possibility to reduce the amount of database reads would be to use
