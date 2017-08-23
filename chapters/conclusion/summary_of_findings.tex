@@ -87,8 +87,16 @@ is out of scope for this thesis.
 the cloud''?}
 
 ``From code to cloud'' includes all the steps necessary to build and deploy the
-complete \ms{} \og{} application. It is assumed the application code is
-fully functional and tested. It is also assumed that the target environment is
+complete \ms{} \og{} application. In a first step the application must be built
+in a cloud-affine way by respecting by respecting all \ms{} tenets. If the
+application does not suffice the tenets it is still possible to refactor the
+application to make it \ms{} friendly. O.Zimmermann provides a comprehensive
+proposal on architectural refactoring for the cloud
+\cite{zimmermann2017architectural}. Once an application satisfies all tenets it
+is suitable for cloud deployment.
+
+A requirement for cloud deployment is that the application code is fully
+functional and tested locally. It is also assumed that the target environment is
 correctly set up meaning the container engine is running in cluster mode and all
 the necessary dependencies are installed and accessible to the cluster (message
 broker, databases). From this point the necessary steps are:
