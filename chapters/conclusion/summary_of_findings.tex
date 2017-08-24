@@ -98,8 +98,8 @@ is suitable for cloud deployment.
 A requirement for cloud deployment is that the application code is fully
 functional and tested locally. It is also assumed that the target environment is
 correctly set up meaning the container engine is running in cluster mode and all
-the necessary dependencies are installed and accessible to the cluster (message
-broker, databases). From this point the necessary steps are:
+the required software like the database and the message broker are installed and
+accessible to the cluster. From this point the necessary steps are:
 
 \begin{itemize}
   \item Locally build the binary executable file of each \ms{}.
@@ -111,7 +111,8 @@ broker, databases). From this point the necessary steps are:
   or clone it from Git via SSH.
   \item Build the application on the target environment using the same
   configuration that has been locally used.
-  \item Start dependencies which are not integrated into the application.
+  \item Start required third party software which is not integrated into the
+  application.
   \item Start the application using the container engine CLI via SSH.
 \end{itemize}
 
@@ -166,14 +167,14 @@ to overlay networks and shared volumes. These two aspects which are essential
 for containerization are quite complex even for Docker which I consider a
 reasonably simple container solution.
 
-Kubernetes and Mesos are very powerful solutions but are very complex,
-and setting up an application can be quite a challenge. My recommendation is
-to use Kubernetes if enough resources are available to set up such a system from
-scratch or if a cloud service provider like Amazon or Google is used to deploy
-the application. These providers natively support Kubernetes applications. For
-small teams I recommend using docker-swarm in a first step because it is easy
-to get started with. It is later possible to translate a docker-swarm
-application to Kubernetes with a conceivable effort.\\
+Kubernetes and Mesos are very powerful solutions but are very complex, and
+setting up an application can be quite a challenge. My recommendation is to use
+Kubernetes if enough resources are available to set up such a system from
+scratch or if a cloud service provider like \gls{aws} or \gls{gcp} is used to
+deploy the application. These providers natively support Kubernetes
+applications. For small teams I recommend using docker-swarm in a first step
+because it is easy to get started with. It is later possible to translate a
+docker-swarm application to Kubernetes with a conceivable effort.\\
 
 \noindent
 \textbf{What tools exist that help the developer with the deployment?}
@@ -196,11 +197,12 @@ MicroNet toolset helps in this regard.
 \textbf{What degree of composition is necessary for a \ms{} application
 to work?}
 
-The \textit{Shared Model} and the \textit{Service API} are the only concepts
-needed to logically compose a \ms{} application. The \textit{Shared Model} is
-needed to provide a common data access layer facilitating session management and
-a durable persistence functionality. The \textit{Service API} concept is needed
-to define the format and the semantics of the message transfers.
+The MicroNet concepts \textit{Shared Model} and \textit{Service API} are the
+only concepts needed to logically compose a \ms{} application. The
+\textit{Shared Model} is needed to provide a common data access layer
+facilitating session management and a durable persistence functionality. The
+\textit{Service API} concept is needed to define the format and the semantics of
+the message transfers.
 
 For physical composition it is enough to rely on a composition engine like
 Docker Swarm. Since these engines are good at abstracting from physical
@@ -227,7 +229,6 @@ The MicroNet concepts \textit{Shared Model} and \textit{Service API} are
 concepts which are inspired by choreographical composition. Also the loose
 coupling achieved through the message broker facilitates choreography.\\
 
-\newpage
 \noindent
 \textbf{Which middle-ware is most useful in providing \ms{} composition?}
 

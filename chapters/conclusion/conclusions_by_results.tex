@@ -1,4 +1,4 @@
-\section{Conclusions Drawn by Results}
+\section{Conclusions}
 
 This conclusion section represents the proposal for a selection of guidelines
 that should be considered when an \og{} is realized with \mss{}. The guidelines
@@ -187,10 +187,11 @@ Containers are the enabling technology for \ms{} applications. Without
 containers it would be nearly impossible to maintain the state of a distributed
 \ms{} application.
 
-Docker is the number one container engine in this regard and can be considered a
-de facto standard. I have to admit that I did not evaluate other container
-technologies due to the dominance of Docker. I believe Docker will maintain a
-strong position because it is being permanently improved.
+Docker is the number one container engine in this regard
+\cite{containers2016survey} and can be considered a de facto standard. I have to
+admit that I did not evaluate other container technologies due to the dominance
+of Docker. I believe Docker will maintain a strong position because it is being
+permanently improved.
 
 The benefit most appreciated about containers is the ability to quickly download
 and start dependencies without going though a complex installation process. This
@@ -243,7 +244,7 @@ In his positioning paper \cite{zimmermann2016microservices} O. Zimmermann
 provides nine questions for practitioners to gather experience about \ms{}
 concepts and to provide a common discussion basis. Although these questions are
 mainly aimed at developers in the software industry my findings in this thesis
-can also be used to contribute a proposal to the practitioner questions.\\
+can also be used to propose answers to the practitioner questions.\\
 
 \textit{1. Can you share any experiences and/or hint how to ``sell'' an
 investment in microservices to business stakeholders(e.g., project sponsors, product managers,
@@ -282,7 +283,7 @@ specifically with a focus on the adherence of all \ms{} tenets. MicroNet serves
 as a reference on how to implement all the tenets.
 
 The deployment process is also covered by MicroNet especially the MicroNet
-tools. Both Amazon Cloud and Google cloud have only been evaluated via
+tools. Both \gls{aws} and \gls{gcp} have only been evaluated via
 literature research and therefore no final statement about the quality of these
 providers can be made.\\
 
@@ -292,11 +293,14 @@ valid remote communication options in the microservices architect’s toolbox and,
 if so, what are the decision drivers when choosing an option?}\\
 
 REST is in my opinion a necessary requirement to achieve the desired stateless
-\ms{} application behaviour. But for the game domain the traditional RESTful HTTP
-approach is just not suited. A more flexible and optimization friendly
-communication solution is needed. A message broker perfectly fulfills this role.
-The main drivers behind this decision is the persistence which a message broker
-offers along with functionality like topics and connection handling.\\
+\ms{} application behaviour. But for the game domain the traditional RESTful
+HTTP approach is just not suited. This is mainly because the content that a
+\og{} \ms{} applications offers are rarely web-pages in HTML format. It is far
+more likely that the game application operates on proprietary content which
+requires a more flexible and optimization friendly communication solution. A
+message broker perfectly fulfills this role. The main drivers behind this
+decision is the persistence which a message broker offers along with
+functionality like topics and connection handling.\\
 
 \textit{5. How did you find an adequate/a suited service cut (e.g.,how
 small/fine is small/fine enough)? How can DDD (and/or other approaches to application
@@ -307,8 +311,10 @@ context for each domain concept to be exposed as service''?}\\
 
 Service size is the factor that matters the most in my opinion. A small service
 is easy to maintain and a new developer can gasp the functionality of a \ms{}
-quickly. With small I mean that the service size should be less then 2-3 IDE
-screens.\\
+quickly. With small I mean that the service should aim have below 100 lines of
+code. Recent discussion indicate however that size should not be the determining
+factor alone meaning it is just as important that a service has the right
+responsibilities \cite{stenberg2014mss}, \cite{ogradly2017soaVSms}.\\
 
 \textit{6. How did you overcome ``distribution classics'' design challenges such
 as service lifecycle management, data representation/schema mismatches, service
@@ -319,7 +325,16 @@ The distribution classics are mainly covered by the MircoNet composition
 concepts. The \textit{Shared Model} and \textit{Service API} represent the
 solution to overcome representation/schema problems. Service versioning and
 evolution is supported by the \textit{Service Explorer} and lifecycle management
-is taken care of by the composition engine.\\
+is taken care of by the composition engine.
+
+Using a proprietary solution like the \textit{Service API} for interface
+documentation might not be an approach that everybody is comfortable with,
+especially since many well known solutions for API documentation exist like
+Swagger, RAML, JSON API, or api blueprint. The reason for this approach is
+mainly the tight integration of the \textit{Service API} with the \textit{Shared
+Model} but also minimalistic solution the \textit{Service API} aims to be. In
+my opinion the format of the \gls{api} documentation only plays a minor role as
+long as the \gls{api} can be used in a convenient way.\\
 
 \textit{-- Did you define machine-readable service contracts? If so, what
 should they cover and how should they be expressed (e.g., are all REST maturity
@@ -351,13 +366,18 @@ foreign key relationships and other semantic links across microservice
 boundaries? And how to backup an entire service landscape at once (atomic system
 snapshot, incremental backup)?}\\
 
-I suggest to completely rely on eventual consistency whenever possible. Eventual
-consistency is offered by NoSQL databases like Couchbase. End-to-end data
-integrity is only needed for financially relevant actors as mentioned above.
+For game applications I suggest to completely rely on eventual consistency
+whenever possible. MicroNet is designed to encourage the use of eventual
+consistency strategies by offering eventual consistency through the Couchbase
+\gls{cas} concept. As mentioned above, there is sometimes a demand for
+end-to-end data integrity for financially relevant actors within MicroNet
+applications. MicroNet does not yet provide a solution for end-to-end data
+integrity.
+
 Since Couchbase is document oriented it is schemaless, foreign keys can be
 modelled according to the needs of the developer using the query language of
-Couchbase. MicroNet shares the semantics over service boundaries using the
-\textit{Shared Model}.\\
+Couchbase N1QL. MicroNet shares the semantics of documents over service
+boundaries using the \textit{Shared Model}.\\
 
 \textit{7. Do you have any advice/guidance how to compose microservices into end
 user client applications? How about application-level intermediaries, i.e., can
@@ -397,4 +417,7 @@ additional layer further complicates this problem.
 Also the address shortage of IPv4 address makes it difficult to develop future
 proof networked applications. Almost all the current networking technologies
 rely on IPv4 technology but you can't just go to the computer store and buy one.
-This problem might intensify over time.
+This problem might intensify over time.\\
+
+These are my recommendations for other practitioners which are looking to get a
+foothold in the \ms{} world. 

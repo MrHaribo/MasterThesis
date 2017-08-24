@@ -193,7 +193,7 @@ market as a reference on how to deploy modern distributed applications. Therefor
 usability of a technology is partially influenced by the support for popular
 cloud service provider infrastructures. 
 
-Amazon Cloud (AWS) and Google Cloud Platform (GCP) are the cloud service
+\gls{aws} and \gls{gcp} are the cloud service
 providers which are considered in this thesis. Besides many other available
 clould service providers like Nextcloud, IBM Cloud, and Microsoft Azure - AWS
 and GCP have been chosen because they both provide dedicated game hosting
@@ -626,16 +626,17 @@ containers.
 
 \subsection{Cloud Service Provider Gaming Solutions}
 
-The major cloud service providers Amazon and Google provide dedicated solutions
-to host \og{} environments. These solutions are deeply integrated into the
-respective cloud technology of the provider and offer additional functionality
-in order to ease the deployment of \ogs{}. Due to the restrictions mention in
-\autoref{sub:zero_buget} these solutions have only briefly been examined.
+The major cloud service providers \glsreset{aws}\gls{aws} and
+\glsreset{gcp}\gls{gcp} provide dedicated solutions to host \og{} environments.
+These solutions are deeply integrated into the respective cloud technology of
+the provider and offer additional functionality in order to ease the deployment
+of \ogs{}. Due to the restrictions mention in \autoref{sub:zero_buget} these
+solutions have only briefly been examined.
 
 \subsubsection{Google Cloud Gaming Solutions}
 
 Google's solution to deploy rich \ogs{} in the cloud is basically a setup
-for the existing Google cloud infrastructure with additional functionality to
+for the existing \gls{gcp} infrastructure with additional functionality to
 provide matchmaking. For this purpose the Google Compute Engine \gls{api} is used
 which is available in a number of programming languages like Java, C\#, GO,
 Phthon, NodeJS, and others. This covers the majority of game engines and
@@ -644,8 +645,8 @@ allows them to use the Google Gaming Solution.
 \subsubsection{Amazon Game Lift}
 
 Amazon GameLift is very similar to Google Gaming Solutions as it also provides
-a matchmaking solution. This is realized by a back-end framework running in the
-Amazon cloud. This back-end is customizable by the developer. 
+a matchmaking solution. This is realized by a back-end framework running on
+\gls{aws}. This back-end is customizable by the developer.
 
 GameLift also offers an \gls{api} which allows game simulation servers to
 incorporate with the backend. This \gls{api} is available for all the major game

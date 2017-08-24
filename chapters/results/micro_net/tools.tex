@@ -372,12 +372,13 @@ configurations into a single configuration. Upon Launch Group execution all
 contained applications are individually started. No build step is further needed
 for this configuration.
 
-For native configurations it is easiest to run dependencies as stand-alone
-installations on the host. Since the native configuration is solely used during
-development this also allows the dependencies to be tested isolated from the
-composed application. It is nonetheless possible to combine a local native
-configuration with a local containerized configuration. Services and
-dependencies can therefore be started in the configuration best suited for them.
+For native configurations it is easiest to run software on which the application
+depends as stand-alone installations on the host. Since the native configuration
+is solely used during development this also allows the dependencies to be tested
+isolated from the composed application. It is nonetheless possible to combine a
+local native configuration with a local containerized configuration. Services
+and dependencies can therefore be started in the configuration best suited for
+them.
 
 \autoref{fig:deployment_local_native} shows the deployment of a MicroNet
 driven game in local deployment mode.
