@@ -685,3 +685,47 @@ theses I found some time during the additional semester to build a game prototyp
 MicroNet. The Spacegame prototype is an example of a more sophisticated game
 than the example game included in MicroNet.
 
+\subsection{Discarded Technologies}
+
+Several technologies that have been evaluated during this thesis have proven
+not beeing useful enough for further evaluation in regards to \ogs{} and \mss{}.
+This section gives a brief overview over these technologies and explains why
+they where discarded.
+
+\subsubsection{Swagger}
+
+Swagger is a framework that generate a full web application skeleton completely
+based on it's API documentation. Swagger provides a rich web \gls{ui} to
+describe the API in a comfortable way. Out of the API definition server stubs
+and client SDKs can be generated automatically.
+
+Swagger was discarded because it forces the development of applications in a
+very specific way. It is to tightly coupled with the way web applications are
+built today that it leaves little freedom in application design. The integration
+of the server subs is bound to specific technologies. Although Swagger was not
+further evaluated it would be interesting to do so in the future.
+
+\subsubsection{YAKINDU}
+
+YAKINDU is a state chart editing and generation Tool. YAKINDU can only generate
+Java code and has therefore a poor language independence. This is a major factor
+because most game engines rely on languages other than Java. For Java however
+YAKINDU is very helpful to realize \glspl{fsm} which are used often in game
+development \cite{bevilacqua2013fsm}.
+
+\subsubsection{Apache Cassandra}
+
+Cassandra is a heavyweight highly available and scalable database solution.
+Cassandra promises to be very cloud friendly but comes with the price of a very
+complex database system which even has its own query language. To deal with
+Cassandra is out of scope of this thesis.
+
+\subsubsection{Hydra}
+
+ORY Hydra is a hardened OAuth2 and OpenID Connect server optimized for
+low-latency, high throughput, and low resource consumption. It's container
+affinity makes it suitable to secure \ms{} application. However an
+external identity provider is necessary to use Hydra and to realize this is out
+of scope of this thesis.
+
+
