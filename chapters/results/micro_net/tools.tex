@@ -20,6 +20,9 @@ thesis and are a major contribution to four of the hypotheses listed in
 \autoref{sub:hypothesis}: the composition, deployment, simple development, and 
 reproducibility hypotheses.
 
+More information on the MicroNet Tools can be found in the MicroNet online
+documentation \cite{micronet2017doku}.
+
 \subsubsection{Files and Folders Structure}
 
 To allow loose coupling of a \ms{} application MicroNet makes a few assumptions
@@ -279,10 +282,17 @@ this thesis.
 
 In the current version of MicroNet the types are presented to the developer via
 a tool-tip. Although type-safety is not enforced the developer can at least read
-the correct types in the \textit{Code Assist} tool-tip, which alone is already very
-helpful.
+the correct types in the \textit{Code Assist} tool-tip, which alone is already
+very helpful. \autoref{fig:code_assist} shows the \textit{Code Assist} tool-tip
+for the \code{mn://foo/hello} message listener that was shown in 
+\autoref{lst:pre_post_conditions}.
 
-\todo{screenshot}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{images/tools/CodeAssist}
+	\caption{MicroNet \textit{Code Assist} tool-tip.}
+	\label{fig:code_assist}
+\end{figure}
 
 \subsubsection{Service Explorer}
 
@@ -310,8 +320,15 @@ The \textit{Service Explorer} also provides a quick interface to all launch
 configurations explained in the \textit{Launch Utility} section below. The launch
 functionality is provided with a context menu for each service in the list and
 through the local pull-down menu offered by the Eclipse view.
+\autoref{fig:service_explorer} shows the \textit{Service Explorer} with the
+launch menu of the \code{FooService} open.
 
-\todo{screenshot}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{images/tools/ServiceExplorer}
+	\caption{MicroNet \textit{Service Explorer}}
+	\label{fig:service_explorer}
+\end{figure}
 
 \subsubsection{Launch Utility}
 
@@ -349,11 +366,16 @@ functionality.
 
 The \textit{Launch Utility} can deploy MicroNet applications in three distinct ways which
 can all be combined which each other: local native, local containerized, and
-cloud containerized. \todo{autoref launcher picture} shows how the launch
+cloud containerized. \autoref{fig:launch_utility} shows how the launch
 configurations can be started via the \textit{Service Explorer}. The rest of this
 paragraph explains all three deployment modes.
 
-\todo{Screenshot Launcher}
+\begin{figure}
+	\centering
+	\includegraphics[width=14cm]{images/tools/LaunchUtility}
+	\caption{\textit{Launch Utilities} offered by the \textit{Service Explorer}}
+	\label{fig:launch_utility}
+\end{figure}
 
 \paragraph{Local Native}
 
@@ -385,13 +407,6 @@ driven game in local deployment mode.
 
 \paragraph{Local Containerized}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\textwidth]{images/architecture/DeploymentLocalContainerized}
-	\caption{Local containerized deployment of a MicroNet driven application.}
-	\label{fig:deployment_local_containerized}
-\end{figure}
-
 The local containerized configuration is meant to reproduce the final deployment
 process on the local developer machine. For this purpose Maven and Docker
 compose/swarm are used. 
@@ -412,6 +427,13 @@ Docker-compose or docker swarm commands. On the local developer machine there is
 only little difference between docker-compose and -swarm. Networking however
 behaves differently locally and in the cloud so the local networking
 configuration cannot be identically transferred to the cloud environment.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{images/architecture/DeploymentLocalContainerized}
+	\caption{Local containerized deployment of a MicroNet driven application.}
+	\label{fig:deployment_local_containerized}
+\end{figure}
 
 \autoref{fig:deployment_local_containerized} shows how an application is
 composed and deployed in the local containerized mode.
@@ -505,9 +527,15 @@ language specifications.
 The COMPONENT type can be any other \textit{Template Type}. A component is
 represented as a field in the data class. Also \textit{Template Types} can be
 derived from other \textit{Template Types}. The derivation is realized using
-regular Java inheritance.
+regular Java inheritance. \autoref{fig:model_view} shows the \textit{Model
+Editor} which can be used to manually edit the \textit{Template Tree}.
 
-\todo{screenshot}
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{images/tools/ModelView}
+	\caption{\textit{Template Type} editing with the MicroNet \textit{Model Editor}.}
+	\label{fig:model_view}
+\end{figure}
 
 \paragraph{Prefab Tree}
 
@@ -525,6 +553,4 @@ The \textit{Prefab Tree} can either be persisted in the file-system or persisted
 database in \gls{json} format. The \textit{Prefab} approach allows for very
 convenient and consistent handling of game data both during development and
 operation.
-
-\todo{screenshot}
 
