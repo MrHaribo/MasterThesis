@@ -1,24 +1,25 @@
 \subsection{Architecture Overview}
 
-The MicroNet framework is a collection of components. Each component is
-confined in itself which allows simple replacement of components. The components
-are organized in three layers: the framework layer, the service catalogue layer,
-and the tools layer. \autoref{fig:architecture_layers} shows the layers and all
-the components they contain.
+The MicroNet framework is a collection of components. Each component is confined
+in itself which allows simple replacement of components. The components are
+organized in three component groups referred to as features: the framework
+feature, the service catalogue feature, and the tools feature.
+\autoref{fig:architecture_layers} shows the relation of the features and all the
+components they contain.
 
-The layers and the components they contain are explained below using Component
+The features and the components they contain are explained below using Component
 Responsibility Cards (CRC).
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.7\textwidth]{images/architecture/ArchitectureLayers}
-  \caption{The layered architecture of MicroNet with the associated components.}
+  \includegraphics[width=0.8\textwidth]{images/architecture/ArchitectureLayers}
+  \caption{The features of MicroNet with the associated components.}
   \label{fig:architecture_layers}
 \end{figure}
 
-\subsubsection{Framework Layer}
+\subsubsection{Framework Feature}
 
-The framework layer provides a uniform interface to the core functionality of
+The framework feature provides a uniform interface to the core functionality of
 MicroNet.\\
 
 \noindent
@@ -107,7 +108,7 @@ MicroNet.\\
     \hline
 \end{tabular}
 
-\subsubsection{Service Catalogue Layer}
+\subsubsection{Service Catalogue Feature}
 
 The service catalogue was mainly developed in the second semester thesis
 \cite{biedermann2016project2} in Chapter 5 Prototype Implementation.
@@ -193,12 +194,13 @@ This section will give three representative examples of catalogue services.\\
     \hline
 \end{tabular}
 
-\subsubsection{Tool Layer}
+\subsubsection{Tools Feature}
 
-The development of the tool layer was a major part of the lab research. The tool
-layer's main purpose is to provide support for the tenet decentralized
-continuous delivery. But the tool layer also has the responsibility to adapt the
-\ms{} application development process to be suitable for \og{} development.\\
+The development of the tools feature was a major part of the \gls{dsm} lab
+research. The tools feature's main purpose is to provide support for the tenet
+decentralized continuous delivery. But the tools feature also has the
+responsibility to adapt the \ms{} application development process to be suitable
+for \og{} development.\\
 
 \noindent
 \begin{tabular}{|l|l|}
