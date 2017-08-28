@@ -161,15 +161,6 @@ easy to use.
 
 \paragraph{Service Generation}
 
-The \textit{@MessageService} and \textit{@MessageListener} \textit{Annotations}
-are used to build the executable class of a \ms{}. The executable class
-registers all message listeners within the networking system. In addition the
-annotated \textit{@Start} and \textit{@Stop} methods are called at service start
-or at service termination respectively. The generated main method encompasses
-the start/stop functionality and the listener registration in a defined set-up
-sequence. \autoref{lst:generated_service} shows the generated implementation of
-the annotated service shown in \autoref{lst:pre_post_conditions}.
-
 \begin{figure}
 \begin{lstlisting}[language=Java,firstnumber=1] 
 public final class ServiceImpl {
@@ -207,6 +198,16 @@ public final class ServiceImpl {
 class.}
 \label{lst:generated_service}
 \end{figure}
+
+The \textit{@MessageService} and \textit{@MessageListener} \textit{Annotations}
+are used to build the executable class of a \ms{}. The executable class
+registers all message listeners within the networking system. In addition the
+annotated \textit{@Start} and \textit{@Stop} methods are called at service start
+or at service termination respectively. The generated main method encompasses
+the start/stop functionality and the listener registration in a defined set-up
+sequence. \autoref{lst:generated_service} shows the generated implementation of
+the annotated service shown in \autoref{lst:pre_post_conditions}.
+
 
 \paragraph{Model Generation}
 
@@ -364,12 +365,6 @@ Docker is used since Docker Toolbox requires setting several Docker environment
 variables. The MicroNet \textit{Launch Utility} however encompasses all this
 functionality.
 
-The \textit{Launch Utility} can deploy MicroNet applications in three distinct ways which
-can all be combined which each other: local native, local containerized, and
-cloud containerized. \autoref{fig:launch_utility} shows how the launch
-configurations can be started via the \textit{Service Explorer}. The rest of this
-paragraph explains all three deployment modes.
-
 \begin{figure}
 	\centering
 	\includegraphics[width=14cm]{images/tools/LaunchUtility}
@@ -377,14 +372,13 @@ paragraph explains all three deployment modes.
 	\label{fig:launch_utility}
 \end{figure}
 
-\paragraph{Local Native}
+The \textit{Launch Utility} can deploy MicroNet applications in three distinct ways which
+can all be combined which each other: local native, local containerized, and
+cloud containerized. \autoref{fig:launch_utility} shows how the launch
+configurations can be started via the \textit{Service Explorer}. The rest of this
+paragraph explains all three deployment modes.
 
-\begin{figure}
-	\centering
-	\includegraphics[width=10cm]{images/architecture/DeploymentLocalNative}
-	\caption{Local native deployment of a MicroNet driven application.}
-	\label{fig:deployment_local_native}
-\end{figure}
+\paragraph{Local Native}
 
 The native configuration runs or debugs a game application as a set of native
 Java applications. This makes debugging very fast and the integration in Eclipse
@@ -401,6 +395,13 @@ isolated from the composed application. It is nonetheless possible to combine a
 local native configuration with a local containerized configuration. Services
 and dependencies can therefore be started in the configuration best suited for
 them.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=10cm]{images/architecture/DeploymentLocalNative}
+	\caption{Local native deployment of a MicroNet driven application.}
+	\label{fig:deployment_local_native}
+\end{figure}
 
 \autoref{fig:deployment_local_native} shows the deployment of a MicroNet
 driven game in local deployment mode.
