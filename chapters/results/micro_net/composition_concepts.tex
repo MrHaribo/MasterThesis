@@ -17,7 +17,7 @@ functionality networking, persistence, and serialization.
 
 According to the dependency abstraction concept external libraries are wrapped
 within the core framework to offer standard access to the underlying dependency.
-\mss{} can use the MicroNet wrapper libraries instead of directly using the
+\mssuc{} can use the MicroNet wrapper libraries instead of directly using the
 dependencies. This allows for exchangeability of the dependencies
 without touching any \ms{}. MicroNet integrates dependent libraries
 into the wrapper libraries by the use of Maven which allows a very flexible
@@ -144,11 +144,11 @@ object looks like.
 
 The messaging system described in \autoref{sub:networking} is the main driver
 for logical composition in MicroNet applications. The \textit{Service API} is
-offered to the user by the \gls{api} gateway in the form of a URI addressing. \mss{}
-can also use this scheme to find each other internally. The only requirement to
-use the \gls{api} is to have access to the underlying message broker either
-through the MicroNet networking component or through a direct connection to
-ActiveMQ.
+offered to the user by the \gls{api} gateway in the form of a URI addressing.
+\mssuc{} can also use this scheme to find each other internally. The only
+requirement to use the \gls{api} is to have access to the underlying message
+broker either through the MicroNet networking component or through a direct
+connection to ActiveMQ.
 
 The MicroNet \textit{Service API} is defined by using static URIs using the
 specific form: \textit{ms://servicename/fine/grained/api}. The host portion of
@@ -213,7 +213,7 @@ development to implement an eventually consistent application.
 
 Eventual consistency in MicroNet is realized by time-outs and retries. This is
 realized by using the persistence system of the message broker in conjunction
-with the request response functionality offered by MicroNet messaging. \mss{}
+with the request response functionality offered by MicroNet messaging. \mssuc{}
 are advised to retry a transaction for a number of times\footnote{Five retries
 seemed appropriate for most requests.}. If all retries were failures the service
 must persistently log the unprocessed transaction to be either examined either

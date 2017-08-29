@@ -46,7 +46,7 @@ are proposed in the concluding \autoref{sub:summary_of_findings}.
 \subsection{Research Problems and Research Questions}
 \label{sub:problems}
 
-\subsubsection{Usability of a \ms{} for \ogs{}} 
+\subsubsection{Usability of \mssuc{} for \ogsucuc{}} 
 
 The research problem to examine the usability of \mss{} to develop and operate
 an \og{} leads to the following research questions:
@@ -75,7 +75,7 @@ cluster environment raises the following research questions:
   \item What tools exist that help the developer with the deployment?
 \end{itemize}
 
-\subsubsection{\ms{} Composition}
+\subsubsection{\msuc{} Composition}
 The problem of how to compose of a set of \mss{} to form a coherently
 distributed application results in the following research questions:
 
@@ -92,7 +92,7 @@ distributed application results in the following research questions:
   \item What protocols help to reduce service coupling?
 \end{itemize}
 
-\subsubsection{\ms{} Development}
+\subsubsection{\msuc{} Development}
 The focus on the development process of a \ms{} application raises the
 following research questions:
 
@@ -114,7 +114,7 @@ build an \og{}.\\
 networking, persistence, serialization, session management and game engine
 integration.}\\
 
-\noindent\textbf{Hypothesis on \ogs{} and \mss{}:}
+\noindent\textbf{Hypothesis on \ogsucuc{} and \mssuc{}:}
 \textit{It is possible to build an \og{} as a pure \ms{} application by
 respecting all seven \ms{} tenets.}\\
 
@@ -128,13 +128,13 @@ simplified to an extent that the process can be understood by reading the instru
 do not exceed the ``size of one screen''.}\\
 
 \noindent\textbf{Stability and Performance Hypothesis:} 
-\textit{Microservices allow to separate the performance critical real-time game
+\textit{\mssuc{} allow to separate the performance critical real-time game
 simulation from the non time-critical backend functionality in regards to
 computing, bandwidth and latency requirements of an online game. This allows
 arbitrary scaling.}\\
 
 \noindent\textbf{Simple Development Hypothesis:} 
-\textit{\mss{} can make the complicated process of developing online games
+\textit{\mssuc{} can make the complicated process of developing online games
 simpler by splitting up a complex game domain into small parts that can be independently
 developed.}\\
 
@@ -145,8 +145,8 @@ development process anywhere at any time.}
 
 \section{Significance of the Thesis}
 
-\mss{} are a very modern approach to realize a \gls{soa}. While \gls{soa} is not
-something new and has been in use for more than a decade \cite{josuttis2007soa},
+\mssuc{} are a very modern approach to realize a \gls{soa}. While \gls{soa} is
+not something new and has been in use for more than a decade \cite{josuttis2007soa},
 \mss{} are a cutting edge implementation approach to \gls{soa} which has gained
 popularity only in the recent years \cite{rajeev2016ms_popular}. Unfortunately
 there is not much literature and practical references of how to actually develop
@@ -198,7 +198,7 @@ research problems of this thesis are described using these design science
 principles. The paper Design Science, The Design Cycle \& Theoretical Frameworks
 \cite{biedermann2016design_science} provides a good overview on the topic.
 
-\subsection{Games and \ogs{}}
+\subsection{Games and \ogsucuc{}}
 \label{sub:games}
 
 Since this thesis is mainly aimed at readers interested in the \ms{} domain it
@@ -285,14 +285,14 @@ level artifacts game engines are used. Game engines come with comprehensive
 editors, tools and libraries to abstract complex low level functionality to
 allow developers to focus their effort on the core parts of the game.
 
-\subsubsection{\ogs{}}
-\ogs{} are a special case of traditional video games. In addition to the
+\subsubsection{\ogsucuc{}}
+\ogsuc{} are a special case of traditional video games. In addition to the
 audiovisual representation the player not only interacts with the game
 simulation but also with other players playing at the same time at another
-location. \ogs{} introduce asynchronism to games which forces a completely
+location. \ogsuc{} introduce asynchronism to games which forces a completely
 different application design in comparison with traditional single-player games.
 
-\paragraph{Simple \ogs{}}
+\paragraph{Simple \ogsucuc{}}
 
 \begin{figure}
 	\centering
@@ -321,7 +321,7 @@ has zero latency to the simulation and has therefore an advantage over the other
 players. In this setting cheating clients are a common problem since the hosting
 player can basically influence the game at will.
 
-\paragraph{Rich \ogs{}}
+\paragraph{Rich \ogsucuc{}}
 
 \begin{figure}
   \centering
@@ -399,9 +399,9 @@ sounds. A good reference for \gls{pcg} is the book Procedural Content Generation
 Games \cite{shaker2014procedural}. It contains many useful \gls{pcg} methods and
 gives a good overview on the topic.
 
-\subsection{\mss{}}
+\subsection{\mssuc{}}
 
-\mss{} are an implementation approach for a \glsreset{soa}\gls{soa}
+\mssuc{} are an implementation approach for a \glsreset{soa}\gls{soa}
 \cite{zimmermann2016microservices}. In \gls{soa} an application is decomposed
 into logical units that each solve one specific task. In a \ms{} application
 each of these units is represented by a service that runs in an isolated
@@ -424,7 +424,7 @@ approach is driven far more by developers as he states. Also the success of
 \ms{} friendly platforms like AWS indicate that service driven platforms are an
 effective way of building applications that are resilient and scalable.
 
-\subsubsection{\ms{} Tenets}
+\subsubsection{\msuc{} Tenets}
 
 In O.Zimmermann's article \ms{} tenets he provides seven \ms{} tenets to
 describe the properties of \ms{} applications
@@ -471,8 +471,8 @@ a persisted data storage provided by the cloud e.g. another \ms{}.
 \subparagraph{Distribution}
 To allow an application to scale, its functionality is spread out among several
 different \mss{}. These shards are then deployed in cloud environments which are
-large distributed systems themselves. \ms{} applications are a natural match for
-the distributed nature of cloud environments.
+large distributed systems themselves. \msuc{} applications are a natural match
+for the distributed nature of cloud environments.
 
 \subparagraph{Elasticity}
 Elasticity inquires if the application can be scaled during operation. When
@@ -544,15 +544,15 @@ application internals to be able co cope with most problems that arise in the
 long term. A. Earnshaw published a blog-post that describes DevOps very
 well \cite{earnshaw2013devops}.
 
-\subsubsection{\ms{} Composition}
+\subsubsection{\msuc{} Composition}
 \label{subsub:composition}
 
-\ms{} composition is a very wide term and therefore needs to be further
+\msuc{} composition is a very wide term and therefore needs to be further
 specified. For this purpose large domain composition can be split into two sub
 topics which are suited to be examined separately: physical composition and
 logical composition.
 
-\ms{} composition can be categorized into two composition paradigms:
+\msuc{} composition can be categorized into two composition paradigms:
 Orchestration and Choreography \cite{varjoinen2014orchestrationVSchoreography},
 \cite{lublinsky2008orchestrationVSchoreography}. Orchestration states that a set
 of \mss{} is composed by a central intelligence unit which is responsible for
@@ -600,9 +600,9 @@ locations. In a choreography solution this information would be distributed
 among all services to form a mesh of information about the application cluster.
 In this case information can be requested from any \ms{} in the system.
 
-\subsubsection{\ms{} Deployment}
+\subsubsection{\msuc{} Deployment}
 
-\ms{} deployment comprises the whole process that is necessary to bring an
+\msuc{} deployment comprises the whole process that is necessary to bring an
 application from the development stage into production. This process includes
 several steps:
 
@@ -620,9 +620,9 @@ several steps:
 While most of these processes can be automated in the long term it requires a
 lot of effort to bring these deployment automation procedures into place.
 
-\subsubsection{\ms{} Development}
+\subsubsection{\msuc{} Development}
 
-\ms{} development consists of the whole process of designing an application
+\msuc{} development consists of the whole process of designing an application
 using an approach suited for \ms{} development. This includes writing the code
 for the application and to manage the collaboration of different developers on
 the same project.
@@ -632,7 +632,7 @@ the same project.
 This section lists several limitations which had an influence on this
 thesis.
 
-\subsection{\mss{} are Developed by Teams}
+\subsection{\mssuc{} are Developed by Teams}
 One of the greatest advantages of \mss{} is that they allow to split the
 development of a complex application into small shards that can be developed by
 small flexible individual teams \cite{anderson2017teams}. This aspect of \mss{}

@@ -5,7 +5,7 @@ that should be considered when an \og{} is realized with \mss{}. The guidelines
 represent a summary of all the important aspects which are relevant for \ms{}
 \og{} development that have been examined in this thesis.
 
-\subsection{\ms{} Tenet Guidelines}
+\subsection{\msuc{} Tenet Guidelines}
 
 I suggest using the \ms{} tenets to ensure that an \og{} application is designed
 according to common \ms{} principles. In this section I provide guidelines
@@ -26,7 +26,7 @@ MicroNet \textit{Code Assist} offers the interface to the developer. MicroNet
 integrates the \gls{api} into the generated service executable file. The API
 gateway is responsible for enforcing security policies to regulate access
 control to restrict parts of the \gls{api}. It is also responsible to offer the
-\gls{api} to clients. \mss{} can access the \gls{api} by only using the
+\gls{api} to clients. \mssuc{} can access the \gls{api} by only using the
 networking functionality of MicroNet.
 
 The single responsibility aspect must be tackled by choosing the ``right''
@@ -94,7 +94,7 @@ game sessions running on simulation services.
 \paragraph{Distribution}
 
 The distribution aspect has already been tackled by using a \ms{} application
-design. \ms{} applications are distributed systems by definition.
+design. \msuc{} applications are distributed systems by definition.
 	
 \paragraph{Elasticity}
 
@@ -259,7 +259,7 @@ positive experience is that working services are very stable and can stay
 unchanged over a long time due to service isolation. This allows developers to
 only work on small parts of the application while the majority stays unchanged.
 
-\mss{} are also very well suited to organize large development teams for large
+\mssuc{} are also very well suited to organize large development teams for large
 projects in smaller independent teams. This allows for much more control over
 the size of development teams.\\
 
@@ -388,9 +388,9 @@ any tools, libraries, frameworks, middleware that can assist with this task, or
 is plain old development(applying state-of-the-art software engineering
 practices) sufficient?}\\
 
-\ms{} composition is one major topic of this thesis but it is difficult to give
-an exhaustive answer to this question. \mss{} can indeed talk to each other and
-I find this approach very useful to distribute application behaviour over
+\msuc{} composition is one major topic of this thesis but it is difficult to
+give an exhaustive answer to this question. \mssuc{} can indeed talk to each other
+and I find this approach very useful to distribute application behaviour over
 multiple services. I can recommend Docker, Docker-compose and docker swarm as
 the most helpful tools for \ms{} composition.\\
 
