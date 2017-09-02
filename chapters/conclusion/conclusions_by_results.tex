@@ -289,32 +289,32 @@ providers can be made.\\
 
 \textit{4. How do you see the relationship between REST and microservices? Is
 the usage of Web protocols required and sufficient? Or is RESTful HTTP only one of several
-valid remote communication options in the microservices architect’s toolbox and,
+valid remote communication options in the microservices architect's toolbox and,
 if so, what are the decision drivers when choosing an option?}\\
 
 REST is in my opinion a necessary requirement to achieve the desired stateless
 \ms{} application behaviour. But for the game domain the traditional RESTful
-HTTP approach is just not suited. This is mainly because the content that a
-\og{} \ms{} applications offers are rarely web-pages in HTML format. It is far
+HTTP approach is simply not suitable. This is mainly because the content that an
+\og{} \ms{} application offers are rarely web-pages in HTML format. It is far
 more likely that the game application operates on proprietary content which
 requires a more flexible and optimization friendly communication solution. A
-message broker perfectly fulfills this role. The main drivers behind this
+message broker perfectly fulfills this role. The main driver behind this
 decision is the persistence which a message broker offers along with
 functionality like topics and connection handling.\\
 
 \textit{5. How did you find an adequate/a suited service cut (e.g.,how
-small/fine is small/fine enough)? How can DDD (and/or other approaches to application
-scoping and functional partitioning) be applied to decompose monoliths into
-services—practitioners have reported that they would welcome guidance that is
-more concrete than the rather frequently stated advice ``define a bounded
-context for each domain concept to be exposed as service''?}\\
+small/fine is small/fine enough)? How can DDD (and/or other approaches to
+application scoping and functional partitioning) be applied to decompose
+monoliths into services? Practitioners have reported that they would welcome
+guidance that is more concrete than the rather frequently stated advice ``define
+a bounded context for each domain concept to be exposed as service''?}\\
 
-Service size is the factor that matters the most in my opinion. A small service
-is easy to maintain and a new developer can gasp the functionality of a \ms{}
-quickly. With small I mean that the service should aim have below 100 lines of
-code. Recent discussion indicate however that size should not be the determining
-factor alone meaning it is just as important that a service has the right
-responsibilities \cite{stenberg2014mss}, \cite{ogradly2017soaVSms}.\\
+Service size is the factor that matters most in my opinion. A small service is
+easy to maintain and a new developer can grasp quickly the functionality of a
+\ms{}. With small I mean that the service should aim at having below 100 lines
+of code. Recent discussion indicates however that size should not be the
+determining factor alone meaning it is just as important that a service has the
+right responsibilities \cite{stenberg2014mss}, \cite{ogradly2017soaVSms}.\\
 
 \textit{6. How did you overcome ``distribution classics'' design challenges such
 as service lifecycle management, data representation/schema mismatches, service
@@ -332,9 +332,10 @@ documentation might not be an approach that everybody is comfortable with,
 especially since many well known solutions for API documentation exist like
 Swagger, RAML, JSON API, or api blueprint. The reason for this approach is
 mainly the tight integration of the \textit{Service API} with the \textit{Shared
-Model} but also minimalistic solution the \textit{Service API} aims to be. In
-my opinion the format of the \gls{api} documentation only plays a minor role as
-long as the \gls{api} can be used in a convenient way.\\
+Model}. Also the \textit{Service API} is a minimalistic solution which does not
+require most of the features which a standard API format offers. In my opinion
+the format of the \gls{api} documentation only plays a minor role as long as the
+\gls{api} can be used in a convenient way.\\
 
 \textit{-- Did you define machine-readable service contracts? If so, what
 should they cover and how should they be expressed (e.g., are all REST maturity

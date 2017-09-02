@@ -64,8 +64,8 @@ overhead:
   \item Setting up the development environment on developer machines
   \item Defining the API of the application early
   \item Implementing and scaling the chosen database solutions
-  \item Designing robust cloud affine solutions for consistency requirements
-  \item Tracking issues which propagate over multiple services
+  \item Designing robust cloud friendly solutions for consistency requirements
+  \item Tracking issues which spread over multiple services
   \item Testing of distributed application behaviour
 \end{itemize}
 
@@ -331,12 +331,13 @@ section 4.5.3 Common Communication Mechanisms.\\
 As this thesis indicates, \ms{} composition is the big addition to regular
 monolithic application development. The major challenge in this regard is to
 develop functionality in a distributed way which is suitable for \ms{}
-application (cloud affine). An explicit task in this regard is to use the API of
-foreign services as their developers intended to. Using such a distributed
-API always introduces asynchronism so the developer is always forced to consider
-data consistency requirements for the application. Using eventual consistency
-concepts like timeout, retry, and roll-back is a convenient way to tackle 
-consistency requirements as explained in \autoref{sub:composition_concepts}.
+application (cloud oriented). An explicit task in this regard is to use the API
+of foreign services in a way their developers intended to. Using such a
+distributed API always introduces asynchronism so the developer is always forced
+to consider data consistency requirements for the application. Using eventual
+consistency concepts like timeout, retry, and roll-back is a convenient way to
+tackle consistency requirements as explained in
+\autoref{sub:composition_concepts}.
 
 Distributed application design inevitably leads to distributed errors which
 span over multiple \mss{}. Finding such errors can be costly since often
@@ -346,25 +347,25 @@ challenge.
 
 Also networking is always an integral part of every \ms{} application and it can
 be cumbersome to develop a good networking infrastructure. This is further
-hindered by the different environments a \ms{} application has to run on like
-the development computer or a cloud environment. Application containerization
-further complicates network design because it involves designing overlay
-networks on top of the physical network infrastructure.
+hindered by the different environments a \ms{} application has to operate on,
+like the development computer or a cloud environment. Application
+containerization further complicates network design because it involves
+designing overlay networks on top of the physical network infrastructure.
 
 Keeping services stateless is another discipline which heavily influences the
 development of a \ms{} application. Compared to monolithic application the use
 of classical member variables to store the application state is not feasible for
 distributed applications. As soon as multiple instances of a service are
-deployed in parallel out of scaling needs variables in memory are in sole
+deployed in parallel due to scaling needs variables in memory are in sole
 possession of one instance only which leads to state divergence.  The use of
 mechanism like the MicroNet \textit{Session Store} concept allows to work around
-this limitation but introduce a significant overhead in development.
+this limitation but introduces a significant overhead in development.
 
-Lastly the initial deployment of a distributed application is major challenge.
-All required software like networking and database solutions have to be set up
-properly on the production environment. The initial deployment of the
-application itself also quite troublesome since many services have to be
-deployed simultaneously. However once the application is deployed successfully,
+Lastly the initial deployment of a distributed application is a major challenge.
+All required software installations like networking and database solutions have
+to be properly set' up on the production environment. The initial deployment of
+the application itself also is quite troublesome since many services have to be
+deployed simultaneously. However once the application is successfully deployed,
 patching it is a lot simpler than patching a monolithic application.\\
 
 \noindent

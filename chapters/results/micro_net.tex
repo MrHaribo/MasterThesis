@@ -8,27 +8,26 @@ to develop and operate an \og{}.
 \subsection{Characteristics of MicroNet}
 
 In order to reduce the complexity of an \og{} development a \ms{} approach can
-be used by splitting the domain of a game game into small shards that can be
-independently developed. These shards are defined using \glsreset{ddd}
-\gls{ddd} patterns, specifically the BoundedContext and the UbiquitousLanguage
-patterns \cite{fowler2003-2016ddd}. The BoundedContext pattern is used to define
-the boundaries of \mss{} according to game domain entities like players, items,
+be used by splitting the domain of a game into small shards that can be
+independently developed. These shards are defined using \glsreset{ddd} \gls{ddd}
+patterns, specifically the BoundedContext and the UbiquitousLanguage patterns
+\cite{fowler2003-2016ddd}. The BoundedContext pattern is used to define the
+boundaries of \mss{} according to game domain entities like players, items,
 levels, or vehicles. The UbiquitousLanguage pattern then allows to make these
 domain shards available in a terminology which is closely related to the game
 domain. This is the general concept that defines the architecture of MicroNet
-applications.\\
-
-In addition to the general concept MicroNet is designed according to four
-guidelines to provide a lean and agile \og{} development process:
+applications. In addition to the general concept MicroNet is designed according
+to four guidelines to provide a lean and agile \og{} development process:
 \begin{itemize}
   \item MicroNet does not reinvent the wheel for online game development but
-  instead makes use of existing technologies, specifically popular game engines
+  instead makes use of existing technologies, specifically of popular game
+  engines.
   \item MicroNet tries to make the developer aware of the problems that are
-  encountered during the development process as early as possible
+  encountered during the development process as early as possible.
   \item MicroNet aims to help the developer to learn the process of \og{}
-  development and to solve related problems
+  development and to solve related problems.
   \item MicroNet supports the developers in realizing the especially
-  difficult aspects of communication and consistency in a \ms{} application
+  difficult aspects of communication and consistency in a \ms{} application.
 \end{itemize}
 
 \input{chapters/results/micro_net/online_games_with_micronet}
