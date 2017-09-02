@@ -4,32 +4,32 @@
 
 This thesis investigates the two research areas \mss{} and
 \ogs{}. Both areas have individually been the topic of intense research lately
-(\mss{}:\cite{zimmermann2016microservices}, \cite{di2017research},
-\ogs{}:\cite{bosch2017towards}, \cite{smed2017algorithms},
+(\mss{}: \cite{zimmermann2016microservices}, \cite{di2017research},
+\ogs{}: \cite{bosch2017towards}, \cite{smed2017algorithms},
 \cite{liu2017apparatus}) but very little research exists on how to combine the
 two.
 
-In regard to the \mss{} domain this thesis serves as a basis for the discussion
+Regarding the \mss{} domain this thesis serves as a basis for the discussion
 about \ms{} applications. Especially the architecture of such distributed \ms{}
-applications is of particular interest. Architecture relevant aspects are both
-examined in theory and practically to propose a complete solution on how to
-develop and operate of a \ms{} application. Of particular interest is the topic
-of how to facilitate the composition of \mss{} and how to deploy a \ms{}
-application in a modern cloud environment.
+applications is of particular interest. Aspects relevant to architecture are
+both examined in theory and in practice to propose a complete solution on how to
+develop and operate a \ms{} application. The topics of how to facilitate the
+composition of \mss{} and how to deploy a \ms{} application in a modern cloud
+environment are of particular interest.
 
 Another goal of this thesis is to provide proof of concept that it is possible
 to develop \ogs{} using \mss{}. For this purpose a vertical slice prototype of a
-\ms{} driven \og{} is developed to showcase the necessary fragments that make up
-a working \og{} using a \ms{} design. Furthermore this prototype serves as a
-simple example of how to reproduce the development process of \ogs{}. The idea
-behind the prototype is to make this process simple enough for newcomers in
-\og{} development to be understood.
+\ms{} driven \og{} is being developed to showcase the necessary fragments that
+make up a working \og{} using a \ms{} design. Furthermore this prototype serves
+as a simple example of how to get started with the development process of
+\ogs{}. The idea behind the prototype is to make the development process simple
+enough for newcomers in \og{} development to be understood.
 
 
 \section{Theoretical framework}
 \label{sec:theoretical_framework}
 
-A theoretical framework is being used in order to curtail the infinite amount of
+A theoretical framework is being used in order to curtail the vast amount of
 research problems that the topics \ogs{} and \mss{} offer. A theoretical
 framework is a \gls{dsm} construct used to frame research problems. \gls{dsm} is
 further detailed in \autoref{sub:dsm}.
@@ -39,8 +39,8 @@ translated into research questions that sufficiently cover the area of interest.
 According to the research questions hypotheses can be formulated. These
 hypotheses are the condensed essence of the research questions and are well
 suited for formal verification. The verification of the hypotheses is the
-substance of this thesis and contributions to the verification are mentioned at
-relevant locations throughout this thesis. Answers to the research questions
+substance of this thesis, and contributions to the verification are mentioned at
+relevant sections throughout this thesis. Answers to the research questions
 are proposed in the concluding \autoref{sub:summary_of_findings}.
 
 \subsection{Research Problems and Research Questions}
@@ -406,43 +406,43 @@ gives a good overview on the topic.
 into logical units that each solve one specific task. In a \ms{} application
 each of these units is represented by a service that runs in an isolated
 process. A service is usually deployed in a container which supports isolation
-and simple replaceability. The services communicate over a lightweight shared
+and simple replaceability. The services communicate through a lightweight shared
 inter process communication channel respecting the smart endpoints - dump pipes
 principle. C.Richardson's article ``Microservices: Decomposing Applications for
 Deployability and Scalability'' \cite{richardson2014mss} is a good introduction to
 \mss{}.
 
-Over the years many discussion about the differences and similarities between
+Over the years many discussions about the differences and similarities between
 \gls{soa} and \mss{} took place \cite{little2017soaVSms},
 \cite{ogradly2017soaVSms}, and \cite{little2015soaVSms}. In his article ``The
-Difference between \gls{soa} and Microservices?'' M.Little collects arguments of
-experts in the \ms{} scene like D.North \cite{north2015mss} and
-J.Stenberg\cite{stenberg2014mss}. One trend that he highlights is that \gls{soa}
-is loosing popularity and \mss{} are gaining popularity. One reason for this
-could be that \gls{soa} is mainly a vendor driven effort whereas the \ms{}
-approach is driven far more by developers as he states. Also the success of
-\ms{} friendly platforms like AWS indicate that service driven platforms are an
-effective way of building applications that are resilient and scalable.
+Difference between \gls{soa} and Microservices?'' M. Little collects arguments
+of experts in the \ms{} scene like D. North \cite{north2015mss} and J. Stenberg
+\cite{stenberg2014mss}. One trend that he highlights is that \gls{soa} is
+loosing popularity and \mss{} are gaining popularity. One reason for this could
+be that \gls{soa} is mainly a vendor driven effort whereas the \ms{} approach is
+driven far more by developers. Also the success of \ms{} friendly platforms like
+AWS indicate that service driven platforms are an effective way of building
+applications that are resilient and scalable.
 
 \subsubsection{\msuc{} Tenets}
 
-In O.Zimmermann's article \ms{} tenets he provides seven \ms{} tenets to
+In O. Zimmermann's article about \ms{} tenets he provides seven \ms{} tenets to
 describe the properties of \ms{} applications
 \cite{zimmermann2016microservices}. According to the tenets a correlation
 between game specific requirements and \ogs{} can be made. In the course of this
-thesis a selection of the \ms{} tenets will be used as an indicator to show
-that \mss{} are suitable to drive \og{} applications.
-
-The remainder of this section will give a brief overview over all \ms{} tenets
-that are relevant for this thesis.
+thesis a selection of the \ms{} tenets will be used as an indicator to show that
+\mss{} are suitable to drive \og{} applications. The remainder of this section
+will give a brief overview over all \ms{} tenets that are relevant for this
+thesis.
 
 \paragraph{Fine-grained Interfaces and Single Responsibility}
 
 Every \ms{} should offer all of its functionality in the form of a fine grained
 interface that decouples the service implementation from its interface. This
 interface is usually exposed via REST/HTTP and is accessible via a reverse
-proxy. Each \ms{} should only have one responsibility in regards to the domain.
-This allows services to be independently deployed, changed, replaced and scaled.
+proxy. Each \ms{} should only have one responsibility with regards to the
+domain. This allows services to be independently deployed, changed, replaced and
+scaled.
 
 \paragraph{Domain-Driven-Design}
 
@@ -455,24 +455,24 @@ be wrong. Granularity is the most challenging part of \gls{ddd}
 
 \paragraph{IDEAL}
 
-The IDEAL tenet is a collection of cloud patterns. These patterns do partially
+The IDEAL tenet is a collection of cloud patterns. These patterns partially
 overlap with several other tenets like single responsibility or decentralized
-continuous delivers. None the less this tenet is a great indicator to
-evaluate if an application respects the major cloud principals. C. Fehling et
-al. provide a good overview over the  IDEAL Cloud Application Properties
-which is summarized in this section \cite{fehling2015cloud}.
+continuous delivery. Nonetheless this tenet is a great indicator to evaluate
+if an application respects the major cloud principles. C. Fehling et al. provide
+a good overview over the  IDEAL Cloud Application Properties which is summarized
+in this section \cite{fehling2015cloud}.
 
 \subparagraph{Isolated State}
 A \ms{} should be stateless which means that a request that is sent to a \ms{}
 should be completely confined in itself. As a consequence \mss{} are not allowed
-to store date in-memory between requests. Instead the state should be stored in
-a persisted data storage provided by the cloud e.g. another \ms{}.
+to store data in-memory between requests. Instead the state should be stored in
+a persisted data storage provided by the cloud e.g. by another \ms{}.
 
 \subparagraph{Distribution}
-To allow an application to scale, its functionality is spread out among several
-different \mss{}. These shards are then deployed in cloud environments which are
-large distributed systems themselves. \msuc{} applications are a natural match
-for the distributed nature of cloud environments.
+In order to allow an application to scale, its functionality is spread out among
+several different \mss{}. These shards are then deployed in cloud environments
+which are large distributed systems themselves. \msuc{} applications are a
+natural match for the distributed nature of cloud environments.
 
 \subparagraph{Elasticity}
 Elasticity inquires if the application can be scaled during operation. When
@@ -507,8 +507,8 @@ central persistence solution and therefore the single point of failure.
 
 Polyglot programming allows development teams to work with the languages and
 tools that they are used to. This greatly speeds up the development process. It
-also allows to integrate arbitrary technology into the application like for
-example legacy systems.
+also allows the integration of arbitrary technology into the application like
+for example legacy systems.
 
 \paragraph{Lightweight Containers}
 
@@ -535,8 +535,8 @@ application changes.
 DevOps engineers are the glue between the development and the operation of a
 \ms{} application. The idea is that DevOps engineers are already part of the
 project during the initial development of an application and remain responsible
-for the application after it's release. This gives the DevOps of to a certain
-application a deep understanding of it's technical requirements. DevOps are also
+for the application after its release. This gives the DevOps of a certain
+application a deep understanding of its technical requirements. DevOps are also
 responsible to test the deployment process early to guarantee a smooth
 transition to the production life-cycle of an application. When a \ms{}
 application is in production the DevOps engineers have enough insight into the
@@ -556,7 +556,7 @@ logical composition.
 Orchestration and Choreography \cite{varjoinen2014orchestrationVSchoreography},
 \cite{lublinsky2008orchestrationVSchoreography}. Orchestration states that a set
 of \mss{} is composed by a central intelligence unit which is responsible for
-the management the application \cite{cohen2015orchestration}. Choreography
+the management of the application \cite{cohen2015orchestration}. Choreography
 implies that there is no central intelligence and the cluster of \mss{} as a
 whole is responsible to guarantee the stability of the application
 \cite{millidge2015choreography}, \cite{vilas2016choreography}, and
@@ -571,9 +571,9 @@ space and networking capabilities. In a cloud setting these physical
 requirements are covered by using a \gls{paas} solution
 \cite{lawton2008developing}, \cite{buyya2009modeling}.
 
-Physical composition is usually enabled using composition engines like for
-example docker-compose, docker-swarm, Apache Mesos or Kubernetes. The majority
-of the composition engines use an orchestration approach. 
+Physical composition is usually enabled using composition engines like
+docker-compose, docker-swarm, Apache Mesos or Kubernetes. The majority of the
+composition engines use an orchestration approach.
 
 \paragraph{Logical Composition}
 
@@ -610,11 +610,11 @@ several steps:
   \item Bring the application code along with eventual dependencies into the
   service containers
   \item Upload the application containers to the cloud
-  \item Prepare the application on the cloud side
+  \item Prepare the application on the cloud environment
   \item Start the application as a whole by starting all service containers
   \item Scale the application according to operational needs
   \item Set up backup and recovery solutions for the application
-  \item Deploy a monitoring solution to keep track of the application
+  \item Deploy a monitoring infrastructure to keep track of the application
 \end{itemize}
 
 While most of these processes can be automated in the long term it requires a
@@ -624,7 +624,7 @@ lot of effort to bring these deployment automation procedures into place.
 
 \msuc{} development consists of the whole process of designing an application
 using an approach suited for \ms{} development. This includes writing the code
-for the application and to manage the collaboration of different developers on
+for the application and managing the collaboration of different developers of
 the same project.
 
 \section{Delimitations and Assumptions}
