@@ -3,7 +3,7 @@
 
 The expert opinion survey was conducted with a Google Forms online
 questionnaire. Experts first had to complete the MicroNet tutorial and
-afterwards answer valuation questions about the following topics:
+afterwards had to answer evaluation questions about the following topics:
 
 \begin{itemize}
   \item The relation between MicroNet and Java
@@ -13,22 +13,17 @@ afterwards answer valuation questions about the following topics:
   \item MicroNet, MicroNet Tools, MicroNet Tutorial, and MicroNet Documentation
 \end{itemize}
 
-\subsection{Results of Statistical Testing}
-
-Unfortunately the survey was completed by only three participants. I first
-conduct the survey with two participants on site so in order to verify that the
-tutorial could be completed as expected. After some tweaks the tutorial and the
-survey were published online to reach more people. But beside the two live
-sessions I could hardly motivate anyone to complete the tutorial. A reason might
-have been the narrowed time frame for the participants since the tutorial and
-the evaluation form could only be sent out one week prior to the end of this
-thesis. The tools and the framework simply were not ready to be sent out
-earlier.
+First I conducted the survey with two participants on site in order to verify
+that the tutorial could be completed as expected. After some minor adjustments the
+tutorial and the survey were published online to reach more people. But beside
+the two live sessions hardly anyone could be motivated to complete the tutorial.
+At the end, the survey was completed by only three participants - a rather
+disappointing fact.
 
 Nonetheless, these three participants examined MicroNet very intensively so
 their opinions can be considered as meaningful feedback.
 
-\subsection{Interpretation of Statistical Results}
+\subsection{Results and Interpretation of the Survey}
 
 The detailed statistical results of the survey can be found in
 \autoref{survey_results}. This section summarizes the results and gives a
@@ -38,8 +33,8 @@ questionnaire is discussed separately.
 \subsubsection{MicroNet and Java}
 
 All participants rated Java as a good solution for distributed application
-development and also modern language features like Lambdas and code generation
-are majorly accepted. Maven is seen as moderately cumbersome but its uses
+development, and also modern language features like Lambdas and code generation
+are majorly accepted. Maven is seen as moderately cumbersome, but its uses
 outweigh the organizational overhead.
 
 These results support the strong Java relation of MicroNet. Also the usage of
@@ -50,11 +45,11 @@ Maven as a main driver for build automation is accredited.
 MicroNet did not noticeably help the participants to get a better understanding
 of distributed application design. This indicates the lack of a dedicated
 tutorial in this regard. The \textit{Shared Model}, the \textit{Shared API}, and
-the \textit{Launch Utilities} are accredited by the participant which justifies
+the \textit{Launch Utilities} are accredited by the participants which justifies
 their central architectural role.
 
-The manual documentation of the \textit{Shared API} with Java annotations
-however is seen as an implementation overhead since the information could also
+The manual documentation of the \textit{Shared API} with Java annotations,
+however, is seen as an implementation overhead since the information could also
 be generated automatically by parsing the service's source code. A consequence
 of manual API documentation is a divergence from the actual implementation which
 inevitably leads to errors. This opinion corresponds with my own impression
@@ -67,19 +62,19 @@ programming and persistence tenets are respected sufficiently. They consider the
 use of a relational database, even if it is containerized, as a violation of the
 IDEAL tenet. I partially agree on this point since realizing fail-over for
 relational databases can be challenging as I experienced first hand. The
-participants also criticized the polyglot programming and persistence tenet was
-not implemented flexible enough.
+participants also criticized that the polyglot programming and persistence tenet
+was not implemented flexible enough.
 
 \subsubsection{MicroNet Related Topics}
 
-The participants were satisfied with MicroNet in general but the setup process
-introduced problems for all participants. The goal of the MicroNet setup was to
-keep it simple by only relying on two software installations: Docker and
-Eclipse. But the configuration of both programs introduced more pitfalls than
-expected. People also liked the simple \gls{ui} of MicroNet and the many options
-that the \textit{Launch Utilities} offer. All participants rated the performance
-of MicroNet sufficient. The shared opinion of all participants is that MicroNet
-still needs improvements in all areas. Since MicroNet is in a very early stage,
-this impression is understandable.
+The participants were satisfied with MicroNet in general. However all
+participants experienced problems during the setup process. The goal of the
+MicroNet setup was to keep it simple by only relying on two software
+installations: Docker and Eclipse. But the configuration of both programs
+had more pitfalls than expected. Participants also liked the simple \gls{ui} of
+MicroNet and the many options that the \textit{Launch Utilities} offer. Most
+participants rated the performance of MicroNet sufficient. The shared opinion of
+all participants is that MicroNet still needs improvements in all areas. Since
+MicroNet is in a very early stage, this impression is understandable.
 
 
