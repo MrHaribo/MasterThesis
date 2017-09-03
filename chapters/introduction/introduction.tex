@@ -15,7 +15,7 @@ applications is of particular interest. Aspects relevant to architecture are
 both examined in theory and in practice to propose a complete solution on how to
 develop and operate a \ms{} application. The topics of how to facilitate the
 composition of \mss{} and how to deploy a \ms{} application in a modern cloud
-environment are of particular interest.
+environment are also of particular interest.
 
 Another goal of this thesis is to provide proof of concept that it is possible
 to develop \ogs{} using \mss{}. For this purpose a vertical slice prototype of a
@@ -26,7 +26,7 @@ as a simple example of how to get started with the development process of
 enough for newcomers in \og{} development to be understood.
 
 
-\section{Theoretical framework}
+\section{Theoretical Framework}
 \label{sec:theoretical_framework}
 
 A theoretical framework is being used in order to curtail the vast amount of
@@ -122,10 +122,10 @@ respecting all seven \ms{} tenets.}\\
 \textit{Code Generation backed by a game meta model is enough information to
 semantically compose a set of \mss{} to build a rich \og{}.}\\
 
-\noindent\textbf{Deployment Hypothesis:}
+\noindent\textbf{Deployment Hypothesis:} 
 \textit{The deployment process of a \ms{} driven \og{} application can be
-simplified to an extent that the process can be understood by reading the instruction which
-do not exceed the ``size of one screen''.}\\
+simplified to an extent that the process can be understood by reading
+instructions for thirty minutes.}\\
 
 \noindent\textbf{Stability and Performance Hypothesis:} 
 \textit{\mssuc{} allow to separate the performance critical real-time game
@@ -150,7 +150,7 @@ not something new and has been in use for more than a decade \cite{josuttis2007s
 \mss{} are a cutting edge implementation approach to \gls{soa} which has gained
 popularity only in the recent years \cite{rajeev2016ms_popular}. Unfortunately
 there is not much literature and practical references of how to actually develop
-and operate such a \ms{} environment are rather rare. This thesis serves as a
+and operate such a \ms{} environments from a to z. This thesis serves as a
 reference for all relevant aspects that have to be taken into account when an
 application (especially an \og{}) is developed using \mss{}.
 
@@ -191,12 +191,14 @@ concepts developed in this thesis from a technical point of view.
 \label{sub:dsm}
 
 Design science provides the definition of a scientific framework that can be
-used to formally define and describe real world research problems. Along with the
-definition on how to conduct scientific research it also provides very useful
-templates to formally frame research problems and research questions. The
+used to formally define and describe real world research problems. Along with
+the definition on how to conduct scientific research it also provides very
+useful templates to formally frame research problems and research questions. The
 research problems of this thesis are described using these design science
 principles. The paper Design Science, The Design Cycle \& Theoretical Frameworks
 \cite{biedermann2016design_science} provides a good overview on the topic.
+\gls{dsm} techniques have been used throughout this thesis in appropriate areas
+to define a clear scientific structure for research tasks.
 
 \subsection{Games and \ogsucuc{}}
 \label{sub:games}
@@ -213,8 +215,8 @@ on gaming consoles. The technical details how all of these games are developed
 vary greatly depending on different factors like genres, platforms, culture
 and so on. This thesis does not make any restrictions on the kind of game
 under development and instead establishes a common basis which supports all
-games. For this purpose the classical Model-View-Control pattern can be used to
-identify the logical artifacts that make up a game: 
+video games. For this purpose the classical Model-View-Control pattern can be
+used to identify the logical artifacts that make up a game: 
 
 \begin{itemize}
   \item \textbf{Model:} The \textit{game model} artifact stores the game state.
@@ -283,7 +285,8 @@ All the artifacts of a game as described in the previous three sections are
 fairly low level. To relieve the developer from the need to cope with these low
 level artifacts game engines are used. Game engines come with comprehensive
 editors, tools and libraries to abstract complex low level functionality to
-allow developers to focus their effort on the core parts of the game.
+allow developers to focus their effort on the game-play relevant parts of the
+game.
 
 \subsubsection{\ogsucuc{}}
 \ogsuc{} are a special case of traditional video games. In addition to the
@@ -305,12 +308,12 @@ different application design in comparison with traditional single-player games.
 Simple \ogs{} are very similar to single-player games with the addition that
 some enemies or companions are played by other human players. In simple \ogs{}
 players are responsible to set up the game's multi-player environment (hosting
-the game session and connection to it). These can be client-server or
-peer-to-peer scenarios. In any case one player is always responsible to host the
-game (\autoref{fig:simple_online_game}). In simple online games the players have
-full control over the game rules. This makes them comparable to classical board
-games in a sense that all players agree to a set of rules. Cheating is therefore
-not an issue most of the time.
+game sessions and connecting to them). These environments are client-server
+scenarios in most cases and one player is always responsible to host the game
+(\autoref{fig:simple_online_game}). In simple online games the players have full
+control over the game rules. This makes them comparable to classical board games
+in a sense that all players agree to a set of rules. Cheating is therefore not
+an issue most of the time.
 
 Examples of such simple games are Quake, Age of Empires, or Diablo 2. Lately it
 has become popular for simple \ogs{} to provide a matchmaking service that helps
@@ -318,7 +321,7 @@ players to find each other for game sessions. This matchmaking functionality is
 responsible to initiate the game session on all clients but does nothing beyond
 that. Hence the session is simulated locally on one of the clients. This client
 has zero latency to the simulation and has therefore an advantage over the other
-players. In this setting cheating clients are a common problem since the hosting
+players. In this setting cheating hosts are a common problem since the hosting
 player can basically influence the game at will.
 
 \paragraph{Rich \ogsucuc{}}
@@ -354,8 +357,8 @@ download the game client to play the game and are spared any environment setup.
 The first occurrences of rich \og{} have been \glspl{mmo}. In \glspl{mmo} the
 player controls an avatar in a persistent virtual game word playing against the
 environment (monsters, traps, dungeons, \ldots) and other players (combat,
-trading, chatting, \ldots). \glspl{mmo} are simulated using a single dedicated
-server to simulate the whole game (see \autoref{fig:mmo}). This limits the
+trading, chatting, \ldots). \glspl{mmo} are usually simulated using a single
+dedicated server to simulate the whole game (see \autoref{fig:mmo}). This limits the
 number of player who can simultaneously participate in the game\footnote{In the
 very popular \gls{mmo} World of Warcraft the player number per server is
 limeted to about 10'000 simultaneous players.}. \glspl{mmo} solve this problem
@@ -432,7 +435,7 @@ describe the properties of \ms{} applications
 between game specific requirements and \ogs{} can be made. In the course of this
 thesis a selection of the \ms{} tenets will be used as an indicator to show that
 \mss{} are suitable to drive \og{} applications. The remainder of this section
-will give a brief overview over all \ms{} tenets that are relevant for this
+will give a brief overview over all \ms{} tenets which are considered in this
 thesis.
 
 \paragraph{Fine-grained Interfaces and Single Responsibility}
@@ -568,10 +571,10 @@ Physical composition is the discipline to bring a set of \mss{} onto a
 physical computing environment, usually the cloud. In the case of the cloud the
 term physical is understood as the appropriation of computing, memory, disc
 space and networking capabilities. In a cloud setting these physical
-requirements are covered by using a \gls{paas} solution
+requirements are covered by using a \gls{paas} or \gls{iaas} solution
 \cite{lawton2008developing}, \cite{buyya2009modeling}.
 
-Physical composition is usually enabled using composition engines like
+Physical composition is usually facilitated through composition engines like
 docker-compose, docker-swarm, Apache Mesos or Kubernetes. The majority of the
 composition engines use an orchestration approach.
 
